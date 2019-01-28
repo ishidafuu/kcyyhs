@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using Unity.Entities;
 
-[Serializable]
-public struct AniScriptSheet : ISharedComponentData
+namespace NKKD
 {
-    //各モーションごとのアニメーション情報
-    public List<AniScript> scripts;
+    [Serializable]
+    public struct AniScriptSheet : ISharedComponentData
+    {
+        //各モーションごとのアニメーション情報
+        public List<AniScript> scripts;
+    }
 }

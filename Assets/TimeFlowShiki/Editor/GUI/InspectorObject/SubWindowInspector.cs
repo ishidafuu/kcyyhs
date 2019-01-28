@@ -1,13 +1,14 @@
-using UnityEngine;
-using UnityEditor;
-
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
-namespace NKKD.EDIT {
-	public class SubWindowInspector : ScriptableObject {
+namespace NKKD.EDIT
+{
+	public class SubWindowInspector : ScriptableObject
+	{
 		public string title;
 		public TackPoint tackPoint;
 		public void UpdateSubWindow(TackPoint tackPoint)
@@ -23,26 +24,18 @@ namespace NKKD.EDIT {
 		{
 			var insp = (SubWindowInspector)target;
 			var tackPoint = insp.tackPoint;
-			//UpdateTackTitle(tackPoint);
-
 			DrawTackSpan(tackPoint);
 		}
 
 		private void UpdateTackTitle(TackPoint tackPoint)
 		{
-			//var newTitle = EditorGUILayout.TextField("title", tackPoint.title_);
-			//if (newTitle != tackPoint.title_)
-			//{
-			//	tackPoint.BeforeSave();
-			//	tackPoint.title_ = newTitle;
-			//	tackPoint.Save();
-			//}
+
 		}
 		private void DrawTackSpan(TackPoint tackPoint)
 		{
-			var start = tackPoint.start_;
+			var start = tackPoint.GetStart();
 			GUILayout.Label("start:" + start);
-			var span = tackPoint.span_;
+			var span = tackPoint.GetSpan();
 			var end = start + span - 1;
 			GUILayout.Label("end:" + end);
 			GUILayout.Label("span:" + span);
