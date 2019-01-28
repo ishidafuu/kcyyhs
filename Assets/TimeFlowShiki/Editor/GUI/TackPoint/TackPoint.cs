@@ -19,9 +19,9 @@ namespace NKKD.EDIT
 		[SerializeField]
 		TackPointModel model = new TackPointModel();
 		TackPointViewModel viewModel = new TackPointViewModel();
-		TackPointInspector tackPointInspector_;
-		TackPointView view = new TackPointView();
-		TackPointOutput output = new TackPointOutput();
+		TackPointInspector tackPointInspector;
+		public TackPointView view = new TackPointView();
+		public TackPointOutput output = new TackPointOutput();
 
 		public void SetModels()
 		{
@@ -120,7 +120,7 @@ namespace NKKD.EDIT
 			model.Active = true;
 
 			ApplyDataToInspector();
-			Selection.activeObject = tackPointInspector_;
+			Selection.activeObject = tackPointInspector;
 		}
 
 		public void SetDeactive()
@@ -193,9 +193,24 @@ namespace NKKD.EDIT
 
 		public void ApplyDataToInspector()
 		{
-			if (tackPointInspector_ == null)tackPointInspector_ = ScriptableObject.CreateInstance("TackPointInspector")as TackPointInspector;
+			if (tackPointInspector == null)tackPointInspector = ScriptableObject.CreateInstance("TackPointInspector")as TackPointInspector;
 
-			tackPointInspector_.UpdateTackPoint(this);
+			tackPointInspector.UpdateTackPoint(this);
+		}
+
+		public string GetTackId()
+		{
+			return model.TackId;
+		}
+
+		public bool GetIsExistTack()
+		{
+			return model.IsExistTack;
+		}
+
+		public void InitializeTackTexture(Texture2D baseTex)
+		{
+			view.InitializeTackTexture(baseTex);
 		}
 	}
 }
