@@ -18,13 +18,12 @@ namespace AnimationImporter
 		/// <typeparam name="T">The ScriptableObject type</typeparam>
 		public static T LoadSaveData<T>(string unityPathToFile)where T : ScriptableObject
 		{
-			Debug.Log(unityPathToFile);
 			// Path must contain Resources folder
 			var resourcesFolder = string.Concat(
-				AssetDatabaseUtility.UnityDirectorySeparator,
+				Path.DirectorySeparatorChar,
 				AssetDatabaseUtility.ResourcesFolderName,
-				AssetDatabaseUtility.UnityDirectorySeparator);
-			Debug.Log(resourcesFolder);
+				Path.DirectorySeparatorChar);
+
 			if (!unityPathToFile.Contains(resourcesFolder))
 			{
 				var exceptionMessage = string.Format(
@@ -66,7 +65,7 @@ namespace AnimationImporter
 
 		private static string GetResourceRelativePath(string unityPath)
 		{
-			var resourcesFolder = AssetDatabaseUtility.ResourcesFolderName + AssetDatabaseUtility.UnityDirectorySeparator;
+			var resourcesFolder = AssetDatabaseUtility.ResourcesFolderName + Path.DirectorySeparatorChar;
 			var pathToResources = unityPath.Substring(0, unityPath.IndexOf(resourcesFolder));
 
 			// Remove all folders leading up to the Resources folder

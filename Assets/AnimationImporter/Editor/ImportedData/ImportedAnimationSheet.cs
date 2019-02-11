@@ -1,10 +1,11 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
-using System.Linq;
+using UnityEngine;
 
 namespace AnimationImporter
 {
@@ -20,7 +21,7 @@ namespace AnimationImporter
 			get
 			{
 				return Mathf.Max(width, height);
-			}			
+			}
 		}
 
 		public List<ImportedAnimationFrame> frames = new List<ImportedAnimationFrame>();
@@ -104,7 +105,7 @@ namespace AnimationImporter
 		public void CreateAnimation(ImportedAnimation anim, string basePath, string masterName, AnimationTargetObjectType targetType)
 		{
 			AnimationClip clip;
-            string fileName = basePath + "/" + masterName + "_" + anim.name + ".anim";
+			string fileName = basePath + Path.DirectorySeparatorChar + masterName + "_" + anim.name + ".anim";
 			bool isLooping = anim.isLooping;
 
 			// check if animation file already exists
@@ -132,24 +133,30 @@ namespace AnimationImporter
 				clip.SetLoop(false);
 			}
 
-			ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[anim.Count + 1]; // one more than sprites because we repeat the last sprite
+			// convert keyframes
+			ImportedAnimationFrame[] srcKeyframes = anim.ListFramesAccountingForPlaybackDirection().ToArray();
+			ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[srcKeyframes.Length + 1];
+			float timeOffset = 0f;
 
-			for (int i = 0; i < anim.Count; i++)
+			for (int i = 0; i < srcKeyframes.Length; i++)
 			{
-				ObjectReferenceKeyframe keyFrame = new ObjectReferenceKeyframe { time = anim.GetKeyFrameTime(i) };
+				// first sprite will be set at the beginning (t=0) of the animation
+				keyFrames[i] = new ObjectReferenceKeyframe
+				{
+					time = timeOffset,
+						value = srcKeyframes[i].sprite
+				};
 
-				Sprite sprite = anim.frames[i].sprite;
-				keyFrame.value = sprite;
-				keyFrames[i] = keyFrame;
+				// add duration of frame in seconds
+				timeOffset += srcKeyframes[i].duration / 1000f;
 			}
 
 			// repeating the last frame at a point "just before the end" so the animation gets its correct length
-
-			ObjectReferenceKeyframe lastKeyFrame = new ObjectReferenceKeyframe { time = anim.GetLastKeyFrameTime(clip.frameRate) };
-
-			Sprite lastSprite = anim.frames[anim.Count - 1].sprite;
-			lastKeyFrame.value = lastSprite;
-			keyFrames[anim.Count] = lastKeyFrame;
+			keyFrames[srcKeyframes.Length] = new ObjectReferenceKeyframe
+			{
+				time = timeOffset - (1f / clip.frameRate), // substract the duration of one frame
+					value = srcKeyframes.Last().sprite
+			};
 
 			// save curve into clip, either for SpriteRenderer, Image, or both
 			if (targetType == AnimationTargetObjectType.SpriteRenderer)
@@ -178,7 +185,7 @@ namespace AnimationImporter
 			{
 				ImportedAnimation anim = animations[i];
 
-				anim.SetFrames(frames.GetRange(anim.firstSpriteIndex, anim.Count).ToArray());
+				anim.frames = frames.GetRange(anim.firstSpriteIndex, anim.Count).ToArray();
 			}
 		}
 
@@ -291,7 +298,7 @@ namespace AnimationImporter
 							case SpriteNamingScheme.AnimationOne:
 								animFrame.name = anim.name + NAME_DELIMITER + (i + 1).ToString();
 								break;
-						}						
+						}
 					}
 				}
 			}

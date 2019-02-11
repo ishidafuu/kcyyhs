@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 namespace AnimationImporter
 {
@@ -29,6 +29,7 @@ namespace AnimationImporter
 			}
 			set
 			{
+				Debug.Log(value);
 				_directoryPathForSprites = value;
 			}
 		}
@@ -73,7 +74,7 @@ namespace AnimationImporter
 		{
 			get
 			{
-				return directoryPathForSprites + "/" + name + ".png";
+				return directoryPathForSprites + Path.DirectorySeparatorChar + name + ".png";
 			}
 		}
 
@@ -133,8 +134,10 @@ namespace AnimationImporter
 			}
 
 			string fileName = Path.GetFileNameWithoutExtension(path);
+			// string lastPart = Path.DirectorySeparatorChar + fileName + "." + extension;
+			Debug.Log(fileName);
 			string lastPart = "/" + fileName + "." + extension;
-
+			Debug.Log(lastPart);
 			return path.Replace(lastPart, "");
 		}
 	}

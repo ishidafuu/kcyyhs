@@ -65,7 +65,7 @@ namespace NKKD.EDIT
 
 			foreach (var item in fileList_)
 			{
-				var dataPath = GetJsonPath() + "/" + item + ".json";
+				var dataPath = GetJsonPath() + Path.DirectorySeparatorChar + item + ".json";
 				var deserialized = new Dictionary<string, object>();
 
 				if (File.Exists(dataPath))
@@ -205,7 +205,7 @@ namespace NKKD.EDIT
 			var dataStr = Json.Serialize(scoreObject);
 
 			//var targetFilePath = Path.Combine(Application.dataPath, TimeFlowShikiSettings.TIMEFLOWSHIKI_DATA_FILEPATH);
-			var targetFilePath = GetJsonPath() + "/" + score.id_ + ".json"; // "timeflowshiki.json";// + selectedFile;
+			var targetFilePath = GetJsonPath() + Path.DirectorySeparatorChar + score.id_ + ".json"; // "timeflowshiki.json";// + selectedFile;
 
 			using(var sw = new StreamWriter(targetFilePath))
 			{
@@ -681,7 +681,7 @@ namespace NKKD.EDIT
 			var dataStr = Json.Serialize(scoreObject);
 
 			//var targetFilePath = Path.Combine(Application.dataPath, TimeFlowShikiSettings.TIMEFLOWSHIKI_DATA_FILEPATH);
-			var targetFilePath = GetJsonPath() + "/" + score.id_ + ".json"; // "timeflowshiki.json";// + selectedFile;
+			var targetFilePath = GetJsonPath() + Path.DirectorySeparatorChar + score.id_ + ".json"; // "timeflowshiki.json";// + selectedFile;
 
 			Debug.Log("<color=red>SaveActiveScore:" + targetFilePath + "</color>");
 
@@ -725,7 +725,7 @@ namespace NKKD.EDIT
 				MotionScores obj = CreateInstance(typeof(MotionScores))as MotionScores;
 				obj.scores.Add(item.CreateMotionScoreObject());
 				//var obj = item.CreateMotionScoreObject();
-				Debug.Log("CreateObject:" + selectedDir_ + "/" + item.id_ + ".asset");
+				Debug.Log("CreateObject:" + selectedDir_ + Path.DirectorySeparatorChar + item.id_ + ".asset");
 				//AssetDatabase.CreateAsset(obj, GetMotionScorePath(item.id_));
 				AssetDatabase.CreateAsset(obj, GetSingleMotionScoreResourcesPath(item.id_));
 			}
@@ -815,27 +815,27 @@ namespace NKKD.EDIT
 
 		string GetMotionScorePath(string scoreId)
 		{
-			return TimeFlowShikiSettings.CREATEOBJECTPATH + selectedDir_ + "/" + scoreId + ".asset";
+			return TimeFlowShikiSettings.CREATEOBJECTPATH + selectedDir_ + Path.DirectorySeparatorChar + scoreId + ".asset";
 		}
 
 		string GetPackMotionScoresResourcesPath()
 		{
-			string resourcesDir = TimeFlowShikiSettings.CREATEOBJECTPATH + "Resources/";
+			string resourcesDir = TimeFlowShikiSettings.CREATEOBJECTPATH + "Resources" + Path.DirectorySeparatorChar;
 			if (!Directory.Exists(resourcesDir))Directory.CreateDirectory(resourcesDir);
 			return resourcesDir + selectedDir_ + ".asset";
 		}
 
 		string GetPackPath(string objName)
 		{
-			string resourcesDir = TimeFlowShikiSettings.CREATEOBJECTPATH + "Resources/";
+			string resourcesDir = TimeFlowShikiSettings.CREATEOBJECTPATH + "Resources" + Path.DirectorySeparatorChar;
 			if (!Directory.Exists(resourcesDir))Directory.CreateDirectory(resourcesDir);
 			return resourcesDir + objName + ".asset";
 		}
 
 		string GetSingleMotionScoreResourcesPath(string scoreId)
 		{
-			string resourcesDir = TimeFlowShikiSettings.CREATEOBJECTPATH + "Resources/";
-			string scoreDir = resourcesDir + selectedDir_ + "/";
+			string resourcesDir = TimeFlowShikiSettings.CREATEOBJECTPATH + "Resources" + Path.DirectorySeparatorChar;
+			string scoreDir = resourcesDir + selectedDir_ + Path.DirectorySeparatorChar;
 
 			if (!Directory.Exists(resourcesDir))Directory.CreateDirectory(resourcesDir);
 			if (!Directory.Exists(scoreDir))Directory.CreateDirectory(scoreDir);
