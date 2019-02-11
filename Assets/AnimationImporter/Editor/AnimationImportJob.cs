@@ -29,7 +29,6 @@ namespace AnimationImporter
 			}
 			set
 			{
-				Debug.Log(value);
 				_directoryPathForSprites = value;
 			}
 		}
@@ -135,9 +134,7 @@ namespace AnimationImporter
 
 			string fileName = Path.GetFileNameWithoutExtension(path);
 			// string lastPart = Path.DirectorySeparatorChar + fileName + "." + extension;
-			Debug.Log(fileName);
 			string lastPart = "/" + fileName + "." + extension;
-			Debug.Log(lastPart);
 			return path.Replace(lastPart, "");
 		}
 	}

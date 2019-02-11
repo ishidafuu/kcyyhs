@@ -710,13 +710,8 @@ namespace AnimationImporter
 
 		private AnimationImportJob CreateAnimationImportJob(string assetPath, string additionalCommandLineArguments = "")
 		{
-			Debug.Log(assetPath);
 			AnimationImportJob importJob = new AnimationImportJob(assetPath);
-
 			importJob.additionalCommandLineArguments = additionalCommandLineArguments;
-
-			Debug.Log(importJob.assetDirectory);
-			Debug.Log(_sharedData.spritesTargetLocation.GetTargetDirectory(importJob.assetDirectory));
 			importJob.directoryPathForSprites = _sharedData.spritesTargetLocation.GetTargetDirectory(importJob.assetDirectory);
 			importJob.directoryPathForAnimations = _sharedData.animationsTargetLocation.GetTargetDirectory(importJob.assetDirectory);
 			importJob.directoryPathForAnimationControllers = _sharedData.animationControllersTargetLocation.GetTargetDirectory(importJob.assetDirectory);
