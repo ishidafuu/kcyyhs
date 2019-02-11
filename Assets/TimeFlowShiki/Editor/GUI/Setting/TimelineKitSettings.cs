@@ -9,6 +9,7 @@ namespace NKKD.EDIT
 		public const string TIMEFLOWSHIKI_DATA_LASTMODIFIED = "lastModified";
 		public const string TIMEFLOWSHIKI_DATA_SCORES = "scores";
 		public const string TIMEFLOWSHIKI_DATA_SCORE_ID = "id";
+		//public const string TIMEFLOWSHIKI_DATA_SCORE_TITLE = "title";
 		public const string TIMEFLOWSHIKI_DATA_SCORE_TIMELINES = "timelines";
 		public const string TIMEFLOWSHIKI_DATA_TIMELINE_TITLE = "title";
 		public const string TIMEFLOWSHIKI_DATA_TIMELINE_TYPE = "type";
@@ -20,9 +21,12 @@ namespace NKKD.EDIT
 
 		public const string TIMEFLOWSHIKI_DATA_TACK_POSDATA = "pos";
 		public const string TIMEFLOWSHIKI_DATA_TACK_TRANSFORMDATA = "transform";
-		// public const string TIMEFLOWSHIKI_DATA_TACK_MOVEDATA = "move";
+		public const string TIMEFLOWSHIKI_DATA_TACK_MOVEDATA = "move";
+		//public const string TIMEFLOWSHIKI_DATA_TACK_ATARIDATA = "atari";
+		//public const string TIMEFLOWSHIKI_DATA_TACK_HOLDDATA = "hold";
+		//public const string TIMEFLOWSHIKI_DATA_TACK_THROWDATA = "throw";
 		public const string TIMEFLOWSHIKI_DATA_TACK_COLORDATA = "color";
 		public const string TIMEFLOWSHIKI_DATA_TACK_EFFECTDATA = "event";
-		// public const string TIMEFLOWSHIKI_DATA_TACK_PASSIVEDATA = "passive";
+		public const string TIMEFLOWSHIKI_DATA_TACK_PASSIVEDATA = "passive";
 	}
 }

@@ -66,6 +66,7 @@ namespace NKKD.EDIT
 
 		public const string RESOURCE_TICK = RESOURCE_BASEPATH + "tick.png";
 		public const string RESOURCE_CONDITIONLINE_BG = RESOURCE_BASEPATH + "conditionLineBg.png";
+
 		public const string RESOURCE_TRACK_HEADER_BG = RESOURCE_BASEPATH + "headerBg.png";
 		public const string RESOURCE_TRACK_CONDITION_BG = RESOURCE_BASEPATH + "bg.png";
 		public const string RESOURCE_TRACK_FRAME_BG = RESOURCE_BASEPATH + "5frame.png";
@@ -74,7 +75,9 @@ namespace NKKD.EDIT
 		public const string RESOURCE_TACK_GRAYPOINT = RESOURCE_BASEPATH + "grayPoint.png";
 		public const string RESOURCE_TACK_WHITEPOINT_SINGLE = RESOURCE_BASEPATH + "whitePointSingle.png";
 		public const string RESOURCE_TACK_GRAYPOINT_SINGLE = RESOURCE_BASEPATH + "grayPointSingle.png";
+
 		public const string RESOURCE_TACK_ACTIVE_BASE = RESOURCE_BASEPATH + "activeTack.png";
+
 		public const string RESOURCE_DUMMY_BG = RESOURCE_BASEPATH + "dummyBg.png";
 
 		public static Texture2D tickTex;
@@ -86,6 +89,7 @@ namespace NKKD.EDIT
 		public static Texture2D whitePointSingleTex;
 		public static Texture2D grayPointSingleTex;
 		public static Texture2D activeTackBaseTex;
+
 		public static Texture2D dummyTex;
 	}
 }

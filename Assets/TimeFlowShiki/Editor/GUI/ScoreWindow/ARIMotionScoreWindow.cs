@@ -1,32 +1,26 @@
+using UnityEngine;
+using UnityEditor;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Collections.Generic;
 using MiniJSONForTimeFlowShiki;
-using UnityEditor;
-using UnityEngine;
+using System.Reflection;
 
-namespace NKKD.EDIT
-{
-	public partial class ARIMotionScoreWindow : EditorWindow
-	{
-		enum enAutoScroll
-		{
+namespace NKKD.EDIT {
+	public partial class ARIMotionScoreWindow : EditorWindow {
+		enum enAutoScroll {
 			Stop,
 			Play,
 			LoopPlay,
 		}
-		struct ManipulateTargets
-		{
+		struct ManipulateTargets {
 			public List<string> activeObjectIds;
-			public ManipulateTargets(List<string> activeObjectIds)
-			{
+			public ManipulateTargets(List<string> activeObjectIds) {
 				this.activeObjectIds = activeObjectIds;
 			}
 		}
-		struct ManipulateEvents
-		{
+		struct ManipulateEvents {
 			public bool keyLeft;
 			public bool keyRight;
 			public bool keyUp;
@@ -53,7 +47,7 @@ namespace NKKD.EDIT
 			//}
 		}
 
-		public List<ScoreComponent> scores_; // = new List<ScoreComponent>();
+		public List<ScoreComponent> scores_;// = new List<ScoreComponent>();
 		public static Action<OnTrackEvent> ParentEmit;
 		public ARIMotionMainWindow parent_;
 		public bool isMovePos_ = true;
@@ -73,9 +67,9 @@ namespace NKKD.EDIT
 		int lastFrame_ = 0;
 		float scrollSpeed_ = 1.0f;
 
+
 		//[MenuItem("Window/TimeFlowShiki")]
-		public static ARIMotionScoreWindow ShowEditor(ARIMotionMainWindow parent)
-		{
+		public static ARIMotionScoreWindow ShowEditor(ARIMotionMainWindow parent) {
 			ARIMotionScoreWindow window = EditorWindow.GetWindow<ARIMotionScoreWindow>();
 			window.parent_ = parent;
 			window.scores_ = parent.scores_;
@@ -83,8 +77,7 @@ namespace NKKD.EDIT
 			return window;
 		}
 
-		public void OnEnable()
-		{
+		public void OnEnable() {
 			InitializeResources();
 			ScoreComponent.Emit = Emit;
 			TimelineTrack.Emit = Emit;
@@ -92,65 +85,58 @@ namespace NKKD.EDIT
 			InitializeScoreView();
 
 		}
-		public void ApplyDataToInspector()
-		{
-			foreach (var score in scores_)score.ApplyDataToInspector();
+		public void ApplyDataToInspector() {
+			foreach (var score in scores_) score.ApplyDataToInspector();
 		}
 
-		public bool HasValidScore()
-		{
-			if (scores_.Any())
-			{
-				foreach (var score in scores_)
-				{
-					if (score.IsExistScore_)return true;
+		public bool HasValidScore() {
+			if (scores_.Any()) {
+				foreach (var score in scores_) {
+					if (score.IsExistScore_) return true;
 				}
 			}
 			return false;
 		}
 
-		public static bool IsTimelineId(string activeObjectId)
-		{
-			if (activeObjectId.StartsWith(WindowSettings.ID_HEADER_TIMELINE))return true;
+		public static bool IsTimelineId(string activeObjectId) {
+			if (activeObjectId.StartsWith(WindowSettings.ID_HEADER_TIMELINE)) return true;
 			return false;
 		}
 
-		public static bool IsTackId(string activeObjectId)
-		{
-			if (activeObjectId.StartsWith(WindowSettings.ID_HEADER_TACK))return true;
+		public static bool IsTackId(string activeObjectId) {
+			if (activeObjectId.StartsWith(WindowSettings.ID_HEADER_TACK)) return true;
 			return false;
 		}
 
-		public int GetSelectedFrame()
-		{
+
+
+		public int GetSelectedFrame() {
 			return selectedFrame_;
 		}
 
-		public void SetZeroFrame()
-		{
+		public void SetZeroFrame() {
 			selectedPos_ = 0;
 			selectedFrame_ = 0;
 		}
 
-		void InitializeScoreView()
-		{
+
+		void InitializeScoreView() {
 			this.titleContent = new GUIContent("TimelineKit");
 			this.wantsMouseMove = true;
 			this.minSize = new Vector2(600f, 300f);
 			this.scrollPos_ = 0;
 		}
 
-		void InitializeResources()
-		{
-			WindowSettings.tickTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TICK, typeof(Texture2D))as Texture2D;
-			WindowSettings.timelineHeaderTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TRACK_HEADER_BG, typeof(Texture2D))as Texture2D;
-			WindowSettings.conditionLineBgTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_CONDITIONLINE_BG, typeof(Texture2D))as Texture2D;
-			WindowSettings.frameTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TRACK_FRAME_BG, typeof(Texture2D))as Texture2D;
-			WindowSettings.whitePointTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_WHITEPOINT, typeof(Texture2D))as Texture2D;
-			WindowSettings.grayPointTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_GRAYPOINT, typeof(Texture2D))as Texture2D;
-			WindowSettings.whitePointSingleTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_WHITEPOINT_SINGLE, typeof(Texture2D))as Texture2D;
-			WindowSettings.grayPointSingleTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_GRAYPOINT_SINGLE, typeof(Texture2D))as Texture2D;
-			WindowSettings.activeTackBaseTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_ACTIVE_BASE, typeof(Texture2D))as Texture2D;
+		void InitializeResources() {
+			WindowSettings.tickTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TICK, typeof(Texture2D)) as Texture2D;
+			WindowSettings.timelineHeaderTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TRACK_HEADER_BG, typeof(Texture2D)) as Texture2D;
+			WindowSettings.conditionLineBgTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_CONDITIONLINE_BG, typeof(Texture2D)) as Texture2D;
+			WindowSettings.frameTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TRACK_FRAME_BG, typeof(Texture2D)) as Texture2D;
+			WindowSettings.whitePointTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_WHITEPOINT, typeof(Texture2D)) as Texture2D;
+			WindowSettings.grayPointTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_GRAYPOINT, typeof(Texture2D)) as Texture2D;
+			WindowSettings.whitePointSingleTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_WHITEPOINT_SINGLE, typeof(Texture2D)) as Texture2D;
+			WindowSettings.grayPointSingleTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_GRAYPOINT_SINGLE, typeof(Texture2D)) as Texture2D;
+			WindowSettings.activeTackBaseTex = AssetDatabase.LoadAssetAtPath(WindowSettings.RESOURCE_TACK_ACTIVE_BASE, typeof(Texture2D)) as Texture2D;
 
 			activeFrameLabelStyle_ = new GUIStyle();
 			activeFrameLabelStyle_.normal.textColor = Color.white;
@@ -160,52 +146,47 @@ namespace NKKD.EDIT
 			activeConditionValueLabelStyle_.normal.textColor = Color.white;
 		}
 
-		void Update()
-		{
+
+
+		void Update() {
 			AutoScrolling();
 
 			drawCounter++;
 
-			if (drawCounter % 5 != 0)return;
-			if (10000 < drawCounter)drawCounter = 0;
+			if (drawCounter % 5 != 0) return;
+			if (10000 < drawCounter) drawCounter = 0;
 
 			var consumed = false;
 			// emit events.
-			if (manipulateEvents_.keyLeft)
-			{
+			if (manipulateEvents_.keyLeft) {
 				//SelectPreviousTack();
 				ChangeStart(true);
 				consumed = true;
 			}
-			if (manipulateEvents_.keyRight)
-			{
+			if (manipulateEvents_.keyRight) {
 				//SelectNextTack();
 				ChangeStart(false);
 				consumed = true;
 			}
 
-			if (manipulateEvents_.keyUp)
-			{
+			if (manipulateEvents_.keyUp) {
 				//SelectAheadObject();
 				ChangeStartAll(true);
 				consumed = true;
 			}
-			if (manipulateEvents_.keyDown)
-			{
+			if (manipulateEvents_.keyDown) {
 				//SelectBelowObject();
 				ChangeStartAll(false);
 				consumed = true;
 			}
 
 			// renew.
-			if (consumed)manipulateEvents_ = new ManipulateEvents();
+			if (consumed) manipulateEvents_ = new ManipulateEvents();
 		}
 
-		void OnGUI()
-		{
+		void OnGUI() {
 			//親閉じたら閉じる
-			if (parent_ == null)
-			{
+			if (parent_ == null) {
 				Close();
 				return;
 			}
@@ -223,23 +204,18 @@ namespace NKKD.EDIT
 			GUI.EndGroup();
 
 		}
-		void AutoScrolling()
-		{
+		void AutoScrolling() {
 			if ((autoScroll_ == enAutoScroll.Play)
-				|| (autoScroll_ == enAutoScroll.LoopPlay))
-			{
+				|| (autoScroll_ == enAutoScroll.LoopPlay)) {
 				int frameCount = (int)((EditorApplication.timeSinceStartup - playStartTime_) * ARIMotionMainWindow.FPS * scrollSpeed_);
-				if (frameCount >= lastFrame_)
-				{
+				if (frameCount >= lastFrame_) {
 
-					if (autoScroll_ == enAutoScroll.Play)
-					{
-						autoScroll_ = enAutoScroll.Stop; //停止
+					if (autoScroll_ == enAutoScroll.Play) {
+						autoScroll_ = enAutoScroll.Stop;//停止
 					}
-					else if (autoScroll_ == enAutoScroll.LoopPlay)
-					{
+					else if (autoScroll_ == enAutoScroll.LoopPlay) {
 						frameCount = 0;
-						playStartTime_ = EditorApplication.timeSinceStartup; //振り出し
+						playStartTime_ = EditorApplication.timeSinceStartup;//振り出し
 					}
 				}
 
@@ -249,95 +225,79 @@ namespace NKKD.EDIT
 			}
 		}
 
-		void SelectPreviousTack()
-		{
-			if (!HasValidScore())return;
+		void SelectPreviousTack() {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
 
-			if (manipulateTargets.activeObjectIds.Any())
-			{
-				if (manipulateTargets.activeObjectIds.Count == 1)
-				{
+			if (manipulateTargets.activeObjectIds.Any()) {
+				if (manipulateTargets.activeObjectIds.Count == 1) {
 					score.SelectPreviousTackOfTimelines(manipulateTargets.activeObjectIds[0]);
 				}
-				else
-				{
+				else {
 					// select multiple objects.
 				}
 			}
 
-			if (!manipulateTargets.activeObjectIds.Any())return;
+			if (!manipulateTargets.activeObjectIds.Any()) return;
 
 			var currentSelectedFrame = score.GetStartFrameById(manipulateTargets.activeObjectIds[0]);
-			if (0 <= currentSelectedFrame)
-			{
+			if (0 <= currentSelectedFrame) {
 				FocusToFrame(currentSelectedFrame);
 			}
 		}
 
-		void SelectNextTack()
-		{
-			if (!HasValidScore())return;
+		void SelectNextTack() {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
-			if (manipulateTargets.activeObjectIds.Any())
-			{
-				if (manipulateTargets.activeObjectIds.Count == 1)
-				{
+			if (manipulateTargets.activeObjectIds.Any()) {
+				if (manipulateTargets.activeObjectIds.Count == 1) {
 					score.SelectNextTackOfTimelines(manipulateTargets.activeObjectIds[0]);
 				}
-				else
-				{
+				else {
 					// select multiple objects.
 				}
 			}
 
-			if (!manipulateTargets.activeObjectIds.Any())return;
+			if (!manipulateTargets.activeObjectIds.Any()) return;
 
 			var currentSelectedFrame = score.GetStartFrameById(manipulateTargets.activeObjectIds[0]);
-			if (0 <= currentSelectedFrame)
-			{
+			if (0 <= currentSelectedFrame) {
 				FocusToFrame(currentSelectedFrame);
 			}
 		}
 
 		//オブジェクトの選択
-		void SelectAheadObject()
-		{
-			if (!HasValidScore())return;
+		void SelectAheadObject() {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
 
 			// if selecting object is top, select tick. unselect all objects.
-			if (score.IsActiveTimelineOrContainsActiveObject(0))
-			{
+			if (score.IsActiveTimelineOrContainsActiveObject(0)) {
 				Emit(new OnTrackEvent(OnTrackEvent.EventType.EVENT_UNSELECTED, null));
 				return;
 			}
 
-			if (!manipulateTargets.activeObjectIds.Any())return;
+			if (!manipulateTargets.activeObjectIds.Any()) return;
 			score.SelectAboveObjectById(manipulateTargets.activeObjectIds[0]);
 
 			var currentSelectedFrame = score.GetStartFrameById(manipulateTargets.activeObjectIds[0]);
-			if (0 <= currentSelectedFrame)
-			{
+			if (0 <= currentSelectedFrame) {
 				FocusToFrame(currentSelectedFrame);
 			}
 		}
 
-		void SelectBelowObject()
-		{
-			if (!HasValidScore())return;
+		void SelectBelowObject() {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
 
-			if (manipulateTargets.activeObjectIds.Any())
-			{
+			if (manipulateTargets.activeObjectIds.Any()) {
 				score.SelectBelowObjectById(manipulateTargets.activeObjectIds[0]);
 				var currentSelectedFrame = score.GetStartFrameById(manipulateTargets.activeObjectIds[0]);
-				if (0 <= currentSelectedFrame)
-				{
+				if (0 <= currentSelectedFrame) {
 					FocusToFrame(currentSelectedFrame);
 				}
 				return;
@@ -347,15 +307,12 @@ namespace NKKD.EDIT
 		}
 
 		//キー入力によるスパンの変更
-		void ChangeSpan(int newSpan)
-		{
-			if (!HasValidScore())return;
+		void ChangeSpan(int newSpan) {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
-			if (manipulateTargets.activeObjectIds.Any())
-			{
-				if (manipulateTargets.activeObjectIds.Count == 1)
-				{
+			if (manipulateTargets.activeObjectIds.Any()) {
+				if (manipulateTargets.activeObjectIds.Count == 1) {
 					var tack = score.TackById(manipulateTargets.activeObjectIds[0]);
 
 					//スパン変更はポジションのみ
@@ -365,14 +322,12 @@ namespace NKKD.EDIT
 						string id = MethodBase.GetCurrentMethod().Name;
 						int lastSpan = tack.span_;
 
-						Action action = () =>
-						{
+						Action action = () => {
 							tack.UpdatePos(tack.start_, newSpan);
 							score.SqueezeTack();
 						};
 
-						Action undo = () =>
-						{
+						Action undo = () => {
 							tack.UpdatePos(tack.start_, lastSpan);
 							score.SqueezeTack();
 						};
@@ -384,28 +339,24 @@ namespace NKKD.EDIT
 					}
 
 				}
-				else
-				{
+				else {
 					// select multiple objects.
 				}
 			}
 		}
 
 		//スタート位置の変更
-		void ChangeStart(bool isForwerd)
-		{
-			if (!HasValidScore())return;
+		void ChangeStart(bool isForwerd) {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
-			if (manipulateTargets.activeObjectIds.Any())
-			{
-				if (manipulateTargets.activeObjectIds.Count == 1)
-				{
+			if (manipulateTargets.activeObjectIds.Any()) {
+				if (manipulateTargets.activeObjectIds.Count == 1) {
 					var tack = score.TackById(manipulateTargets.activeObjectIds[0]);
 
-					if (tack == null)return;
+					if (tack == null) return;
 
-					if ((TimelineType)tack.timelineType_ == TimelineType.TL_POS)return;
+					if ((TimelineType)tack.timelineType_ == TimelineType.TL_POS) return;
 
 					Undo.RecordObject(this, "ChangeSpan");
 					int newStart = (isForwerd)
@@ -416,64 +367,56 @@ namespace NKKD.EDIT
 					string id = MethodBase.GetCurrentMethod().Name;
 					//int lastSpan = tack.span_;
 
-					Action action = () =>
-					{
+					Action action = () => {
 						tack.UpdatePos(newStart, tack.span_);
 						score.SqueezeTack();
 					};
 
-					Action undo = () =>
-					{
+					Action undo = () => {
 						tack.UpdatePos(lastStart, tack.span_);
 						score.SqueezeTack();
 					};
 
 					ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
 
+
 					Emit(new OnTrackEvent(OnTrackEvent.EventType.EVENT_TACK_SAVE, null));
 					parent_.RepaintAllWindow();
 
+
 				}
-				else
-				{
+				else {
 					// select multiple objects.
 				}
 			}
 		}
 
 		//キー入力によるスパンの変更
-		void ChangeStartAll(bool isForwerd)
-		{
-			if (!HasValidScore())return;
+		void ChangeStartAll(bool isForwerd) {
+			if (!HasValidScore()) return;
 
 			var score = GetActiveScore();
-			if (manipulateTargets.activeObjectIds.Any())
-			{
-				if (manipulateTargets.activeObjectIds.Count == 1)
-				{
+			if (manipulateTargets.activeObjectIds.Any()) {
+				if (manipulateTargets.activeObjectIds.Count == 1) {
 					var activeId = manipulateTargets.activeObjectIds[0];
 					List<TackPoint> tackPoints = null;
-					if (IsTimelineId(activeId))
-					{
+					if (IsTimelineId(activeId)) {
 						TimelineTrack timelineTrack = score.TimelineById(activeId);
 						tackPoints = timelineTrack.tackPoints_;
 					}
-					else if (IsTackId(activeId))
-					{
+					else if (IsTackId(activeId)) {
 						var tack = score.TackById(activeId);
 						tackPoints = score.TimelinesByType((TimelineType)tack.timelineType_);
 					}
 
-					if (tackPoints != null)
-					{
+					if (tackPoints != null) {
 						Undo.RecordObject(this, "ChangeSpan");
 
 						List<Action> cmdDo = new List<Action>();
 						List<Action> cmdUndo = new List<Action>();
 						string id = MethodBase.GetCurrentMethod().Name;
 
-						foreach (var item in tackPoints)
-						{
+						foreach (var item in tackPoints) {
 							TackPoint tack = item;
 							int newStart = (isForwerd)
 								? item.start_ - 1
@@ -481,14 +424,13 @@ namespace NKKD.EDIT
 
 							int lastStart = item.start_;
 
-							Action action = () =>
-							{
+
+							Action action = () => {
 								tack.UpdatePos(newStart, tack.span_);
 								score.SqueezeTack();
 							};
 
-							Action undo = () =>
-							{
+							Action undo = () => {
 								tack.UpdatePos(lastStart, tack.span_);
 								score.SqueezeTack();
 							};
@@ -501,40 +443,34 @@ namespace NKKD.EDIT
 						cmdDo.Add(() => score.SqueezeTack());
 						cmdUndo.Add(() => score.SqueezeTack());
 
-						if (cmdDo.Any())
-						{
+						if (cmdDo.Any()) {
 							ARIMotionMainWindow.tackCmd_.Do(new MotionCommand(id,
-								() => { foreach (var cmd in cmdDo)cmd(); },
-								() => { foreach (var cmd in cmdUndo)cmd(); }));
+								() => { foreach (var cmd in cmdDo) cmd(); },
+								() => { foreach (var cmd in cmdUndo) cmd(); }));
 						}
 
 						Emit(new OnTrackEvent(OnTrackEvent.EventType.EVENT_TACK_SAVE, null));
 						parent_.RepaintAllWindow();
 					}
 				}
-				else
-				{
+				else {
 					// select multiple objects.
 				}
 			}
 		}
 
 		//オート再生ボタン
-		void AutoScrollButtons()
-		{
+		void AutoScrollButtons() {
 			const int MAXWIDTH = 72;
 			EditorGUILayout.BeginVertical(GUI.skin.box);
-			if (GUILayout.Button("停止", GUILayout.Height(16), GUILayout.MaxWidth(MAXWIDTH)))
-			{
+			if (GUILayout.Button("停止", GUILayout.Height(16), GUILayout.MaxWidth(MAXWIDTH))) {
 				autoScroll_ = enAutoScroll.Stop;
 			}
-			if (GUILayout.Button("再生", GUILayout.Height(16), GUILayout.MaxWidth(MAXWIDTH)))
-			{
+			if (GUILayout.Button("再生", GUILayout.Height(16), GUILayout.MaxWidth(MAXWIDTH))) {
 				autoScroll_ = enAutoScroll.Play;
 				PlayStartSetup();
 			}
-			if (GUILayout.Button("ループ再生", GUILayout.Height(16), GUILayout.MaxWidth(MAXWIDTH)))
-			{
+			if (GUILayout.Button("ループ再生", GUILayout.Height(16), GUILayout.MaxWidth(MAXWIDTH))) {
 				autoScroll_ = enAutoScroll.LoopPlay;
 				PlayStartSetup();
 			}
@@ -545,232 +481,205 @@ namespace NKKD.EDIT
 			EditorGUILayout.EndVertical();
 		}
 
-		void PlayStartSetup()
-		{
+		void PlayStartSetup() {
 			playStartTime_ = EditorApplication.timeSinceStartup;
 			lastFrame_ = GetActiveScore().LastFrame();
 			Emit(new OnTrackEvent(OnTrackEvent.EventType.EVENT_UNSELECTED, null));
 		}
 
 		//マウス入力イベント設定
-		void HandlingMouseEvent()
-		{
+		void HandlingMouseEvent() {
 			var repaint = false;
 			var useEvent = false;
-			switch (Event.current.type)
-			{
+			switch (Event.current.type) {
 				// mouse event handling.
-				case EventType.MouseDown:
-					{
+				case EventType.MouseDown: {
+					var touchedFrameCount = TimelineTrack.GetFrameOnTimelineFromAbsolutePosX(scrollPos_ + (Event.current.mousePosition.x - WindowSettings.TIMELINE_CONDITIONBOX_SPAN));
+					if (touchedFrameCount < 0) touchedFrameCount = 0;
+					selectedPos_ = touchedFrameCount * WindowSettings.TACK_FRAME_WIDTH;
+					selectedFrame_ = touchedFrameCount;
+					repaint = true;
+
+					Emit(new OnTrackEvent(OnTrackEvent.EventType.EVENT_UNSELECTED, null));
+
+					useEvent = true;
+					break;
+				}
+				case EventType.ContextClick: {
+					ShowContextMenu();
+					useEvent = true;
+					break;
+				}
+				case EventType.MouseUp: {
+
+					// right click.
+					if (Event.current.button == 1) {
+						ShowContextMenu();
+					}
+					else {
 						var touchedFrameCount = TimelineTrack.GetFrameOnTimelineFromAbsolutePosX(scrollPos_ + (Event.current.mousePosition.x - WindowSettings.TIMELINE_CONDITIONBOX_SPAN));
-						if (touchedFrameCount < 0)touchedFrameCount = 0;
+						if (touchedFrameCount < 0) touchedFrameCount = 0;
 						selectedPos_ = touchedFrameCount * WindowSettings.TACK_FRAME_WIDTH;
 						selectedFrame_ = touchedFrameCount;
 						repaint = true;
-
-						Emit(new OnTrackEvent(OnTrackEvent.EventType.EVENT_UNSELECTED, null));
-
-						useEvent = true;
-						break;
 					}
-				case EventType.ContextClick:
-					{
-						ShowContextMenu();
-						useEvent = true;
-						break;
-					}
-				case EventType.MouseUp:
-					{
 
-						// right click.
-						if (Event.current.button == 1)
-						{
-							ShowContextMenu();
-						}
-						else
-						{
-							var touchedFrameCount = TimelineTrack.GetFrameOnTimelineFromAbsolutePosX(scrollPos_ + (Event.current.mousePosition.x - WindowSettings.TIMELINE_CONDITIONBOX_SPAN));
-							if (touchedFrameCount < 0)touchedFrameCount = 0;
-							selectedPos_ = touchedFrameCount * WindowSettings.TACK_FRAME_WIDTH;
-							selectedFrame_ = touchedFrameCount;
-							repaint = true;
-						}
+					useEvent = true;
 
-						useEvent = true;
+					break;
+				}
+				case EventType.MouseDrag: {
+					var pos = scrollPos_ + (Event.current.mousePosition.x - WindowSettings.TIMELINE_CONDITIONBOX_SPAN);
+					if (pos < 0) pos = 0;
+					selectedPos_ = pos - ((WindowSettings.TACK_FRAME_WIDTH / 2f) - 1f);
+					selectedFrame_ = TimelineTrack.GetFrameOnTimelineFromAbsolutePosX(pos);
 
-						break;
-					}
-				case EventType.MouseDrag:
-					{
-						var pos = scrollPos_ + (Event.current.mousePosition.x - WindowSettings.TIMELINE_CONDITIONBOX_SPAN);
-						if (pos < 0)pos = 0;
-						selectedPos_ = pos - ((WindowSettings.TACK_FRAME_WIDTH / 2f) - 1f);
-						selectedFrame_ = TimelineTrack.GetFrameOnTimelineFromAbsolutePosX(pos);
+					FocusToFrame(selectedFrame_);
 
-						FocusToFrame(selectedFrame_);
+					repaint = true;
+					useEvent = true;
+					break;
+				}
+
+				// scroll event handling.
+				case EventType.ScrollWheel: {
+					if (0 != Event.current.delta.x) {
+						scrollPos_ = scrollPos_ + (Event.current.delta.x * 2);
+						if (scrollPos_ < 0) scrollPos_ = 0;
 
 						repaint = true;
-						useEvent = true;
-						break;
 					}
+					useEvent = true;
+					break;
+				}
 
-					// scroll event handling.
-				case EventType.ScrollWheel:
-					{
-						if (0 != Event.current.delta.x)
-						{
-							scrollPos_ = scrollPos_ + (Event.current.delta.x * 2);
-							if (scrollPos_ < 0)scrollPos_ = 0;
+				// key event handling.
+				case EventType.KeyDown: {
+					switch (Event.current.keyCode) {
+						case KeyCode.LeftArrow: {
+							if (manipulateTargets.activeObjectIds.Count == 0) {
 
+								selectedFrame_ = selectedFrame_ - 1;
+								if (selectedFrame_ < 0) selectedFrame_ = 0;
+								selectedPos_ = selectedFrame_ * WindowSettings.TACK_FRAME_WIDTH;
+								repaint = true;
+
+								FocusToFrame(selectedFrame_);
+							}
+							manipulateEvents_.keyLeft = true;
+							useEvent = true;
+							break;
+						}
+						case KeyCode.RightArrow: {
+							if (manipulateTargets.activeObjectIds.Count == 0) {
+								selectedFrame_ = selectedFrame_ + 1;
+								selectedPos_ = selectedFrame_ * WindowSettings.TACK_FRAME_WIDTH;
+								repaint = true;
+
+								FocusToFrame(selectedFrame_);
+							}
+							manipulateEvents_.keyRight = true;
+							useEvent = true;
+							break;
+						}
+						case KeyCode.UpArrow: {
+							manipulateEvents_.keyUp = true;
+							useEvent = true;
+							break;
+						}
+						case KeyCode.DownArrow: {
+							manipulateEvents_.keyDown = true;
+							useEvent = true;
+							break;
+						}
+						case KeyCode.S:
+							parent_.SaveData2(true);
+							break;
+						case KeyCode.L:
+							parent_.ReloadSavedData();
+							break;
+						case KeyCode.Z:
+							ARIMotionMainWindow.scoreCmd_.Undo();//Undo
 							repaint = true;
-						}
-						useEvent = true;
-						break;
+							break;
+						case KeyCode.Y:
+							ARIMotionMainWindow.scoreCmd_.Redo();//Redo
+							repaint = true;
+							break;
+							//case KeyCode.Keypad1:
+							//case KeyCode.Keypad2:
+							//case KeyCode.Keypad3:
+							//case KeyCode.Keypad4:
+							//case KeyCode.Keypad5:
+							//case KeyCode.Keypad6:
+							//case KeyCode.Keypad7:
+							//case KeyCode.Keypad8:
+							//case KeyCode.Keypad9:
+							//case KeyCode.Keypad0:
+							//	{
+							//		manipulateEvents_.SetKeyNum(Event.current.keyCode);
+							//		useEvent = true;
+							//		break;
+							//	}
 					}
-
-					// key event handling.
-				case EventType.KeyDown:
-					{
-						switch (Event.current.keyCode)
-						{
-							case KeyCode.LeftArrow:
-								{
-									if (manipulateTargets.activeObjectIds.Count == 0)
-									{
-
-										selectedFrame_ = selectedFrame_ - 1;
-										if (selectedFrame_ < 0)selectedFrame_ = 0;
-										selectedPos_ = selectedFrame_ * WindowSettings.TACK_FRAME_WIDTH;
-										repaint = true;
-
-										FocusToFrame(selectedFrame_);
-									}
-									manipulateEvents_.keyLeft = true;
-									useEvent = true;
-									break;
-								}
-							case KeyCode.RightArrow:
-								{
-									if (manipulateTargets.activeObjectIds.Count == 0)
-									{
-										selectedFrame_ = selectedFrame_ + 1;
-										selectedPos_ = selectedFrame_ * WindowSettings.TACK_FRAME_WIDTH;
-										repaint = true;
-
-										FocusToFrame(selectedFrame_);
-									}
-									manipulateEvents_.keyRight = true;
-									useEvent = true;
-									break;
-								}
-							case KeyCode.UpArrow:
-								{
-									manipulateEvents_.keyUp = true;
-									useEvent = true;
-									break;
-								}
-							case KeyCode.DownArrow:
-								{
-									manipulateEvents_.keyDown = true;
-									useEvent = true;
-									break;
-								}
-							case KeyCode.S:
-								parent_.SaveData2(true);
-								break;
-							case KeyCode.L:
-								parent_.ReloadSavedData();
-								break;
-							case KeyCode.Z:
-								ARIMotionMainWindow.scoreCmd_.Undo(); //Undo
-								repaint = true;
-								break;
-							case KeyCode.Y:
-								ARIMotionMainWindow.scoreCmd_.Redo(); //Redo
-								repaint = true;
-								break;
-								//case KeyCode.Keypad1:
-								//case KeyCode.Keypad2:
-								//case KeyCode.Keypad3:
-								//case KeyCode.Keypad4:
-								//case KeyCode.Keypad5:
-								//case KeyCode.Keypad6:
-								//case KeyCode.Keypad7:
-								//case KeyCode.Keypad8:
-								//case KeyCode.Keypad9:
-								//case KeyCode.Keypad0:
-								//	{
-								//		manipulateEvents_.SetKeyNum(Event.current.keyCode);
-								//		useEvent = true;
-								//		break;
-								//	}
-						}
-						break;
-					}
+					break;
+				}
 			}
 
 			// update cursor pos
 			cursorPos_ = selectedPos_ - scrollPos_;
 
-			if (repaint)
-			{
+			if (repaint) {
 				//HandleUtility.Repaint();
 				parent_.RepaintAllWindow();
 				//repaint = false;
 			}
 
-			if (eventStacks_.Any())
-			{
-				foreach (var onTrackEvent in eventStacks_)EmitAfterDraw(onTrackEvent);
+			if (eventStacks_.Any()) {
+				foreach (var onTrackEvent in eventStacks_) EmitAfterDraw(onTrackEvent);
 				eventStacks_.Clear();
 				parent_.NeedSave();
 			}
 
-			if (useEvent)Event.current.Use();
+			if (useEvent) Event.current.Use();
 		}
 
 		//右クリックメニュー
-		void ShowContextMenu()
-		{
-			var nearestTimelineIndex = 0; // fixed. should change by mouse position.
+		void ShowContextMenu() {
+			var nearestTimelineIndex = 0;// fixed. should change by mouse position.
 
 			var menu = new GenericMenu();
 
-			if (HasValidScore())
-			{
+			if (HasValidScore()) {
 				var currentScore = GetActiveScore();
 				var scoreId = currentScore.scoreGuid_;
 
 				//各種タイムライン
-				var menuItems = new Dictionary<string, OnTrackEvent.EventType>
-					{ { "Add New Pos", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_POS },
-						{ "Add New Transform", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_TRANSFORM },
-						{ "Add New Move", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_MOVE },
-						//{"Add New Atari", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_ATARI},
-						//{"Add New Hold", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_HOLD},
-						//{"Add New Throw", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_THROW},
-						{ "Add New Color", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_COLOR },
-						{ "Add New Effect", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_EFFECT },
-						{ "Add New Passive", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_PASSIVE },
-					};
+				var menuItems = new Dictionary<string, OnTrackEvent.EventType>{
+					{"Add New Pos", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_POS},
+					{"Add New Transform", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_TRANSFORM},
+					{"Add New Move", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_MOVE},
+					//{"Add New Atari", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_ATARI},
+					//{"Add New Hold", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_HOLD},
+					//{"Add New Throw", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_THROW},
+					{"Add New Color", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_COLOR},
+					{"Add New Effect", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_EFFECT},
+					{"Add New Passive", OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_PASSIVE},
+				};
 
-				foreach (var key in menuItems.Keys)
-				{
+				foreach (var key in menuItems.Keys) {
 					var eventType = menuItems[key];
 					var enable = IsEnableEvent(eventType);
-					if (enable)
-					{
+					if (enable) {
 						menu.AddItem(
-							new GUIContent(key),
-							false,
-							() =>
-							{
-								Emit(new OnTrackEvent(eventType, scoreId, nearestTimelineIndex));
-							}
-						);
+						new GUIContent(key),
+						false,
+						() => {
+							Emit(new OnTrackEvent(eventType, scoreId, nearestTimelineIndex));
+						}
+					);
 					}
-					else
-					{
+					else {
 						menu.AddDisabledItem(new GUIContent(key));
 					}
 				}
@@ -780,26 +689,30 @@ namespace NKKD.EDIT
 		}
 
 		//右クリックメニューの可不可
-		bool IsEnableEvent(OnTrackEvent.EventType eventType)
-		{
+		bool IsEnableEvent(OnTrackEvent.EventType eventType) {
 			int timelineType = 0;
 
 			//既に存在する種類のタイムラインは作成できないように
 			//各種タイムライン
-			switch (eventType)
-			{
+			switch (eventType) {
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_POS:
-					timelineType = (int)TimelineType.TL_POS;
-					break;
+					timelineType = (int)TimelineType.TL_POS; break;
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_TRANSFORM:
-					timelineType = (int)TimelineType.TL_TRANSFORM;
-					break;
+					timelineType = (int)TimelineType.TL_TRANSFORM; break;
+				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_MOVE:
+					timelineType = (int)TimelineType.TL_MOVE; break;
+				//case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_ATARI:
+				//	timelineType = (int)TimelineType.TL_ATARI; break;
+				//case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_HOLD:
+				//	timelineType = (int)TimelineType.TL_HOLD; break;
+				//case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_THROW:
+				//	timelineType = (int)TimelineType.TL_THROW; break;
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_COLOR:
-					timelineType = (int)TimelineType.TL_COLOR;
-					break;
+					timelineType = (int)TimelineType.TL_COLOR; break;
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_EFFECT:
-					timelineType = (int)TimelineType.TL_EFFECT;
-					break;
+					timelineType = (int)TimelineType.TL_EFFECT; break;
+				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_PASSIVE:
+					timelineType = (int)TimelineType.TL_PASSIVE; break;
 			}
 
 			return !GetActiveScore().timelineTracks_
@@ -808,352 +721,320 @@ namespace NKKD.EDIT
 				.Any();
 		}
 
-		void Emit(OnTrackEvent onTrackEvent)
-		{
+		void Emit(OnTrackEvent onTrackEvent) {
 			var type = onTrackEvent.eventType;
 			// tack events.
-			switch (type)
-			{
-				case OnTrackEvent.EventType.EVENT_UNSELECTED:
-					{
-						manipulateTargets = new ManipulateTargets(new List<string>());
+			switch (type) {
+				case OnTrackEvent.EventType.EVENT_UNSELECTED: {
+					manipulateTargets = new ManipulateTargets(new List<string>());
 
-						Undo.RecordObject(this, "Unselect");
+					Undo.RecordObject(this, "Unselect");
 
-						var activeAuto = GetActiveScore();
-						activeAuto.DeactivateAllObjects();
-						activeAuto.SetScoreInspector();
-						parent_.RepaintAllWindow();
-						return;
-					}
-				case OnTrackEvent.EventType.EVENT_OBJECT_SELECTED:
-					{
-						manipulateTargets = new ManipulateTargets(new List<string> { onTrackEvent.activeObjectId });
+					var activeAuto = GetActiveScore();
+					activeAuto.DeactivateAllObjects();
+					activeAuto.SetScoreInspector();
+					parent_.RepaintAllWindow();
+					return;
+				}
+				case OnTrackEvent.EventType.EVENT_OBJECT_SELECTED: {
+					manipulateTargets = new ManipulateTargets(new List<string> { onTrackEvent.activeObjectId });
 
-						var activeAuto = GetActiveScore();
+					var activeAuto = GetActiveScore();
 
-						Undo.RecordObject(this, "Select");
-						activeAuto.ActivateObjectsAndDeactivateOthers(manipulateTargets.activeObjectIds);
-						parent_.RepaintAllWindow();
-						return;
-					}
+					Undo.RecordObject(this, "Select");
+					activeAuto.ActivateObjectsAndDeactivateOthers(manipulateTargets.activeObjectIds);
+					parent_.RepaintAllWindow();
+					return;
+				}
 
-					//各種タイムライン
+				//各種タイムライン
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_POS:
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_TRANSFORM:
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_MOVE:
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_COLOR:
 				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_EFFECT:
-				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_PASSIVE:
-					{
-						int timelineType = 0;
-						//各種タイムライン
-						switch (type)
-						{
-							case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_POS:
-								timelineType = (int)TimelineType.TL_POS;
-								break;
-							case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_TRANSFORM:
-								timelineType = (int)TimelineType.TL_TRANSFORM;
-								break;
-							case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_COLOR:
-								timelineType = (int)TimelineType.TL_COLOR;
-								break;
-							case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_EFFECT:
-								timelineType = (int)TimelineType.TL_EFFECT;
-								break;
-						}
-
-						var activeAuto = GetActiveScore();
-						var tackPoints = new List<TackPoint>();
-						var newTimeline = new TimelineTrack(activeAuto.timelineTracks_.Count, timelineType, tackPoints);
-						var newTimelineId = newTimeline.timelineId_;
-						Undo.RecordObject(this, "Add Timeline");
-
-						//activeAuto.timelineTracks.Add(newTimeline);
-
-						string id = MethodBase.GetCurrentMethod().Name;
-
-						Action action = () =>
-						{
-							activeAuto.timelineTracks_.Add(newTimeline);
-						};
-
-						Action undo = () =>
-						{
-							activeAuto.DeleteObjectById(newTimelineId, false);
-						};
-
-						ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
-
-						parent_.NeedSave();
-						return;
+				case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_PASSIVE: {
+					int timelineType = 0;
+					//各種タイムライン
+					switch (type) {
+						case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_POS:
+							timelineType = (int)TimelineType.TL_POS; break;
+						case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_TRANSFORM:
+							timelineType = (int)TimelineType.TL_TRANSFORM; break;
+						case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_MOVE:
+							timelineType = (int)TimelineType.TL_MOVE; break;
+						case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_COLOR:
+							timelineType = (int)TimelineType.TL_COLOR; break;
+						case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_EFFECT:
+							timelineType = (int)TimelineType.TL_EFFECT; break;
+						case OnTrackEvent.EventType.EVENT_SCORE_ADDTIMELINE_PASSIVE:
+							timelineType = (int)TimelineType.TL_PASSIVE; break;
 					}
 
-				case OnTrackEvent.EventType.EVENT_SCORE_BEFORESAVE:
-					{
-						Undo.RecordObject(this, "Update Score Title");
-						return;
-					}
+					var activeAuto = GetActiveScore();
+					var tackPoints = new List<TackPoint>();
+					var newTimeline = new TimelineTrack(activeAuto.timelineTracks_.Count, timelineType, tackPoints);
+					var newTimelineId = newTimeline.timelineId_;
+					Undo.RecordObject(this, "Add Timeline");
 
-				case OnTrackEvent.EventType.EVENT_SCORE_SAVE:
-					{
-						parent_.NeedSave();
-						return;
-					}
+					//activeAuto.timelineTracks.Add(newTimeline);
 
-					/*
-						timeline events.
-					*/
-				case OnTrackEvent.EventType.EVENT_TIMELINE_ADDTACK:
-					{
-						eventStacks_.Add(onTrackEvent.Copy());
-						return;
-					}
+					string id = MethodBase.GetCurrentMethod().Name;
 
-				case OnTrackEvent.EventType.EVENT_TIMELINE_PASTETACK:
-					{
-						eventStacks_.Add(onTrackEvent.Copy());
-						return;
-					}
+					Action action = () => {
+						activeAuto.timelineTracks_.Add(newTimeline);
+					};
 
-				case OnTrackEvent.EventType.EVENT_TIMELINE_DELETE:
-					{
-						var targetTimelineId = onTrackEvent.activeObjectId;
-						var activeAuto = GetActiveScore();
+					Action undo = () => {
+						activeAuto.DeleteObjectById(newTimelineId, false);
+					};
 
-						Undo.RecordObject(this, "Delete Timeline");
+					ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
 
-						string id = MethodBase.GetCurrentMethod().Name;
+					parent_.NeedSave();
+					return;
+				}
 
-						Action action = () =>
-						{
-							activeAuto.DeleteObjectById(targetTimelineId, false);
-						};
+				case OnTrackEvent.EventType.EVENT_SCORE_BEFORESAVE: {
+					Undo.RecordObject(this, "Update Score Title");
+					return;
+				}
 
-						Action undo = () =>
-						{
-							activeAuto.DeleteObjectById(targetTimelineId, true);
-						};
+				case OnTrackEvent.EventType.EVENT_SCORE_SAVE: {
+					parent_.NeedSave();
+					return;
+				}
 
-						ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
+				/*
+					timeline events.
+				*/
+				case OnTrackEvent.EventType.EVENT_TIMELINE_ADDTACK: {
+					eventStacks_.Add(onTrackEvent.Copy());
+					return;
+				}
 
-						//activeAuto.DeleteObjectById(targetTimelineId);
-						parent_.NeedSave();
-						return;
-					}
-				case OnTrackEvent.EventType.EVENT_TIMELINE_BEFORESAVE:
-					{
-						Undo.RecordObject(this, "Update Timeline Title");
-						return;
-					}
 
-				case OnTrackEvent.EventType.EVENT_TIMELINE_SAVE:
-					{
-						parent_.NeedSave();
-						return;
-					}
+				case OnTrackEvent.EventType.EVENT_TIMELINE_PASTETACK: {
+					eventStacks_.Add(onTrackEvent.Copy());
+					return;
+				}
 
-					/*
-						tack events.
-					*/
-				case OnTrackEvent.EventType.EVENT_TACK_MOVING:
-					{
-						var movingTackId = onTrackEvent.activeObjectId;
+				case OnTrackEvent.EventType.EVENT_TIMELINE_DELETE: {
+					var targetTimelineId = onTrackEvent.activeObjectId;
+					var activeAuto = GetActiveScore();
 
-						var activeAuto = GetActiveScore();
 
-						activeAuto.SetMovingTackToTimelimes(movingTackId);
-						break;
-					}
-				case OnTrackEvent.EventType.EVENT_TACK_MOVED:
-					{
+					Undo.RecordObject(this, "Delete Timeline");
 
-						Undo.RecordObject(this, "Move Tack");
+					string id = MethodBase.GetCurrentMethod().Name;
 
-						return;
-					}
-				case OnTrackEvent.EventType.EVENT_TACK_MOVED_AFTER:
-					{
-						var targetTackId = onTrackEvent.activeObjectId;
+					Action action = () => {
+						activeAuto.DeleteObjectById(targetTimelineId, false);
+					};
 
-						var activeAuto = GetActiveScore();
-						var activeTimelineIndex = activeAuto.GetTackContainedTimelineIndex(targetTackId);
-						if (0 <= activeTimelineIndex)
-						{
-							//タックの移動後処理
-							activeAuto.timelineTracks_[activeTimelineIndex].UpdateByTackMoved(targetTackId);
+					Action undo = () => {
+						activeAuto.DeleteObjectById(targetTimelineId, true);
+					};
 
-							//Repaint();
-							parent_.NeedSave();
-						}
-						return;
-					}
-				case OnTrackEvent.EventType.EVENT_TACK_DELETED:
-					{
-						var targetTackId = onTrackEvent.activeObjectId;
-						var activeAuto = GetActiveScore();
+					ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
 
-						Undo.RecordObject(this, "Delete Tack");
 
-						string id = MethodBase.GetCurrentMethod().Name;
+					//activeAuto.DeleteObjectById(targetTimelineId);
+					parent_.NeedSave();
+					return;
+				}
+				case OnTrackEvent.EventType.EVENT_TIMELINE_BEFORESAVE: {
+					Undo.RecordObject(this, "Update Timeline Title");
+					return;
+				}
 
-						Action action = () =>
-						{
-							activeAuto.DeleteObjectById(targetTackId, false);
-							activeAuto.SqueezeTack();
-						};
+				case OnTrackEvent.EventType.EVENT_TIMELINE_SAVE: {
+					parent_.NeedSave();
+					return;
+				}
 
-						Action undo = () =>
-						{
-							activeAuto.DeleteObjectById(targetTackId, true);
-							activeAuto.SqueezeTack();
-						};
 
-						ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
+				/*
+					tack events.
+				*/
+				case OnTrackEvent.EventType.EVENT_TACK_MOVING: {
+					var movingTackId = onTrackEvent.activeObjectId;
+
+					var activeAuto = GetActiveScore();
+
+					activeAuto.SetMovingTackToTimelimes(movingTackId);
+					break;
+				}
+				case OnTrackEvent.EventType.EVENT_TACK_MOVED: {
+
+					Undo.RecordObject(this, "Move Tack");
+
+					return;
+				}
+				case OnTrackEvent.EventType.EVENT_TACK_MOVED_AFTER: {
+					var targetTackId = onTrackEvent.activeObjectId;
+
+					var activeAuto = GetActiveScore();
+					var activeTimelineIndex = activeAuto.GetTackContainedTimelineIndex(targetTackId);
+					if (0 <= activeTimelineIndex) {
+						//タックの移動後処理
+						activeAuto.timelineTracks_[activeTimelineIndex].UpdateByTackMoved(targetTackId);
 
 						//Repaint();
 						parent_.NeedSave();
-						return;
 					}
+					return;
+				}
+				case OnTrackEvent.EventType.EVENT_TACK_DELETED: {
+					var targetTackId = onTrackEvent.activeObjectId;
+					var activeAuto = GetActiveScore();
 
-				case OnTrackEvent.EventType.EVENT_TACK_COPY:
-					{
-						var targetTackId = onTrackEvent.activeObjectId;
-						var activeAuto = GetActiveScore();
-						clipTack_ = activeAuto.GetTackById(targetTackId);
-						return;
-					}
+					Undo.RecordObject(this, "Delete Tack");
 
-				case OnTrackEvent.EventType.EVENT_TACK_BEFORESAVE:
-					{
-						Undo.RecordObject(this, "Update Tack Title");
-						return;
-					}
 
-				case OnTrackEvent.EventType.EVENT_TACK_SAVE:
-					{
-						parent_.NeedSave();
-						return;
-					}
+					string id = MethodBase.GetCurrentMethod().Name;
 
-				case OnTrackEvent.EventType.EVENT_TACK_CHANGE:
-					{
-						parent_.NeedSave();
-						parent_.subWindow_.SetupPartsData(false); //サブウインドウにも反映させる
-						parent_.RepaintAllWindow();
-						return;
-					}
+					Action action = () => {
+						activeAuto.DeleteObjectById(targetTackId, false);
+						activeAuto.SqueezeTack();
+					};
 
-				default:
-					{
-						//親に投げる
-						ParentEmit(onTrackEvent);
-						//Debug.LogError("no match type:" + type);
-						break;
-					}
+					Action undo = () => {
+						activeAuto.DeleteObjectById(targetTackId, true);
+						activeAuto.SqueezeTack();
+					};
+
+					ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
+
+					//Repaint();
+					parent_.NeedSave();
+					return;
+				}
+
+				case OnTrackEvent.EventType.EVENT_TACK_COPY: {
+					var targetTackId = onTrackEvent.activeObjectId;
+					var activeAuto = GetActiveScore();
+					clipTack_ = activeAuto.GetTackById(targetTackId);
+					return;
+				}
+
+
+				case OnTrackEvent.EventType.EVENT_TACK_BEFORESAVE: {
+					Undo.RecordObject(this, "Update Tack Title");
+					return;
+				}
+
+				case OnTrackEvent.EventType.EVENT_TACK_SAVE: {
+					parent_.NeedSave();
+					return;
+				}
+
+
+				case OnTrackEvent.EventType.EVENT_TACK_CHANGE: {
+					parent_.NeedSave();
+					parent_.subWindow_.SetupPartsData(false);//サブウインドウにも反映させる
+					parent_.RepaintAllWindow();
+					return;
+				}
+
+
+				default: {
+					//親に投げる
+					ParentEmit(onTrackEvent);
+					//Debug.LogError("no match type:" + type);
+					break;
+				}
 			}
 		}
 
-		ScoreComponent GetActiveScore()
-		{
+		ScoreComponent GetActiveScore() {
 			return parent_.GetActiveScore();
 		}
 
-		void EmitAfterDraw(OnTrackEvent onTrackEvent)
-		{
+		void EmitAfterDraw(OnTrackEvent onTrackEvent) {
 			var type = onTrackEvent.eventType;
-			switch (type)
-			{
-				case OnTrackEvent.EventType.EVENT_TIMELINE_ADDTACK:
-					{
-						var targetTimelineId = onTrackEvent.activeObjectId;
-						var targetFramePos = onTrackEvent.frame;
+			switch (type) {
+				case OnTrackEvent.EventType.EVENT_TIMELINE_ADDTACK: {
+					var targetTimelineId = onTrackEvent.activeObjectId;
+					var targetFramePos = onTrackEvent.frame;
 
-						var activeAuto = GetActiveScore();
+					var activeAuto = GetActiveScore();
 
-						Undo.RecordObject(this, "Add Tack");
+					Undo.RecordObject(this, "Add Tack");
 
-						string id = MethodBase.GetCurrentMethod().Name;
+					string id = MethodBase.GetCurrentMethod().Name;
 
-						TackPoint newTackPoint = activeAuto.NewTackToTimeline(targetTimelineId, targetFramePos);
-						var delId = newTackPoint.tackId_;
-						Action action = () =>
-						{
-							activeAuto.PasteTackToTimeline(targetTimelineId, targetFramePos, newTackPoint);
-							activeAuto.SqueezeTack();
-						};
+					TackPoint newTackPoint = activeAuto.NewTackToTimeline(targetTimelineId, targetFramePos);
+					var delId = newTackPoint.tackId_;
+					Action action = () => {
+						activeAuto.PasteTackToTimeline(targetTimelineId, targetFramePos, newTackPoint);
+						activeAuto.SqueezeTack();
+					};
 
-						Action undo = () =>
-						{
-							activeAuto.DeleteObjectById(delId, false);
-							activeAuto.SqueezeTack();
-						};
+					Action undo = () => {
+						activeAuto.DeleteObjectById(delId, false);
+						activeAuto.SqueezeTack();
+					};
 
-						ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
+					ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
 
-						return;
-					}
 
-				case OnTrackEvent.EventType.EVENT_TIMELINE_PASTETACK:
-					{
+					return;
+				}
 
-						var targetTimelineId = onTrackEvent.activeObjectId;
-						var targetFramePos = onTrackEvent.frame;
-						var activeAuto = GetActiveScore();
+				case OnTrackEvent.EventType.EVENT_TIMELINE_PASTETACK: {
 
-						Undo.RecordObject(this, "Paste Tack");
+					var targetTimelineId = onTrackEvent.activeObjectId;
+					var targetFramePos = onTrackEvent.frame;
+					var activeAuto = GetActiveScore();
 
-						//activeAuto.PasteTackToTimeline(targetTimelineId, targetFramePos, clipTack_);
-						//activeAuto.SqueezeTack();
+					Undo.RecordObject(this, "Paste Tack");
 
-						string id = MethodBase.GetCurrentMethod().Name;
+					//activeAuto.PasteTackToTimeline(targetTimelineId, targetFramePos, clipTack_);
+					//activeAuto.SqueezeTack();
 
-						TackPoint newTackPoint = clipTack_;
+					string id = MethodBase.GetCurrentMethod().Name;
 
-						Action action = () =>
-						{
-							activeAuto.PasteTackToTimeline(targetTimelineId, targetFramePos, newTackPoint);
-							activeAuto.SqueezeTack();
-						};
+					TackPoint newTackPoint = clipTack_;
 
-						Action undo = () =>
-						{
-							activeAuto.DeleteObjectById(newTackPoint.tackId_, false);
-							activeAuto.SqueezeTack();
-						};
+					Action action = () => {
+						activeAuto.PasteTackToTimeline(targetTimelineId, targetFramePos, newTackPoint);
+						activeAuto.SqueezeTack();
+					};
 
-						ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
+					Action undo = () => {
+						activeAuto.DeleteObjectById(newTackPoint.tackId_, false);
+						activeAuto.SqueezeTack();
+					};
 
-						return;
-					}
+					ARIMotionMainWindow.scoreCmd_.Do(new MotionCommand(id, action, undo));
+
+					return;
+				}
 			}
 		}
 
-		void FocusToFrame(int focusTargetFrame)
-		{
+		void FocusToFrame(int focusTargetFrame) {
 			var leftFrame = (int)Math.Round(scrollPos_ / WindowSettings.TACK_FRAME_WIDTH);
 			var rightFrame = (int)(((scrollPos_ + (position.width - WindowSettings.TIMELINE_CONDITIONBOX_SPAN)) / WindowSettings.TACK_FRAME_WIDTH) - 1);
 
 			// left edge of view - leftFrame - rightFrame - right edge of view
 
-			if (focusTargetFrame < leftFrame)
-			{
+			if (focusTargetFrame < leftFrame) {
 				scrollPos_ = scrollPos_ - ((leftFrame - focusTargetFrame) * WindowSettings.TACK_FRAME_WIDTH);
 				return;
 			}
 
-			if (rightFrame < focusTargetFrame)
-			{
+			if (rightFrame < focusTargetFrame) {
 				scrollPos_ = scrollPos_ + ((focusTargetFrame - rightFrame) * WindowSettings.TACK_FRAME_WIDTH);
 				return;
 			}
 		}
-		string GetScriptableObjectFilePath()
-		{
+		string GetScriptableObjectFilePath() {
 			return "Assets/" + TimeFlowShikiSettings.TIMEFLOWSHIKI_DATA_PATH + "TimeFlow.asset";
 			//return Path.Combine(Application.dataPath, TimeFlowShikiSettings.TIMEFLOWSHIKI_DATA_PATH + "TimeFlow.asset");
 		}
+
 
 	}
 

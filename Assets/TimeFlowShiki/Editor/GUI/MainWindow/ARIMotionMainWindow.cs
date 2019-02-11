@@ -12,11 +12,12 @@ namespace NKKD.EDIT
 	public class ARIMotionMainWindow : EditorWindow
 	{
 		[SerializeField]
-		List<ScoreComponent> scores_ = new List<ScoreComponent>();
-		Sprite sprite;
-		const int FPS = 60;
-		ARIMotionScoreWindow scoreWindow_;
-		ARIMotionSubWindow subWindow_;
+		public List<ScoreComponent> scores_ = new List<ScoreComponent>();
+		//public JMCharManager charManager_;
+		public Sprite sprite;
+		public const int FPS = 60;
+		public ARIMotionScoreWindow scoreWindow_;
+		public ARIMotionSubWindow subWindow_;
 		public static List<string> dirList_ = new List<string>();
 		public static List<string> fileList_ = new List<string>();
 		public static MotionCommandManager tackCmd_ = new MotionCommandManager(true);
@@ -82,19 +83,19 @@ namespace NKKD.EDIT
 				}
 			}
 
-			// // load demo data then save it.
-			// if (!this.scores_.Any())
-			// {
-			// 	foreach (enMotionType item in Enum.GetValues(typeof(enMotionType)))
-			// 	{
-			// 		var firstAuto = GenerateFirstScore(item.ToString());
-			// 		this.scores_.Add(firstAuto);
-			// 	}
+			// load demo data then save it.
+			if (!this.scores_.Any())
+			{
+				foreach (enMotionType item in Enum.GetValues(typeof(enMotionType)))
+				{
+					var firstAuto = GenerateFirstScore(item.ToString());
+					this.scores_.Add(firstAuto);
+				}
 
-			// 	//生成されたヤツ全保存
-			// 	SaveDataAll();
-			// 	Debug.Log("SaveDataAll");
-			// }
+				//生成されたヤツ全保存
+				SaveDataAll();
+				Debug.Log("SaveDataAll");
+			}
 
 			SetActiveScore(activeScoreIndex_);
 		}
@@ -359,8 +360,10 @@ namespace NKKD.EDIT
 			EditorGUILayout.EndScrollView();
 
 			if (GUILayout.Button("SaveAll"))SaveDataAll();
+			//if (GUILayout.Button("CreateScriptableObject")) CreateObject(false);
+			//if (GUILayout.Button("CreateScriptableObjectAll")) CreateObjectAll();
 			if (GUILayout.Button("CreateAniScriptSheet"))CreateAniScriptSheet();
-			// if (GUILayout.Button("CreateAniBaseScript"))CreateAniBaseScript();
+			if (GUILayout.Button("CreateAniBaseScript"))CreateAniBaseScript();
 			EditorGUILayout.EndVertical();
 
 			EditorGUILayout.BeginVertical();
@@ -749,23 +752,59 @@ namespace NKKD.EDIT
 			AniScriptSheetObject obj = CreateInstance(typeof(AniScriptSheetObject))as AniScriptSheetObject;
 			obj.scripts = new List<AniScript>();
 
-			// foreach (NKKD.EnumMotion motion in Enum.GetValues(typeof(NKKD.EnumMotion)))
-			// {
-			// 	foreach (var item in scores_)
-			// 	{
-			// 		if (item.id_.IndexOf(motion.ToString()) != -1)
-			// 		{
-			// 			obj.scripts.Add(item.CreateAniScriptObject());
-			// 			break;
-			// 		}
-			// 	}
-			// }
+			foreach (NKKD.EnumMotion motion in Enum.GetValues(typeof(NKKD.EnumMotion)))
+			{
+				foreach (var item in scores_)
+				{
+					if (item.id_.IndexOf(motion.ToString()) != -1)
+					{
+						//Debug.Log(motion.ToString());
+						obj.scripts.Add(item.CreateAniScriptObject());
+						break;
+					}
+				}
+			}
 
+			//foreach (var item in obj.scripts) {
+			//	Debug.Log(item.frames[0].ant);
+			//}
 			AssetDatabase.CreateAsset(obj, GetPackPath("AniScriptSheet"));
+			//Debug.Log("CreateAniScript:" + selectedDir_ + ".asset");
 			AssetDatabase.SaveAssets();
 			AssetDatabase.Refresh();
 			// 完了ポップアップ
 			EditorUtility.DisplayDialog("CreateAniScript", "AniScriptSheetを保存しました。", "ok");
+		}
+
+		// ファイルで出力
+		void CreateAniBaseScript()
+		{
+			AniBasePosObject obj = CreateInstance(typeof(AniBasePosObject))as AniBasePosObject;
+			//obj.aniBasePos = new AniBasePos();
+			obj.aniBasePos.FRONTDEPTH = BasePosition.OutputDepth(false);
+			obj.aniBasePos.BACKDEPTH = BasePosition.OutputDepth(true);
+			obj.aniBasePos.BODY_BASE = BasePosition.BODY_BASE;
+			obj.aniBasePos.HEAD_BASE = BasePosition.HEAD_BASE;
+			obj.aniBasePos.L_ARM_BASE = BasePosition.L_ARM_BASE;
+			obj.aniBasePos.R_ARM_BASE = BasePosition.R_ARM_BASE;
+			obj.aniBasePos.L_HAND_BASE = BasePosition.L_HAND_BASE;
+			obj.aniBasePos.R_HAND_BASE = BasePosition.R_HAND_BASE;
+			obj.aniBasePos.L_LEG_BASE = BasePosition.L_LEG_BASE;
+			obj.aniBasePos.R_LEG_BASE = BasePosition.R_LEG_BASE;
+			obj.aniBasePos.L_FOOT_BASE = BasePosition.L_FOOT_BASE;
+			obj.aniBasePos.R_FOOT_BASE = BasePosition.R_FOOT_BASE;
+			obj.aniBasePos.ANT_BASE = BasePosition.ANT_BASE;
+
+			//obj.aniBasePos.LOOKDEPTH = BasePosition.OutputDepth(enPartsAngle.Look);
+			//obj.aniBasePos.SIDEDEPTH = BasePosition.OutputDepth(enPartsAngle.Side);
+			//obj.aniBasePos.REARDEPTH = BasePosition.OutputDepth(enPartsAngle.Rear);
+
+			AssetDatabase.CreateAsset(obj, GetPackPath("AniBasePos"));
+			Debug.Log("CreateAniBaseScript:" + selectedDir_ + ".asset");
+			AssetDatabase.SaveAssets();
+			AssetDatabase.Refresh();
+			// 完了ポップアップ
+			EditorUtility.DisplayDialog("CreateAniBaseScript", "AniBasePosを保存しました。", "ok");
 		}
 
 		//JSONパス
@@ -804,50 +843,50 @@ namespace NKKD.EDIT
 			return scoreDir + scoreId + ".asset";
 		}
 
-		// public Sprite GetSprite(enPartsType partsType, bool isBack, int faceNo)
-		// {
+		public Sprite GetSprite(enPartsType partsType, bool isBack, int faceNo)
+		{
 
-		// 	int typeNo = 0;
-		// 	switch (partsType)
-		// 	{
-		// 		case enPartsType.Body:
-		// 			typeNo = 0;
-		// 			break;
-		// 		case enPartsType.LeftArm:
-		// 		case enPartsType.RightArm:
-		// 			typeNo = 1;
-		// 			break;
-		// 		case enPartsType.LeftHand:
-		// 		case enPartsType.RightHand:
-		// 			typeNo = 2;
-		// 			break;
-		// 		case enPartsType.LeftLeg:
-		// 		case enPartsType.RightLeg:
-		// 			typeNo = 3;
-		// 			break;
-		// 		case enPartsType.LeftFoot:
-		// 		case enPartsType.RightFoot:
-		// 			typeNo = 4;
-		// 			break;
-		// 		case enPartsType.Head:
-		// 			typeNo = 5;
-		// 			break;
-		// 		case enPartsType.Ant:
-		// 			typeNo = 6;
-		// 			break;
-		// 		default:
-		// 			Debug.LogError("other partsType_");
-		// 			break;
-		// 	}
+			int typeNo = 0;
+			switch (partsType)
+			{
+				case enPartsType.Body:
+					typeNo = 0;
+					break;
+				case enPartsType.LeftArm:
+				case enPartsType.RightArm:
+					typeNo = 1;
+					break;
+				case enPartsType.LeftHand:
+				case enPartsType.RightHand:
+					typeNo = 2;
+					break;
+				case enPartsType.LeftLeg:
+				case enPartsType.RightLeg:
+					typeNo = 3;
+					break;
+				case enPartsType.LeftFoot:
+				case enPartsType.RightFoot:
+					typeNo = 4;
+					break;
+				case enPartsType.Head:
+					typeNo = 5;
+					break;
+				case enPartsType.Ant:
+					typeNo = 6;
+					break;
+				default:
+					Debug.LogError("other partsType_");
+					break;
+			}
 
-		// 	var spriteName = TimeFlowShikiSettings.SPRITE_NAME + "_" + typeNo.ToString();
-		// 	if (!spriteDic.ContainsKey(spriteName))
-		// 	{
-		// 		Debug.Log("GetSprite NotFound : " + spriteName);
-		// 		return null;
-		// 	}
-		// 	return spriteDic[spriteName];
-		// }
+			var spriteName = TimeFlowShikiSettings.SPRITE_NAME + "_" + typeNo.ToString();
+			if (!spriteDic.ContainsKey(spriteName))
+			{
+				Debug.Log("GetSprite NotFound : " + spriteName);
+				return null;
+			}
+			return spriteDic[spriteName];
+		}
 
 		public int LoadSprite()
 		{

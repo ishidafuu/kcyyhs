@@ -13,9 +13,14 @@ namespace NKKD.EDIT
 
 		public class PartsObject
 		{
+			public enPartsType partsType;
 			public Vector2Int pos;
-			// public PartsTransformState partsTransform;
+			public PartsTransformState partsTransform;
 
+			public PartsObject(enPartsType partsType)
+			{
+				this.partsType = partsType;
+			}
 		}
 
 		public static Action<OnTrackEvent> ParentEmit;
@@ -41,14 +46,14 @@ namespace NKKD.EDIT
 		Vector2 mouseStPos_;
 		bool isRepaint_;
 
-		PartsObject partsObjects_ = new PartsObject();
+		Dictionary<enPartsType, PartsObject> partsObjects_ = new Dictionary<enPartsType, PartsObject>();
 		MotionState sendMotion_; //シーンに移すデータ
 		Vector2 tempMovePos_; //位置移動反映
 
 		enFocusObject focusObject_;
 		TimelineType timelineType_;
-		bool isMultiParts_ = false;
-		Vector2Int multiOffset_ = Vector2Int.zero;
+		Dictionary<enEditPartsType, bool> isMultiParts_ = new Dictionary<enEditPartsType, bool>();
+		Dictionary<enEditPartsType, Vector2Int> multiOffset_ = new Dictionary<enEditPartsType, Vector2Int>();
 		string lastTackId_;
 		string lastParentTimelineId_;
 		int selectedFrame_;
@@ -91,8 +96,13 @@ namespace NKKD.EDIT
 		{
 			wantsMouseMove = true; // マウス情報を取得.
 			isRepaint_ = true;
-			isMultiParts_ = false;
-			multiOffset_ = Vector2Int.zero;
+			foreach (enPartsType item in Enum.GetValues(typeof(enPartsType)))
+			{
+				var enEditParts = PartsConverter.Convert(item);
+
+				isMultiParts_[enEditParts] = false;
+				multiOffset_[enEditParts] = Vector2Int.zero;
+			}
 		}
 
 		void OnGUI()
@@ -249,8 +259,12 @@ namespace NKKD.EDIT
 			//各種タイムライン
 			SetupPartsPos();
 			SetupPartsTransform();
+			SetupPartsMove();
+			//SetupPartsAtari();
+			//SetupPartsThrow();
 			SetupPartsColor();
 			SetupPartsEffect();
+			SetupPartsPassive();
 
 			StateToPartsObject();
 			RefreshMotionManager();
@@ -262,8 +276,11 @@ namespace NKKD.EDIT
 
 		void StateToPartsObject()
 		{
-			// GetPartsObject(item).pos = sendMotion_.stPos.pos;
-			// GetPartsObject(item).partsTransform = sendMotion_.stTransform.GetTransform(item);
+			foreach (enPartsType item in Enum.GetValues(typeof(enPartsType)))
+			{
+				GetPartsObject(item).pos = sendMotion_.stPos.GetPos(item) + BasePosition.GetPosEdit(item, false);
+				GetPartsObject(item).partsTransform = sendMotion_.stTransform.GetTransform(item);
+			}
 		}
 
 		////タックのデータをサブウインドウに移す
@@ -326,6 +343,108 @@ namespace NKKD.EDIT
 			//sendMotion_.stTransform.InportMotion(latestTransform, selectedFrame_);
 		}
 
+		//現在の選択フレームの位置移動状態算出
+		void SetupPartsMove()
+		{
+			tempMovePos_ = Vector2Int.zero;
+
+			if (focusObject_ != enFocusObject.focusScore)return;
+
+			if (!parent_.scoreWindow_.isMovePos_)return;
+
+			//Move
+			var untilSelectedFrameMove = parent_.GetActiveScore().GetUntilSelectedFrameMove(selectedFrame_);
+			if (untilSelectedFrameMove == null)return;
+			if (untilSelectedFrameMove.Count == 0)return;
+
+			Vector2 nowSpeed = Vector2.zero;
+
+			for (int i = 0; i < selectedFrame_; i++)
+			{
+				var nowTack = untilSelectedFrameMove
+					.Where(t => t.IsExistTack_)
+					.Where(t => (t.start_ <= i))
+					.Where(t => ((t.start_ + t.span_) > i))
+					.FirstOrDefault();
+
+				float ACCTIME = (1f / (float)ARIMotionMainWindow.FPS);
+
+				if (nowTack != null)
+				{
+					//そのタックに入ったフレーム
+					if (i == nowTack.start_)
+					{
+						//初速の書き換え
+						if (!nowTack.motionData_.mMove.isKeepX)nowSpeed.x = nowTack.motionData_.mMove.delta.x;
+						if (!nowTack.motionData_.mMove.isKeepY)nowSpeed.y = nowTack.motionData_.mMove.delta.y;
+					}
+
+					//タック内
+					nowSpeed.x += (nowTack.motionData_.mMove.accel.x * ACCTIME);
+					nowSpeed.y += (nowTack.motionData_.mMove.accel.y * ACCTIME);
+
+					//ブレーキ
+					if (nowTack.motionData_.mMove.decelMag > 0)
+					{
+						//正規化された現在の速度に摩擦倍率
+						Vector3 revVelocity = nowSpeed.normalized * nowTack.motionData_.mMove.decelMag;
+
+						//ブレーキ
+						float newX = (Mathf.Abs(nowSpeed.x) > Mathf.Abs(revVelocity.x))
+							? nowSpeed.x - revVelocity.x
+							: 0.0f;
+
+						float newY = (Mathf.Abs(nowSpeed.y) > Mathf.Abs(revVelocity.y))
+							? nowSpeed.y - revVelocity.y
+							: 0.0f;
+
+						nowSpeed.x = newX;
+						nowSpeed.y = newY;
+					}
+
+					////浮いてるときだけ重力
+					//if ((tempMovePos_.y < 0) && !nowTack.motionData_.mMove.isZeroGrv) {
+					//	nowSpeed.y += (MoveDefine.main.gravity_ * ACCTIME);
+					//}
+				}
+
+				//位置変更
+				tempMovePos_.x += nowSpeed.x;
+				tempMovePos_.y -= nowSpeed.y;
+				if (tempMovePos_.y > 0)tempMovePos_.y = 0; //地面
+
+			}
+		}
+
+		////当たり判定
+		//void SetupPartsAtari()
+		//{
+		//	var atariTack = parent_.GetActiveScore().GetSelectedFrame(selectedFrame_, TimelineType.TL_ATARI);
+		//	if (atariTack == null)
+		//	{
+		//		sendMotion_.stAtari.isActive = false;
+		//	}
+		//	else
+		//	{
+		//		sendMotion_.stAtari.InportMotion(atariTack.motionData_.mAtari);
+		//	}
+		//}
+
+		////投げ位置
+		//void SetupPartsThrow()
+		//{
+		//	var throwTack = parent_.GetActiveScore().GetSelectedFrame(selectedFrame_, TimelineType.TL_THROW);
+		//	if (throwTack == null)
+		//	{
+		//		sendMotion_.stThrow.isActive = false;
+		//	}
+		//	else
+		//	{
+		//		sendMotion_.stThrow.InportMotion(throwTack.motionData_.mThrow, true);
+		//	}
+
+		//}
+
 		//アニメーション
 		void SetupPartsColor()
 		{
@@ -355,16 +474,30 @@ namespace NKKD.EDIT
 			}
 		}
 
+		//状態
+		void SetupPartsPassive()
+		{
+			var passiveTack = parent_.GetActiveScore().GetSelectedFrame(selectedFrame_, TimelineType.TL_PASSIVE);
+			if (passiveTack != null)
+			{
+				sendMotion_.stPassive.InportMotion(passiveTack.motionData_.mPassive);
+			}
+		}
+
 		void ClearSelectedParts()
 		{
-			// var enEditParts = PartsConverter.Convert(item);
-			isMultiParts_ = false;
-			multiOffset_ = Vector2Int.zero;
+			foreach (enPartsType item in Enum.GetValues(typeof(enPartsType)))
+			{
+				var enEditParts = PartsConverter.Convert(item);
+
+				isMultiParts_[enEditParts] = false;
+				multiOffset_[enEditParts] = Vector2Int.zero;
+			}
 		}
 
 		bool IsSelectedParts()
 		{
-			return isMultiParts_;
+			return isMultiParts_.Where(m => m.Value).Any();
 		}
 
 		//サブウインドウの編集情報をタックに送る
@@ -375,14 +508,14 @@ namespace NKKD.EDIT
 			return new Vector2Int((int)pos.x, (int)pos.y);
 		}
 
-		// //サブウインドウのパーツオブジェクト取得
-		// PartsObject GetPartsObject(enPartsType partsType)
-		// {
-		// 	if (!partsObjects_.ContainsKey(partsType))
-		// 		partsObjects_[partsType] = new PartsObject(partsType);
+		//サブウインドウのパーツオブジェクト取得
+		PartsObject GetPartsObject(enPartsType partsType)
+		{
+			if (!partsObjects_.ContainsKey(partsType))
+				partsObjects_[partsType] = new PartsObject(partsType);
 
-		// 	return partsObjects_[partsType];
-		// }
+			return partsObjects_[partsType];
+		}
 
 		//シーンにタック情報を反映
 		void RefreshMotionManager()

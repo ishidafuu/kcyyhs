@@ -23,6 +23,21 @@ namespace NKKD.EDIT
 		{
 			var insp = (ScoreComponentInspector)target;
 			var score = insp.score;
+			//UpdateTimelineTrackTitle(score);
 		}
+
+		//private void UpdateTimelineTrackTitle(ScoreComponent score)
+		//{
+		//	//���C���X�y�N�^�̕\��
+		//	var newTitle = EditorGUILayout.TextField("title", score.title_);
+		//	//var charManager = EditorGUILayout.ObjectField("charManager", timelineTrack.charManager, typeof(JMCharManager),true);
+		//	//EditorGUILayout.LabelField("type : " + score.timelineType.ToString());
+		//	if (newTitle != score.title_)
+		//	{
+		//		score.BeforeSave();
+		//		//score.title_ = newTitle;
+		//		score.Save();
+		//	}
+		//}
 	}
 }
