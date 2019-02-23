@@ -1,11 +1,11 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Random = UnityEngine.Random;
-using System.IO;
 using AnimationImporter.Boomlagoon.JSON;
 using UnityEditor;
+using System.IO;
 
 namespace AnimationImporter.Aseprite
 {
@@ -38,7 +38,7 @@ namespace AnimationImporter.Aseprite
 		//  static constructor, registering plugin
 		// --------------------------------------------------------------------------------
 
-		static AsepriteImporter()
+		static AsepriteImporter ()
 		{
 			AsepriteImporter importer = new AsepriteImporter();
 			AnimationImporter.RegisterImporter(importer, "ase", "aseprite");
@@ -69,7 +69,7 @@ namespace AnimationImporter.Aseprite
 
 		public bool IsConfigured()
 		{
-			return File.Exists(AnimationImporter.Instance.asepritePath);
+			return File.Exists(Path.GetFullPath(AnimationImporter.Instance.asepritePath));
 		}
 
 		// ================================================================================
@@ -79,7 +79,7 @@ namespace AnimationImporter.Aseprite
 		// parses a JSON file and creates the raw data for ImportedAnimationSheet from it
 		private static ImportedAnimationSheet CreateAnimationSheetFromMetaData(AnimationImportJob job, AnimationImporterSharedConfig config)
 		{
-			string textAssetFilename = job.directoryPathForSprites + Path.DirectorySeparatorChar + job.name + ".json";
+			string textAssetFilename = job.directoryPathForSprites + "/" + job.name + ".json";
 			TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(textAssetFilename);
 
 			if (textAsset != null)
@@ -102,7 +102,7 @@ namespace AnimationImporter.Aseprite
 				animationSheet.SetNonLoopingAnimations(config.animationNamesThatDoNotLoop);
 
 				// delete JSON file afterwards
-				// AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(textAsset));
+				AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(textAsset));
 
 				return animationSheet;
 			}
@@ -140,8 +140,8 @@ namespace AnimationImporter.Aseprite
 				}
 
 				// check and copy json file
-				string jsonSource = job.assetDirectory + Path.DirectorySeparatorChar + job.name + ".json";
-				string jsonTarget = job.directoryPathForSprites + Path.DirectorySeparatorChar + job.name + ".json";
+				string jsonSource = job.assetDirectory + "/" + job.name + ".json";
+				string jsonTarget = job.directoryPathForSprites + "/" + job.name + ".json";
 				if (File.Exists(jsonSource))
 				{
 					if (File.Exists(jsonTarget))
@@ -157,8 +157,8 @@ namespace AnimationImporter.Aseprite
 				}
 
 				// check and copy png file
-				string pngSource = job.assetDirectory + Path.DirectorySeparatorChar + job.name + ".png";
-				string pngTarget = job.directoryPathForSprites + Path.DirectorySeparatorChar + job.name + ".png";
+				string pngSource = job.assetDirectory + "/" + job.name + ".png";
+				string pngTarget = job.directoryPathForSprites + "/" + job.name + ".png";
 				if (File.Exists(pngSource))
 				{
 					if (File.Exists(pngTarget))
@@ -200,7 +200,7 @@ namespace AnimationImporter.Aseprite
 			if (GetAnimationsFromJSON(animationSheet, meta) == false)
 			{
 				return null;
-			}
+			}		
 
 			if (GetFramesFromJSON(animationSheet, root) == false)
 			{
@@ -218,14 +218,14 @@ namespace AnimationImporter.Aseprite
 
 			System.Diagnostics.ProcessStartInfo start = new System.Diagnostics.ProcessStartInfo();
 			start.Arguments = "-b " + buildOptions;
-			start.FileName = asepritePath;
+			start.FileName = Path.GetFullPath(asepritePath);
 			start.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 			start.CreateNoWindow = true;
 			start.UseShellExecute = false;
 			start.WorkingDirectory = workingDirectory;
 
 			// Run the external process & wait for it to finish
-			using(System.Diagnostics.Process proc = System.Diagnostics.Process.Start(start))
+			using (System.Diagnostics.Process proc = System.Diagnostics.Process.Start(start))
 			{
 				proc.WaitForExit();
 				// Retrieve the app's exit code
@@ -260,13 +260,14 @@ namespace AnimationImporter.Aseprite
 
 				switch (frameTag["direction"].Str)
 				{
-					default : anim.direction = PlaybackDirection.Forward;
-					break;
+					default:
+						anim.direction = PlaybackDirection.Forward;
+						break;
 					case "reverse":
-							anim.direction = PlaybackDirection.Reverse;
+						anim.direction = PlaybackDirection.Reverse;
 						break;
 					case "pingpong":
-							anim.direction = PlaybackDirection.PingPong;
+						anim.direction = PlaybackDirection.PingPong;
 						break;
 				}
 

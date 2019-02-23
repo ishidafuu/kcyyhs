@@ -1,29 +1,17 @@
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using System.IO;
+using UnityEditor.Animations;
 using System.Linq;
 using AnimationImporter.Aseprite;
-using MiniJSONForTimeFlowShiki;
-using UnityEditor;
-using UnityEditor.Animations;
-using UnityEngine;
 
 namespace AnimationImporter
 {
 	public class AnimationImporter
 	{
-		// ================================================================================
-		//  const
-		// --------------------------------------------------------------------------------
-
-		private const string PREFS_PREFIX = "ANIMATION_IMPORTER_";
-		// private const string SHARED_CONFIG_PATH = "Assets/Resources/AnimationImporter/AnimationImporterConfig.asset";
-		readonly string SHARED_CONFIG_PATH =
-			"Assets" + Path.DirectorySeparatorChar
-			+ "Resources" + Path.DirectorySeparatorChar
-			+ "AnimationImporter" + Path.DirectorySeparatorChar
-			+ "AnimationImporterConfig.asset";
 		// ================================================================================
 		//	Singleton
 		// --------------------------------------------------------------------------------
@@ -53,6 +41,13 @@ namespace AnimationImporter
 		public static CustomReImportDelegate HandleCustomReImport = null;
 
 		public delegate void ChangeImportJob(AnimationImportJob job);
+
+		// ================================================================================
+		//  const
+		// --------------------------------------------------------------------------------
+
+		private const string PREFS_PREFIX = "ANIMATION_IMPORTER_";
+		private const string SHARED_CONFIG_PATH = "Assets/Resources/AnimationImporter/AnimationImporterConfig.asset";
 
 		// ================================================================================
 		//  user values
@@ -262,11 +257,10 @@ namespace AnimationImporter
 				{
 					AnimationImportJob job = jobs[i];
 
-					job.progressUpdated += (float progress) =>
-					{
-						float completeProgress = i * progressPerJob + progress * progressPerJob;
-						EditorUtility.DisplayProgressBar("Import", job.name, completeProgress);
-					};
+					job.progressUpdated += (float progress) => {							
+							float completeProgress = i * progressPerJob + progress * progressPerJob;
+							EditorUtility.DisplayProgressBar("Import", job.name, completeProgress);
+						};
 					ImportJob(job);
 				}
 				AssetDatabase.Refresh();
@@ -297,7 +291,6 @@ namespace AnimationImporter
 				animationSheet.ApplySpriteNamingScheme(sharedData.spriteNamingScheme);
 
 				CreateSprites(animationSheet, job);
-				// CreateFrames(animationSheet);
 
 				job.SetProgress(0.6f);
 
@@ -321,21 +314,6 @@ namespace AnimationImporter
 			return animationSheet;
 		}
 
-		void CreateFrames(ImportedAnimationSheet animations)
-		{
-			YhAnimeData obj = ScriptableObject.CreateInstance(typeof(YhAnimeData))as YhAnimeData;
-			obj.frame.frames = new List<int>();
-
-			string directory = sharedData.animationControllersTargetLocation.GetAndEnsureTargetDirectory(animations.assetDirectory);
-			string pathForOverrideController = directory + Path.DirectorySeparatorChar + "obj" + Path.DirectorySeparatorChar + animations.name + ".asset";
-			AssetDatabase.CreateAsset(obj, pathForOverrideController);
-			Debug.Log("CreateFrames:" + pathForOverrideController);
-			AssetDatabase.SaveAssets();
-			// AssetDatabase.Refresh();
-			// 完了ポップアップ
-			// EditorUtility.DisplayDialog("CreateFrames", "Framesを保存しました。", "ok");
-		}
-
 		// ================================================================================
 		//  create animator controllers
 		// --------------------------------------------------------------------------------
@@ -347,7 +325,7 @@ namespace AnimationImporter
 			string directory = sharedData.animationControllersTargetLocation.GetAndEnsureTargetDirectory(animations.assetDirectory);
 
 			// check if controller already exists; use this to not loose any references to this in other assets
-			string pathForAnimatorController = directory + Path.DirectorySeparatorChar + animations.name + ".controller";
+			string pathForAnimatorController = directory + "/" + animations.name + ".controller";
 			controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(pathForAnimatorController);
 
 			if (controller == null)
@@ -385,7 +363,7 @@ namespace AnimationImporter
 			string directory = sharedData.animationControllersTargetLocation.GetAndEnsureTargetDirectory(animations.assetDirectory);
 
 			// check if override controller already exists; use this to not loose any references to this in other assets
-			string pathForOverrideController = directory + Path.DirectorySeparatorChar + animations.name + ".overrideController";
+			string pathForOverrideController = directory + "/" + animations.name + ".overrideController";
 			overrideController = AssetDatabase.LoadAssetAtPath<AnimatorOverrideController>(pathForOverrideController);
 
 			RuntimeAnimatorController baseController = _baseController;
@@ -473,7 +451,7 @@ namespace AnimationImporter
 
 			string imageAssetFile = job.imageAssetFilename;
 
-			TextureImporter importer = AssetImporter.GetAtPath(imageAssetFile)as TextureImporter;
+			TextureImporter importer = AssetImporter.GetAtPath(imageAssetFile) as TextureImporter;
 
 			// apply texture import settings if there are no previous ones
 			if (!animationSheet.hasPreviousTextureImportSettings)
@@ -566,7 +544,7 @@ namespace AnimationImporter
 		// check if there is a configured importer for the specified extension
 		public static bool IsConfiguredForAssets(DefaultAsset[] assets)
 		{
-			foreach (var asset in assets)
+			foreach(var asset in assets)
 			{
 				string assetPath = AssetDatabase.GetAssetPath(asset);
 				string extension = GetExtension(assetPath);
@@ -578,7 +556,7 @@ namespace AnimationImporter
 						IAnimationImporterPlugin importer = _importerPlugins[extension];
 						if (importer != null)
 						{
-							if (!importer.IsConfigured())
+							if(!importer.IsConfigured())
 							{
 								return false;
 							}
@@ -638,7 +616,7 @@ namespace AnimationImporter
 			string basePath = GetBasePath(assetPath);
 			string targetDirectory = sharedData.animationControllersTargetLocation.GetTargetDirectory(basePath);
 
-			string pathForController = targetDirectory + Path.DirectorySeparatorChar + name + ".controller";
+			string pathForController = targetDirectory + "/" + name + ".controller";
 			AnimatorController controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(pathForController);
 
 			return controller;
@@ -650,7 +628,7 @@ namespace AnimationImporter
 			string basePath = GetBasePath(assetPath);
 			string targetDirectory = sharedData.animationControllersTargetLocation.GetTargetDirectory(basePath);
 
-			string pathForController = targetDirectory + Path.DirectorySeparatorChar + name + ".overrideController";
+			string pathForController = targetDirectory + "/" + name + ".overrideController";
 			AnimatorOverrideController controller = AssetDatabase.LoadAssetAtPath<AnimatorOverrideController>(pathForController);
 
 			return controller;
@@ -702,7 +680,7 @@ namespace AnimationImporter
 			}
 
 			Import(jobs.ToArray());
-		}
+		}		
 
 		// ================================================================================
 		//  private methods
@@ -711,7 +689,9 @@ namespace AnimationImporter
 		private AnimationImportJob CreateAnimationImportJob(string assetPath, string additionalCommandLineArguments = "")
 		{
 			AnimationImportJob importJob = new AnimationImportJob(assetPath);
+
 			importJob.additionalCommandLineArguments = additionalCommandLineArguments;
+
 			importJob.directoryPathForSprites = _sharedData.spritesTargetLocation.GetTargetDirectory(importJob.assetDirectory);
 			importJob.directoryPathForAnimations = _sharedData.animationsTargetLocation.GetTargetDirectory(importJob.assetDirectory);
 			importJob.directoryPathForAnimationControllers = _sharedData.animationControllersTargetLocation.GetTargetDirectory(importJob.assetDirectory);
@@ -740,7 +720,7 @@ namespace AnimationImporter
 			}
 
 			string fileName = Path.GetFileNameWithoutExtension(path);
-			string lastPart = Path.DirectorySeparatorChar + fileName + "." + extension;
+			string lastPart = "/" + fileName + "." + extension;
 
 			return path.Replace(lastPart, "");
 		}

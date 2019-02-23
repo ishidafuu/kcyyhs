@@ -16,19 +16,18 @@ namespace AnimationImporter
 		/// <returns>The saved data as a ScriptableObject, or null if not found.</returns>
 		/// <param name="unityPathToFile">Unity path to file (e.g. "Assets/Resources/MyFile.asset")</param>
 		/// <typeparam name="T">The ScriptableObject type</typeparam>
-		public static T LoadSaveData<T>(string unityPathToFile)where T : ScriptableObject
+		public static T LoadSaveData<T> (string unityPathToFile) where T : ScriptableObject
 		{
 			// Path must contain Resources folder
 			var resourcesFolder = string.Concat(
-				Path.DirectorySeparatorChar,
+				AssetDatabaseUtility.UnityDirectorySeparator,
 				AssetDatabaseUtility.ResourcesFolderName,
-				Path.DirectorySeparatorChar);
-
+				AssetDatabaseUtility.UnityDirectorySeparator);
 			if (!unityPathToFile.Contains(resourcesFolder))
 			{
 				var exceptionMessage = string.Format(
-					"Failed to Load ScriptableObject of type, {0}, from path: {1}. "
-					+ "Path must begin with Assets and include a directory within the Resources folder.",
+					"Failed to Load ScriptableObject of type, {0}, from path: {1}. " +
+					"Path must begin with Assets and include a directory within the Resources folder.",
 					typeof(T).ToString(),
 					unityPathToFile);
 				throw new UnityException(exceptionMessage);
@@ -51,7 +50,7 @@ namespace AnimationImporter
 		/// <returns>The saved data as a ScriptableObject.</returns>
 		/// <param name="unityPathToFile">Unity path to file (e.g. "Assets/Resources/MyFile.asset")</param>
 		/// <typeparam name="T">The ScriptableObject type</typeparam>
-		public static T LoadOrCreateSaveData<T>(string unityPathToFile)where T : ScriptableObject
+		public static T LoadOrCreateSaveData<T>(string unityPathToFile) where T : ScriptableObject
 		{
 			var loadedSettings = LoadSaveData<T>(unityPathToFile);
 			if (loadedSettings == null)
@@ -65,7 +64,7 @@ namespace AnimationImporter
 
 		private static string GetResourceRelativePath(string unityPath)
 		{
-			var resourcesFolder = AssetDatabaseUtility.ResourcesFolderName + Path.DirectorySeparatorChar;
+			var resourcesFolder = AssetDatabaseUtility.ResourcesFolderName + AssetDatabaseUtility.UnityDirectorySeparator;
 			var pathToResources = unityPath.Substring(0, unityPath.IndexOf(resourcesFolder));
 
 			// Remove all folders leading up to the Resources folder

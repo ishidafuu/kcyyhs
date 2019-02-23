@@ -1,13 +1,13 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Random = UnityEngine.Random;
-using System.IO;
-using System.Linq;
-using AnimationImporter.Boomlagoon.JSON;
 using UnityEditor;
+using System.IO;
+using AnimationImporter.Boomlagoon.JSON;
 using UnityEditor.Animations;
+using System.Linq;
 
 namespace AnimationImporter
 {
@@ -247,7 +247,7 @@ namespace AnimationImporter
 
 			if (targetLocation.locationType == AssetTargetLocationType.GlobalDirectory)
 			{
-				string displayDirectory = Path.DirectorySeparatorChar + globalDirectory;
+				string displayDirectory = "/" + globalDirectory;
 				EditorGUILayout.EndHorizontal();
 				EditorGUILayout.BeginHorizontal();
 				GUILayout.Label(displayDirectory, GUILayout.MaxWidth(300f));
@@ -288,7 +288,7 @@ namespace AnimationImporter
 
 			GUILayout.EndHorizontal();
 
-			if (!File.Exists(AnimationImporter.Instance.asepritePath))
+			if(!File.Exists(AnimationImporter.Instance.asepritePath))
 			{
 				var fileErrorMessage = string.Format(
 					"Cannot find Aseprite at the specified path. Use the Select button to locate the application.");
@@ -322,7 +322,7 @@ namespace AnimationImporter
 		{
 			ShowHeadline("Animator Override Controller + Animations");
 
-			importer.baseController = EditorGUILayout.ObjectField("Based on Controller:", importer.baseController, typeof(RuntimeAnimatorController), false)as RuntimeAnimatorController;
+			importer.baseController = EditorGUILayout.ObjectField("Based on Controller:", importer.baseController, typeof(RuntimeAnimatorController), false) as RuntimeAnimatorController;
 
 			DefaultAsset[] droppedAssets = ShowDropButton<DefaultAsset>(importer.canImportAnimationsForOverrideController, AnimationImporter.IsValidAsset);
 			if (droppedAssets != null && droppedAssets.Length > 0)
@@ -333,7 +333,7 @@ namespace AnimationImporter
 
 		private void ImportAssetsOrError(DefaultAsset[] assets, ImportAnimatorController importAnimatorController = ImportAnimatorController.None)
 		{
-			if (AnimationImporter.IsConfiguredForAssets(assets))
+			if(AnimationImporter.IsConfiguredForAssets(assets))
 			{
 				importer.ImportAssets(assets, importAnimatorController);
 			}
@@ -362,7 +362,7 @@ namespace AnimationImporter
 
 		public delegate bool IsValidAssetDelegate(string path);
 
-		private T[] ShowDropButton<T>(bool isEnabled, IsValidAssetDelegate IsValidAsset)where T : UnityEngine.Object
+		private T[] ShowDropButton<T>(bool isEnabled, IsValidAssetDelegate IsValidAsset) where T : UnityEngine.Object
 		{
 			T[] returnValue = null;
 
@@ -414,7 +414,7 @@ namespace AnimationImporter
 			return returnValue;
 		}
 
-		private bool DraggedObjectsContainValidObject<T>(IsValidAssetDelegate IsValidAsset)where T : UnityEngine.Object
+		private bool DraggedObjectsContainValidObject<T>(IsValidAssetDelegate IsValidAsset) where T : UnityEngine.Object
 		{
 			foreach (UnityEngine.Object dragged_object in DragAndDrop.objectReferences)
 			{

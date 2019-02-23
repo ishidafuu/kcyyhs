@@ -1,10 +1,10 @@
-﻿using System;
+﻿using UnityEngine;
+using UnityEditor;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using AnimationImporter.Boomlagoon.JSON;
-using UnityEditor;
-using UnityEngine;
 
 namespace AnimationImporter.PyxelEdit
 {
@@ -48,7 +48,7 @@ namespace AnimationImporter.PyxelEdit
 		{
 			_latestData = null;
 
-			var zipFilePath = GetFileSystemPath(job.assetDirectory + Path.DirectorySeparatorChar + job.fileName);
+			var zipFilePath = GetFileSystemPath(job.assetDirectory + "/" + job.fileName);
 
 			var files = GetContentsFromZipFile(zipFilePath);
 
@@ -320,7 +320,7 @@ namespace AnimationImporter.PyxelEdit
 
 			if (zipFileClass != null)
 			{
-				using(var zipFile = readZipFileMethod.Invoke(null, new object[] { fileName })as IDisposable)
+				using (var zipFile = readZipFileMethod.Invoke(null, new object[] { fileName }) as IDisposable)
 				{
 					var zipFileAsEnumeration = zipFile as IEnumerable;
 					foreach (var entry in zipFileAsEnumeration)

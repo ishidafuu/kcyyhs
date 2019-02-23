@@ -1,11 +1,10 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
-using UnityEngine;
+using System.Linq;
 
 namespace AnimationImporter
 {
@@ -21,7 +20,7 @@ namespace AnimationImporter
 			get
 			{
 				return Mathf.Max(width, height);
-			}
+			}			
 		}
 
 		public List<ImportedAnimationFrame> frames = new List<ImportedAnimationFrame>();
@@ -105,7 +104,7 @@ namespace AnimationImporter
 		public void CreateAnimation(ImportedAnimation anim, string basePath, string masterName, AnimationTargetObjectType targetType)
 		{
 			AnimationClip clip;
-			string fileName = basePath + Path.DirectorySeparatorChar + masterName + "_" + anim.name + ".anim";
+            string fileName = basePath + "/" + masterName + "_" + anim.name + ".anim";
 			bool isLooping = anim.isLooping;
 
 			// check if animation file already exists
@@ -144,7 +143,7 @@ namespace AnimationImporter
 				keyFrames[i] = new ObjectReferenceKeyframe
 				{
 					time = timeOffset,
-						value = srcKeyframes[i].sprite
+					value = srcKeyframes[i].sprite
 				};
 
 				// add duration of frame in seconds
@@ -155,7 +154,7 @@ namespace AnimationImporter
 			keyFrames[srcKeyframes.Length] = new ObjectReferenceKeyframe
 			{
 				time = timeOffset - (1f / clip.frameRate), // substract the duration of one frame
-					value = srcKeyframes.Last().sprite
+				value = srcKeyframes.Last().sprite
 			};
 
 			// save curve into clip, either for SpriteRenderer, Image, or both
@@ -298,7 +297,7 @@ namespace AnimationImporter
 							case SpriteNamingScheme.AnimationOne:
 								animFrame.name = anim.name + NAME_DELIMITER + (i + 1).ToString();
 								break;
-						}
+						}						
 					}
 				}
 			}
