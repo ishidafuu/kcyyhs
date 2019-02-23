@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = UnityEngine.Random;
+using System.IO;
 using AnimationImporter.Boomlagoon.JSON;
 using UnityEditor;
-using System.IO;
 
 namespace AnimationImporter.Aseprite
 {
@@ -38,7 +38,7 @@ namespace AnimationImporter.Aseprite
 		//  static constructor, registering plugin
 		// --------------------------------------------------------------------------------
 
-		static AsepriteImporter ()
+		static AsepriteImporter()
 		{
 			AsepriteImporter importer = new AsepriteImporter();
 			AnimationImporter.RegisterImporter(importer, "ase", "aseprite");
@@ -102,7 +102,7 @@ namespace AnimationImporter.Aseprite
 				animationSheet.SetNonLoopingAnimations(config.animationNamesThatDoNotLoop);
 
 				// delete JSON file afterwards
-				AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(textAsset));
+				// AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(textAsset));
 
 				return animationSheet;
 			}
@@ -200,7 +200,7 @@ namespace AnimationImporter.Aseprite
 			if (GetAnimationsFromJSON(animationSheet, meta) == false)
 			{
 				return null;
-			}		
+			}
 
 			if (GetFramesFromJSON(animationSheet, root) == false)
 			{
@@ -225,7 +225,7 @@ namespace AnimationImporter.Aseprite
 			start.WorkingDirectory = workingDirectory;
 
 			// Run the external process & wait for it to finish
-			using (System.Diagnostics.Process proc = System.Diagnostics.Process.Start(start))
+			using(System.Diagnostics.Process proc = System.Diagnostics.Process.Start(start))
 			{
 				proc.WaitForExit();
 				// Retrieve the app's exit code
@@ -260,14 +260,13 @@ namespace AnimationImporter.Aseprite
 
 				switch (frameTag["direction"].Str)
 				{
-					default:
-						anim.direction = PlaybackDirection.Forward;
-						break;
+					default : anim.direction = PlaybackDirection.Forward;
+					break;
 					case "reverse":
-						anim.direction = PlaybackDirection.Reverse;
+							anim.direction = PlaybackDirection.Reverse;
 						break;
 					case "pingpong":
-						anim.direction = PlaybackDirection.PingPong;
+							anim.direction = PlaybackDirection.PingPong;
 						break;
 				}
 

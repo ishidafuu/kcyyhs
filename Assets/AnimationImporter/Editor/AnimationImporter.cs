@@ -1,12 +1,12 @@
-using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using System.IO;
-using UnityEditor.Animations;
 using System.Linq;
 using AnimationImporter.Aseprite;
+using UnityEditor;
+using UnityEditor.Animations;
+using UnityEngine;
 
 namespace AnimationImporter
 {
@@ -257,10 +257,11 @@ namespace AnimationImporter
 				{
 					AnimationImportJob job = jobs[i];
 
-					job.progressUpdated += (float progress) => {							
-							float completeProgress = i * progressPerJob + progress * progressPerJob;
-							EditorUtility.DisplayProgressBar("Import", job.name, completeProgress);
-						};
+					job.progressUpdated += (float progress) =>
+					{
+						float completeProgress = i * progressPerJob + progress * progressPerJob;
+						EditorUtility.DisplayProgressBar("Import", job.name, completeProgress);
+					};
 					ImportJob(job);
 				}
 				AssetDatabase.Refresh();
@@ -451,7 +452,7 @@ namespace AnimationImporter
 
 			string imageAssetFile = job.imageAssetFilename;
 
-			TextureImporter importer = AssetImporter.GetAtPath(imageAssetFile) as TextureImporter;
+			TextureImporter importer = AssetImporter.GetAtPath(imageAssetFile)as TextureImporter;
 
 			// apply texture import settings if there are no previous ones
 			if (!animationSheet.hasPreviousTextureImportSettings)
@@ -544,7 +545,7 @@ namespace AnimationImporter
 		// check if there is a configured importer for the specified extension
 		public static bool IsConfiguredForAssets(DefaultAsset[] assets)
 		{
-			foreach(var asset in assets)
+			foreach (var asset in assets)
 			{
 				string assetPath = AssetDatabase.GetAssetPath(asset);
 				string extension = GetExtension(assetPath);
@@ -556,7 +557,7 @@ namespace AnimationImporter
 						IAnimationImporterPlugin importer = _importerPlugins[extension];
 						if (importer != null)
 						{
-							if(!importer.IsConfigured())
+							if (!importer.IsConfigured())
 							{
 								return false;
 							}
@@ -680,7 +681,7 @@ namespace AnimationImporter
 			}
 
 			Import(jobs.ToArray());
-		}		
+		}
 
 		// ================================================================================
 		//  private methods
@@ -689,7 +690,6 @@ namespace AnimationImporter
 		private AnimationImportJob CreateAnimationImportJob(string assetPath, string additionalCommandLineArguments = "")
 		{
 			AnimationImportJob importJob = new AnimationImportJob(assetPath);
-
 			importJob.additionalCommandLineArguments = additionalCommandLineArguments;
 
 			importJob.directoryPathForSprites = _sharedData.spritesTargetLocation.GetTargetDirectory(importJob.assetDirectory);
