@@ -28,8 +28,8 @@ namespace YYHS
 				var toukiMeter = toukiMeters[i];
 				// Debug.Log(toukiMeter.value);
 				// Debug.Log(toukiMeter.muki);
-				ConsoleProDebug.Watch("ToukiMeter.value", toukiMeter.value.ToString());
-				ConsoleProDebug.Watch("ToukiMeter.muki", toukiMeter.muki.ToString());
+				DebugPanel.Log("ToukiMeter.value", toukiMeter.value.ToString());
+				DebugPanel.Log("ToukiMeter.muki", toukiMeter.muki.ToString());
 				toukiMeters[i] = toukiMeter;
 			}
 		}

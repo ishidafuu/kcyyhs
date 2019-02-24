@@ -43,7 +43,7 @@ namespace YYHS
 		/// </summary>
 		protected override void OnUpdate()
 		{
-			var padInputs = m_group.GetComponentDataArray<PadInput>();
+			var padInputs = m_group.ToComponentDataArray<PadInput>(Allocator.TempJob);
 			for (int i = 0; i < padInputs.Length; i++)
 			{
 				var padInput = padInputs[i];
@@ -52,6 +52,9 @@ namespace YYHS
 				SetButton(ref padInput, player);
 				padInputs[i] = padInput;
 			}
+			m_group.CopyFromComponentDataArray(padInputs);
+			padInputs.Dispose();
+
 		}
 
 		void SetCross(ref PadInput padInput, string player)
