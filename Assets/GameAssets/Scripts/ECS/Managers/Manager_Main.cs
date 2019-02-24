@@ -96,6 +96,7 @@ namespace YYHS
             world.CreateManager(typeof(ToukiMeterSwitchJobSystem));
             world.CreateManager(typeof(ToukiMeterUpdateJobSystem));
             world.CreateManager(typeof(ToukiMeterDebubSystem));
+            world.CreateManager(typeof(BGDrawSystem));
 
             // //モーションの時間進行システム
             // world.CreateManager(typeof(CountMotionJobSystem));

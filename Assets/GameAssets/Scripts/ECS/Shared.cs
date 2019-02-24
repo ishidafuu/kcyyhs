@@ -20,32 +20,38 @@ namespace YYHS
 		public static MeshMatList geoMeshMat;
 		public static MeshMatList foodMeshMat;
 
+		public static MeshMatList bgFrameMeshMat;
+
 		//SharedComponentDataの読み込み
 		public static void ReadySharedComponentData()
 		{
-			//スプライトからメッシュの作成
-			charaMeshMat = new MeshMatList();
-			charaMeshMat.Init();
-			const int DEKUNUM = 1;
-			for (int i = 0; i < DEKUNUM; i++)
-			{
+			// //スプライトからメッシュの作成
+			// charaMeshMat = new MeshMatList();
+			// charaMeshMat.Init();
+			// const int DEKUNUM = 1;
+			// for (int i = 0; i < DEKUNUM; i++)
+			// {
 
-				var res = charaMeshMat.Load("deku" + i.ToString("d2"), false, "Sprites/CharaSprite");
-				// Debug.Log(res);
-				if (res == 0)break;
-			}
+			// 	var res = charaMeshMat.Load("deku" + i.ToString("d2"), false, "Sprites/CharaSprite");
+			// 	// Debug.Log(res);
+			// 	if (res == 0)break;
+			// }
 
-			geoMeshMat = new MeshMatList();
-			geoMeshMat.Init();
-			for (int i = 0; i < 1; i++)
-			{
-				var res = geoMeshMat.Load("tip" + i.ToString("d2"), true, "Sprites/GeoSprite");
-				if (res == 0)break;
-			}
+			// geoMeshMat = new MeshMatList();
+			// geoMeshMat.Init();
+			// for (int i = 0; i < 1; i++)
+			// {
+			// 	var res = geoMeshMat.Load("tip" + i.ToString("d2"), true, "Sprites/GeoSprite");
+			// 	if (res == 0)break;
+			// }
 
-			foodMeshMat = new MeshMatList();
-			foodMeshMat.Init();
-			foodMeshMat.Load("food", true, "Sprites/FoodSprite");
+			// foodMeshMat = new MeshMatList();
+			// foodMeshMat.Init();
+			// foodMeshMat.Load("food", true, "Sprites/FoodSprite");
+
+			bgFrameMeshMat = new MeshMatList();
+			bgFrameMeshMat.Init();
+			bgFrameMeshMat.Load("yyhs/bg/bg_frame", true, "Sprites/BgFrameSprite");
 
 			//スクリプタブルオブジェクトの読み込み
 			aniScriptSheet = new AniScriptSheet();

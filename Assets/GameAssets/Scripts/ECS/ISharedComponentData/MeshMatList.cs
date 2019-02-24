@@ -19,10 +19,17 @@
 			// listがnullまたは空ならエラーで返す
 			if (list == null || list.Length == 0)
 			{
+				Debug.LogWarning(path);
 				return 0;
 			}
 			//マテリアル用シェーダー
 			var matShader = Shader.Find(shader);
+			if (matShader == null)
+			{
+				Debug.LogWarning(shader);
+				return 0;
+			}
+
 			// listを回してDictionaryに格納
 			for (var i = 0; i < list.Length; ++i)
 			{
