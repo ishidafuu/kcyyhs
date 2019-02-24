@@ -22,6 +22,8 @@ namespace YYHS
 
 		public static MeshMatList bgFrameMeshMat;
 
+		public static MeshMatList meterMeshMat;
+
 		//SharedComponentDataの読み込み
 		public static void ReadySharedComponentData()
 		{
@@ -52,6 +54,10 @@ namespace YYHS
 			bgFrameMeshMat = new MeshMatList();
 			bgFrameMeshMat.Init();
 			bgFrameMeshMat.Load("yyhs/bg/bg_frame", true, "Sprites/BgFrameSprite");
+
+			meterMeshMat = new MeshMatList();
+			meterMeshMat.Init();
+			meterMeshMat.Load("yyhs/bg/meter", true, "Sprites/BgFrameSprite");
 
 			//スクリプタブルオブジェクトの読み込み
 			aniScriptSheet = new AniScriptSheet();

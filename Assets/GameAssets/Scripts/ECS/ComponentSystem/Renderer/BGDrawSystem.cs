@@ -29,11 +29,6 @@ namespace YYHS
 
             var length = toukiMeters.Length;
 
-            // var isInCamera = new NativeArray<int>(length, Allocator.TempJob);
-            // var lrQuaternion = new NativeArray<Quaternion>(2, Allocator.TempJob);
-            // var position = new NativeArray<Position>(length, Allocator.TempJob);
-            // var look = new NativeArray<CharaLook>(length, Allocator.TempJob);
-            // var motion = new NativeArray<CharaMotion>(length, Allocator.TempJob);
             var toukiMeterMatrixs = new NativeArray<Matrix4x4>(length, Allocator.TempJob);
 
             var quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
@@ -48,18 +43,18 @@ namespace YYHS
             m_group.AddDependency(inputDeps);
             inputDeps.Complete();
 
+            Matrix4x4 bgFrameMatrix = Matrix4x4.TRS(new Vector3(0, 0, 1), quaternion, Vector3.one);
+            Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs[0],
+                bgFrameMatrix,
+                Shared.bgFrameMeshMat.materials[0], 0);
+
             for (int i = 0; i < toukiMeterJob.toukiMeterMatrixs.Length; i++)
             {
                 var framesCount = Shared.charaMeshMat;
-                Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs[0],
+                Graphics.DrawMesh(Shared.meterMeshMat.meshs[1],
                     toukiMeterJob.toukiMeterMatrixs[i],
-                    Shared.bgFrameMeshMat.materials[0], 0);
+                    Shared.meterMeshMat.materials[0], 0);
             }
-
-            // Matrix4x4 bgFrameMatrix = Matrix4x4.TRS(new Vector3(0, 0, 0), quaternion, Vector3.one);
-            // Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs[0],
-            //     bgFrameMatrix,
-            //     Shared.bgFrameMeshMat.materials[0], 0);
 
             //NativeArrayの開放
             toukiMeterMatrixs.Dispose();
@@ -86,7 +81,7 @@ namespace YYHS
 
                     var width = (float)toukiMeters[i].value / 100;
 
-                    Matrix4x4 tmpMatrix = Matrix4x4.TRS(new Vector3(toukiMeters[i].value, 0, 0),
+                    Matrix4x4 tmpMatrix = Matrix4x4.TRS(new Vector3(-128 + 8, -35, 0),
                         q, new Vector3(width, 1, 1));
 
                     toukiMeterMatrixs[i] = tmpMatrix;
