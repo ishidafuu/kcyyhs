@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YYHS
 {
 	//InputManagerSetter.csで編集
-	public enum EnumButtonType
+	public enum EnumUnityButtonType
 	{
 		Fire1,
 		Fire2,
@@ -16,10 +16,27 @@ namespace YYHS
 
 	public enum EnumCrossType
 	{
+		None = 0,
 		Up,
 		Down,
 		Left,
 		Right,
+	}
+
+	public enum EnumButtonType
+	{
+		None = 0,
+		A,
+		B,
+		X,
+		Y,
+	}
+
+	public enum EnumToukiMaterState
+	{
+		Active = 0,
+		Inactive,
+		Decide,
 	}
 
 	public enum EnumInputCross
@@ -31,13 +48,13 @@ namespace YYHS
 		_END,
 	}
 
-	public enum EnumInputButton
-	{
-		A,
-		B,
-		Jump,
-		_END,
-	}
+	// public enum EnumInputButton
+	// {
+	// 	A,
+	// 	B,
+	// 	Jump,
+	// 	_END,
+	// }
 
 	public enum EnumPartsTypeBase
 	{

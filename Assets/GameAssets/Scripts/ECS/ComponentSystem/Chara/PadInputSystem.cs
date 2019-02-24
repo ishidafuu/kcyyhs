@@ -31,12 +31,12 @@ namespace YYHS
 		ReadOnlyCollection<string> ButtonTypeName =
 			Array.AsReadOnly(new string[]
 			{
-				EnumButtonType.Fire1.ToString(),
-					EnumButtonType.Fire2.ToString(),
-					EnumButtonType.Fire3.ToString(),
-					EnumButtonType.Fire4.ToString(),
-					EnumButtonType.Fire5.ToString(),
-					EnumButtonType.Fire6.ToString(),
+				EnumUnityButtonType.Fire1.ToString(),
+					EnumUnityButtonType.Fire2.ToString(),
+					EnumUnityButtonType.Fire3.ToString(),
+					EnumUnityButtonType.Fire4.ToString(),
+					EnumUnityButtonType.Fire5.ToString(),
+					EnumUnityButtonType.Fire6.ToString(),
 			});
 		/// <summary>
 		/// 更新
@@ -54,9 +54,17 @@ namespace YYHS
 			}
 		}
 
+		void SetCross(ref PadInput padInput, string player)
+		{
+			var nowAxis = new Vector2(Input.GetAxis(player + "Horizontal"), Input.GetAxis(player + "Vertical"));
+			padInput.SetCross(nowAxis, Time.time);
+			// if (nowAxis != Vector2.zero)
+			// 	Debug.Log(nowAxis);
+		}
+
 		void SetButton(ref PadInput padInput, string player)
 		{
-			foreach (EnumButtonType item in Enum.GetValues(typeof(EnumButtonType)))
+			foreach (EnumUnityButtonType item in Enum.GetValues(typeof(EnumUnityButtonType)))
 			{
 				var buttonName = player + ButtonTypeName[(int)item];
 				var isPush = Input.GetButtonDown(buttonName);
@@ -65,22 +73,22 @@ namespace YYHS
 
 				switch (item)
 				{
-					case EnumButtonType.Fire1:
+					case EnumUnityButtonType.Fire1:
 						padInput.buttonA.SetButtonData(isPush, isPress, isPop, Time.time);
 						break;
-					case EnumButtonType.Fire2:
+					case EnumUnityButtonType.Fire2:
 						padInput.buttonB.SetButtonData(isPush, isPress, isPop, Time.time);
+						break;
+					case EnumUnityButtonType.Fire3:
+						padInput.buttonX.SetButtonData(isPush, isPress, isPop, Time.time);
+						break;
+					case EnumUnityButtonType.Fire4:
+						padInput.buttonY.SetButtonData(isPush, isPress, isPop, Time.time);
 						break;
 				}
 				if (isPush)
 					Debug.Log(buttonName);
 			}
-		}
-
-		void SetCross(ref PadInput padInput, string player)
-		{
-			var nowAxis = new Vector2(Input.GetAxis(player + "Horizontal"), Input.GetAxis(player + "Vertical"));
-			padInput.SetCross(nowAxis, Time.time);
 		}
 	}
 }

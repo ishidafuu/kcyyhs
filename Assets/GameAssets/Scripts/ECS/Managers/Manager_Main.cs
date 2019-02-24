@@ -93,6 +93,10 @@ namespace YYHS
 
             //入力システム
             world.CreateManager(typeof(PadInputSystem));
+            world.CreateManager(typeof(ToukiMeterSwitchJobSystem));
+            world.CreateManager(typeof(ToukiMeterUpdateJobSystem));
+            world.CreateManager(typeof(ToukiMeterDebubSystem));
+
             // //モーションの時間進行システム
             // world.CreateManager(typeof(CountMotionJobSystem));
             // //時間経過によるモーション変更システム

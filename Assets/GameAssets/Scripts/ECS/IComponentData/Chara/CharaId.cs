@@ -6,7 +6,6 @@ namespace YYHS
 	/// </summary>
 	public struct CharaId : IComponentData
 	{
-		public int familyId;
 		public int myId;
 	}
 }

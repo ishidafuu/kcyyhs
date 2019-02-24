@@ -184,13 +184,13 @@ namespace YYHS
 			/// <returns></returns>
 			bool CheckJump(int i)
 			{
-				if (m_padInputs[i].IsJumpPush())
-				{
-					var charaMotion = m_charaMotions[i];
-					charaMotion.SetMotion(EnumMotion.Jump);
-					m_charaMotions[i] = charaMotion;
-					return true;
-				}
+				// if (m_padInputs[i].IsJumpPush())
+				// {
+				// 	var charaMotion = m_charaMotions[i];
+				// 	charaMotion.SetMotion(EnumMotion.Jump);
+				// 	m_charaMotions[i] = charaMotion;
+				// 	return true;
+				// }
 
 				return false;
 			}

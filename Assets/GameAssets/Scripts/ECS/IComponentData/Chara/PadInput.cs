@@ -17,33 +17,61 @@ namespace YYHS
 		// ボタン
 		public Button buttonA;
 		public Button buttonB;
-
+		public Button buttonX;
+		public Button buttonY;
 		public void SetCross(Vector2 _axis, float _time)
 		{
 			//直前キーから変更無ければ処理しない
 			if (_axis != axis)
 			{
-				var isUp = (_axis.y > 0);
-				var isDown = (_axis.y < 0);
-				var isRight = (_axis.x > 0);
-				var isLeft = (_axis.x < 0);
+				var isUp = (_axis.y > +0.1f);
+				var isDown = (_axis.y < -0.1f);
+				var isRight = (_axis.x > +0.1f);
+				var isLeft = (_axis.x < -0.1f);
 
 				axis = _axis;
 				crossUp.SetCrossData(isUp, Time.time);
 				crossDown.SetCrossData(isDown, Time.time);
 				crossRight.SetCrossData(isRight, Time.time);
 				crossLeft.SetCrossData(isLeft, Time.time);
-
-				// //斜めの受付にもなってるか
-				// if (((Time.time - _padInput.axisBufferTime) < DOUBLETIME) &&
-				// 	(_padInput.axis == Vector2.zero) //直前がゼロ
-				// 	&&
-				// 	(nowAxis == _padInput.axisBuffer))
-				// {
-
-				// }
+				// Debug.Log(axis);
 			}
 		}
+
+		public EnumCrossType GetPressCross()
+		{
+			if (crossUp.IsPress())
+				return EnumCrossType.Up;
+
+			if (crossDown.IsPress())
+				return EnumCrossType.Down;
+
+			if (crossLeft.IsPress())
+				return EnumCrossType.Left;
+
+			if (crossRight.IsPress())
+				return EnumCrossType.Right;
+
+			return EnumCrossType.None;
+		}
+
+		public EnumButtonType GetPressButton()
+		{
+			if (buttonA.IsPress())
+				return EnumButtonType.A;
+
+			if (buttonB.IsPress())
+				return EnumButtonType.B;
+
+			if (buttonX.IsPress())
+				return EnumButtonType.X;
+
+			if (buttonY.IsPress())
+				return EnumButtonType.Y;
+
+			return EnumButtonType.None;
+		}
+
 		/// <summary>
 		/// どれか十字が押されてる
 		/// </summary>
@@ -52,15 +80,16 @@ namespace YYHS
 		{
 			return (crossUp.IsPress() || crossDown.IsPress() || crossLeft.IsPress() || crossRight.IsPress());
 		}
-		/// <summary>
-		/// ジャンプ入力
-		/// </summary>
-		/// <returns></returns>
-		public bool IsJumpPush()
-		{
-			return ((buttonA.IsPress() && buttonB.IsPush())
-				|| (buttonA.IsPush() && buttonB.IsPress()));
-		}
+		// /// <summary>
+		// /// ジャンプ入力
+		// /// </summary>
+		// /// <returns></returns>
+		// public bool IsJumpPush()
+		// {
+		// 	return ((buttonA.IsPress() && buttonB.IsPush())
+		// 		|| (buttonA.IsPush() && buttonB.IsPress()));
+		// }
+
 	}
 
 	public struct Button
@@ -107,8 +136,6 @@ namespace YYHS
 			if (IsPush())
 				lastPushTime = _time;
 
-			if (_isPush)
-				Debug.Log("isPush");
 		}
 
 		public void SetCrossData(bool _isPress, float _time)
@@ -119,6 +146,9 @@ namespace YYHS
 			isDouble = BoolToByte(IsPush() && ((_time - lastPushTime) < DOUBLE_TIME));
 			if (IsPush())
 				lastPushTime = _time;
+
+			// if (IsPress())
+			// 	Debug.Log("isPress");
 		}
 		byte BoolToByte(bool value)
 		{

@@ -35,9 +35,9 @@ namespace YYHS
 			var entity = _entityManager.CreateEntity(archetype);
 
 			//ComponentDataのセット
-			var posL = 0;
-			//Define.Instance.GetMapSize() / 2;
-			var posH = 0;
+			// var posL = 0;
+			// //Define.Instance.GetMapSize() / 2;
+			// var posH = 0;
 			//Define.Instance.GetMapSize() / 2;
 
 			// //Tag
@@ -52,8 +52,15 @@ namespace YYHS
 			//ID
 			_entityManager.SetComponentData(entity, new CharaId
 			{
-				familyId = 0,
-					myId = _i,
+				myId = _i,
+			});
+
+			// 闘気メーター
+			_entityManager.SetComponentData(entity, new ToukiMeter
+			{
+				muki = EnumCrossType.None,
+					value = 0,
+					state = EnumToukiMaterState.Active
 			});
 
 			// //位置
@@ -62,25 +69,18 @@ namespace YYHS
 			// 	Value = new float3(UnityEngine.Random.Range(posL, posH), UnityEngine.Random.Range(posL, posH), 0)
 			// });
 
-			//位置
-			_entityManager.SetComponentData(entity, new CharaMove
-			{
-				position = new Vector3Int(UnityEngine.Random.Range(posL, posH), UnityEngine.Random.Range(posL, posH), 0),
-					delta = Vector3Int.zero
-			});
+			// //位置
+			// _entityManager.SetComponentData(entity, new CharaMove
+			// {
+			// 	position = new Vector3Int(UnityEngine.Random.Range(posL, posH), UnityEngine.Random.Range(posL, posH), 0),
+			// 		delta = Vector3Int.zero
+			// });
 
-			//モーション
-			_entityManager.SetComponentData(entity, new CharaMotion
-			{
+			// //モーション
+			// _entityManager.SetComponentData(entity, new CharaMotion
+			// {
 
-			});
-
-			//位置
-			_entityManager.SetComponentData(entity, new CharaMuki
-			{
-				muki = EnumMuki.Right,
-					// dashMuki = EnumMuki.None,
-			});
+			// });
 
 			// //行動
 			// _entityManager.SetComponentData(entity, new CharaBehave
@@ -90,12 +90,12 @@ namespace YYHS
 			// 		endTime = (Time.realtimeSinceStartup + 0.5f + UnityEngine.Random.value)
 			// });
 
-			//見た目
-			_entityManager.SetComponentData(entity, new CharaLook
-			{
-				isLeft = 0,
-					isBack = 0
-			});
+			// //見た目
+			// _entityManager.SetComponentData(entity, new CharaLook
+			// {
+			// 	isLeft = 0,
+			// 		isBack = 0
+			// });
 
 			//SharedComponentDataのセット
 			_entityManager.AddSharedComponentData(entity, _meshMatList);
