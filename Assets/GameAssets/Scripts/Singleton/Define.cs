@@ -5,7 +5,7 @@ using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-namespace NKKD
+namespace YYHS
 {
 	[ExecuteInEditMode]
 	public class Define : SingletonMonoBehaviour<Define>

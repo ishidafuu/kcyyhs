@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
     /// <summary>
     /// 座標移動設定

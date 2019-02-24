@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using MiniJSONForTimeFlowShiki;
 using System.Reflection;
 
-namespace NKKD.EDIT {
+namespace YYHS.EDIT {
 	public partial class ARIMotionScoreWindow : EditorWindow {
 		enum enAutoScroll {
 			Stop,

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 
 	///<summary>実際に出力される座標データ</summary>

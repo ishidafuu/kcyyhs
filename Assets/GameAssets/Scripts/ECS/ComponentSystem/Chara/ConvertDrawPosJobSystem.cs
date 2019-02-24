@@ -9,7 +9,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
 
 	//ゲーム座標を描画座標に変換

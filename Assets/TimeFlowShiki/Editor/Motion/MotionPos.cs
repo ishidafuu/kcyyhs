@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	[Serializable] //シリアライズするため必要
 	public struct PartsPos

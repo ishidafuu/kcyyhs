@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
 
 	//座標移動

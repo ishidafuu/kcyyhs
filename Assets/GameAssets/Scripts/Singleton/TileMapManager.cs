@@ -6,7 +6,7 @@
 // using UnityEngine;
 // using UnityEngine.Tilemaps;
 
-// namespace NKKD
+// namespace YYHS
 // {
 // 	[ExecuteInEditMode]
 // 	public class TileMapManager : SingletonMonoBehaviour<TileMapManager>

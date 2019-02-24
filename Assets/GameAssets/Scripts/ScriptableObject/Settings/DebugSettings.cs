@@ -3,7 +3,7 @@
 using System;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
     /// <summary>
     /// ゲーム設定

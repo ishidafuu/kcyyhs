@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace NKKD.EDIT {
+namespace YYHS.EDIT {
 	public class SubWindowInspector : ScriptableObject {
 		public string title;
 		public TackPoint tackPoint;

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	[Serializable]
 	public class MotionScores : ScriptableObject

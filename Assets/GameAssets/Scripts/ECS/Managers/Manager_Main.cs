@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.U2D;
 
-namespace NKKD
+namespace YYHS
 {
 
     /// <summary>
@@ -91,8 +91,8 @@ namespace NKKD
             //Player
             //Chara
 
-            // //入力システム
-            // world.CreateManager(typeof(PadInputSystem));
+            //入力システム
+            world.CreateManager(typeof(PadInputSystem));
             // //モーションの時間進行システム
             // world.CreateManager(typeof(CountMotionJobSystem));
             // //時間経過によるモーション変更システム
@@ -171,13 +171,11 @@ namespace NKKD
         {
             for (int i = 0; i < Define.Instance.Common.CharaNum; i++)
             {
-                // var playerEntity = (i < m_playerEntityList.Count)
-                //     ? m_playerEntityList[i]
-                //     : Entity.Null;
+                var playerEntity = (i < m_playerEntityList.Count)
+                    ? m_playerEntityList[i]
+                    : Entity.Null;
 
-                // var entity = CharaEntityFactory.CreateEntity(i, manager, ref Shared.charaMeshMat, ref Shared.aniScriptSheet, ref Shared.aniBasePos);
-                //エンティティリストに追加
-                // entityList.Add(entity);
+                var entity = CharaEntityFactory.CreateEntity(i, manager, ref Shared.charaMeshMat, ref Shared.aniScriptSheet, ref Shared.aniBasePos);
             }
         }
 

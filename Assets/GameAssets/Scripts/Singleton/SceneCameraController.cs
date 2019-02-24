@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace NKKD
+namespace YYHS
 {
 	[RequireComponent(typeof(Camera))]
 	public class SceneCameraController : MonoBehaviour

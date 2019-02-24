@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NKKD
+namespace YYHS
 {
 	public static class Shared
 	{

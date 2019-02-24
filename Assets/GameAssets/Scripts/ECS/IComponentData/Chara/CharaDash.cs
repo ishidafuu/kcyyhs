@@ -1,6 +1,6 @@
 using Unity.Entities;
 using UnityEngine;
-namespace NKKD
+namespace YYHS
 {
 	/// <summary>
 	/// キャラの向き

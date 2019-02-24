@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 
 	[Serializable]

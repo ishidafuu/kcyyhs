@@ -1,4 +1,4 @@
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	public class TimeFlowShikiSettings
 	{

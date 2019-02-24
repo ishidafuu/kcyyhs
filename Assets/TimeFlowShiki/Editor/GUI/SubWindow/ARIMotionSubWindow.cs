@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	//[SerializeField]
 	public partial class ARIMotionSubWindow : EditorWindow

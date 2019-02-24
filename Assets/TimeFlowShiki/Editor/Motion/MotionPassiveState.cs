@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-namespace NKKD.EDIT {
+namespace YYHS.EDIT {
 	public struct MotionPassiveState {
 		public bool isLeft;
 		public bool isBack;

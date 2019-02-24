@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-namespace NKKD
+namespace YYHS
 {
 	[Serializable]
 	public class AniBasePosObject : ScriptableObject

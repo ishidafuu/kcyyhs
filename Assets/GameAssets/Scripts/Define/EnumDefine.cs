@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace NKKD
+namespace YYHS
 {
 	//InputManagerSetter.csで編集
 	public enum EnumButtonType

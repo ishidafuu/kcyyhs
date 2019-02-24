@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	public partial class ARIMotionSubWindow : EditorWindow
 	{

@@ -3,22 +3,22 @@ using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
 	[ExecuteInEditMode]
 	public class AniScriptManager : SingletonMonoBehaviour<AniScriptManager>
-	{
-		public AniScriptSheetObject aniScriptSheet;
-		public AniBasePosObject aniBasePos;
-
-		public void LoadObject()
 		{
-			//オートセット
-			aniScriptSheet = Resources.FindObjectsOfTypeAll<AniScriptSheetObject>().First()as AniScriptSheetObject;
-			aniBasePos = Resources.FindObjectsOfTypeAll<AniBasePosObject>().First()as AniBasePosObject;
-		}
+			public AniScriptSheetObject aniScriptSheet;
+			public AniBasePosObject aniBasePos;
 
-	}
+			public void LoadObject()
+			{
+				//オートセット
+				aniScriptSheet = Resources.FindObjectsOfTypeAll<AniScriptSheetObject>().First()as AniScriptSheetObject;
+				aniBasePos = Resources.FindObjectsOfTypeAll<AniBasePosObject>().First()as AniBasePosObject;
+			}
+
+		}
 
 	[CustomEditor(typeof(AniScriptManager))] //拡張するクラスを指定
 	public class AniScriptManagerEditor : Editor

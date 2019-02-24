@@ -6,7 +6,7 @@ using MiniJSONForTimeFlowShiki;
 using UnityEditor;
 using UnityEngine;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	[ExecuteInEditMode]
 	public class ARIMotionMainWindow : EditorWindow
@@ -752,7 +752,7 @@ namespace NKKD.EDIT
 			AniScriptSheetObject obj = CreateInstance(typeof(AniScriptSheetObject))as AniScriptSheetObject;
 			obj.scripts = new List<AniScript>();
 
-			foreach (NKKD.EnumMotion motion in Enum.GetValues(typeof(NKKD.EnumMotion)))
+			foreach (YYHS.EnumMotion motion in Enum.GetValues(typeof(YYHS.EnumMotion)))
 			{
 				foreach (var item in scores_)
 				{

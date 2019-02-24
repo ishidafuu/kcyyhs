@@ -10,7 +10,7 @@ using System.Linq;
 using Unity.Jobs;
 using UnityEditor;
 using UnityEngine.SceneManagement;
-namespace NKKD
+namespace YYHS
 {
 	public static class CharaEntityFactory
 	{

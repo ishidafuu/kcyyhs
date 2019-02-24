@@ -1,5 +1,5 @@
 using Unity.Entities;
-namespace NKKD
+namespace YYHS
 {
 	/// <summary>
 	/// キャラ識別情報

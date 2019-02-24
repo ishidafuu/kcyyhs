@@ -1,5 +1,5 @@
 using Unity.Entities;
-namespace NKKD
+namespace YYHS
 {
     /// <summary>
     /// 画像の向きと表情（システム的な向きではない）

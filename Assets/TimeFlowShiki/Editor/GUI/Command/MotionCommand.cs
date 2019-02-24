@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	public class MotionCommand
 	{

@@ -9,7 +9,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
 	/// <summary>
 	/// 入力による向き変化システム

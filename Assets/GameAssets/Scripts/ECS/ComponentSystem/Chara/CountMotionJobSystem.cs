@@ -9,7 +9,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
 	/// <summary>
 	/// モーションの時間進行システム

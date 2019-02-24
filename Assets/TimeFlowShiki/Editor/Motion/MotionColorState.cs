@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-namespace NKKD.EDIT
+namespace YYHS.EDIT
 {
 	public struct MotionColorState
 	{

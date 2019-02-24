@@ -6,7 +6,7 @@ using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
-namespace NKKD
+namespace YYHS
 {
 
 	//各パーツの描画位置決定および描画

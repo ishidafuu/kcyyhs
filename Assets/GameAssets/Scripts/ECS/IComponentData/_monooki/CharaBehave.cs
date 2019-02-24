@@ -1,7 +1,7 @@
 // using Unity.Entities;
 // using Unity.Mathematics;
 
-// namespace NKKD
+// namespace YYHS
 // {
 // 	/// <summary>
 // 	/// 行動タイプ

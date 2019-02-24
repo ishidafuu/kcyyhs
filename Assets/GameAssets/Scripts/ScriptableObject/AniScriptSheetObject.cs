@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NKKD
+namespace YYHS
 {
 	[Serializable]
 	public class AniScriptSheetObject : ScriptableObject
