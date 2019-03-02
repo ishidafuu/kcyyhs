@@ -93,8 +93,8 @@ namespace YYHS
 
             //入力システム
             world.CreateManager(typeof(PadScanSystem));
-            world.CreateManager(typeof(ToukiMeterSwitchJobSystem));
-            world.CreateManager(typeof(ToukiMeterUpdateJobSystem));
+            world.CreateManager(typeof(ToukiMeterInputJobSystem));
+            world.CreateManager(typeof(ToukiMeterCountJobSystem));
             world.CreateManager(typeof(ToukiMeterDebubSystem));
             world.CreateManager(typeof(BGDrawSystem));
 

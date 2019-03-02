@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace YYHS
 {
-	[UpdateInGroup(typeof(CountGroup))]
-	public class ToukiMeterSwitchJobSystem : JobComponentSystem
+	[UpdateInGroup(typeof(UpdateGroup))]
+	public class ToukiMeterInputJobSystem : JobComponentSystem
 	{
 		ComponentGroup m_group;
 

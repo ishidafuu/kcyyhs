@@ -9,7 +9,7 @@ using UnityEngine;
 namespace YYHS
 {
 	[UpdateInGroup(typeof(CountGroup))]
-	public class ToukiMeterUpdateJobSystem : JobComponentSystem
+	public class ToukiMeterCountJobSystem : JobComponentSystem
 	{
 		ComponentGroup m_group;
 
