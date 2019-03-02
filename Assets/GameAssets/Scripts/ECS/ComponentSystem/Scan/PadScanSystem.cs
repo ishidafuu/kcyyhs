@@ -15,7 +15,9 @@ namespace YYHS
 	/// <summary>
 	/// 入力システム（Input.GetButtonDownはメインスレッドからのみ呼び出せるのでComponentSystemで呼び出す）
 	/// </summary>
-	public class PadInputSystem : ComponentSystem
+	[UpdateInGroup(typeof(ScanGroup))]
+	[UpdateBefore(typeof(CountGroup))]
+	public class PadScanSystem : ComponentSystem
 	{
 		enum EnumUnityButtonType
 		{
@@ -35,7 +37,7 @@ namespace YYHS
 		protected override void OnCreateManager()
 		{
 			m_group = GetComponentGroup(
-				ComponentType.Create<PadInput>());
+				ComponentType.Create<PadScan>());
 
 			var playerNum = Define.Instance.Common.PlayerNum;
 			var tpmPlayerNames = new List<string>();
@@ -93,28 +95,28 @@ namespace YYHS
 
 		protected override void OnUpdate()
 		{
-			var padInputs = m_group.ToComponentDataArray<PadInput>(Allocator.TempJob);
-			for (int i = 0; i < padInputs.Length; i++)
+			var PadScans = m_group.ToComponentDataArray<PadScan>(Allocator.TempJob);
+			for (int i = 0; i < PadScans.Length; i++)
 			{
-				var padInput = padInputs[i];
-				SetCross(ref padInput, i);
-				SetButton(ref padInput, i);
-				padInputs[i] = padInput;
+				var PadScan = PadScans[i];
+				SetCross(ref PadScan, i);
+				SetButton(ref PadScan, i);
+				PadScans[i] = PadScan;
 			}
-			m_group.CopyFromComponentDataArray(padInputs);
-			padInputs.Dispose();
+			m_group.CopyFromComponentDataArray(PadScans);
+			PadScans.Dispose();
 
 		}
 
-		void SetCross(ref PadInput padInput, int playerNo)
+		void SetCross(ref PadScan PadScan, int playerNo)
 		{
 			var nowAxis = new Vector2(Input.GetAxis(HorizontalName[playerNo]), Input.GetAxis(VerticalName[playerNo]));
-			padInput.SetCross(nowAxis, Time.time);
+			PadScan.SetCross(nowAxis, Time.time);
 			// if (nowAxis != Vector2.zero)
 			// 	Debug.Log(nowAxis);
 		}
 
-		void SetButton(ref PadInput padInput, int playerNo)
+		void SetButton(ref PadScan padScan, int playerNo)
 		{
 			var ButtonNum = Define.Instance.Common.ButtonNum;
 
@@ -127,16 +129,16 @@ namespace YYHS
 				switch ((EnumUnityButtonType)i)
 				{
 					case EnumUnityButtonType.Fire1:
-						padInput.buttonA.SetButtonData(isPush, isPress, isPop, Time.time);
+						padScan.buttonA.SetButtonData(isPush, isPress, isPop, Time.time);
 						break;
 					case EnumUnityButtonType.Fire2:
-						padInput.buttonB.SetButtonData(isPush, isPress, isPop, Time.time);
+						padScan.buttonB.SetButtonData(isPush, isPress, isPop, Time.time);
 						break;
 					case EnumUnityButtonType.Fire3:
-						padInput.buttonX.SetButtonData(isPush, isPress, isPop, Time.time);
+						padScan.buttonX.SetButtonData(isPush, isPress, isPop, Time.time);
 						break;
 					case EnumUnityButtonType.Fire4:
-						padInput.buttonY.SetButtonData(isPush, isPress, isPop, Time.time);
+						padScan.buttonY.SetButtonData(isPush, isPress, isPop, Time.time);
 						break;
 				}
 				// if (isPush)

@@ -23,7 +23,7 @@ namespace YYHS
 			m_group = GetComponentGroup(
 				ComponentType.Create<CharaMotion>(),
 				ComponentType.Create<CharaDash>(),
-				ComponentType.ReadOnly<PadInput>());
+				ComponentType.ReadOnly<PadScan>());
 		}
 
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
@@ -32,7 +32,7 @@ namespace YYHS
 			{
 				m_charaMotions = m_group.GetComponentDataArray<CharaMotion>(),
 					m_charaDashs = m_group.GetComponentDataArray<CharaDash>(),
-					m_padInputs = m_group.GetComponentDataArray<PadInput>(),
+					m_PadScans = m_group.GetComponentDataArray<PadScan>(),
 			};
 
 			inputDeps = job.Schedule(inputDeps);
@@ -46,7 +46,7 @@ namespace YYHS
 			public ComponentDataArray<CharaMotion> m_charaMotions;
 			public ComponentDataArray<CharaDash> m_charaDashs;
 			[ReadOnly]
-			public ComponentDataArray<PadInput> m_padInputs;
+			public ComponentDataArray<PadScan> m_PadScans;
 
 			public void Execute()
 			{
@@ -143,11 +143,11 @@ namespace YYHS
 			/// アイドルチェック
 			/// </summary>
 			/// <param name="motion"></param>
-			/// <param name="padInput"></param>
+			/// <param name="PadScan"></param>
 			/// <returns></returns>
 			bool CheckIdle(int i)
 			{
-				if (!m_padInputs[i].IsAnyCrossPress())
+				if (!m_PadScans[i].IsAnyCrossPress())
 				{
 					var charaMotion = m_charaMotions[i];
 					charaMotion.SetMotion(EnumMotion.Idle);
@@ -162,11 +162,11 @@ namespace YYHS
 			/// 歩きチェック
 			/// </summary>
 			/// <param name="motion"></param>
-			/// <param name="padInput"></param>
+			/// <param name="PadScan"></param>
 			/// <returns></returns>
 			bool CheckWalk(int i)
 			{
-				if (m_padInputs[i].IsAnyCrossPress())
+				if (m_PadScans[i].IsAnyCrossPress())
 				{
 					var charaMotion = m_charaMotions[i];
 					charaMotion.SetMotion(EnumMotion.Walk);
@@ -180,11 +180,11 @@ namespace YYHS
 			/// ジャンプチェック
 			/// </summary>
 			/// <param name="motion"></param>
-			/// <param name="padInput"></param>
+			/// <param name="PadScan"></param>
 			/// <returns></returns>
 			bool CheckJump(int i)
 			{
-				// if (m_padInputs[i].IsJumpPush())
+				// if (m_PadScans[i].IsJumpPush())
 				// {
 				// 	var charaMotion = m_charaMotions[i];
 				// 	charaMotion.SetMotion(EnumMotion.Jump);
@@ -199,11 +199,11 @@ namespace YYHS
 			/// ダッシュチェック
 			/// </summary>
 			/// <param name="motion"></param>
-			/// <param name="padInput"></param>
+			/// <param name="PadScan"></param>
 			/// <returns></returns>
 			bool CheckDash(int i)
 			{
-				if (m_padInputs[i].crossLeft.IsDouble() || m_padInputs[i].crossRight.IsDouble())
+				if (m_PadScans[i].crossLeft.IsDouble() || m_PadScans[i].crossRight.IsDouble())
 				{
 					var charaMotion = m_charaMotions[i];
 					charaMotion.SetMotion(EnumMotion.Dash);
@@ -211,7 +211,7 @@ namespace YYHS
 
 					// ダッシュ向き
 					var charaDash = m_charaDashs[i];
-					charaDash.dashMuki = (m_padInputs[i].crossLeft.IsDouble())
+					charaDash.dashMuki = (m_PadScans[i].crossLeft.IsDouble())
 						? EnumMuki.Left
 						: EnumMuki.Right;
 					m_charaDashs[i] = charaDash;
@@ -226,11 +226,11 @@ namespace YYHS
 			/// 滑りチェック
 			/// </summary>
 			/// <param name="motion"></param>
-			/// <param name="padInput"></param>
+			/// <param name="PadScan"></param>
 			/// <returns></returns>
 			bool CheckSlip(int i)
 			{
-				if (m_padInputs[i].IsAnyCrossPress())
+				if (m_PadScans[i].IsAnyCrossPress())
 				{
 					var charaMotion = m_charaMotions[i];
 					charaMotion.SetMotion(EnumMotion.Slip);

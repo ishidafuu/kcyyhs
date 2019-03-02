@@ -8,37 +8,30 @@ using UnityEngine;
 
 namespace YYHS
 {
-	public class ToukiMeterSwitchJobSystem : JobComponentSystem
+	[UpdateInGroup(typeof(CountGroup))]
+	public class ToukiMeterUpdateJobSystem : JobComponentSystem
 	{
 		ComponentGroup m_group;
 
 		protected override void OnCreateManager()
 		{
 			m_group = GetComponentGroup(
-				ComponentType.ReadOnly<PadInput>(),
 				ComponentType.Create<ToukiMeter>()
 			);
-
 		}
 
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
 			m_group.AddDependency(inputDeps);
+			var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
 
-			var padInputs = m_group.ToComponentDataArray<PadInput>(Allocator.TempJob, out JobHandle handle1);
-			var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob, out JobHandle handle2);
-			inputDeps = JobHandle.CombineDependencies(handle1, handle2);
-
-			var job = new InputToToukiJob()
+			inputDeps = new UpdateToukiJob()
 			{
-				padInputs = padInputs,
-					toukiMeters = toukiMeters,
-			};
-			inputDeps = job.Schedule(inputDeps);
+				toukiMeters = toukiMeters,
+			}.Schedule(inputDeps);
 
 			m_group.AddDependency(inputDeps);
 			m_group.CopyFromComponentDataArray(toukiMeters, out JobHandle handle3);
-			// inputDeps.Complete();
 
 			inputDeps = new ReleaseJob
 			{
@@ -57,30 +50,26 @@ namespace YYHS
 		}
 
 		[BurstCompileAttribute]
-		struct InputToToukiJob : IJob
+		struct UpdateToukiJob : IJob
 		{
-			[ReadOnly]
-			[DeallocateOnJobCompletion]
-			public NativeArray<PadInput> padInputs;
-
 			public NativeArray<ToukiMeter> toukiMeters;
 
 			public void Execute()
 			{
-				for (int i = 0; i < padInputs.Length; i++)
+				for (int i = 0; i < toukiMeters.Length; i++)
 				{
 					var toukiMeter = toukiMeters[i];
-
-					if (toukiMeter.state != EnumToukiMaterState.Active)
+					if (toukiMeter.muki != EnumCrossType.None)
 					{
-						break;
+						toukiMeter.value++;
+						if (toukiMeter.value > 100)
+						{
+							toukiMeter.value = 100;
+						}
+						// int asdf = toukiMeter.value;
+						// Debug.Log(asdf);
 					}
 
-					if (toukiMeter.muki != padInputs[i].GetPressCross())
-					{
-						toukiMeter.muki = padInputs[i].GetPressCross();
-						toukiMeter.value = 0;
-					}
 					toukiMeters[i] = toukiMeter;
 				}
 			}

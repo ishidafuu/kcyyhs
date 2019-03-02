@@ -9,6 +9,8 @@ using UnityEngine.Experimental.PlayerLoop;
 namespace YYHS
 {
 
+    [UpdateInGroup(typeof(RenderGroup))]
+    [UpdateAfter(typeof(CountGroup))]
     [UpdateAfter(typeof(PreLateUpdate.ParticleSystemBeginUpdateAll))]
     public class BGDrawSystem : JobComponentSystem
     {

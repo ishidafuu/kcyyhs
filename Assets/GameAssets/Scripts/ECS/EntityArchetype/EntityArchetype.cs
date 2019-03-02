@@ -11,7 +11,7 @@ namespace YYHS
 		public static ComponentType[] CharaComponentType = {
 			typeof(CharaTag), //キャラタグ
 			typeof(CharaId), //ID
-			// typeof(PadInput), //入力（CharaEntityFactoryで必要なキャラのみつける）
+			// typeof(PadScan), //入力（CharaEntityFactoryで必要なキャラのみつける）
 			typeof(ToukiMeter), //闘気メーター
 			// typeof(CharaMove), //座標
 			// typeof(CharaMuki), //向き

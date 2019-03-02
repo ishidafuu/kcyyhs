@@ -5,7 +5,7 @@ namespace YYHS
 	/// <summary>
 	/// キー入力
 	/// </summary>
-	public struct PadInput : IComponentData
+	public struct PadScan : IComponentData
 	{
 		//十字のバッファ
 		Vector2 axis;

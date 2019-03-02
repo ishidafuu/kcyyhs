@@ -24,19 +24,19 @@ namespace YYHS
 				ComponentType.Create<CharaMove>(),
 				ComponentType.ReadOnly<CharaDash>(),
 				ComponentType.ReadOnly<CharaMotion>(),
-				ComponentType.ReadOnly<PadInput>());
+				ComponentType.ReadOnly<PadScan>());
 		}
 		ComponentDataArray<CharaMove> charaMoves;
 		ComponentDataArray<CharaDash> charaDashs;
 		ComponentDataArray<CharaMotion> charaMotions;
-		ComponentDataArray<PadInput> padInputs;
+		ComponentDataArray<PadScan> PadScans;
 
 		protected override void OnUpdate()
 		{
 			charaMoves = group.GetComponentDataArray<CharaMove>();
 			charaDashs = group.GetComponentDataArray<CharaDash>();
 			charaMotions = group.GetComponentDataArray<CharaMotion>();
-			padInputs = group.GetComponentDataArray<PadInput>();
+			PadScans = group.GetComponentDataArray<PadScan>();
 
 			for (int i = 0; i < charaMotions.Length; i++)
 			{
@@ -119,13 +119,13 @@ namespace YYHS
 		{
 			var res = EnumMoveMuki.None;
 
-			if (padInputs[i].crossLeft.IsPress())
+			if (PadScans[i].crossLeft.IsPress())
 			{
-				if (padInputs[i].crossUp.IsPress())
+				if (PadScans[i].crossUp.IsPress())
 				{
 					res = EnumMoveMuki.LeftUp;
 				}
-				else if (padInputs[i].crossDown.IsPress())
+				else if (PadScans[i].crossDown.IsPress())
 				{
 					res = EnumMoveMuki.LeftDown;
 				}
@@ -134,13 +134,13 @@ namespace YYHS
 					res = EnumMoveMuki.Left;
 				}
 			}
-			else if (padInputs[i].crossRight.IsPress())
+			else if (PadScans[i].crossRight.IsPress())
 			{
-				if (padInputs[i].crossUp.IsPress())
+				if (PadScans[i].crossUp.IsPress())
 				{
 					res = EnumMoveMuki.RightUp;
 				}
-				else if (padInputs[i].crossDown.IsPress())
+				else if (PadScans[i].crossDown.IsPress())
 				{
 					res = EnumMoveMuki.RightDown;
 				}
@@ -151,11 +151,11 @@ namespace YYHS
 			}
 			else
 			{
-				if (padInputs[i].crossUp.IsPress())
+				if (PadScans[i].crossUp.IsPress())
 				{
 					res = EnumMoveMuki.Up;
 				}
-				else if (padInputs[i].crossDown.IsPress())
+				else if (PadScans[i].crossDown.IsPress())
 				{
 					res = EnumMoveMuki.Down;
 				}
@@ -176,13 +176,13 @@ namespace YYHS
 
 			if (charaDash.dashMuki == EnumMuki.Left)
 			{
-				if (padInputs[i].crossLeft.IsPress())
+				if (PadScans[i].crossLeft.IsPress())
 				{
-					if (padInputs[i].crossUp.IsPress())
+					if (PadScans[i].crossUp.IsPress())
 					{
 						res = EnumMoveMuki.LeftLeftUp;
 					}
-					else if (padInputs[i].crossDown.IsPress())
+					else if (PadScans[i].crossDown.IsPress())
 					{
 						res = EnumMoveMuki.LeftLeftDown;
 					}
@@ -193,11 +193,11 @@ namespace YYHS
 				}
 				else
 				{
-					if (padInputs[i].crossUp.IsPress())
+					if (PadScans[i].crossUp.IsPress())
 					{
 						res = EnumMoveMuki.LeftUp;
 					}
-					else if (padInputs[i].crossDown.IsPress())
+					else if (PadScans[i].crossDown.IsPress())
 					{
 						res = EnumMoveMuki.LeftDown;
 					}
@@ -209,13 +209,13 @@ namespace YYHS
 			}
 			else if (charaDash.dashMuki == EnumMuki.Right)
 			{
-				if (padInputs[i].crossRight.IsPress())
+				if (PadScans[i].crossRight.IsPress())
 				{
-					if (padInputs[i].crossUp.IsPress())
+					if (PadScans[i].crossUp.IsPress())
 					{
 						res = EnumMoveMuki.RightRightUp;
 					}
-					else if (padInputs[i].crossDown.IsPress())
+					else if (PadScans[i].crossDown.IsPress())
 					{
 						res = EnumMoveMuki.RightRightDown;
 					}
@@ -226,11 +226,11 @@ namespace YYHS
 				}
 				else
 				{
-					if (padInputs[i].crossUp.IsPress())
+					if (PadScans[i].crossUp.IsPress())
 					{
 						res = EnumMoveMuki.RightUp;
 					}
-					else if (padInputs[i].crossDown.IsPress())
+					else if (PadScans[i].crossDown.IsPress())
 					{
 						res = EnumMoveMuki.RightDown;
 					}

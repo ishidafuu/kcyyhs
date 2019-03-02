@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace YYHS
 {
+	[UpdateInGroup(typeof(RenderGroup))]
 	public class ToukiMeterDebubSystem : ComponentSystem
 	{
 		ComponentGroup m_group;
@@ -15,7 +16,7 @@ namespace YYHS
 		protected override void OnCreateManager()
 		{
 			m_group = GetComponentGroup(
-				ComponentType.Create<PadInput>(),
+				ComponentType.Create<PadScan>(),
 				ComponentType.Create<ToukiMeter>()
 			);
 		}

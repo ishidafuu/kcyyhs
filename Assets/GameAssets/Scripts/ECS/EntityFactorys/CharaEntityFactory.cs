@@ -46,7 +46,7 @@ namespace YYHS
 			//必要なキャラのみインプットをつける
 			if (_i < Define.Instance.Common.PlayerNum)
 			{
-				_entityManager.AddComponent(entity, ComponentType.Create<PadInput>());
+				_entityManager.AddComponent(entity, ComponentType.Create<PadScan>());
 			}
 
 			//ID

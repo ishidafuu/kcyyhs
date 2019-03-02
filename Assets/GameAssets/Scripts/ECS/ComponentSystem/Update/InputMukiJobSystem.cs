@@ -23,7 +23,7 @@
 // 			m_group = GetComponentGroup(
 // 				ComponentType.Create<CharaMuki>(),
 // 				ComponentType.ReadOnly<CharaMotion>(),
-// 				ComponentType.ReadOnly<PadInput>());
+// 				ComponentType.ReadOnly<PadScan>());
 // 		}
 
 // 		protected override JobHandle OnUpdate(JobHandle inputDeps)
@@ -32,7 +32,7 @@
 // 			{
 // 				m_charaMotions = m_group.GetComponentDataArray<CharaMotion>(),
 // 					m_charaMukis = m_group.GetComponentDataArray<CharaMuki>(),
-// 					m_padInputs = m_group.GetComponentDataArray<PadInput>(),
+// 					m_PadScans = m_group.GetComponentDataArray<PadScan>(),
 // 			};
 
 // 			inputDeps = job.Schedule(inputDeps);
@@ -47,7 +47,7 @@
 // 			[ReadOnly]
 // 			public ComponentDataArray<CharaMotion> m_charaMotions;
 // 			[ReadOnly]
-// 			public ComponentDataArray<PadInput> m_padInputs;
+// 			public ComponentDataArray<PadScan> m_PadScans;
 // 			public void Execute()
 // 			{
 
@@ -93,11 +93,11 @@
 // 			//左右チェック
 // 			bool CheckCrossX(int i)
 // 			{
-// 				if (m_padInputs[i].crossLeft.IsPress()
-// 					|| m_padInputs[i].crossRight.IsPress())
+// 				if (m_PadScans[i].crossLeft.IsPress()
+// 					|| m_PadScans[i].crossRight.IsPress())
 // 				{
 // 					var charaMuki = m_charaMukis[i];
-// 					charaMuki.muki = m_padInputs[i].crossLeft.IsPress()
+// 					charaMuki.muki = m_PadScans[i].crossLeft.IsPress()
 // 						? EnumMuki.Left
 // 						: EnumMuki.Right;
 // 					m_charaMukis[i] = charaMuki;

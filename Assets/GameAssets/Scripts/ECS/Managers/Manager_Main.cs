@@ -92,7 +92,7 @@ namespace YYHS
             //Chara
 
             //入力システム
-            world.CreateManager(typeof(PadInputSystem));
+            world.CreateManager(typeof(PadScanSystem));
             world.CreateManager(typeof(ToukiMeterSwitchJobSystem));
             world.CreateManager(typeof(ToukiMeterUpdateJobSystem));
             world.CreateManager(typeof(ToukiMeterDebubSystem));

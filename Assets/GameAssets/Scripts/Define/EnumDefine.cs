@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace YYHS
 {
-
 	public enum EnumCrossType
 	{
 		None = 0,
