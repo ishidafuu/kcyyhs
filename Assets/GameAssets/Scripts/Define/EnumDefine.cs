@@ -3,16 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace YYHS
 {
-	//InputManagerSetter.csで編集
-	public enum EnumUnityButtonType
-	{
-		Fire1,
-		Fire2,
-		Fire3,
-		Fire4,
-		Fire5,
-		Fire6,
-	}
 
 	public enum EnumCrossType
 	{

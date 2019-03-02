@@ -11,6 +11,6 @@ namespace YYHS
     {
         public int PlayerNum;
         public int CharaNum;
-
+        public int ButtonNum;
     }
 }
