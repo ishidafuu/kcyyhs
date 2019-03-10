@@ -25,15 +25,15 @@ namespace YYHS
 			}
 		}
 
-	[CustomEditor(typeof(Define))] //拡張するクラスを指定
+	[CustomEditor(typeof(Define))] // 拡張するクラスを指定
 	public class DefineEditor : Editor
 	{
 		public override void OnInspectorGUI()
 		{
-			//元のInspector部分を表示
+			// 元のInspector部分を表示
 			base.OnInspectorGUI();
 
-			//ボタンを表示
+			// ボタンを表示
 			if (GUILayout.Button("LoadObject"))
 			{
 				(target as Define).LoadObject();

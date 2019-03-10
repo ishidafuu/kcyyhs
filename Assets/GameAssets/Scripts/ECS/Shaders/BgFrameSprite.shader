@@ -6,14 +6,14 @@
 	}
 	SubShader
 	{
-        //Tags{ "QUEUE" = "Geometry" "IgnoreProjector" = "true" "RenderType" = "Transparent" "PreviewType" = "Plane" "CanUseSpriteAtlas" = "true" }
-        //ZWrite Off
-        ///ZTest Always
-        //Cull Off
-        //Blend SrcAlpha OneMinusSrcAlpha Transparent
+        // Tags{ "QUEUE" = "Geometry" "IgnoreProjector" = "true" "RenderType" = "Transparent" "PreviewType" = "Plane" "CanUseSpriteAtlas" = "true" }
+        // ZWrite Off
+        /// ZTest Always
+        // Cull Off
+        // Blend SrcAlpha OneMinusSrcAlpha Transparent
 
-		//Tags { "Queue"="Geometry" "IgnoreProjector"="True" "RenderType"="Transparent" }
-  //      //Zテストで下の画像が部分的に消えるから
+		// Tags { "Queue"="Geometry" "IgnoreProjector"="True" "RenderType"="Transparent" }
+  //      // Zテストで下の画像が部分的に消えるから
   //      ZTest Always
   //      // 反転すると裏面描画されないから
   //      Cull Off
@@ -23,12 +23,12 @@
         {
             "Queue" = "Geometry"
             "IgnoreProjector" = "True"
-            //"RenderType" = "Transparent"
+            // "RenderType" = "Transparent"
         }
-        //Cull Off
-        //ZTest Always
+        // Cull Off
+        // ZTest Always
         Lighting Off
-        //ZWrite On
+        // ZWrite On
         Blend One Zero
 
         Pass
@@ -56,10 +56,10 @@
 			float4 _MainTex_ST;
         			
             // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
-            // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+            // See https:// docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
             // #pragma instancing_options assumeuniformscaling
             UNITY_INSTANCING_BUFFER_START(Props)
-                //stuff
+                // stuff
             UNITY_INSTANCING_BUFFER_END(Props)
 			
 			v2f vert (appdata v)

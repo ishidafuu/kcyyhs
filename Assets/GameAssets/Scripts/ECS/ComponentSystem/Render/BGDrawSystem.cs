@@ -58,13 +58,12 @@ namespace YYHS
                     Shared.meterMeshMat.materials[0], 0);
             }
 
-            //NativeArrayの開放
+            // NativeArrayの開放
             toukiMeterMatrixs.Dispose();
 
             return inputDeps;
         }
 
-        //触角頭位置
         [BurstCompileAttribute]
         struct ToukiMeterJob : IJob
         {

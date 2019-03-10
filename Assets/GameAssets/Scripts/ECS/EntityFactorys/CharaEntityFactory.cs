@@ -2,9 +2,9 @@
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-//using Unity.Transforms2D;
+// using Unity.Transforms2D;
 using Unity.Collections;
-//using toinfiniityandbeyond.Rendering2D;
+// using toinfiniityandbeyond.Rendering2D;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Jobs;
@@ -34,22 +34,22 @@ namespace YYHS
 
 			var entity = _entityManager.CreateEntity(archetype);
 
-			//ComponentDataのセット
+			// ComponentDataのセット
 			// var posL = 0;
-			// //Define.Instance.GetMapSize() / 2;
+			// // Define.Instance.GetMapSize() / 2;
 			// var posH = 0;
-			//Define.Instance.GetMapSize() / 2;
+			// Define.Instance.GetMapSize() / 2;
 
-			// //Tag
+			// // Tag
 			// entityManager.SetComponentData(entity, new CharaTag);
 
-			//必要なキャラのみインプットをつける
+			// 必要なキャラのみインプットをつける
 			if (_i < Define.Instance.Common.PlayerNum)
 			{
 				_entityManager.AddComponent(entity, ComponentType.Create<PadScan>());
 			}
 
-			//ID
+			// ID
 			_entityManager.SetComponentData(entity, new CharaId
 			{
 				myId = _i,
@@ -63,26 +63,26 @@ namespace YYHS
 					state = EnumToukiMaterState.Active
 			});
 
-			// //位置
+			// // 位置
 			// _entityManager.SetComponentData(entity, new Position
 			// {
 			// 	Value = new float3(UnityEngine.Random.Range(posL, posH), UnityEngine.Random.Range(posL, posH), 0)
 			// });
 
-			// //位置
+			// // 位置
 			// _entityManager.SetComponentData(entity, new CharaMove
 			// {
 			// 	position = new Vector3Int(UnityEngine.Random.Range(posL, posH), UnityEngine.Random.Range(posL, posH), 0),
 			// 		delta = Vector3Int.zero
 			// });
 
-			// //モーション
+			// // モーション
 			// _entityManager.SetComponentData(entity, new CharaMotion
 			// {
 
 			// });
 
-			// //行動
+			// // 行動
 			// _entityManager.SetComponentData(entity, new CharaBehave
 			// {
 			// 	behaveType = 0,
@@ -90,14 +90,14 @@ namespace YYHS
 			// 		endTime = (Time.realtimeSinceStartup + 0.5f + UnityEngine.Random.value)
 			// });
 
-			// //見た目
+			// // 見た目
 			// _entityManager.SetComponentData(entity, new CharaLook
 			// {
 			// 	isLeft = 0,
 			// 		isBack = 0
 			// });
 
-			//SharedComponentDataのセット
+			// SharedComponentDataのセット
 			_entityManager.AddSharedComponentData(entity, _meshMatList);
 			_entityManager.AddSharedComponentData(entity, _aniScriptSheet);
 			_entityManager.AddSharedComponentData(entity, _aniBasePos);

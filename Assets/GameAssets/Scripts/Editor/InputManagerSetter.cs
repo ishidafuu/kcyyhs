@@ -1,8 +1,8 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 /// <summary>
 /// InputManagerを自動的に設定してくれるクラス
@@ -74,38 +74,37 @@ public class InputManagerSetter
 	/// <param name="playerIndex">Player index.</param>
 	private static void AddPlayerInputSettings(InputManagerGenerator inputManagerGenerator, int playerIndex)
 	{
-		if (playerIndex < 0 || playerIndex > 3) Debug.LogError("プレイヤーインデックスの値が不正です。");
+		if (playerIndex < 0 || playerIndex > 3)Debug.LogError("プレイヤーインデックスの値が不正です。");
 		string upKey = "", downKey = "", leftKey = "", rightKey = "";
 		List<string> fireKeys;
 		GetAxisKey(out upKey, out downKey, out leftKey, out rightKey, out fireKeys, playerIndex);
 
 		int joystickNum = playerIndex + 1;
 
-		Debug.Log("プレイヤー"+ joystickNum + "の設定を追加します。");
+		Debug.Log("プレイヤー" + joystickNum + "の設定を追加します。");
 
 		// 横方向
 		{
 			var name = string.Format("P{0}Horizontal", playerIndex);
 			inputManagerGenerator.AddAxis(InputAxis.CreatePadAxis(name, joystickNum, 1));
-			inputManagerGenerator.AddAxis(InputAxis.CreatePadAxis(name, joystickNum, 5));//5thAxis
+			inputManagerGenerator.AddAxis(InputAxis.CreatePadAxis(name, joystickNum, 5)); // 5thAxis
 			inputManagerGenerator.AddAxis(InputAxis.CreateKeyAxis(name, leftKey, rightKey, "", ""));
 		}
 
 		// 縦方向
 		{
 			var name = string.Format("P{0}Vertical", playerIndex);
-			//Yはinvert設定しないとギャクに成る
+			// Yはinvert設定しないとギャクに成る
 			inputManagerGenerator.AddAxis(InputAxis.CreatePadAxis(name, joystickNum, 2, true));
-			inputManagerGenerator.AddAxis(InputAxis.CreatePadAxis(name, joystickNum, 6, true));//6thAxis
+			inputManagerGenerator.AddAxis(InputAxis.CreatePadAxis(name, joystickNum, 6, true)); // 6thAxis
 			inputManagerGenerator.AddAxis(InputAxis.CreateKeyAxis(name, downKey, upKey, "", ""));
 		}
-
 
 		// 攻撃
 		for (int i = 0; i < FIRENUM; i++)
 		{
 			var axis = new InputAxis();
-			var name = string.Format("P{0}Fire{1}", playerIndex, i+1);
+			var name = string.Format("P{0}Fire{1}", playerIndex, i + 1);
 			var button = string.Format("joystick {0} button {1}", joystickNum, i);
 			inputManagerGenerator.AddAxis(InputAxis.CreateButton(name, button, fireKeys[i]));
 		}
@@ -166,15 +165,15 @@ public class InputManagerSetter
 				fireKey.Add("[4]");
 				fireKey.Add("[5]");
 				break;
-			//case 3:
-			//	upKey = "[8]";
-			//	downKey = "[5]";
-			//	leftKey = "[4]";
-			//	rightKey = "[6]";
-			//	attackKey = "[9]";
-			//	break;
+				// case 3:
+				// 	upKey = "[8]";
+				// 	downKey = "[5]";
+				// 	leftKey = "[4]";
+				// 	rightKey = "[6]";
+				// 	attackKey = "[9]";
+				// 	break;
 			default:
-				//Debug.LogError("プレイヤーインデックスの値が不正です。");
+				// Debug.LogError("プレイヤーインデックスの値が不正です。");
 				upKey = "";
 				downKey = "";
 				leftKey = "";

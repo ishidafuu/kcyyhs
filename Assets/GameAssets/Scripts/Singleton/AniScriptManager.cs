@@ -13,22 +13,22 @@ namespace YYHS
 
 			public void LoadObject()
 			{
-				//オートセット
+				// オートセット
 				aniScriptSheet = Resources.FindObjectsOfTypeAll<AniScriptSheetObject>().First()as AniScriptSheetObject;
 				aniBasePos = Resources.FindObjectsOfTypeAll<AniBasePosObject>().First()as AniBasePosObject;
 			}
 
 		}
 
-	[CustomEditor(typeof(AniScriptManager))] //拡張するクラスを指定
+	[CustomEditor(typeof(AniScriptManager))] // 拡張するクラスを指定
 	public class AniScriptManagerEditor : Editor
 	{
 		public override void OnInspectorGUI()
 		{
-			//元のInspector部分を表示
+			// 元のInspector部分を表示
 			base.OnInspectorGUI();
 
-			//ボタンを表示
+			// ボタンを表示
 			if (GUILayout.Button("LoadObject"))
 			{
 				(target as AniScriptManager).LoadObject();

@@ -27,14 +27,14 @@ namespace YYHS
 			}
 
 			//// 回転
-			//if (Input.GetMouseButton(1)) {
-			//	float dist = Vector3.Distance(this.transform.position, targetPoint);
+			// if (Input.GetMouseButton(1)) {
+			// 	float dist = Vector3.Distance(this.transform.position, targetPoint);
 
-			//	this.transform.rotation = Quaternion.AngleAxis(rotateSpeed * -mouseY, transform.right) * transform.rotation;
-			//	this.transform.rotation = Quaternion.AngleAxis(rotateSpeed * mouseX, Vector3.up) * transform.rotation;
+			// 	this.transform.rotation = Quaternion.AngleAxis(rotateSpeed * -mouseY, transform.right) * transform.rotation;
+			// 	this.transform.rotation = Quaternion.AngleAxis(rotateSpeed * mouseX, Vector3.up) * transform.rotation;
 
-			//	targetPoint = this.transform.position + this.transform.forward * dist;
-			//}
+			// 	targetPoint = this.transform.position + this.transform.forward * dist;
+			// }
 
 			// ズーム
 			if (mouseWheelScroll != 0)
@@ -57,7 +57,7 @@ namespace YYHS
 		}
 		void Start()
 		{
-			//Debug.Log(Define.Instance.GetMapSize() / 2);
+			// Debug.Log(Define.Instance.GetMapSize() / 2);
 			// this.transform.position = new Vector3(Define.Instance.GetMapSize() / 2, Define.Instance.GetMapSize() / 2, this.transform.position.z);
 		}
 

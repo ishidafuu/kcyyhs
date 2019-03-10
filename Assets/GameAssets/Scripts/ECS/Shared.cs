@@ -13,7 +13,7 @@ namespace YYHS
 {
 	public static class Shared
 	{
-		//SharedComponentData
+		// SharedComponentData
 		public static MeshMatList charaMeshMat;
 		public static AniScriptSheet aniScriptSheet;
 		public static AniBasePos aniBasePos;
@@ -24,10 +24,10 @@ namespace YYHS
 
 		public static MeshMatList meterMeshMat;
 
-		//SharedComponentDataの読み込み
+		// SharedComponentDataの読み込み
 		public static void ReadySharedComponentData()
 		{
-			// //スプライトからメッシュの作成
+			// // スプライトからメッシュの作成
 			// charaMeshMat = new MeshMatList();
 			// charaMeshMat.Init();
 			// const int DEKUNUM = 1;
@@ -59,7 +59,7 @@ namespace YYHS
 			meterMeshMat.Init();
 			meterMeshMat.Load("yyhs/bg/meter", true, "Sprites/BgFrameSprite");
 
-			//スクリプタブルオブジェクトの読み込み
+			// スクリプタブルオブジェクトの読み込み
 			aniScriptSheet = new AniScriptSheet();
 			if (Resources.FindObjectsOfTypeAll<AniScriptSheetObject>().Length == 0)
 				Debug.LogError("aniScriptSheet 0");

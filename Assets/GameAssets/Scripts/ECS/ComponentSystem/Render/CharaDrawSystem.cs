@@ -9,7 +9,7 @@
 // namespace YYHS
 // {
 
-//     //各パーツの描画位置決定および描画
+//     // 各パーツの描画位置決定および描画
 //     [UpdateAfter(typeof(PreLateUpdate.ParticleSystemBeginUpdateAll))]
 //     public class CharaDrawSystem : JobComponentSystem
 //     {
@@ -89,7 +89,7 @@
 //                 entitiesLength = length,
 //                 one = Vector3.one,
 //             };
-//             //var jobHandle = job.Schedule(length, 50);
+//             // var jobHandle = job.Schedule(length, 50);
 //             inputDeps = jobBody.Schedule(inputDeps);
 
 //             const int HEADNUM = 2;
@@ -115,8 +115,8 @@
 //             // jobBodyHandle.Complete();
 //             // jobAntHeadHandle.Complete();
 
-//             //DrawMeshInstancedだとZソートがかからない（最初に描画されたやつに引っ張られてる？）
-//             //体
+//             // DrawMeshInstancedだとZソートがかからない（最初に描画されたやつに引っ張られてる？）
+//             // 体
 //             for (int i = 0; i < jobBody.bodyMatrix.Length; i++)
 //             {
 //                 var framesCount = Shared.charaMeshMat;
@@ -141,27 +141,27 @@
 //                 Graphics.DrawMesh(Shared.charaMeshMat.meshs[2], jobBody.rightFootMatrix[i],
 //                     Shared.charaMeshMat.materials[2], 0);
 
-//                 //Graphics.DrawMesh(Shared.ariMeshMat.meshs[3], jobBody.gasterMatrix[i],
-//                 //	Shared.ariMeshMat.materials[3], 0);
+//                 // Graphics.DrawMesh(Shared.ariMeshMat.meshs[3], jobBody.gasterMatrix[i],
+//                 // 	Shared.ariMeshMat.materials[3], 0);
 //             }
 
-//             //頭
+//             // 頭
 //             for (int i = 0; i < jobAntHead.matrixLength[0]; i++)
 //             {
-//                 //Graphics.DrawMesh(Shared.ariMeshMat.meshs[4], jobAntHead.antMatrix[i],
-//                 //	Shared.ariMeshMat.materials[4], 0);
+//                 // Graphics.DrawMesh(Shared.ariMeshMat.meshs[4], jobAntHead.antMatrix[i],
+//                 // 	Shared.ariMeshMat.materials[4], 0);
 //                 Graphics.DrawMesh(Shared.charaMeshMat.meshs[5], jobAntHead.headMatrix[i],
 //                     Shared.charaMeshMat.materials[5], 0);
 //             }
 //             for (int i = 0; i < jobAntHead.matrixLength[1]; i++)
 //             {
-//                 //Graphics.DrawMesh(Shared.ariMeshMat.meshs[6], jobAntHead.antMatrix2[i],
-//                 //	Shared.ariMeshMat.materials[6], 0);
+//                 // Graphics.DrawMesh(Shared.ariMeshMat.meshs[6], jobAntHead.antMatrix2[i],
+//                 // 	Shared.ariMeshMat.materials[6], 0);
 //                 Graphics.DrawMesh(Shared.charaMeshMat.meshs[7], jobAntHead.headMatrix2[i],
 //                     Shared.charaMeshMat.materials[7], 0);
 //             }
 
-//             //NativeArrayの開放
+//             // NativeArrayの開放
 
 //             jobBody.bodyMatrix.Dispose();
 //             jobBody.leftArmMatrix.Dispose();
@@ -189,7 +189,7 @@
 //             return inputDeps;
 //         }
 
-//         //カリング
+//         // カリング
 //         [BurstCompileAttribute]
 //         struct JobCulling : IJobParallelFor
 //         {
@@ -203,7 +203,7 @@
 //             public void Execute(int i)
 //             {
 
-//                 //isInCamera[i] = 1;
+//                 // isInCamera[i] = 1;
 //                 if (cameraXMax < position[i].Value.x)
 //                 {
 //                     isInCamera[i] = 0;
@@ -227,7 +227,7 @@
 //             }
 //         }
 
-//         //胸手足位置
+//         // 胸手足位置
 //         [BurstCompileAttribute]
 //         struct JobBody : IJob
 //         {
@@ -419,7 +419,7 @@
 //             }
 //         }
 
-//         //触角頭位置
+//         // 触角頭位置
 //         [BurstCompileAttribute]
 //         struct JobAntHead : IJob
 //         {
@@ -508,35 +508,35 @@
 //     }
 // }
 
-// ////胸
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[0], 0,
-// //	Shared.ariMeshMat.materials[0], job.thoraxMatrix.ToArray(), job.thoraxMatrix.Length);
-// ////腕
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[1], 0,
-// //	Shared.ariMeshMat.materials[1], job.leftArmMatrix.ToArray(), job.leftArmMatrix.Length);
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[1], 0,
-// //	Shared.ariMeshMat.materials[1], job.rightArmMatrix.ToArray(), job.rightArmMatrix.Length);
-// ////足
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[2], 0,
-// //	Shared.ariMeshMat.materials[2], job.leftLegMatrix.ToArray(), job.leftLegMatrix.Length);
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[2], 0,
-// //	Shared.ariMeshMat.materials[2], job.rightLegMatrix.ToArray(), job.rightLegMatrix.Length);
+// //// 胸
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[0], 0,
+// // 	Shared.ariMeshMat.materials[0], job.thoraxMatrix.ToArray(), job.thoraxMatrix.Length);
+// //// 腕
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[1], 0,
+// // 	Shared.ariMeshMat.materials[1], job.leftArmMatrix.ToArray(), job.leftArmMatrix.Length);
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[1], 0,
+// // 	Shared.ariMeshMat.materials[1], job.rightArmMatrix.ToArray(), job.rightArmMatrix.Length);
+// //// 足
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[2], 0,
+// // 	Shared.ariMeshMat.materials[2], job.leftLegMatrix.ToArray(), job.leftLegMatrix.Length);
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[2], 0,
+// // 	Shared.ariMeshMat.materials[2], job.rightLegMatrix.ToArray(), job.rightLegMatrix.Length);
 
-// ////腹
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[3], 0,
-// //	Shared.ariMeshMat.materials[3], jobGaster.gasterMatrix.ToArray(), jobGaster.matrixLength[0]);
-// ////腹
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[4], 0,
-// //	Shared.ariMeshMat.materials[4], jobGaster.gasterMatrix2.ToArray(), jobGaster.matrixLength[1]);
+// //// 腹
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[3], 0,
+// // 	Shared.ariMeshMat.materials[3], jobGaster.gasterMatrix.ToArray(), jobGaster.matrixLength[0]);
+// //// 腹
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[4], 0,
+// // 	Shared.ariMeshMat.materials[4], jobGaster.gasterMatrix2.ToArray(), jobGaster.matrixLength[1]);
 
-// ////アンテナと顔
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[6], 0,
-// //	Shared.ariMeshMat.materials[6], jobAntHead.antMatrix.ToArray(), jobAntHead.matrixLength[0]);
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[7], 0,
-// //	Shared.ariMeshMat.materials[7], jobAntHead.headMatrix.ToArray(), jobAntHead.matrixLength[0]);
+// //// アンテナと顔
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[6], 0,
+// // 	Shared.ariMeshMat.materials[6], jobAntHead.antMatrix.ToArray(), jobAntHead.matrixLength[0]);
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[7], 0,
+// // 	Shared.ariMeshMat.materials[7], jobAntHead.headMatrix.ToArray(), jobAntHead.matrixLength[0]);
 
-// ////アンテナと顔
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[8], 0,
-// //	Shared.ariMeshMat.materials[8], jobAntHead.antMatrix2.ToArray(), jobAntHead.matrixLength[1]);
-// //Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[9], 0,
-// //	Shared.ariMeshMat.materials[9], jobAntHead.headMatrix2.ToArray(), jobAntHead.matrixLength[1]);
+// //// アンテナと顔
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[8], 0,
+// // 	Shared.ariMeshMat.materials[8], jobAntHead.antMatrix2.ToArray(), jobAntHead.matrixLength[1]);
+// // Graphics.DrawMeshInstanced(Shared.ariMeshMat.meshs[9], 0,
+// // 	Shared.ariMeshMat.materials[9], jobAntHead.headMatrix2.ToArray(), jobAntHead.matrixLength[1]);

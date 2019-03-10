@@ -32,7 +32,7 @@ namespace YYHS
 
         void Start()
         {
-            //シーンの判定
+            // シーンの判定
             var scene = SceneManager.GetActiveScene();
             if (scene.name != SCENE_NAME)
                 return;
@@ -40,10 +40,10 @@ namespace YYHS
             // ワールド生成
             var manager = InitializeWorld();
 
-            //SharedComponentDataの準備
+            // SharedComponentDataの準備
             ReadySharedComponentData();
 
-            //コンポーネントのキャッシュ
+            // コンポーネントのキャッシュ
             ComponentCache();
 
             // エンティティ生成
@@ -88,46 +88,46 @@ namespace YYHS
             // world.CreateManager(typeof(EndFrameTransformSystem));
             // world.CreateManager<MeshInstanceRendererSystem>().ActiveCamera = GetComponent<Camera>();
 
-            //Player
-            //Chara
+            // Player
+            // Chara
 
-            //入力システム
+            // 入力システム
             world.CreateManager(typeof(PadScanSystem));
             world.CreateManager(typeof(ToukiMeterInputJobSystem));
             world.CreateManager(typeof(ToukiMeterCountJobSystem));
             world.CreateManager(typeof(ToukiMeterDebubSystem));
             world.CreateManager(typeof(BGDrawSystem));
 
-            // //モーションの時間進行システム
+            // // モーションの時間進行システム
             // world.CreateManager(typeof(CountMotionJobSystem));
-            // //時間経過によるモーション変更システム
+            // // 時間経過によるモーション変更システム
             // world.CreateManager(typeof(ShiftCountMotionJobSystem));
-            // //入力による状態変化システム
+            // // 入力による状態変化システム
             // world.CreateManager(typeof(InputMotionJobSystem));
-            // //入力による向き変化システム
+            // // 入力による向き変化システム
             // world.CreateManager(typeof(InputMukiSystem));
-            // //入力による座標変化システム
+            // // 入力による座標変化システム
             // world.CreateManager(typeof(InputMoveSystem));
-            // //座標移動システム
+            // // 座標移動システム
             // world.CreateManager(typeof(MovePosJobSystem));
-            // //描画向き変換
+            // // 描画向き変換
             // world.CreateManager(typeof(LookJobSystem));
-            // //描画座標変換システム
+            // // 描画座標変換システム
             // world.CreateManager(typeof(ConvertDrawPosJobSystem));
-            // //Renderer
-            // //各パーツの描画位置決定および描画
+            // // Renderer
+            // // 各パーツの描画位置決定および描画
             // world.CreateManager(typeof(CharaDrawSystem));
 
         }
 
-        //各コンポーネントのキャッシュ
+        // 各コンポーネントのキャッシュ
         void ComponentCache()
         {
             Cache.pixelPerfectCamera = FindObjectOfType<PixelPerfectCamera>();
             // var tileMaps = FindObjectsOfType<Tilemap>();
             // foreach (var item in tileMaps)
             // {
-            //     //Debug.Log(item.layoutGrid.name);
+            //     // Debug.Log(item.layoutGrid.name);
             //     if (item.layoutGrid.name == "PheromGrid")
             //     {
             //         Cache.pheromMap = item;
@@ -137,7 +137,7 @@ namespace YYHS
             // }
         }
 
-        //SharedComponentDataの読み込み
+        // SharedComponentDataの読み込み
         void ReadySharedComponentData()
         {
             Shared.ReadySharedComponentData();

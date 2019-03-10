@@ -42,10 +42,10 @@
 			float4 _MainTex_ST;
         			
             // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
-            // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+            // See https:// docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
             // #pragma instancing_options assumeuniformscaling
             UNITY_INSTANCING_BUFFER_START(Props)
-                //stuff
+                // stuff
             UNITY_INSTANCING_BUFFER_END(Props)
 			
 			v2f vert (appdata v)

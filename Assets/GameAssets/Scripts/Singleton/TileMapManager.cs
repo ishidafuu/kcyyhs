@@ -11,7 +11,7 @@
 // 	[ExecuteInEditMode]
 // 	public class TileMapManager : SingletonMonoBehaviour<TileMapManager>
 // 	{
-// 		//public int mapSize = 100;
+// 		// public int mapSize = 100;
 // 		public float fDiv = 50f;
 // 		public int fillPercent = 10;
 // 		public int smoothCount = 1;
@@ -23,10 +23,10 @@
 // 		public List<TileBase> tile2;
 
 // 		const int HOLENO = -99;
-// 		//public List<int> surfType;
+// 		// public List<int> surfType;
 // 		public void LoadTileMap()
 // 		{
-// 			//オートセット
+// 			// オートセット
 // 			if (tilemap == null)
 // 			{
 // 				var tileMaps = FindObjectsOfType<Tilemap>();
@@ -47,7 +47,7 @@
 // 			return ((Define.Instance.MAP_GRID_NUM * Define.Instance.GRID_SIZE) / Define.Instance.TIP_SIZE);
 // 		}
 
-// 		//マップタイル作成
+// 		// マップタイル作成
 // 		public void CreatePerlinNoise()
 // 		{
 
@@ -65,40 +65,40 @@
 // 			int[, ] map = new int[mapSize, mapSize];
 
 // 			//// 乱数生成器にシード値を設定する
-// 			//System.Random rand = new System.Random(seed.GetHashCode());
-// 			//パーリンノイズでマップ生成
+// 			// System.Random rand = new System.Random(seed.GetHashCode());
+// 			// パーリンノイズでマップ生成
 // 			map = PerlinNoiseSurface(map, groundTile.Count);
 
-// 			//チップをランダムで配置（割合指定）
+// 			// チップをランダムで配置（割合指定）
 // 			var mapFilter = GenerateCellularAutomata(mapSize, fillPercent, false);
 
-// 			//ムーア近傍
+// 			// ムーア近傍
 // 			mapFilter = SmoothMooreCellularAutomata(mapFilter, false, smoothCount);
 // 			map = SetFilter(map, mapFilter, true);
-// 			//ムーア近傍
+// 			// ムーア近傍
 // 			mapFilter = GenerateCellularAutomata(mapSize, fillPercent, false);
 // 			mapFilter = SmoothMooreCellularAutomata(mapFilter, false, smoothCount);
 // 			map = SetFilter(map, mapFilter, false);
 
-// 			//ムーア近傍
+// 			// ムーア近傍
 // 			mapFilter = GenerateCellularAutomata(mapSize, fillPercent, false);
 // 			mapFilter = SmoothMooreCellularAutomata(mapFilter, false, smoothCount);
 // 			map = SetFilter(map, mapFilter, true);
-// 			//巣穴周り
+// 			// 巣穴周り
 // 			map = MakeHomeHole2(map, new Vector2Int(mapSize / 2, mapSize / 2), holeR);
-// 			//ムーア近傍
+// 			// ムーア近傍
 // 			mapFilter = GenerateCellularAutomata(mapSize, fillPercent, false);
 // 			mapFilter = SmoothMooreCellularAutomata(mapFilter, false, smoothCount);
 // 			map = SetFilter(map, mapFilter, false);
 
-// 			//本巣穴
+// 			// 本巣穴
 // 			map = MakeHomeHole2(map, new Vector2Int(mapSize / 2, mapSize / 2), holeR * 0.6f);
-// 			//範囲チェック
+// 			// 範囲チェック
 // 			map = CheckMapBetween(map);
-// 			//tilemap.size = new Vector3Int(mapSize, mapSize, 0);
-// 			//int cellsize = (int)tilemap.layoutGrid.cellSize.x;
+// 			// tilemap.size = new Vector3Int(mapSize, mapSize, 0);
+// 			// int cellsize = (int)tilemap.layoutGrid.cellSize.x;
 
-// 			//タイルすべて置く
+// 			// タイルすべて置く
 // 			SetTileFromMapArray(map, mapSize);
 // 		}
 
@@ -142,16 +142,16 @@
 // 				}
 // 			}
 
-// 			//巣穴
+// 			// 巣穴
 // 			map[mapSize / 2, mapSize / 2] = HOLENO;
-// 			//map[mapSize / 2 - 1, mapSize / 2] = HOLENO;
-// 			//map[mapSize / 2, mapSize / 2 - 1] = HOLENO;
-// 			//map[mapSize / 2 - 1, mapSize / 2 - 1] = HOLENO;
+// 			// map[mapSize / 2 - 1, mapSize / 2] = HOLENO;
+// 			// map[mapSize / 2, mapSize / 2 - 1] = HOLENO;
+// 			// map[mapSize / 2 - 1, mapSize / 2 - 1] = HOLENO;
 
 // 			return map;
 // 		}
 
-// 		//タイルすべて置く
+// 		// タイルすべて置く
 // 		public void SetTileFromMapArray(int[, ] map, int mapSize)
 // 		{
 // 			tilemap.ClearAllTiles();
@@ -159,8 +159,8 @@
 // 			{
 // 				for (int y = 0; y < mapSize; y++)
 // 				{
-// 					//tilemap.AddTileFlags(position, TileFlags.LockAll);
-// 					//int index = (y * mapSize) + x;
+// 					// tilemap.AddTileFlags(position, TileFlags.LockAll);
+// 					// int index = (y * mapSize) + x;
 // 					var tileNo = map[x, y];
 // 					if (tileNo == HOLENO)
 // 					{
@@ -183,42 +183,42 @@
 // 			{
 // 				for (int y = 0; y < mapSize; y++)
 // 				{
-// 					//int index = (y * mapSize) + x;
+// 					// int index = (y * mapSize) + x;
 // 					float noise = Mathf.PerlinNoise(((float)x + xf) / fDiv, ((float)y + yf) / fDiv);
 // 					var surf = Mathf.FloorToInt(noise * tipTypeNum);
 // 					if (surf < 0)surf = 0;
 // 					else if (surf >= tipTypeNum)surf = tipTypeNum - 1;
 // 					map[x, y] = surf;
-// 					//surfType.Add(surf);
+// 					// surfType.Add(surf);
 // 				}
 // 			}
 
 // 			return map;
 // 		}
 
-// 		////マップタイル作成
-// 		//public void CreateSmoothMoore() {
+// 		//// マップタイル作成
+// 		// public void CreateSmoothMoore() {
 
-// 		//	LoadTileMap();
-// 		//	//// 乱数生成器にシード値を設定する
-// 		//	//System.Random rand = new System.Random(seed.GetHashCode());
-// 		//	//List<int> surfType = PerlinNoiseSurface(surfaceNum);
+// 		// 	LoadTileMap();
+// 		// 	//// 乱数生成器にシード値を設定する
+// 		// 	// System.Random rand = new System.Random(seed.GetHashCode());
+// 		// 	// List<int> surfType = PerlinNoiseSurface(surfaceNum);
 
-// 		//	//チップをランダムで配置（割合指定）
-// 		//	var mapFilter = GenerateCellularAutomata(mapSize, fillPercent, false);
-// 		//	//ムーア近傍
-// 		//	SmoothMooreCellularAutomata(mapFilter, false, smoothCount);
+// 		// 	// チップをランダムで配置（割合指定）
+// 		// 	var mapFilter = GenerateCellularAutomata(mapSize, fillPercent, false);
+// 		// 	// ムーア近傍
+// 		// 	SmoothMooreCellularAutomata(mapFilter, false, smoothCount);
 
-// 		//	//for (int x = 0; x < mapSize; x++) {
-// 		//	//	for (int y = 0; y < mapSize; y++) {
-// 		//	//		var position = new Vector3Int(x, y, 0);
-// 		//	//		var thisTile = tilemap.GetTile(position);
-// 		//	//		tilemap.SetTile(position, tile2[map[x, y]]);
-// 		//	//	}
-// 		//	//}
-// 		//}
+// 		// 	// for (int x = 0; x < mapSize; x++) {
+// 		// 	// 	for (int y = 0; y < mapSize; y++) {
+// 		// 	// 		var position = new Vector3Int(x, y, 0);
+// 		// 	// 		var thisTile = tilemap.GetTile(position);
+// 		// 	// 		tilemap.SetTile(position, tile2[map[x, y]]);
+// 		// 	// 	}
+// 		// 	// }
+// 		// }
 
-// 		//チップをランダムで配置（割合指定）
+// 		// チップをランダムで配置（割合指定）
 // 		int[, ] GenerateCellularAutomata(int mapSize, int fillPercent, bool edgesAreWalls)
 // 		{
 
@@ -244,7 +244,7 @@
 // 			return map;
 // 		}
 
-// 		//ムーア近傍
+// 		// ムーア近傍
 // 		int[, ] SmoothMooreCellularAutomata(int[, ] map, bool edgesAreWalls, int smoothCount)
 // 		{
 // 			for (int i = 0; i < smoothCount; i++)
@@ -275,7 +275,7 @@
 // 			// 戻り値として修正されたマップを返す
 // 			return map;
 // 		}
-// 		//ムーア近傍用周囲取得
+// 		// ムーア近傍用周囲取得
 // 		int GetMooreSurroundingTiles(int[, ] map, int x, int y, bool edgesAreWalls)
 // 		{
 // 			int tileCount = 0;
@@ -297,7 +297,7 @@
 // 			return tileCount;
 // 		}
 
-// 		//フィルター
+// 		// フィルター
 // 		int[, ] SetFilter(int[, ] map, int[, ] mapFilter, bool isPosi)
 // 		{
 // 			for (int x = 0; x < map.GetUpperBound(0); x++)
@@ -319,52 +319,52 @@
 // 			return map;
 // 		}
 
-// 		//	public void UpdateMap(int[,] map, Tilemap tilemap) { //マップとタイルマップを取得し、null タイルを必要箇所に設定する
+// 		// 	public void UpdateMap(int[,] map, Tilemap tilemap) { // マップとタイルマップを取得し、null タイルを必要箇所に設定する
 
-// 		//		//TileBase
+// 		// 		// TileBase
 
-// 		//		for (int x = 0; x < map.GetUpperBound(0); x++) {
-// 		//			for (int y = 0; y < map.GetUpperBound(1); y++) {
-// 		//				//再レンダリングではなく、マップの更新のみを行う
-// 		//				//これは、それぞれのタイル（および衝突データ）を再描画するのに比べて
-// 		//				//タイルを null に更新するほうが使用リソースが少なくて済むためです。
-// 		//				if (map[x, y] == 0) {
-// 		//					tilemap.SetTile(new Vector3Int(x, y, 0), null);
-// 		//				}
-// 		//			}
-// 		//		}
-// 		//	}
+// 		// 		for (int x = 0; x < map.GetUpperBound(0); x++) {
+// 		// 			for (int y = 0; y < map.GetUpperBound(1); y++) {
+// 		// 				// 再レンダリングではなく、マップの更新のみを行う
+// 		// 				// これは、それぞれのタイル（および衝突データ）を再描画するのに比べて
+// 		// 				// タイルを null に更新するほうが使用リソースが少なくて済むためです。
+// 		// 				if (map[x, y] == 0) {
+// 		// 					tilemap.SetTile(new Vector3Int(x, y, 0), null);
+// 		// 				}
+// 		// 			}
+// 		// 		}
+// 		// 	}
 
-// 		//	public int[,] PerlinNoise(int[,] map, float seed) {
-// 		//		int newPoint;
-// 		//		//パーリンノイズのポイントの位置を下げるために使用される
-// 		//		float reduction = 0.5f;
-// 		//		//パーリンノイズを生成する
-// 		//		for (int x = 0; x < map.GetUpperBound(0); x++) {
-// 		//			newPoint = Mathf.FloorToInt((Mathf.PerlinNoise(x, seed) - reduction) * map.GetUpperBound(1));
+// 		// 	public int[,] PerlinNoise(int[,] map, float seed) {
+// 		// 		int newPoint;
+// 		// 		// パーリンノイズのポイントの位置を下げるために使用される
+// 		// 		float reduction = 0.5f;
+// 		// 		// パーリンノイズを生成する
+// 		// 		for (int x = 0; x < map.GetUpperBound(0); x++) {
+// 		// 			newPoint = Mathf.FloorToInt((Mathf.PerlinNoise(x, seed) - reduction) * map.GetUpperBound(1));
 
-// 		//			//高さの半分の位置付近からノイズが始まるようにする
-// 		//			newPoint += (map.GetUpperBound(1) / 2);
-// 		//			for (int y = newPoint; y >= 0; y--) {
-// 		//				map[x, y] = 1;
-// 		//			}
-// 		//		}
-// 		//		return map;
-// 		//	}
+// 		// 			// 高さの半分の位置付近からノイズが始まるようにする
+// 		// 			newPoint += (map.GetUpperBound(1) / 2);
+// 		// 			for (int y = newPoint; y >= 0; y--) {
+// 		// 				map[x, y] = 1;
+// 		// 			}
+// 		// 		}
+// 		// 		return map;
+// 		// 	}
 // 	}
 
-// 	[CustomEditor(typeof(TileMapManager))] //拡張するクラスを指定
+// 	[CustomEditor(typeof(TileMapManager))] // 拡張するクラスを指定
 // 	public class TileMapManagerEditor : Editor
 // 	{
 // 		public override void OnInspectorGUI()
 // 		{
-// 			//元のInspector部分を表示
+// 			// 元のInspector部分を表示
 // 			base.OnInspectorGUI();
 
-// 			//ボタンを表示
+// 			// ボタンを表示
 // 			if (GUILayout.Button("LoadTileMap"))(target as TileMapManager).LoadTileMap();
 // 			if (GUILayout.Button("PerlinNoise"))(target as TileMapManager).CreatePerlinNoise();
-// 			//if (GUILayout.Button("SmoothMoore")) (target as TileMapManager).CreateSmoothMoore();
+// 			// if (GUILayout.Button("SmoothMoore")) (target as TileMapManager).CreateSmoothMoore();
 
 // 		}
 

@@ -56,7 +56,7 @@ namespace YYHS
 		_END,
 	}
 
-	//パーツ位置
+	// パーツ位置
 	public enum EnumPartsType
 	{
 		Ant = 0,
@@ -74,15 +74,6 @@ namespace YYHS
 		_END,
 	}
 
-	public enum EnumBehave
-	{
-		Idle,
-		Wander,
-		Goto,
-		Attack,
-		_END,
-	}
-
 	public enum EnumMuki
 	{
 		Left = -1,
@@ -90,24 +81,7 @@ namespace YYHS
 		Right = 1,
 	}
 
-	public enum EnumMoveMuki
-	{
-		None,
-		Left,
-		LeftLeftUp,
-		LeftUp,
-		LeftLeftDown,
-		LeftDown,
-		Up,
-		Right,
-		RightRightUp,
-		RightUp,
-		RightRightDown,
-		RightDown,
-		Down,
-	}
-
-	//パーツ位置
+	// パーツ位置
 	public enum EnumMotion
 	{
 		Idle = 0,
@@ -124,16 +98,16 @@ namespace YYHS
 		Action,
 	}
 
-	//モーションフラグ
+	// モーションフラグ
 	[Flags]
 	public enum EnumFlagMotion
 	{
 		None = 0x0000,
-		//空中
+		// 空中
 		Air = 0x001,
-		//ダッシュ
+		// ダッシュ
 		Dash = 0x002,
-		//ダメージ
+		// ダメージ
 		Damage = 0x003,
 		};
 }

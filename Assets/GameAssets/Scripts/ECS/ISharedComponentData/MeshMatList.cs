@@ -22,7 +22,7 @@
 				Debug.LogWarning(path);
 				return 0;
 			}
-			//マテリアル用シェーダー
+			// マテリアル用シェーダー
 			var matShader = Shader.Find(shader);
 			if (matShader == null)
 			{
@@ -33,13 +33,13 @@
 			// listを回してDictionaryに格納
 			for (var i = 0; i < list.Length; ++i)
 			{
-				//Debug.Log(list[i].name);
+				// Debug.Log(list[i].name);
 				var sprite = list[i] as Sprite;
 				var mesh = GenerateQuad(sprite);
 
 				var material = new Material(matShader)
 				{
-					enableInstancing = enableInstancing, //インスタンシング可能フラグ DrawMeshInstancedじゃないと描画が重いかも
+					enableInstancing = enableInstancing, // インスタンシング可能フラグ DrawMeshInstancedじゃないと描画が重いかも
 						mainTexture = sprite.texture
 				};
 				meshs.Add(mesh);

@@ -7,9 +7,9 @@ namespace YYHS
 	/// </summary>
 	public struct PadScan : IComponentData
 	{
-		//十字のバッファ
+		// 十字のバッファ
 		Vector2 axis;
-		//十字
+		// 十字
 		public Button crossUp;
 		public Button crossDown;
 		public Button crossLeft;
@@ -21,7 +21,7 @@ namespace YYHS
 		public Button buttonY;
 		public void SetCross(Vector2 _axis, float _time)
 		{
-			//直前キーから変更無ければ処理しない
+			// 直前キーから変更無ければ処理しない
 			if (_axis != axis)
 			{
 				var isUp = (_axis.y > +0.1f);
@@ -94,17 +94,17 @@ namespace YYHS
 
 	public struct Button
 	{
-		//連打受付時間
+		// 連打受付時間
 		const float DOUBLE_TIME = 0.4f;
-		//押した瞬間
+		// 押した瞬間
 		byte isPush;
-		//押してる
+		// 押してる
 		byte isPress;
-		//離した瞬間
+		// 離した瞬間
 		byte isPop;
-		//連打
+		// 連打
 		byte isDouble;
-		//ダッシュ用直前押した瞬間時間
+		// ダッシュ用直前押した瞬間時間
 		float lastPushTime;
 
 		public bool IsPush()
