@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:3dcb200c9c0ef9138c3c527489d24ca4:5044f21ec9f5c667b1d0aa4432a93b57:ed4ecb476564f6b2eaa49de4ae7728b9$
+# $TexturePacker:SmartUpdate:aeb543de21009c4cf41e13d9fe13bad6:acdee72715fa6b50ac2efb7978123d36:ed4ecb476564f6b2eaa49de4ae7728b9$
 #
 :format=40300
 :texture=bg.png
@@ -12,7 +12,7 @@
 :pivotpoints=enabled
 :borders=disabled
 
-bg00;903;931;120;92; 0.5;0.5; 0;0;0;0
+bg00;773;479;128;92; 0.5;0.5; 0;0;0;0
 bg01;1;379;256;96; 0.5;0.5; 0;0;0;0
 bg02;1;477;512;256; 0.5;0.5; 0;0;0;0
 bg03;1;735;512;288; 0.5;0.5; 0;0;0;0
@@ -22,8 +22,8 @@ bg06;1;281;256;96; 0.5;0.5; 0;0;0;0
 bg07;773;775;128;248; 0.5;0.5; 0;0;0;0
 bg08;773;573;128;200; 0.5;0.5; 0;0;0;0
 frame;515;557;256;224; 0.5;0.5; 0;0;0;0
-meter00;903;925;96;4; 0;1; 0;0;0;0
-meter01;903;919;96;4; 0;1; 0;0;0;0
-meter02;903;914;96;3; 0;1; 0;0;0;0
-meter03;903;908;64;4; 0;1; 0;0;0;0
-meter04;1001;919;2;10; 0;1; 0;0;0;0
+meter00;903;1019;96;4; 0;1; 0;0;0;0
+meter01;903;1013;96;4; 0;1; 0;0;0;0
+meter02;903;1008;96;3; 0;1; 0;0;0;0
+meter03;903;1002;64;4; 0;1; 0;0;0;0
+meter04;1001;1013;2;10; 0;1; 0;0;0;0

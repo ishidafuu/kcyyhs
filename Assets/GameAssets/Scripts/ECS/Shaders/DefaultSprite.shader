@@ -1,4 +1,4 @@
-﻿Shader "Sprites/CharaSprite"
+﻿Shader "Sprites/DefaultSprite"
 {
 	Properties
 	{

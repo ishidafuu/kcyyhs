@@ -95,6 +95,7 @@ namespace YYHS
             world.CreateManager(typeof(PadScanSystem));
             world.CreateManager(typeof(ToukiMeterInputJobSystem));
             world.CreateManager(typeof(ToukiMeterCountJobSystem));
+            // world.CreateManager(typeof(BgScrollCountJobSystem));
             world.CreateManager(typeof(ToukiMeterDebubSystem));
             world.CreateManager(typeof(BGDrawSystem));
 

@@ -7,5 +7,6 @@ namespace YYHS
 		public EnumCrossType muki;
 		public int value;
 		public EnumToukiMaterState state;
+		public int bgScroll;
 	}
 }

@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Common: {fileID: 11400000, guid: 3ad1dfe4e0cb70445be8af78c9a01ae5, type: 2}
   Move: {fileID: 11400000, guid: fa8e656e7d4dd4242b8ce87907ec00ea, type: 2}
+  DrawPos: {fileID: 11400000, guid: 45d5ff70ac9b1ec4285e771325ea46dc, type: 2}
   Debug: {fileID: 11400000, guid: 98018889a92fab74499b219013d66af7, type: 2}
 --- !u!114 &192078716
 MonoBehaviour:

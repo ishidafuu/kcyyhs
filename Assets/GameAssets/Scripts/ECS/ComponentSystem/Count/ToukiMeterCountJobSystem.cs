@@ -23,22 +23,29 @@ namespace YYHS
 		protected override JobHandle OnUpdate(JobHandle inputDeps)
 		{
 			m_group.AddDependency(inputDeps);
+
 			var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
+			JobHandle jobHandle = DoCountToukiJob(ref inputDeps, toukiMeters);
 
-			inputDeps = new UpdateToukiJob()
-			{
-				toukiMeters = toukiMeters,
-			}.Schedule(inputDeps);
-
-			m_group.AddDependency(inputDeps);
-			m_group.CopyFromComponentDataArray(toukiMeters, out JobHandle handle3);
-
+			// 開放
 			inputDeps = new ReleaseJob
 			{
 				toukiMeters = toukiMeters
-			}.Schedule(handle3);
+			}.Schedule(jobHandle);
 
 			return inputDeps;
+		}
+
+		private JobHandle DoCountToukiJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters)
+		{
+			inputDeps = new CountToukiJob()
+			{
+				BgScrollRange = Define.Instance.DrawPos.BgScrollWidth << Define.Instance.DrawPos.BgScrollRangeFactor,
+					toukiMeters = toukiMeters,
+			}.Schedule(inputDeps);
+			m_group.AddDependency(inputDeps);
+			m_group.CopyFromComponentDataArray(toukiMeters, out JobHandle jobHandle);
+			return jobHandle;
 		}
 
 		struct ReleaseJob : IJob
@@ -50,8 +57,10 @@ namespace YYHS
 		}
 
 		[BurstCompileAttribute]
-		struct UpdateToukiJob : IJob
+		struct CountToukiJob : IJob
 		{
+			[ReadOnly]
+			public int BgScrollRange;
 			public NativeArray<ToukiMeter> toukiMeters;
 
 			public void Execute()
@@ -66,8 +75,27 @@ namespace YYHS
 						{
 							toukiMeter.value = 100;
 						}
-						// int asdf = toukiMeter.value;
-						// Debug.Log(asdf);
+					}
+
+					// 背景スクロール
+					switch (toukiMeter.muki)
+					{
+						case EnumCrossType.Left:
+						case EnumCrossType.Down:
+
+							toukiMeter.bgScroll--;
+							if (toukiMeter.bgScroll < 0)
+							{
+								toukiMeter.bgScroll = BgScrollRange;
+							}
+							break;
+						case EnumCrossType.Right:
+							toukiMeter.bgScroll++;
+							if (toukiMeter.bgScroll > BgScrollRange)
+							{
+								toukiMeter.bgScroll = 0;
+							}
+							break;
 					}
 
 					toukiMeters[i] = toukiMeter;

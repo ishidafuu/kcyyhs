@@ -28,7 +28,7 @@
         Cull Off
         // ZTest Always
         Lighting Off
-        // ZWrite On
+        ZWrite On
         Blend One Zero
 
         Pass

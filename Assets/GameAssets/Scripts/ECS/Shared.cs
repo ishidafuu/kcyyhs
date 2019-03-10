@@ -20,7 +20,7 @@ namespace YYHS
 		public static MeshMatList bgFrameMeshMat;
 		// public static MeshMatList meterMeshMat;
 
-		static readonly string ShaderBg = "Sprites/BgFrameSprite";
+		static readonly string ShaderBg = "Sprites/DefaultSprite";
 
 		// SharedComponentDataの読み込み
 		public static void ReadySharedComponentData()

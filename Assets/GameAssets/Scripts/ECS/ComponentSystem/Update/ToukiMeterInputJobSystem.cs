@@ -82,6 +82,7 @@ namespace YYHS
 						toukiMeter.muki = PadScans[i].GetPressCross();
 						toukiMeter.value = 0;
 					}
+
 					toukiMeters[i] = toukiMeter;
 				}
 			}

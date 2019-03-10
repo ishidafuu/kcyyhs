@@ -12,6 +12,7 @@ namespace YYHS
 		{
 			public CommonSettings Common;
 			public MoveSettings Move;
+			public DrawPosSettings DrawPos;
 			public DebugSettings Debug;
 
 			/// <summary>
@@ -22,6 +23,7 @@ namespace YYHS
 				Common = Resources.FindObjectsOfTypeAll<CommonSettings>().First()as CommonSettings;
 				Move = Resources.FindObjectsOfTypeAll<MoveSettings>().First()as MoveSettings;
 				Debug = Resources.FindObjectsOfTypeAll<DebugSettings>().First()as DebugSettings;
+				DrawPos = Resources.FindObjectsOfTypeAll<DrawPosSettings>().First()as DrawPosSettings;
 			}
 		}
 
