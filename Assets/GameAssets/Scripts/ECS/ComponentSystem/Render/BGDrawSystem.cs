@@ -15,12 +15,14 @@ namespace YYHS
     public class BGDrawSystem : JobComponentSystem
     {
         ComponentGroup m_group;
+        Quaternion m_quaternion;
 
         protected override void OnCreateManager()
         {
             m_group = GetComponentGroup(
                 ComponentType.ReadOnly<ToukiMeter>()
             );
+            m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
         }
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
@@ -28,40 +30,48 @@ namespace YYHS
             m_group.AddDependency(inputDeps);
 
             var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
+            var toukiMeterMatrixs = new NativeArray<Matrix4x4>(toukiMeters.Length, Allocator.TempJob);
+            ToukiMeterJob toukiMeterJob = DoToukiMeterJob(ref inputDeps, toukiMeters, toukiMeterMatrixs);
 
-            var length = toukiMeters.Length;
-
-            var toukiMeterMatrixs = new NativeArray<Matrix4x4>(length, Allocator.TempJob);
-
-            var quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
-            var toukiMeterJob = new ToukiMeterJob()
-            {
-                toukiMeters = toukiMeters,
-                toukiMeterMatrixs = toukiMeterMatrixs,
-                q = quaternion,
-            };
-            // m_group.AddDependency(inputDeps);
-            inputDeps = toukiMeterJob.Schedule(inputDeps);
-            m_group.AddDependency(inputDeps);
-            inputDeps.Complete();
-
-            Matrix4x4 bgFrameMatrix = Matrix4x4.TRS(new Vector3(0, 0, 1), quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs[0],
-                bgFrameMatrix,
-                Shared.bgFrameMeshMat.materials[0], 0);
-
-            for (int i = 0; i < toukiMeterJob.toukiMeterMatrixs.Length; i++)
-            {
-                var framesCount = Shared.charaMeshMat;
-                Graphics.DrawMesh(Shared.meterMeshMat.meshs[1],
-                    toukiMeterJob.toukiMeterMatrixs[i],
-                    Shared.meterMeshMat.materials[0], 0);
-            }
+            DrawFrame();
+            DrawToukiMeter(toukiMeterJob);
 
             // NativeArrayの開放
             toukiMeterMatrixs.Dispose();
 
             return inputDeps;
+        }
+
+        private ToukiMeterJob DoToukiMeterJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters, NativeArray<Matrix4x4> toukiMeterMatrixs)
+        {
+            var toukiMeterJob = new ToukiMeterJob()
+            {
+                toukiMeters = toukiMeters,
+                toukiMeterMatrixs = toukiMeterMatrixs,
+                q = m_quaternion,
+            };
+            inputDeps = toukiMeterJob.Schedule(inputDeps);
+            m_group.AddDependency(inputDeps);
+            inputDeps.Complete();
+            return toukiMeterJob;
+        }
+
+        private void DrawToukiMeter(ToukiMeterJob toukiMeterJob)
+        {
+            for (int i = 0; i < toukiMeterJob.toukiMeterMatrixs.Length; i++)
+            {
+                Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs["meter02"],
+                    toukiMeterJob.toukiMeterMatrixs[i],
+                    Shared.bgFrameMeshMat.material, 0);
+            }
+        }
+
+        private void DrawFrame()
+        {
+            Matrix4x4 bgFrameMatrix = Matrix4x4.TRS(new Vector3(0, 0, 1), m_quaternion, Vector3.one);
+            Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs["frame"],
+                bgFrameMatrix,
+                Shared.bgFrameMeshMat.material, 0);
         }
 
         [BurstCompileAttribute]

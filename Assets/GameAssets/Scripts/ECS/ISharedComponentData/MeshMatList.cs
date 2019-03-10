@@ -6,49 +6,43 @@
 	[Serializable]
 	public struct MeshMatList : ISharedComponentData
 	{
-		public List<Mesh> meshs;
-		public List<Material> materials;
-		public void Init()
+		public Material material;
+		public Dictionary<string, Mesh> meshs;
+
+		public MeshMatList(string path, string shader)
 		{
-			meshs = new List<Mesh>();
-			materials = new List<Material>();
-		}
-		public int Load(string path, bool enableInstancing, string shader)
-		{
+			meshs = new Dictionary<string, Mesh>();
 			UnityEngine.Object[] list = Resources.LoadAll(path, typeof(Sprite));
+
 			// listがnullまたは空ならエラーで返す
 			if (list == null || list.Length == 0)
 			{
 				Debug.LogWarning(path);
-				return 0;
 			}
 			// マテリアル用シェーダー
 			var matShader = Shader.Find(shader);
+			material = new Material(matShader);
+
 			if (matShader == null)
 			{
 				Debug.LogWarning(shader);
-				return 0;
 			}
 
 			// listを回してDictionaryに格納
 			for (var i = 0; i < list.Length; ++i)
 			{
-				// Debug.Log(list[i].name);
+				Debug.Log(list[i].name);
 				var sprite = list[i] as Sprite;
-				var mesh = GenerateQuad(sprite);
-
-				var material = new Material(matShader)
+				var mesh = GenerateQuadMesh(sprite);
+				meshs.Add(list[i].name, mesh);
+				if (i == 0)
 				{
-					enableInstancing = enableInstancing, // インスタンシング可能フラグ DrawMeshInstancedじゃないと描画が重いかも
-						mainTexture = sprite.texture
-				};
-				meshs.Add(mesh);
-				materials.Add(material);
+					material.mainTexture = sprite.texture;
+				}
 			}
-			return list.Length;
 		}
 
-		Mesh GenerateQuad(Sprite sprite)
+		Mesh GenerateQuadMesh(Sprite sprite)
 		{
 			Vector3[] _vertices = {
 				new Vector3(sprite.vertices[0].x, 0, sprite.vertices[0].y),

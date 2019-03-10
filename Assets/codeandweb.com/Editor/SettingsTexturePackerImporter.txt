@@ -2,11 +2,14 @@ version: 2
 importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/GameAssets/Resources/yyhs/bg/bg.tpsheet
 - Assets/GameAssets/Resources/yyhs/Sprites/sp_000.tpsheet
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/GameAssets/Resources/yyhs/bg/bg.png
 - Assets/GameAssets/Resources/yyhs/Sprites/sp_000.png
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
 - 
 enableDebugOutput: 0

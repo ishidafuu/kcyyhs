@@ -25,7 +25,7 @@
             "IgnoreProjector" = "True"
             // "RenderType" = "Transparent"
         }
-        // Cull Off
+        Cull Off
         // ZTest Always
         Lighting Off
         // ZWrite On
