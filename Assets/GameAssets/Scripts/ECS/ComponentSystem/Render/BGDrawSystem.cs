@@ -35,19 +35,20 @@ namespace YYHS
             ToukiMeterJob toukiMeterJob = DoToukiMeterJob(ref inputDeps, toukiMeters, toukiMeterMatrixs);
 
             // var bgScrolls = m_group.ToComponentDataArray<BgScroll>(Allocator.TempJob);
-            var bgScrollsMatrixs = new NativeArray<Matrix4x4>(toukiMeters.Length * 2, Allocator.TempJob);
-            BgScrollJob bgScrollJob = DoBgScrollJob(ref inputDeps, toukiMeters, bgScrollsMatrixs);
+            // var bgScrollsMatrixs = new NativeArray<Matrix4x4>(toukiMeters.Length, Allocator.TempJob);
+            // BgScrollJob bgScrollJob = DoBgScrollJob(ref inputDeps, toukiMeters, bgScrollsMatrixs);
 
             // 描画のためCompleteする
             inputDeps.Complete();
 
-            DrawBgScroll(bgScrollJob);
+            DrawBgScroll(toukiMeters);
             DrawFrame();
             DrawToukiMeter(toukiMeterJob);
 
             // NativeArrayの開放
+            toukiMeters.Dispose();
             toukiMeterMatrixs.Dispose();
-            bgScrollsMatrixs.Dispose();
+            // bgScrollsMatrixs.Dispose();
 
             return inputDeps;
         }
@@ -67,29 +68,46 @@ namespace YYHS
             return toukiMeterJob;
         }
 
-        private BgScrollJob DoBgScrollJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters, NativeArray<Matrix4x4> bgScrollMatrixs)
-        {
-            var bgScrollJob = new BgScrollJob()
-            {
-                toukiMeters = toukiMeters,
-                bgScrollMatrixs = bgScrollMatrixs,
-                q = m_quaternion,
-                BgScrollWidth = Define.Instance.DrawPos.BgScrollWidth,
-                BgScrollRangeFactor = Define.Instance.DrawPos.BgScrollRangeFactor,
-                BgScrollX = -(Define.Instance.DrawPos.BgScrollWidth / 2),
-                BgScrollY = Define.Instance.DrawPos.BgScrollY,
-            };
-            inputDeps = bgScrollJob.Schedule(inputDeps);
-            m_group.AddDependency(inputDeps);
-            return bgScrollJob;
-        }
+        // private BgScrollJob DoBgScrollJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters, NativeArray<Matrix4x4> bgScrollMatrixs)
+        // {
+        //     var bgScrollJob = new BgScrollJob()
+        //     {
+        //         toukiMeters = toukiMeters,
+        //         bgScrollMatrixs = bgScrollMatrixs,
+        //         q = m_quaternion,
+        //         BgScrollWidth = Define.Instance.DrawPos.BgScrollWidth,
+        //         BgScrollRangeFactor = Define.Instance.DrawPos.BgScrollRangeFactor,
+        //         BgScrollX = -Define.Instance.DrawPos.BgScrollX,
+        //         BgScrollY = Define.Instance.DrawPos.BgScrollY,
+        //     };
+        //     inputDeps = bgScrollJob.Schedule(inputDeps);
+        //     m_group.AddDependency(inputDeps);
+        //     return bgScrollJob;
+        // }
 
-        private void DrawBgScroll(BgScrollJob bgScrollJob)
+        private void DrawBgScroll(NativeArray<ToukiMeter> toukiMeters)
         {
-            for (int i = 0; i < bgScrollJob.bgScrollMatrixs.Length; i++)
+            for (int i = 0; i < toukiMeters.Length; i++)
             {
-                Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs["bg00"],
-                    bgScrollJob.bgScrollMatrixs[i],
+                Matrix4x4 bgScrollMatrixs = Matrix4x4.TRS(new Vector3(-Define.Instance.DrawPos.BgScrollX,
+                        Define.Instance.DrawPos.BgScrollY, 0),
+                    m_quaternion, new Vector3(0.5f, 1, 1));
+
+                Mesh baseMesh = Shared.bgFrameMeshMat.meshs["bg00"];
+                Mesh mesh = new Mesh()
+                {
+                    vertices = baseMesh.vertices,
+                    uv = new Vector2[]
+                    {
+                    new Vector2(toukiMeters[i].textureUl, baseMesh.uv[0].y),
+                    new Vector2(toukiMeters[i].textureUr, baseMesh.uv[1].y),
+                    new Vector2(toukiMeters[i].textureUl, baseMesh.uv[2].y),
+                    new Vector2(toukiMeters[i].textureUr, baseMesh.uv[3].y),
+                    },
+                    triangles = baseMesh.triangles,
+                };
+                Graphics.DrawMesh(mesh,
+                    bgScrollMatrixs,
                     Shared.bgFrameMeshMat.material, 0);
             }
         }
@@ -139,44 +157,44 @@ namespace YYHS
             }
         }
 
-        [BurstCompileAttribute]
-        struct BgScrollJob : IJob
-        {
-            [ReadOnly]
-            [DeallocateOnJobCompletion]
-            public NativeArray<ToukiMeter> toukiMeters;
-            [ReadOnly]
-            public Quaternion q;
-            [ReadOnly]
-            public int BgScrollWidth;
-            [ReadOnly]
-            public int BgScrollRangeFactor;
-            [ReadOnly]
-            public int BgScrollX;
-            [ReadOnly]
-            public int BgScrollY;
-            public NativeArray<Matrix4x4> bgScrollMatrixs;
+        // [BurstCompileAttribute]
+        // struct BgScrollJob : IJob
+        // {
+        //     [ReadOnly]
+        //     // [DeallocateOnJobCompletion]
+        //     public NativeArray<ToukiMeter> toukiMeters;
+        //     [ReadOnly]
+        //     public Quaternion q;
+        //     [ReadOnly]
+        //     public int BgScrollWidth;
+        //     [ReadOnly]
+        //     public int BgScrollRangeFactor;
+        //     [ReadOnly]
+        //     public int BgScrollX;
+        //     [ReadOnly]
+        //     public int BgScrollY;
+        //     public NativeArray<Matrix4x4> bgScrollMatrixs;
 
-            public void Execute()
-            {
-                for (int i = 0; i < toukiMeters.Length; i++)
-                {
-                    var index = i * 2;
-                    var posX = BgScrollX + (toukiMeters[i].bgScroll >> BgScrollRangeFactor);
-                    var posX2 = (posX - BgScrollWidth);
+        //     public void Execute()
+        //     {
+        //         for (int i = 0; i < toukiMeters.Length; i++)
+        //         {
+        //             // var index = i * 2;
+        //             var posX = BgScrollX + (toukiMeters[i].bgScroll >> BgScrollRangeFactor);
+        //             var posX2 = (posX - BgScrollWidth);
 
-                    Matrix4x4 tmpMatrix = Matrix4x4.TRS(new Vector3(posX, BgScrollY, 0),
-                        q, Vector3.one);
+        //             Matrix4x4 tmpMatrix = Matrix4x4.TRS(new Vector3(posX, BgScrollY, 0),
+        //                 q, Vector3.one);
 
-                    bgScrollMatrixs[index] = tmpMatrix;
+        //             bgScrollMatrixs[i] = tmpMatrix;
 
-                    Matrix4x4 tmpMatrix2 = Matrix4x4.TRS(new Vector3(posX2, BgScrollY, 0),
-                        q, Vector3.one);
+        //             // Matrix4x4 tmpMatrix2 = Matrix4x4.TRS(new Vector3(posX2, BgScrollY, 0),
+        //             //     q, Vector3.one);
 
-                    bgScrollMatrixs[index + 1] = tmpMatrix2;
-                }
-            }
-        }
+        //             // bgScrollMatrixs[index + 1] = tmpMatrix2;
+        //         }
+        //     }
+        // }
 
     }
 }

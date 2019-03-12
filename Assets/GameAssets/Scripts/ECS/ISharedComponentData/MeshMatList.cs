@@ -38,6 +38,7 @@
 				sprites.Add(list[i].name, sprite);
 
 				var mesh = GenerateQuadMesh(sprite);
+
 				meshs.Add(list[i].name, mesh);
 				if (i == 0)
 				{
@@ -54,6 +55,16 @@
 				new Vector3(sprite.vertices[2].x, 0, sprite.vertices[2].y),
 				new Vector3(sprite.vertices[3].x, 0, sprite.vertices[3].y)
 			};
+
+			// Debug.Log(sprite.name);
+			// foreach (var item in sprite.vertices)
+			// {
+			// 	Debug.Log(item);
+			// }
+			// foreach (var item in sprite.uv)
+			// {
+			// 	Debug.Log(item);
+			// }
 
 			int[] triangles = {
 				sprite.triangles[0],

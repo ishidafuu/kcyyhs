@@ -38,11 +38,15 @@ namespace YYHS
 
 		private JobHandle DoCountToukiJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters)
 		{
+			Vector2[] uv = Shared.bgFrameMeshMat.meshs["bg00"].uv;
 			inputDeps = new CountToukiJob()
 			{
 				BgScrollRange = Define.Instance.DrawPos.BgScrollWidth << Define.Instance.DrawPos.BgScrollRangeFactor,
 					toukiMeters = toukiMeters,
+					spriteUl = uv[0].x,
+					spriteUr = uv[1].x,
 			}.Schedule(inputDeps);
+
 			m_group.AddDependency(inputDeps);
 			m_group.CopyFromComponentDataArray(toukiMeters, out JobHandle jobHandle);
 			return jobHandle;
@@ -61,10 +65,16 @@ namespace YYHS
 		{
 			[ReadOnly]
 			public int BgScrollRange;
+			[ReadOnly]
+			public float spriteUl;
+			[ReadOnly]
+			public float spriteUr;
 			public NativeArray<ToukiMeter> toukiMeters;
 
 			public void Execute()
 			{
+				float width = (spriteUr - spriteUl) / 2;
+
 				for (int i = 0; i < toukiMeters.Length; i++)
 				{
 					var toukiMeter = toukiMeters[i];
@@ -98,6 +108,9 @@ namespace YYHS
 							break;
 					}
 
+					float u = (float)toukiMeter.bgScroll / (float)BgScrollRange;
+					toukiMeter.textureUl = spriteUl + (u * width);
+					toukiMeter.textureUr = toukiMeter.textureUl + width;
 					toukiMeters[i] = toukiMeter;
 				}
 			}

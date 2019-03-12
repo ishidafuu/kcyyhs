@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:aeb543de21009c4cf41e13d9fe13bad6:acdee72715fa6b50ac2efb7978123d36:ed4ecb476564f6b2eaa49de4ae7728b9$
+# $TexturePacker:SmartUpdate:58028d794c88b42c1fc2800de4262f98:910e967e66c43e8801cfb8e41c06eddc:ed4ecb476564f6b2eaa49de4ae7728b9$
 #
 :format=40300
 :texture=bg.png
@@ -12,7 +12,7 @@
 :pivotpoints=enabled
 :borders=disabled
 
-bg00;773;479;128;92; 0.5;0.5; 0;0;0;0
+bg00;1;187;256;92; 0;1; 0;0;0;0
 bg01;1;379;256;96; 0.5;0.5; 0;0;0;0
 bg02;1;477;512;256; 0.5;0.5; 0;0;0;0
 bg03;1;735;512;288; 0.5;0.5; 0;0;0;0

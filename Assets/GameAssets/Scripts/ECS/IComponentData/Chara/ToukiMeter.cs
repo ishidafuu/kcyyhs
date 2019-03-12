@@ -8,5 +8,7 @@ namespace YYHS
 		public int value;
 		public EnumToukiMaterState state;
 		public int bgScroll;
+		public float textureUl;
+		public float textureUr;
 	}
 }

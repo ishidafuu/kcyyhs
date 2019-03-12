@@ -30,7 +30,9 @@ namespace YYHS
 				// Debug.Log(toukiMeter.value);
 				// Debug.Log(toukiMeter.muki);
 				// DebugPanel.Log("ToukiMeter.value", toukiMeter.value.ToString());
-				DebugPanel.Log("ToukiMeter.bgScroll", toukiMeter.bgScroll.ToString());
+				DebugPanel.Log("ToukiMeter.bgScroll" + i.ToString(), toukiMeter.bgScroll.ToString());
+				DebugPanel.Log("ToukiMeter.textureUl" + i.ToString(), toukiMeter.textureUl.ToString());
+				DebugPanel.Log("ToukiMeter.textureUr" + i.ToString(), toukiMeter.textureUr.ToString());
 				toukiMeters[i] = toukiMeter;
 			}
 		}

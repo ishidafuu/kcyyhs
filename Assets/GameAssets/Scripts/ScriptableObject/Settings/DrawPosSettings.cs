@@ -11,6 +11,7 @@ namespace YYHS
     {
         public int BgScrollWidth;
         public int BgScrollRangeFactor;
+        public int BgScrollX;
         public int BgScrollY;
         public int ToukiMeterX;
         public int ToukiMeterY;
