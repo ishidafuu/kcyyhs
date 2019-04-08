@@ -11,45 +11,122 @@ namespace YYHS
 	{
 
 		public int CharaNo;
+		public int BGNo;
 
-		public GameObject Base;
+		public GameObject Character;
+		public GameObject BackGround;
+		public GameObject Effect;
 		public GameObject SpriteRC;
 
 		public void InitObject()
 		{
-			Base = GameObject.Find("Base");
+			FindObject();
+			InitPosition();
+			DeleteOldObject(Character);
+			DeleteOldObject(BackGround);
+			DeleteOldObject(Effect);
+			CreateNewCharaObject();
+			CreateNewBGObject();
+			CreateNewEffectObject(GetCharaPath());
+			CreateNewEffectObject(GetBackGroundPath());
+			LoadObject();
+		}
+
+		private void FindObject()
+		{
+			Character = GameObject.Find("Character");
+			BackGround = GameObject.Find("BackGround");
+			Effect = GameObject.Find("Effect");
 			SpriteRC = GameObject.Find("SpriteRC");
+		}
 
-			// 削除
-			var transforms = Base.GetComponentsInChildren<Transform>();
-			foreach (var item in transforms)
-			{
-				if (item == Base.transform)
-					continue;
-				DestroyImmediate(item.gameObject);
-			}
+		private void InitPosition()
+		{
+			Vector3 BASE_POS = new Vector3(0, 48, 0);
+			Character.transform.localPosition = BASE_POS;
+			BackGround.transform.localPosition = BASE_POS;
+			Effect.transform.localPosition = BASE_POS;
+		}
 
+		private void CreateNewBGObject()
+		{
 			// 生成
-			string path = GetCharaPath();
-			Debug.Log(path);
+			string path = GetBackGroundPath();
 			UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
 			foreach (var item in spriteList)
 			{
+				if (!CheckBG(item.name))
+					continue;
+
+				if (CheckEffect(item.name))
+					continue;
+
 				var newSprite = Instantiate(SpriteRC);
-				newSprite.transform.SetParent(Base.transform);
+				newSprite.transform.SetParent(BackGround.transform);
 				newSprite.name = item.name;
 			}
 		}
 
+		private void CreateNewEffectObject(string path)
+		{
+			UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
+			foreach (var item in spriteList)
+			{
+				if (!CheckEffect(item.name))
+					continue;
+
+				var newSprite = Instantiate(SpriteRC);
+				newSprite.transform.SetParent(Effect.transform);
+				newSprite.name = item.name;
+			}
+		}
+
+		private void CreateNewCharaObject()
+		{
+			// 生成
+			string path = GetCharaPath();
+			UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
+			foreach (var item in spriteList)
+			{
+				if (CheckEffect(item.name))
+					continue;
+
+				var newSprite = Instantiate(SpriteRC);
+				newSprite.transform.SetParent(Character.transform);
+				newSprite.name = item.name;
+			}
+		}
+
+		private void DeleteOldObject(GameObject baseObject)
+		{
+			// 削除
+			var transforms = baseObject.GetComponentsInChildren<Transform>();
+			foreach (var item in transforms)
+			{
+				if (item == baseObject.transform)
+					continue;
+				DestroyImmediate(item.gameObject);
+			}
+		}
+
+		public bool CheckEffect(string itemName)
+		{
+			return (itemName.IndexOf("effect") >= 0);
+		}
+
+		public bool CheckBG(string itemName)
+		{
+			return (itemName.IndexOf("bg") >= 0);
+		}
+
 		public void LoadObject()
 		{
-			// オートセット
-			// aniScriptSheet = Resources.FindObjectsOfTypeAll<AniScriptSheetObject>().First()as AniScriptSheetObject;
-			// aniBasePos = Resources.FindObjectsOfTypeAll<AniBasePosObject>().First()as AniBasePosObject;
-			// Texture2D tex2d = Resources.Load("Textures/AssetName")as Texture2D;
+			LoadSprite(GetCharaPath());
+			LoadSprite(GetBackGroundPath());
+		}
 
-			// var sprites = new Dictionary<string, Sprite>();
-			string path = GetCharaPath();
+		private void LoadSprite(string path)
+		{
 			UnityEngine.Object[] list = Resources.LoadAll(path, typeof(Sprite));
 
 			// listを回してDictionaryに格納
@@ -61,8 +138,7 @@ namespace YYHS
 				var targetObj = GameObject.Find(sprite.name);
 				if (targetObj == null)
 				{
-					Debug.LogError(sprite.name + "GameObject Not Found");
-
+					// Debug.LogError(sprite.name + "GameObject Not Found");
 					continue;
 				}
 
@@ -73,16 +149,27 @@ namespace YYHS
 					Debug.LogError(sprite.name + "SpriteRenderer Not Found");
 					continue;
 				}
+
 				targetSpriteRenderer.sprite = sprite;
 
-				if (targetSpriteRenderer.name.IndexOf("a_") >= 0)
+				if (CheckBG(targetSpriteRenderer.name))
 				{
-					targetSpriteRenderer.sortingOrder = +10;
+					targetSpriteRenderer.sprite = sprite;
+					targetSpriteRenderer.sortingOrder = -20;
+					targetSpriteRenderer.transform.localPosition = Vector3.zero;
 				}
-				else if (targetSpriteRenderer.name.IndexOf("b_") >= 0)
+				else
 				{
-					targetSpriteRenderer.sortingOrder = -10;
+					if (targetSpriteRenderer.name.IndexOf("a_") >= 0)
+					{
+						targetSpriteRenderer.sortingOrder = +10;
+					}
+					else if (targetSpriteRenderer.name.IndexOf("b_") >= 0)
+					{
+						targetSpriteRenderer.sortingOrder = -10;
+					}
 				}
+				targetSpriteRenderer.transform.localPosition = Vector3.zero;
 			}
 		}
 
@@ -90,6 +177,16 @@ namespace YYHS
 		{
 			return "Sprites/Character/chara" + CharaNo.ToString("d2");
 		}
+
+		private string GetBackGroundPath()
+		{
+			return "Sprites/BackGround/bg" + BGNo.ToString("d2");
+		}
+
+		// private string GetEffectPath()
+		// {
+		// 	return "Sprites/BackGround/effect";
+		// }
 	}
 
 	[CustomEditor(typeof(SpriteSetter))] // 拡張するクラスを指定
