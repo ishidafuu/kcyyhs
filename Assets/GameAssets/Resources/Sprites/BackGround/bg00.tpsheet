@@ -1,0 +1,30 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:f6c585e0c39ddad5ef130b4a2557dbda:cff5fd1f617138f18c5d46d38f1d979a:2248fd36522a7106322df8ef76fb78a4$
+#
+:format=40300
+:texture=bg00.png
+:size=1024x1024
+:pivotpoints=enabled
+:borders=disabled
+
+bg00;1;285;256;92; 0;1; 0;0;0;0
+bg01;515;407;256;96; 0.5;0.5; 0;0;0;0
+bg02;1;477;512;256; 0.5;0.5; 0;0;0;0
+bg03;1;735;512;288; 0.5;0.5; 0;0;0;0
+bg04;515;783;256;240; 0.5;0.5; 0;0;0;0
+bg05;515;621;256;160; 0.5;0.5; 0;0;0;0
+bg06;1;379;256;96; 0.5;0.5; 0;0;0;0
+bg07;773;775;128;248; 0.5;0.5; 0;0;0;0
+bg08;773;573;128;200; 0.5;0.5; 0;0;0;0
+frame_bottom;515;505;256;114; 0.5;0; 0;0;0;0
+frame_top;1;264;256;19; 0.5;1; 0;0;0;0
+meter00;903;1019;96;4; 0;1; 0;0;0;0
+meter01;903;1013;96;4; 0;1; 0;0;0;0
+meter02;903;1008;96;3; 0;1; 0;0;0;0
+meter03;903;1002;64;4; 0;1; 0;0;0;0
+meter04;1001;1013;2;10; 0;1; 0;0;0;0
