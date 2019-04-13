@@ -5,4 +5,4 @@ PlayerSettingsで
 UNITY_DISABLE_AUTOMATIC_SYSTEM_BOOTSTRAP
 をつけることで、デフォルトのワールドを生成しないようにしている
 
-test2
+test
