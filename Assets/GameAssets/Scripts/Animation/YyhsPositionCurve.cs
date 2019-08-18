@@ -11,6 +11,5 @@ namespace YYHS
     {
         public string path;
         public AnimationClip[] m_Curve;
-        // Keyframe asdf;
     }
 }

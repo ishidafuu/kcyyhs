@@ -11,11 +11,11 @@ namespace YYHS
     [UpdateInGroup(typeof(UpdateGroup))]
     public class ToukiMeterInputJobSystem : JobComponentSystem
     {
-        ComponentGroup m_group;
+        EntityQuery m_group;
 
         protected override void OnCreateManager()
         {
-            m_group = GetComponentGroup(
+            m_group = GetEntityQuery(
                 ComponentType.ReadOnly<PadScan>(),
                 ComponentType.Create<ToukiMeter>()
             );
@@ -71,7 +71,10 @@ namespace YYHS
                 for (int i = 0; i < PadScans.Length; i++)
                 {
                     var toukiMeter = toukiMeters[i];
-
+                    var a = true;
+                    var b = true;
+                    var c = true;
+                    var v = a || (b && c);
                     if (toukiMeter.state != EnumToukiMaterState.Active)
                     {
                         break;

@@ -2,8 +2,8 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Transforms;
+// using Unity.Mathematics;
+// using Unity.Transforms;
 using UnityEngine;
 
 namespace YYHS
@@ -11,11 +11,11 @@ namespace YYHS
     [UpdateInGroup(typeof(CountGroup))]
     public class ToukiMeterCountJobSystem : JobComponentSystem
     {
-        ComponentGroup m_group;
+        EntityQuery m_group;
 
         protected override void OnCreateManager()
         {
-            m_group = GetComponentGroup(
+            m_group = GetEntityQuery(
                 ComponentType.Create<ToukiMeter>()
             );
         }
@@ -42,9 +42,9 @@ namespace YYHS
             inputDeps = new CountToukiJob()
             {
                 BgScrollRange = Define.Instance.DrawPos.BgScrollWidth << Define.Instance.DrawPos.BgScrollRangeFactor,
-                    toukiMeters = toukiMeters,
-                    spriteUl = uv[0].x,
-                    spriteUr = uv[1].x,
+                toukiMeters = toukiMeters,
+                spriteUl = uv[0].x,
+                spriteUr = uv[1].x,
             }.Schedule(inputDeps);
 
             m_group.AddDependency(inputDeps);
@@ -57,7 +57,7 @@ namespace YYHS
             [DeallocateOnJobCompletion]
             public NativeArray<ToukiMeter> toukiMeters;
 
-            public void Execute() {}
+            public void Execute() { }
         }
 
         [BurstCompileAttribute]

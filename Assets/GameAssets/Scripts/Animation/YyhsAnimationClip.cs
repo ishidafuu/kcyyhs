@@ -11,6 +11,5 @@ namespace YYHS
     {
         public string m_Name;
         public YyhsPositionCurves[] m_PositionCurves;
-        // Keyframe asdf;
     }
 }

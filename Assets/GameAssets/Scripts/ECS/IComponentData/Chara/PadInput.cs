@@ -80,15 +80,15 @@ namespace YYHS
         {
             return (crossUp.IsPress() || crossDown.IsPress() || crossLeft.IsPress() || crossRight.IsPress());
         }
-        // /// <summary>
-        // /// ジャンプ入力
-        // /// </summary>
-        // /// <returns></returns>
-        // public bool IsJumpPush()
-        // {
-        // 	return ((buttonA.IsPress() && buttonB.IsPush())
-        // 		|| (buttonA.IsPush() && buttonB.IsPress()));
-        // }
+        /// <summary>
+        /// ジャンプ入力
+        /// </summary>
+        /// <returns></returns>
+        public bool IsJumpPush()
+        {
+            return ((buttonA.IsPress() && buttonB.IsPush())
+                || (buttonA.IsPush() && buttonB.IsPress()));
+        }
 
     }
 

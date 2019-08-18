@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace YYHS
 {
-    /// <summary>
-    /// 座標移動設定
-    /// </summary>
+
     [CreateAssetMenu(menuName = "Settings/MoveSettings", fileName = "MoveSettings")]
     public sealed class MoveSettings : ScriptableObject
     {

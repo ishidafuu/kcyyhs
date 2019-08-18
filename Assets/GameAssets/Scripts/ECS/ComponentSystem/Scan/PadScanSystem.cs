@@ -29,14 +29,14 @@ namespace YYHS
             Fire6,
         }
 
-        ComponentGroup m_group;
+        EntityQuery m_group;
         ReadOnlyCollection<string>[] ButtonTypeName;
         ReadOnlyCollection<string> HorizontalName;
         ReadOnlyCollection<string> VerticalName;
 
         protected override void OnCreateManager()
         {
-            m_group = GetComponentGroup(
+            m_group = GetEntityQuery(
                 ComponentType.Create<PadScan>());
 
             var playerNum = Define.Instance.Common.PlayerNum;

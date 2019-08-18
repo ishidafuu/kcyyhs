@@ -2,35 +2,34 @@ fileFormatVersion: 2
 guid: 9a1ff5ed1022bb443a2dccc99ff13fc5
 TextureImporter:
   fileIDToRecycleName:
-    21300000: chara00
-    21300002: a_effect00
-    21300004: a_effect01
-    21300006: a_effect02
-    21300008: a_effect03
-    21300010: a_effect04
-    21300012: a_parts00
-    21300014: a_parts01
-    21300016: b_parts00
-    21300018: body00
-    21300020: body01
-    21300022: body02
-    21300024: bullet00
-    21300026: bullet01
-    21300028: cm_a_face00
-    21300030: cm_a_face01
-    21300032: cm_a_parts00
-    21300034: cm_b_parts00
-    21300036: cm_dodge00
-    21300038: cm_down00
-    21300040: cm_jump00
-    21300042: cm_jump01
-    21300044: cm_jump02
-    21300046: cm_jump03
-    21300048: cm_miss00
-    21300050: cm_stand00
-    21300052: cm_stand01
-    21300054: cm_stand02
-    21300056: cm_stand03
+    21300000: a_effect00
+    21300002: a_effect01
+    21300004: a_effect02
+    21300006: a_effect03
+    21300008: a_effect04
+    21300010: a_parts00
+    21300012: a_parts01
+    21300014: b_parts00
+    21300016: body00
+    21300018: body01
+    21300020: body02
+    21300022: bullet00
+    21300024: bullet01
+    21300026: cm_a_face00
+    21300028: cm_a_face01
+    21300030: cm_a_parts00
+    21300032: cm_b_parts00
+    21300034: cm_dodge00
+    21300036: cm_down00
+    21300038: cm_jump00
+    21300040: cm_jump01
+    21300042: cm_jump02
+    21300044: cm_jump03
+    21300046: cm_miss00
+    21300048: cm_stand00
+    21300050: cm_stand01
+    21300052: cm_stand02
+    21300054: cm_stand03
   externalObjects: {}
   serializedVersion: 9
   mipmaps:

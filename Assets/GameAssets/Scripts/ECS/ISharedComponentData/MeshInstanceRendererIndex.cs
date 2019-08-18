@@ -1,5 +1,5 @@
 // using System;
-// using Unity.Entities;
+using Unity.Entities;
 
 // public sealed partial class MeshInstanceRendererInstancedIndirectSystem
 // {

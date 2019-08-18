@@ -2,7 +2,7 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Transforms;
+// using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
@@ -14,14 +14,14 @@ namespace YYHS
     [UpdateAfter(typeof(PreLateUpdate.ParticleSystemBeginUpdateAll))]
     public class BGDrawSystem : JobComponentSystem
     {
-        ComponentGroup m_group;
+        EntityQuery m_group;
         Quaternion m_quaternion;
 
         protected override void OnCreateManager()
         {
-            m_group = GetComponentGroup(
+            m_group = GetEntityQuery(
                 ComponentType.ReadOnly<ToukiMeter>()
-                // ComponentType.ReadOnly<BgScroll>()
+            // ComponentType.ReadOnly<BgScroll>()
             );
             m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
         }
