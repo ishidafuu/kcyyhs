@@ -9,7 +9,7 @@ namespace YYHS
     {
         public void PlaySe(int seNo)
         {
-            Keyframe asdf;
+            // Keyframe asdf;
 
         }
     }

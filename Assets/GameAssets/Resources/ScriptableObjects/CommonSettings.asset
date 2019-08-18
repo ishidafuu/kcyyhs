@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CommonSettings
   m_EditorClassIdentifier: 
   PlayerNum: 1
-  CharaNum: 0
+  CharaNum: 1
   ButtonNum: 0

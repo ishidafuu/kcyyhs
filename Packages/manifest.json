@@ -12,6 +12,7 @@
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.timeline": "1.1.0",
     "com.unity.ugui": "1.0.0",
+    "unienumextension": "https://github.com/pCYSl5EDgo/UniEnumExtension.git#master",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -43,5 +44,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "unienumextension": {
+      "hash": "3293010cc519e95fd2c07a6b7eaae908592eda66",
+      "revision": "master"
+    }
   }
 }
