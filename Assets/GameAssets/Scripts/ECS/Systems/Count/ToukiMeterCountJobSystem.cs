@@ -11,65 +11,43 @@ namespace YYHS
     [UpdateInGroup(typeof(CountGroup))]
     public class ToukiMeterCountJobSystem : JobComponentSystem
     {
-        EntityQuery m_group;
+        EntityQuery m_query;
 
         protected override void OnCreateManager()
         {
-            m_group = GetEntityQuery(
-                ComponentType.Create<ToukiMeter>()
+            m_query = GetEntityQuery(
+                ComponentType.ReadWrite<ToukiMeter>()
             );
         }
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            m_group.AddDependency(inputDeps);
+            m_query.AddDependency(inputDeps);
 
-            var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            JobHandle jobHandle = DoCountToukiJob(ref inputDeps, toukiMeters);
-
-            // 開放
-            inputDeps = new ReleaseJob
+            NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
+            Vector2[] uv = Shared.bgFrameMeshMat.meshs["bg00"].uv;
+            var job = new CountToukiJob()
             {
-                toukiMeters = toukiMeters
-            }.Schedule(jobHandle);
+                toukiMeters = toukiMeters,
+                BgScrollRange = Define.Instance.DrawPos.BgScrollWidth << Define.Instance.DrawPos.BgScrollRangeFactor,
+                spriteUl = uv[0].x,
+                spriteUr = uv[1].x,
+            };
 
+            inputDeps = job.Schedule(inputDeps);
+            inputDeps.Complete();
+            m_query.CopyFromComponentDataArray(toukiMeters);
+            toukiMeters.Dispose();
             return inputDeps;
         }
 
-        private JobHandle DoCountToukiJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters)
-        {
-            Vector2[] uv = Shared.bgFrameMeshMat.meshs["bg00"].uv;
-            inputDeps = new CountToukiJob()
-            {
-                BgScrollRange = Define.Instance.DrawPos.BgScrollWidth << Define.Instance.DrawPos.BgScrollRangeFactor,
-                toukiMeters = toukiMeters,
-                spriteUl = uv[0].x,
-                spriteUr = uv[1].x,
-            }.Schedule(inputDeps);
-
-            m_group.AddDependency(inputDeps);
-            m_group.CopyFromComponentDataArray(toukiMeters, out JobHandle jobHandle);
-            return jobHandle;
-        }
-
-        struct ReleaseJob : IJob
-        {
-            [DeallocateOnJobCompletion]
-            public NativeArray<ToukiMeter> toukiMeters;
-
-            public void Execute() { }
-        }
-
-        [BurstCompileAttribute]
+        // [BurstCompileAttribute]
         struct CountToukiJob : IJob
         {
-            [ReadOnly]
-            public int BgScrollRange;
-            [ReadOnly]
-            public float spriteUl;
-            [ReadOnly]
-            public float spriteUr;
             public NativeArray<ToukiMeter> toukiMeters;
+            [ReadOnly] public int BgScrollRange;
+            [ReadOnly] public float spriteUl;
+            [ReadOnly] public float spriteUr;
 
             public void Execute()
             {
@@ -114,8 +92,6 @@ namespace YYHS
                     toukiMeters[i] = toukiMeter;
                 }
             }
-
         }
-
     }
 }

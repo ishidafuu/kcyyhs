@@ -14,12 +14,12 @@ namespace YYHS
     [UpdateAfter(typeof(PreLateUpdate.ParticleSystemBeginUpdateAll))]
     public class BGDrawSystem : JobComponentSystem
     {
-        EntityQuery m_group;
+        EntityQuery m_query;
         Quaternion m_quaternion;
 
         protected override void OnCreateManager()
         {
-            m_group = GetEntityQuery(
+            m_query = GetEntityQuery(
                 ComponentType.ReadOnly<ToukiMeter>()
             // ComponentType.ReadOnly<BgScroll>()
             );
@@ -28,27 +28,33 @@ namespace YYHS
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            m_group.AddDependency(inputDeps);
+            m_query.AddDependency(inputDeps);
 
-            var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
+            var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var toukiMeterMatrixs = new NativeArray<Matrix4x4>(toukiMeters.Length, Allocator.TempJob);
-            ToukiMeterJob toukiMeterJob = DoToukiMeterJob(ref inputDeps, toukiMeters, toukiMeterMatrixs);
 
+            var toukiMeterJob = new ToukiMeterJob()
+            {
+                toukiMeters = toukiMeters,
+                toukiMeterMatrixs = toukiMeterMatrixs,
+                q = m_quaternion,
+                ToukiMeterX = Define.Instance.DrawPos.ToukiMeterX,
+                ToukiMeterY = Define.Instance.DrawPos.ToukiMeterY,
+            };
+            inputDeps = toukiMeterJob.Schedule(inputDeps);
             // var bgScrolls = m_group.ToComponentDataArray<BgScroll>(Allocator.TempJob);
             // var bgScrollsMatrixs = new NativeArray<Matrix4x4>(toukiMeters.Length, Allocator.TempJob);
             // BgScrollJob bgScrollJob = DoBgScrollJob(ref inputDeps, toukiMeters, bgScrollsMatrixs);
 
-            // 描画のためCompleteする
             inputDeps.Complete();
+            // m_query.CopyFromComponentDataArray(toukiMeters);
 
             DrawBgScroll(toukiMeters);
             DrawFrame();
             DrawToukiMeter(toukiMeterJob);
 
-            // NativeArrayの開放
             toukiMeters.Dispose();
             toukiMeterMatrixs.Dispose();
-            // bgScrollsMatrixs.Dispose();
 
             return inputDeps;
         }
@@ -64,7 +70,7 @@ namespace YYHS
                 ToukiMeterY = Define.Instance.DrawPos.ToukiMeterY,
             };
             inputDeps = toukiMeterJob.Schedule(inputDeps);
-            m_group.AddDependency(inputDeps);
+            m_query.AddDependency(inputDeps);
             return toukiMeterJob;
         }
 
@@ -130,18 +136,14 @@ namespace YYHS
             }
         }
 
-        [BurstCompileAttribute]
+        // [BurstCompileAttribute]
         struct ToukiMeterJob : IJob
         {
-            [ReadOnly]
-            public NativeArray<ToukiMeter> toukiMeters;
-            [ReadOnly]
-            public Quaternion q;
-            [ReadOnly]
-            public int ToukiMeterX;
-            [ReadOnly]
-            public int ToukiMeterY;
             public NativeArray<Matrix4x4> toukiMeterMatrixs;
+            [ReadOnly] public NativeArray<ToukiMeter> toukiMeters;
+            [ReadOnly] public Quaternion q;
+            [ReadOnly] public int ToukiMeterX;
+            [ReadOnly] public int ToukiMeterY;
 
             public void Execute()
             {

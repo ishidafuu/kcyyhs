@@ -11,64 +11,48 @@ namespace YYHS
     [UpdateInGroup(typeof(UpdateGroup))]
     public class ToukiMeterInputJobSystem : JobComponentSystem
     {
-        EntityQuery m_group;
+        EntityQuery m_query;
 
         protected override void OnCreateManager()
         {
-            m_group = GetEntityQuery(
+            m_query = GetEntityQuery(
                 ComponentType.ReadOnly<PadScan>(),
-                ComponentType.Create<ToukiMeter>()
+                ComponentType.ReadWrite<ToukiMeter>()
             );
-
         }
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            m_group.AddDependency(inputDeps);
+            m_query.AddDependency(inputDeps);
 
-            var PadScans = m_group.ToComponentDataArray<PadScan>(Allocator.TempJob, out JobHandle handle1);
-            var toukiMeters = m_group.ToComponentDataArray<ToukiMeter>(Allocator.TempJob, out JobHandle handle2);
-            inputDeps = JobHandle.CombineDependencies(handle1, handle2);
-
+            NativeArray<PadScan> padScans = m_query.ToComponentDataArray<PadScan>(Allocator.TempJob);
+            NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var job = new InputToToukiJob()
             {
-                PadScans = PadScans,
+                padScans = padScans,
                 toukiMeters = toukiMeters,
             };
             inputDeps = job.Schedule(inputDeps);
 
-            m_group.AddDependency(inputDeps);
-            m_group.CopyFromComponentDataArray(toukiMeters, out JobHandle handle3);
-            // inputDeps.Complete();
+            m_query.AddDependency(inputDeps);
+            inputDeps.Complete();
+            m_query.CopyFromComponentDataArray(toukiMeters);
 
-            inputDeps = new ReleaseJob
-            {
-                toukiMeters = toukiMeters
-            }.Schedule(handle3);
+            padScans.Dispose();
+            toukiMeters.Dispose();
 
             return inputDeps;
         }
 
-        struct ReleaseJob : IJob
-        {
-            [DeallocateOnJobCompletion]
-            public NativeArray<ToukiMeter> toukiMeters;
-
-            public void Execute() {}
-        }
-
-        [BurstCompileAttribute]
+        // [BurstCompileAttribute]
         struct InputToToukiJob : IJob
         {
-            [ReadOnly]
-            [DeallocateOnJobCompletion]
-            public NativeArray<PadScan> PadScans;
-
             public NativeArray<ToukiMeter> toukiMeters;
+            [ReadOnly] public NativeArray<PadScan> padScans;
 
             public void Execute()
             {
-                for (int i = 0; i < PadScans.Length; i++)
+                for (int i = 0; i < padScans.Length; i++)
                 {
                     var toukiMeter = toukiMeters[i];
                     var a = true;
@@ -80,9 +64,9 @@ namespace YYHS
                         break;
                     }
 
-                    if (toukiMeter.muki != PadScans[i].GetPressCross())
+                    if (toukiMeter.muki != padScans[i].GetPressCross())
                     {
-                        toukiMeter.muki = PadScans[i].GetPressCross();
+                        toukiMeter.muki = padScans[i].GetPressCross();
                         toukiMeter.value = 0;
                     }
 
