@@ -16,7 +16,6 @@ namespace YYHS
     /// 入力システム（Input.GetButtonDownはメインスレッドからのみ呼び出せるのでComponentSystemで呼び出す）
     /// </summary>
     [UpdateInGroup(typeof(ScanGroup))]
-    [UpdateBefore(typeof(CountGroup))]
     public class PadScanSystem : ComponentSystem
     {
         enum EnumUnityButtonType
@@ -37,9 +36,9 @@ namespace YYHS
         protected override void OnCreateManager()
         {
             m_group = GetEntityQuery(
-                ComponentType.Create<PadScan>());
+                ComponentType.ReadWrite<PadScan>());
 
-            var playerNum = Define.Instance.Common.PlayerNum;
+            var playerNum = Settings.Instance.Common.PlayerNum;
             var tpmPlayerNames = new List<string>();
             for (int i = 0; i < playerNum; i++)
             {
@@ -53,7 +52,7 @@ namespace YYHS
 
         private void InitButtonTypeName(List<string> tpmPlayerNames)
         {
-            var ButtonNum = Define.Instance.Common.ButtonNum;
+            var ButtonNum = Settings.Instance.Common.ButtonNum;
             ButtonTypeName = new ReadOnlyCollection<string>[ButtonNum];
 
             var buttonNames = new List<string>();
@@ -118,7 +117,7 @@ namespace YYHS
 
         void SetButton(ref PadScan padScan, int playerNo)
         {
-            var ButtonNum = Define.Instance.Common.ButtonNum;
+            var ButtonNum = Settings.Instance.Common.ButtonNum;
 
             for (int i = 0; i < ButtonNum; i++)
             {

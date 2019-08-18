@@ -10,12 +10,11 @@ namespace YYHS
 {
 
     [UpdateInGroup(typeof(RenderGroup))]
-    [UpdateAfter(typeof(CountGroup))]
-    [UpdateAfter(typeof(PreLateUpdate.ParticleSystemBeginUpdateAll))]
     public class BGDrawSystem : JobComponentSystem
     {
         EntityQuery m_query;
         Quaternion m_quaternion;
+
 
         protected override void OnCreateManager()
         {
@@ -38,8 +37,8 @@ namespace YYHS
                 toukiMeters = toukiMeters,
                 toukiMeterMatrixs = toukiMeterMatrixs,
                 q = m_quaternion,
-                ToukiMeterX = Define.Instance.DrawPos.ToukiMeterX,
-                ToukiMeterY = Define.Instance.DrawPos.ToukiMeterY,
+                ToukiMeterX = Settings.Instance.DrawPos.ToukiMeterX,
+                ToukiMeterY = Settings.Instance.DrawPos.ToukiMeterY,
             };
             inputDeps = toukiMeterJob.Schedule(inputDeps);
             // var bgScrolls = m_group.ToComponentDataArray<BgScroll>(Allocator.TempJob);
@@ -66,8 +65,8 @@ namespace YYHS
                 toukiMeters = toukiMeters,
                 toukiMeterMatrixs = toukiMeterMatrixs,
                 q = m_quaternion,
-                ToukiMeterX = Define.Instance.DrawPos.ToukiMeterX,
-                ToukiMeterY = Define.Instance.DrawPos.ToukiMeterY,
+                ToukiMeterX = Settings.Instance.DrawPos.ToukiMeterX,
+                ToukiMeterY = Settings.Instance.DrawPos.ToukiMeterY,
             };
             inputDeps = toukiMeterJob.Schedule(inputDeps);
             m_query.AddDependency(inputDeps);
@@ -81,10 +80,10 @@ namespace YYHS
         //         toukiMeters = toukiMeters,
         //         bgScrollMatrixs = bgScrollMatrixs,
         //         q = m_quaternion,
-        //         BgScrollWidth = Define.Instance.DrawPos.BgScrollWidth,
-        //         BgScrollRangeFactor = Define.Instance.DrawPos.BgScrollRangeFactor,
-        //         BgScrollX = -Define.Instance.DrawPos.BgScrollX,
-        //         BgScrollY = Define.Instance.DrawPos.BgScrollY,
+        //         BgScrollWidth = Settings.Instance.DrawPos.BgScrollWidth,
+        //         BgScrollRangeFactor = Settings.Instance.DrawPos.BgScrollRangeFactor,
+        //         BgScrollX = -Settings.Instance.DrawPos.BgScrollX,
+        //         BgScrollY = Settings.Instance.DrawPos.BgScrollY,
         //     };
         //     inputDeps = bgScrollJob.Schedule(inputDeps);
         //     m_group.AddDependency(inputDeps);
@@ -95,11 +94,11 @@ namespace YYHS
         {
             for (int i = 0; i < toukiMeters.Length; i++)
             {
-                Matrix4x4 bgScrollMatrixs = Matrix4x4.TRS(new Vector3(-Define.Instance.DrawPos.BgScrollX,
-                        Define.Instance.DrawPos.BgScrollY, 0),
+                Matrix4x4 bgScrollMatrixs = Matrix4x4.TRS(new Vector3(-Settings.Instance.DrawPos.BgScrollX,
+                        Settings.Instance.DrawPos.BgScrollY, 0),
                     m_quaternion, new Vector3(0.5f, 1, 1));
 
-                Mesh baseMesh = Shared.bgFrameMeshMat.meshs["bg00"];
+                Mesh baseMesh = Shared.bgFrameMeshMat.meshs[EnumBGPartsType.bg00.ToString()];
                 Mesh mesh = new Mesh()
                 {
                     vertices = baseMesh.vertices,
@@ -121,7 +120,7 @@ namespace YYHS
         private void DrawFrame()
         {
             Matrix4x4 frameMatrix = Matrix4x4.TRS(new Vector3(0, 0, 0), m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs["frame"],
+            Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs[EnumBGPartsType.frame_bottom.ToString()],
                 frameMatrix,
                 Shared.bgFrameMeshMat.material, 0);
         }
@@ -130,7 +129,7 @@ namespace YYHS
         {
             for (int i = 0; i < toukiMeterJob.toukiMeterMatrixs.Length; i++)
             {
-                Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs["meter02"],
+                Graphics.DrawMesh(Shared.bgFrameMeshMat.meshs[EnumBGPartsType.meter02.ToString()],
                     toukiMeterJob.toukiMeterMatrixs[i],
                     Shared.bgFrameMeshMat.material, 0);
             }

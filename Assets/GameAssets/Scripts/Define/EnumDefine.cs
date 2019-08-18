@@ -27,4 +27,28 @@ namespace YYHS
         Inactive,
         Decide,
     }
+
+
+
+    public enum EnumBGPartsType
+    {
+        bg00,
+        bg01,
+        bg02,
+        bg03,
+        bg04,
+        bg05,
+        bg06,
+        bg07,
+        bg08,
+        frame_bottom,
+        frame_top,
+        meter,
+        meter00,
+        meter01,
+        meter02,
+        meter03,
+        meter04,
+
+    }
 }

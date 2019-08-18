@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using System;
 using Unity.Entities;
 using UnityEngine;
 
 [Serializable]
-public struct AniFrame : ISharedComponentData
+public struct AniFrame : IEquatable<AniFrame>, ISharedComponentData
 {
     public Vector2Int ant;
     public Vector2Int head;
@@ -21,4 +22,14 @@ public struct AniFrame : ISharedComponentData
 
     public int angle;
     public int face;
+
+    public bool Equals(AniFrame obj)
+    {
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return EqualityComparer<Transform>.Default.GetHashCode();
+    }
 }

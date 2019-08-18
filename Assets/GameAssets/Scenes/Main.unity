@@ -215,6 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 192078714}
+  - component: {fileID: 192078715}
   m_Layer: 0
   m_Name: Singletons
   m_TagString: Untagged
@@ -236,6 +237,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &192078715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192078713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90b067c302200d428b5d07acd985327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Common: {fileID: 11400000, guid: e895c4f3b41c30547bbae97efe8ef8cf, type: 2}
+  Move: {fileID: 11400000, guid: c8854f1cf092be943b8cfc7f12dd017b, type: 2}
+  DrawPos: {fileID: 11400000, guid: 8e3f1794458865b4997c9522bd5481b4, type: 2}
+  Debug: {fileID: 11400000, guid: 0c41494bde3197f40ad232f603929672, type: 2}
 --- !u!1 &287312160
 GameObject:
   m_ObjectHideFlags: 0

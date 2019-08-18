@@ -36,15 +36,15 @@ namespace YYHS
 
             // ComponentDataのセット
             // var posL = 0;
-            // // Define.Instance.GetMapSize() / 2;
+            // // Settings.Instance.GetMapSize() / 2;
             // var posH = 0;
-            // Define.Instance.GetMapSize() / 2;
+            // Settings.Instance.GetMapSize() / 2;
 
             // // Tag
             // entityManager.SetComponentData(entity, new CharaTag);
 
             // 必要なキャラのみインプットをつける
-            if (_i < Define.Instance.Common.PlayerNum)
+            if (_i < Settings.Instance.Common.PlayerNum)
             {
                 _entityManager.AddComponent(entity, ComponentType.Create<PadScan>());
             }
@@ -59,8 +59,8 @@ namespace YYHS
             _entityManager.SetComponentData(entity, new ToukiMeter
             {
                 muki = EnumCrossType.None,
-                    value = 0,
-                    state = EnumToukiMaterState.Active
+                value = 0,
+                state = EnumToukiMaterState.Active
             });
 
             // // 位置

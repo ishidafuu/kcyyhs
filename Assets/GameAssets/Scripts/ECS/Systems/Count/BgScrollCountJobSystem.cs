@@ -43,7 +43,7 @@ using Unity.Entities;
 // 		{
 // 			inputDeps = new CountBgScrollJob()
 // 			{
-// 				BgScrollWidth = Define.Instance.DrawPos.BgScrollWidth,
+// 				BgScrollWidth = Settings.Instance.DrawPos.BgScrollWidth,
 // 					bgScrolls = bgScrolls,
 // 			}.Schedule(inputDeps);
 // 			m_group.AddDependency(inputDeps);

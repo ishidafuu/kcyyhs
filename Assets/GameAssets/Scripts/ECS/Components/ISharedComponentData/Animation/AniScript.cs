@@ -1,10 +1,11 @@
-using System;
 using System.Collections.Generic;
+using System;
 using Unity.Entities;
 using UnityEngine;
 
+
 [Serializable]
-public struct AniScript : ISharedComponentData
+public struct AniScript : IEquatable<AniScript>, ISharedComponentData
 {
     public string id;
     public List<AniFrame> frames;
@@ -18,5 +19,15 @@ public struct AniScript : ISharedComponentData
         AniScript res = new AniScript();
         res.Setup(id, AniFrames);
         return res;
+    }
+
+    public bool Equals(AniScript obj)
+    {
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return EqualityComparer<Transform>.Default.GetHashCode();
     }
 }

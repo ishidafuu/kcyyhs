@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Entities;
-using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Transforms;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine.U2D;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
-using UnityEngine.U2D;
+using UnityEngine;
+using Unity.Entities;
+using System.Collections.Generic;
 
 namespace YYHS
 {
@@ -74,8 +63,6 @@ namespace YYHS
             return world.EntityManager;
         }
 
-
-        // 各コンポーネントのキャッシュ
         void ComponentCache()
         {
             Cache.pixelPerfectCamera = FindObjectOfType<PixelPerfectCamera>();
@@ -93,7 +80,7 @@ namespace YYHS
 
         void CreateCharaEntity(EntityManager manager)
         {
-            for (int i = 0; i < Define.Instance.Common.CharaNum; i++)
+            for (int i = 0; i < Settings.Instance.Common.CharaNum; i++)
             {
                 var playerEntity = (i < m_playerEntityList.Count)
                     ? m_playerEntityList[i]
@@ -102,6 +89,5 @@ namespace YYHS
                 var entity = CharaEntityFactory.CreateEntity(i, manager, ref Shared.charaMeshMat, ref Shared.aniScriptSheet, ref Shared.aniBasePos);
             }
         }
-
     }
 }

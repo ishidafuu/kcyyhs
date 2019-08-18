@@ -39,12 +39,12 @@
 // 				}
 // 			}
 
-// 			tilemap.layoutGrid.cellSize = new Vector3(Define.Instance.TIP_SIZE, Define.Instance.TIP_SIZE, 0);
+// 			tilemap.layoutGrid.cellSize = new Vector3(Settings.Instance.TIP_SIZE, Settings.Instance.TIP_SIZE, 0);
 // 		}
 
 // 		public int MapTipNum()
 // 		{
-// 			return ((Define.Instance.MAP_GRID_NUM * Define.Instance.GRID_SIZE) / Define.Instance.TIP_SIZE);
+// 			return ((Settings.Instance.MAP_GRID_NUM * Settings.Instance.GRID_SIZE) / Settings.Instance.TIP_SIZE);
 // 		}
 
 // 		// マップタイル作成

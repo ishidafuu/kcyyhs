@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using System;
 using Unity.Entities;
 using UnityEngine;
 
 [Serializable]
-public struct AniBasePos : ISharedComponentData
+public struct AniBasePos : IEquatable<AniBasePos>, ISharedComponentData
 {
     public Vector2Int ANT_BASE;
     public Vector2Int HEAD_BASE;
@@ -19,4 +20,14 @@ public struct AniBasePos : ISharedComponentData
 
     public AniDepth FRONTDEPTH;
     public AniDepth BACKDEPTH;
+
+    public bool Equals(AniBasePos obj)
+    {
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return EqualityComparer<Transform>.Default.GetHashCode();
+    }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace YYHS
 {
-    [UpdateInGroup(typeof(UpdateGroup))]
+    [UpdateInGroup(typeof(ScanGroup))]
     public class ToukiMeterInputJobSystem : JobComponentSystem
     {
         EntityQuery m_query;
