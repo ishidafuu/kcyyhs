@@ -9,48 +9,105 @@ namespace YYHS
     [ExecuteInEditMode]
     public class SpriteSetter : MonoBehaviour
     {
+        [SerializeField] GameObject m_character;
+        [SerializeField] GameObject m_backGround;
+        [SerializeField] GameObject m_effect;
+        [SerializeField] GameObject m_camera;
+        [SerializeField] GameObject m_spriteRC;
+        [SerializeField] GameObject m_characterRC;
+        [SerializeField] GameObject m_backGroundRC;
+        [SerializeField] GameObject m_effectRC;
+        [SerializeField] int m_charaNo;
+        [SerializeField] int m_bgNo;
 
-        public int CharaNo;
-        public int BGNo;
-
-        public GameObject Character;
-        public GameObject BackGround;
-        public GameObject Effect;
-        public GameObject SpriteRC;
+        List<GameObject> m_charaList = new List<GameObject>();
+        List<GameObject> m_backgroundList = new List<GameObject>();
+        List<GameObject> m_effectList = new List<GameObject>();
 
         public void InitObject()
         {
             FindObject();
-            InitPosition();
-            DeleteOldObject(Character);
-            DeleteOldObject(BackGround);
-            DeleteOldObject(Effect);
+            ClearList();
+            DeleteOldObject(m_character);
+            DeleteOldObject(m_backGround);
+            DeleteOldObject(m_effect);
             CreateNewCharaObject();
             CreateNewBGObject();
             CreateNewEffectObject(GetCharaPath());
             CreateNewEffectObject(GetBackGroundPath());
+            InitPosition();
             LoadObject();
+            InactiveBGSprite();
+            InactiveCharacterSprite();
+            InactiveEffectSprite();
+        }
+
+        public void InactiveBGSprite()
+        {
+            foreach (var item in m_backgroundList)
+            {
+                item.SetActive(false);
+            }
+        }
+
+        public void InactiveCharacterSprite()
+        {
+            foreach (var item in m_charaList)
+            {
+                item.SetActive(false);
+            }
+        }
+
+        public void InactiveEffectSprite()
+        {
+            foreach (var item in m_effectList)
+            {
+                item.SetActive(false);
+            }
+        }
+
+        public void LoadObject()
+        {
+            LoadSprite(GetCharaPath());
+            LoadSprite(GetBackGroundPath());
+        }
+
+        private void ClearList()
+        {
+            m_backgroundList.Clear();
+            m_effectList.Clear();
+            m_charaList.Clear();
         }
 
         private void FindObject()
         {
-            Character = GameObject.Find("Character");
-            BackGround = GameObject.Find("BackGround");
-            Effect = GameObject.Find("Effect");
-            SpriteRC = GameObject.Find("SpriteRC");
+            m_character = GameObject.Find("Character");
+            m_backGround = GameObject.Find("BackGround");
+            m_effect = GameObject.Find("Effect");
+            m_camera = GameObject.Find("Camera");
+            m_spriteRC = GameObject.Find("SpriteRC");
+            m_characterRC = GameObject.Find("CharacterRC");
+            m_backGroundRC = GameObject.Find("BackGroundRC");
+            m_effectRC = GameObject.Find("EffectRC");
         }
 
         private void InitPosition()
         {
             Vector3 BASE_POS = new Vector3(0, 48, 0);
-            Character.transform.localPosition = BASE_POS;
-            BackGround.transform.localPosition = BASE_POS;
-            Effect.transform.localPosition = BASE_POS;
+            m_character.transform.localPosition = BASE_POS;
+            m_backGround.transform.localPosition = BASE_POS;
+            m_effect.transform.localPosition = BASE_POS;
         }
 
         private void CreateNewBGObject()
         {
-            // 生成
+            if (m_backGround == null)
+            {
+                m_backGround = Instantiate(m_backGroundRC);
+                m_backGround.name = "BackGround";
+                m_backGround.transform.SetParent(m_camera.transform);
+            }
+
             string path = GetBackGroundPath();
             UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
             foreach (var item in spriteList)
@@ -61,29 +118,46 @@ namespace YYHS
                 if (CheckEffect(item.name))
                     continue;
 
-                var newSprite = Instantiate(SpriteRC);
-                newSprite.transform.SetParent(BackGround.transform);
-                newSprite.name = item.name;
+                CreateSprite(item, m_backGround, m_backgroundList);
             }
+        }
+
+        private void CreateSprite(Object item, GameObject parentObj, List<GameObject> objectList)
+        {
+            var newSprite = Instantiate(m_spriteRC);
+            newSprite.transform.SetParent(parentObj.transform);
+            newSprite.name = item.name;
+            objectList.Add(newSprite.gameObject);
         }
 
         private void CreateNewEffectObject(string path)
         {
+            if (m_effect == null)
+            {
+                m_effect = Instantiate(m_effectRC);
+                m_effect.name = "Effect";
+                m_effect.transform.SetParent(m_camera.transform);
+            }
+
             UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
             foreach (var item in spriteList)
             {
                 if (!CheckEffect(item.name))
                     continue;
 
-                var newSprite = Instantiate(SpriteRC);
-                newSprite.transform.SetParent(Effect.transform);
-                newSprite.name = item.name;
+                CreateSprite(item, m_effect, m_effectList);
             }
         }
 
         private void CreateNewCharaObject()
         {
-            // 生成
+            if (m_character == null)
+            {
+                m_character = Instantiate(m_characterRC);
+                m_character.name = "Character";
+                m_character.transform.SetParent(m_camera.transform);
+            }
+
             string path = GetCharaPath();
             UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
             foreach (var item in spriteList)
@@ -91,22 +165,26 @@ namespace YYHS
                 if (CheckEffect(item.name))
                     continue;
 
-                var newSprite = Instantiate(SpriteRC);
-                newSprite.transform.SetParent(Character.transform);
-                newSprite.name = item.name;
+                CreateSprite(item, m_character, m_charaList);
             }
         }
 
         private void DeleteOldObject(GameObject baseObject)
         {
-            // 削除
-            var transforms = baseObject.GetComponentsInChildren<Transform>();
-            foreach (var item in transforms)
+            if (baseObject != null)
             {
-                if (item == baseObject.transform)
-                    continue;
-                DestroyImmediate(item.gameObject);
+                DestroyImmediate(baseObject);
+                baseObject = null;
             }
+
+            // // 削除
+            // var transforms = baseObject.GetComponentsInChildren<Transform>();
+            // foreach (var item in transforms)
+            // {
+            //     if (item == baseObject.transform)
+            //         continue;
+            //     DestroyImmediate(item.gameObject);
+            // }
         }
 
         public bool CheckEffect(string itemName)
@@ -117,12 +195,6 @@ namespace YYHS
         public bool CheckBG(string itemName)
         {
             return (itemName.IndexOf("bg") >= 0);
-        }
-
-        public void LoadObject()
-        {
-            LoadSprite(GetCharaPath());
-            LoadSprite(GetBackGroundPath());
         }
 
         private void LoadSprite(string path)
@@ -160,6 +232,7 @@ namespace YYHS
                 }
                 else
                 {
+                    // 描画プライオリティ
                     if (targetSpriteRenderer.name.IndexOf("a_") >= 0)
                     {
                         targetSpriteRenderer.sortingOrder = +10;
@@ -170,35 +243,38 @@ namespace YYHS
                     }
                 }
                 targetSpriteRenderer.transform.localPosition = Vector3.zero;
+
+                targetObj.SetActive(false);
             }
         }
 
         private string GetCharaPath()
         {
-            return string.Format(PathSettings.CharaSprite, CharaNo.ToString("d2"));
+            return string.Format(PathSettings.CharaSprite, m_charaNo.ToString("d2"));
         }
 
         private string GetBackGroundPath()
         {
-            return string.Format(PathSettings.BackGroundSprite, BGNo.ToString("d2"));
+            return string.Format(PathSettings.BackGroundSprite, m_bgNo.ToString("d2"));
         }
     }
 
-    [CustomEditor(typeof(SpriteSetter))] // 拡張するクラスを指定
+    [CustomEditor(typeof(SpriteSetter))]
     public class SpriteSetterEditor : Editor
     {
         public override void OnInspectorGUI()
         {
-            // 元のInspector部分を表示
             base.OnInspectorGUI();
 
-            // ボタンを表示
-
-            if (GUILayout.Button("InitObject"))
+            if (GUILayout.Button("Init Object"))
                 (target as SpriteSetter).InitObject();
 
-            if (GUILayout.Button("LoadObject"))
-                (target as SpriteSetter).LoadObject();
+            if (GUILayout.Button("Inactive Character Sprite"))
+                (target as SpriteSetter).InactiveCharacterSprite();
+            if (GUILayout.Button("Inactive BG Sprite"))
+                (target as SpriteSetter).InactiveBGSprite();
+            if (GUILayout.Button("Inactive Effect Sprite"))
+                (target as SpriteSetter).InactiveEffectSprite();
 
         }
 
