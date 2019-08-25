@@ -86,7 +86,7 @@ namespace YYHS
                     ? m_playerEntityList[i]
                     : Entity.Null;
 
-                var entity = CharaEntityFactory.CreateEntity(i, manager, ref Shared.charaMeshMat, ref Shared.aniScriptSheet, ref Shared.aniBasePos);
+                var entity = CharaEntityFactory.CreateEntity(i, manager, ref Shared.charaMeshMat);
             }
         }
     }

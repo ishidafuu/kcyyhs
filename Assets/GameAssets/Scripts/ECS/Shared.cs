@@ -15,8 +15,6 @@ namespace YYHS
     {
         // SharedComponentData
         public static MeshMatList charaMeshMat;
-        public static AniScriptSheet aniScriptSheet;
-        public static AniBasePos aniBasePos;
         public static MeshMatList bgFrameMeshMat;
         // public static MeshMatList meterMeshMat;
 

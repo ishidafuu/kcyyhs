@@ -25,9 +25,7 @@ namespace YYHS
         /// <param name="aniBasePos"></param>
         /// <returns></returns>
         public static Entity CreateEntity(int _i, EntityManager _entityManager,
-            ref MeshMatList _meshMatList,
-            ref AniScriptSheet _aniScriptSheet,
-            ref AniBasePos _aniBasePos
+            ref MeshMatList _meshMatList
         )
         {
             var archetype = _entityManager.CreateArchetype(ComponentTypes.CharaComponentType);
@@ -99,8 +97,6 @@ namespace YYHS
 
             // SharedComponentDataのセット
             _entityManager.AddSharedComponentData(entity, _meshMatList);
-            _entityManager.AddSharedComponentData(entity, _aniScriptSheet);
-            _entityManager.AddSharedComponentData(entity, _aniBasePos);
 
             return entity;
         }
