@@ -1898,6 +1898,7 @@ GameObject:
   - component: {fileID: 529558759}
   - component: {fileID: 529558757}
   - component: {fileID: 529558758}
+  - component: {fileID: 529558761}
   - component: {fileID: 529558760}
   m_Layer: 0
   m_Name: Animation
@@ -1974,6 +1975,18 @@ MonoBehaviour:
   m_effectRC: {fileID: 1086060930}
   m_charaNo: 0
   m_bgNo: 0
+--- !u!114 &529558761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529558756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f33c1081e678247b9cd126afde1fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554131987
 GameObject:
   m_ObjectHideFlags: 0
@@ -5568,7 +5581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Width: 320
-  m_Height: 199
+  m_Height: 209
   m_AutoAspect: 1
   m_FramePerSecond: 15
   m_Repeat: 0

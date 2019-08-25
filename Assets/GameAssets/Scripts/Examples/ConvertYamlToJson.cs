@@ -7,23 +7,23 @@ using YamlDotNet.Serialization;
 
 namespace YamlDotNet.Samples
 {
-  public class ConvertYamlToJson
-  {
-    private readonly ITestOutputHelper output;
-
-    public ConvertYamlToJson(ITestOutputHelper output)
+    public class ConvertYamlToJson
     {
-      this.output = output;
-    }
+        private readonly ITestOutputHelper output;
 
-    [Sample(
-      Title = "Convert YAML to JSON",
-      Description = "Shows how to convert a YAML document to JSON."
-    )]
-    public void Main()
-    {
-      // convert string/file to YAML object
-      var r = new StringReader(@"
+        public ConvertYamlToJson(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
+        [Sample(
+          Title = "Convert YAML to JSON",
+          Description = "Shows how to convert a YAML document to JSON."
+        )]
+        public void Main()
+        {
+            // convert string/file to YAML object
+            var r = new StringReader(@"
 AnimationClip:
   m_Name: Punch00
   m_RotationCurves: []
@@ -1291,33 +1291,29 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
 ");
-      var deserializer = new DeserializerBuilder().Build();
-      var yamlObject = deserializer.Deserialize(r);
+            var deserializer = new DeserializerBuilder().Build();
+            var yamlObject = deserializer.Deserialize(r);
+            // Debug.Log(asdf);
+            var serializer = new SerializerBuilder()
+              .JsonCompatible()
+              .Build();
 
-      var serializer = new SerializerBuilder()
-        .JsonCompatible()
-        .Build();
+            var json = serializer.Serialize(yamlObject);
+            Debug.Log(json);
 
-      var json = serializer.Serialize(yamlObject);
+            output.WriteLine(json);
 
-      output.WriteLine(json);
+            YYHS.YHAnimation asdf = JsonUtility.FromJson<YYHS.YHAnimation>(json);
+            // YYHS.YyhsAnimation asdf = JsonUtility.FromJson<YYHS.YyhsAnimation>(json);
+            Debug.Log(asdf.AnimationClip.m_Name);
+            Debug.Log(asdf.AnimationClip.m_PositionCurves.Length);
+            // Debug.Log(asdf.AnimationClip.m_PositionCurves.m_Curve);
+            // Debug.Log(asdf.AnimationClip.m_PositionCurves.path);
+            // foreach (var item in asdf.AnimationClip.m_PositionCurves.m_Curve)
+            // {
+            //   Debug.Log(item.);
+            // }
 
-      YYHS.YyhsAnimation asdf = JsonUtility.FromJson<YYHS.YyhsAnimation>(json);
-      Debug.Log(json);
-      Debug.Log(asdf.AnimationClip.m_Name);
-      Debug.Log(asdf.AnimationClip.m_PositionCurves);
-      foreach (var item in asdf.AnimationClip.m_PositionCurves)
-      {
-        Debug.Log(item.m_Curve.Length);
-        Debug.Log(item.path);
-      }
-      // Debug.Log(asdf.AnimationClip.m_PositionCurves.m_Curve);
-      // Debug.Log(asdf.AnimationClip.m_PositionCurves.path);
-      // foreach (var item in asdf.AnimationClip.m_PositionCurves.m_Curve)
-      // {
-      //   Debug.Log(item.);
-      // }
-
+        }
     }
-  }
 }

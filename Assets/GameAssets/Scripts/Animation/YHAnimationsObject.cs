@@ -7,8 +7,8 @@ namespace YYHS
 {
 
     [Serializable]
-    public class YyhsAnimation
+    public class YHAnimationsObject : ScriptableObject
     {
-        public YyhsAnimationClip AnimationClip;
+        public List<YHAnimation> animations = new List<YHAnimation>();
     }
 }

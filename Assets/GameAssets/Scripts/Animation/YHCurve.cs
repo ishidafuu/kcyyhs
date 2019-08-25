@@ -7,9 +7,8 @@ namespace YYHS
 {
 
     [Serializable]
-    public class YyhsPositionCurves
+    public class YHCurve
     {
-        public string path;
-        public AnimationClip[] m_Curve;
+        public YHFrame[] m_Curve;
     }
 }
