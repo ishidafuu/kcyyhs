@@ -13,44 +13,83 @@ MonoBehaviour:
   m_Name: YHAnimationsObject
   m_EditorClassIdentifier: 
   animations:
-  - AnimationClip:
-      m_Name: Punch00_00
-      serializedVersion: 6
-      m_PositionCurves:
-      - path: Camera/Character/cm_stand03
-        curve:
-          m_Curve:
-          - time: 0
-            value: {x: 20, y: 0}
-          - time: 0.5
-            value: {x: 0, y: 0}
-          - time: 0.6666667
-            value: {x: 0, y: 0}
-          - time: 0.9166667
-            value: {x: 0, y: 0}
-          - time: 1.1666666
-            value: {x: 0, y: 0}
-      - path: Camera/Character/cm_b_parts00
-        curve:
-          m_Curve:
-          - time: 0
-            value: {x: 80, y: 0}
-          - time: 0.5
-            value: {x: 40, y: 0}
-          - time: 0.6666667
-            value: {x: 40, y: 0}
-          - time: 0.9166667
-            value: {x: 40, y: 0}
-          - time: 1.1666666
-            value: {x: 40, y: 0}
-      - path: Camera/Character/cm_a_parts00
-        curve:
-          m_Curve:
-          - time: 0
-            value: {x: 0, y: 0}
-          - time: 0.6666667
-            value: {x: 23, y: -41}
-          - time: 0.9166667
-            value: {x: 23, y: -27}
-          - time: 1.1666666
-            value: {x: 23, y: -24}
+  - name: Punch00_00
+    length: 70
+    parts:
+    - name: cm_stand03
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+      - frame: 40
+        isActive: 1
+        isFlipX: 1
+        isFlipY: 0
+      positions:
+      - frame: 0
+        position: {x: 20, y: 0}
+      - frame: 30
+        position: {x: 0, y: 0}
+      scales: []
+      rotations:
+      - frame: 0
+        rotation: 0
+      - frame: 52
+        rotation: -350.5
+      - frame: 54
+        rotation: 350.97
+      - frame: 55
+        rotation: 314.54095
+      - frame: 59
+        rotation: 0.5
+      - frame: 70
+        rotation: 0
+    - name: cm_b_parts00
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+      - frame: 40
+        isActive: 0
+        isFlipX: 0
+        isFlipY: 0
+      positions:
+      - frame: 0
+        position: {x: 80, y: 0}
+      - frame: 30
+        position: {x: 40, y: 0}
+      scales: []
+      rotations: []
+    - name: cm_a_parts00
+      frames:
+      - frame: 0
+        isActive: 0
+        isFlipX: 0
+        isFlipY: 0
+      - frame: 40
+        isActive: 1
+        isFlipX: 1
+        isFlipY: 0
+      positions:
+      - frame: 0
+        position: {x: 0, y: 0}
+      - frame: 40
+        position: {x: 23, y: -42}
+      - frame: 55
+        position: {x: 23, y: -28}
+      - frame: 70
+        position: {x: 23, y: -25}
+      scales:
+      - frame: 40
+        scale: {x: 0, y: 0}
+      - frame: 70
+        scale: {x: 2, y: 2}
+      rotations: []
+    events:
+    - frame: 30
+      functionName: PlaySe
+      data: 
+      floatParameter: 0
+      intParameter: 9999

@@ -1303,7 +1303,7 @@ AnimationClip:
 
             output.WriteLine(json);
 
-            YYHS.YHAnimation asdf = JsonUtility.FromJson<YYHS.YHAnimation>(json);
+            YYHS.YHRawAnimation asdf = JsonUtility.FromJson<YYHS.YHRawAnimation>(json);
             // YYHS.YyhsAnimation asdf = JsonUtility.FromJson<YYHS.YyhsAnimation>(json);
             Debug.Log(asdf.AnimationClip.m_Name);
             Debug.Log(asdf.AnimationClip.m_PositionCurves.Length);

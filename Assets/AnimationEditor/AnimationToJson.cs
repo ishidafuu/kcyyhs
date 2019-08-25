@@ -32,9 +32,10 @@ namespace YYHS
             Serializer serializer = new SerializerBuilder().JsonCompatible().Build();
             string json = serializer.Serialize(yamlObject);
             Debug.Log(json);
-            YHAnimation newAnim = JsonUtility.FromJson<YHAnimation>(json);
-            YHAnimationsObject animObjects = new YHAnimationsObject();
-            animObjects.animations.Add(newAnim);
+            YHRawAnimation rawAnim = JsonUtility.FromJson<YHRawAnimation>(json);
+            YHAnimation anim = YHRawAnimationConverter.Convert(rawAnim);
+            YHAnimationsObject animObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
+            animObjects.animations.Add(anim);
 
             AssetDatabase.CreateAsset(animObjects, "Assets/GameAssets/Resources/ScriptableObjects/YHAnimation/YHAnimationsObject.asset");
             AssetDatabase.SaveAssets();
