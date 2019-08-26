@@ -10,9 +10,77 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daca190aefaf47445b2cb5e35a876a82, type: 3}
-  m_Name: YHAnimationsObject
+  m_Name: YHAnim_00
   m_EditorClassIdentifier: 
   animations:
+  - name: Air
+    length: 60
+    parts: []
+    events: []
+  - name: Charge00
+    length: 60
+    parts: []
+    events: []
+  - name: Charge01
+    length: 60
+    parts: []
+    events: []
+  - name: DamageM00
+    length: 60
+    parts: []
+    events: []
+  - name: DamageM01
+    length: 60
+    parts: []
+    events: []
+  - name: DamageM02
+    length: 60
+    parts: []
+    events: []
+  - name: DamageS00
+    length: 60
+    parts: []
+    events: []
+  - name: DamageS01
+    length: 60
+    parts: []
+    events: []
+  - name: DamageS02
+    length: 60
+    parts: []
+    events: []
+  - name: Decision00
+    length: 60
+    parts: []
+    events: []
+  - name: Decision01
+    length: 60
+    parts: []
+    events: []
+  - name: Down
+    length: 60
+    parts: []
+    events: []
+  - name: Fall00
+    length: 60
+    parts: []
+    events: []
+  - name: Fall01
+    length: 60
+    parts: []
+    events: []
+  - name: Jump00
+    length: 60
+    parts: []
+    events: []
+  - name: Jump01
+    length: 60
+    parts: []
+    events: []
+  - name: Miss
+    length: 60
+    parts: []
+    events: []
   - name: Punch00_00
     length: 70
     parts:
@@ -93,3 +161,19 @@ MonoBehaviour:
       data: 
       floatParameter: 0
       intParameter: 9999
+  - name: Punch00_01
+    length: 60
+    parts: []
+    events: []
+  - name: Punch01_00
+    length: 60
+    parts: []
+    events: []
+  - name: Punch01_01
+    length: 60
+    parts: []
+    events: []
+  - name: Stand
+    length: 60
+    parts: []
+    events: []

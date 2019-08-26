@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace YYHS
 {
+    /// <summary>
+    /// 中間モデル
+    /// </summary>
     [Serializable]
     public class YHRawAnimation
     {

@@ -1305,8 +1305,8 @@ AnimationClip:
 
             YYHS.YHRawAnimation asdf = JsonUtility.FromJson<YYHS.YHRawAnimation>(json);
             // YYHS.YyhsAnimation asdf = JsonUtility.FromJson<YYHS.YyhsAnimation>(json);
-            Debug.Log(asdf.AnimationClip.m_Name);
-            Debug.Log(asdf.AnimationClip.m_PositionCurves.Length);
+            // Debug.Log(asdf.AnimationClip.m_Name);
+            // Debug.Log(asdf.AnimationClip.m_PositionCurves.Length);
             // Debug.Log(asdf.AnimationClip.m_PositionCurves.m_Curve);
             // Debug.Log(asdf.AnimationClip.m_PositionCurves.path);
             // foreach (var item in asdf.AnimationClip.m_PositionCurves.m_Curve)
