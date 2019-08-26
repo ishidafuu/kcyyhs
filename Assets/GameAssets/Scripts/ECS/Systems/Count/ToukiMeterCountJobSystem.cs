@@ -13,7 +13,7 @@ namespace YYHS
     {
         EntityQuery m_query;
 
-        protected override void OnCreateManager()
+        protected override void OnCreate()
         {
             m_query = GetEntityQuery(
                 ComponentType.ReadWrite<ToukiMeter>()
@@ -25,7 +25,7 @@ namespace YYHS
             m_query.AddDependency(inputDeps);
 
             NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            Vector2[] uv = Shared.bgFrameMeshMat.meshs["bg00"].uv;
+            Vector2[] uv = Shared.bgFrameMeshMat.meshDict[EnumBGPartsType.bg00.ToString()].uv;
             var job = new CountToukiJob()
             {
                 toukiMeters = toukiMeters,

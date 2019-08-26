@@ -33,7 +33,7 @@ namespace YYHS
         ReadOnlyCollection<string> HorizontalName;
         ReadOnlyCollection<string> VerticalName;
 
-        protected override void OnCreateManager()
+        protected override void OnCreate()
         {
             m_group = GetEntityQuery(
                 ComponentType.ReadWrite<PadScan>());

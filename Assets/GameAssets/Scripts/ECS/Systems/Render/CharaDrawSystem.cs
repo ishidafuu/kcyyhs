@@ -15,7 +15,7 @@ using Unity.Entities;
 //     {
 //         ComponentGroup group;
 
-//         protected override void OnCreateManager()
+//         protected override void OnCreate()
 //         {
 //             group = GetComponentGroup(
 //                 ComponentType.ReadOnly<Position>(),

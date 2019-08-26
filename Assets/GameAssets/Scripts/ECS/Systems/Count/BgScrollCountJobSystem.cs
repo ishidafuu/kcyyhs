@@ -13,7 +13,7 @@ using Unity.Entities;
 // 	{
 // 		ComponentGroup m_group;
 
-// 		protected override void OnCreateManager()
+// 		protected override void OnCreate()
 // 		{
 // 			m_group = GetComponentGroup(
 // 				ComponentType.ReadOnly<ToukiMeter>(),

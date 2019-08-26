@@ -16,14 +16,14 @@ namespace YYHS
         // SharedComponentData
         public static MeshMatList charaMeshMat;
         public static MeshMatList bgFrameMeshMat;
-        // public static MeshMatList meterMeshMat;
+        public static MeshMatList commonMeshMat;
 
-        static readonly string ShaderBg = "Sprites/DefaultSprite";
+        static readonly string DefaultShader = "Sprites/DefaultSprite";
 
-        // SharedComponentDataの読み込み
         public static void ReadySharedComponentData()
         {
-            bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), ShaderBg);
+            commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
+            bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
             // meterMeshMat = new MeshMatList("yyhs/bg/meter", ShaderBg);
 
             // // スクリプタブルオブジェクトの読み込み

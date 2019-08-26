@@ -7,13 +7,13 @@ using UnityEngine;
 public struct MeshMatList : IEquatable<MeshMatList>, ISharedComponentData
 {
     public Material material;
-    public Dictionary<string, Mesh> meshs;
-    public Dictionary<string, Sprite> sprites;
+    public Dictionary<string, Mesh> meshDict;
+    public Dictionary<string, Sprite> spriteDict;
 
     public MeshMatList(string path, string shader)
     {
-        meshs = new Dictionary<string, Mesh>();
-        sprites = new Dictionary<string, Sprite>();
+        meshDict = new Dictionary<string, Mesh>();
+        spriteDict = new Dictionary<string, Sprite>();
         UnityEngine.Object[] list = Resources.LoadAll(path, typeof(Sprite));
 
         // listがnullまたは空ならエラーで返す
@@ -33,13 +33,13 @@ public struct MeshMatList : IEquatable<MeshMatList>, ISharedComponentData
         // listを回してDictionaryに格納
         for (var i = 0; i < list.Length; ++i)
         {
-            Debug.Log(list[i].name);
+            // Debug.Log(list[i].name);
             var sprite = list[i] as Sprite;
-            sprites.Add(list[i].name, sprite);
+            spriteDict.Add(list[i].name, sprite);
 
             var mesh = GenerateQuadMesh(sprite);
 
-            meshs.Add(list[i].name, mesh);
+            meshDict.Add(list[i].name, mesh);
             if (i == 0)
             {
                 material.mainTexture = sprite.texture;
