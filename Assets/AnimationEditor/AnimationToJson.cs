@@ -1,7 +1,6 @@
 ﻿using YamlDotNet.Serialization;
 using YamlDotNet.Samples.Helpers;
 using UnityEngine;
-using UnityEngine;
 using UnityEditor;
 using Unity.Collections;
 using System.Linq;
@@ -13,35 +12,62 @@ namespace YYHS
     [ExecuteInEditMode]
     public class AnimationToJson : MonoBehaviour
     {
-        public void Main()
+        [SerializeField] SpriteSetter m_spriteSetter;
+        public void Convert()
         {
-            string[] guids2 = AssetDatabase.FindAssets("Punch00_00", new[] { "Assets/GameAssets/Resources/Animations/Common" });
-            Debug.Log(guids2);
-
-            string path = AssetDatabase.GUIDToAssetPath(guids2[0]);
-            string destpath = path.Replace(".anim", ".bytes");
-            string assetpath = path.Replace(".anim", ".asset");
-            System.IO.File.Copy(path, destpath, true);
-            AssetDatabase.Refresh();
-            TextAsset text_asset = AssetDatabase.LoadAssetAtPath<TextAsset>(destpath);
-            int removeIndex = text_asset.text.IndexOf("AnimationClip:");
-            string yamlText = text_asset.text.Remove(0, removeIndex);
-            StringReader r = new StringReader(yamlText);
-            Deserializer deserializer = new DeserializerBuilder().Build();
-            object yamlObject = deserializer.Deserialize(new StringReader(yamlText));
-            Serializer serializer = new SerializerBuilder().JsonCompatible().Build();
-            string json = serializer.Serialize(yamlObject);
-            Debug.Log(json);
-            YHRawAnimation rawAnim = JsonUtility.FromJson<YHRawAnimation>(json);
-            YHAnimation anim = YHRawAnimationConverter.Convert(rawAnim);
-            YHAnimationsObject animObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
-            animObjects.animations.Add(anim);
-
-            AssetDatabase.CreateAsset(animObjects, "Assets/GameAssets/Resources/ScriptableObjects/YHAnimation/YHAnimationsObject.asset");
+            int charaNo = m_spriteSetter.GetCharaNo();
+            List<string> destPaths = new List<string>();
+            YHAnimationsObject outputObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
+            CreateByteFiles(destPaths);
+            CreateYHAnimation(destPaths, outputObjects);
+            AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/ScriptableObjects/YHAnimation/YHAnim_{charaNo.ToString("d2")}.asset");
             AssetDatabase.SaveAssets();
-
-
+            AssetDatabase.Refresh();
         }
+
+        private static void CreateByteFiles(List<string> destPaths)
+        {
+            string[] animGuids = AssetDatabase.FindAssets("", new[] { "Assets/GameAssets/Resources/Animations/Common" });
+            foreach (var guid in animGuids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.IndexOf(".anim") == -1)
+                    continue;
+
+                string destPath = path.Replace(".anim", ".bytes");
+                // Debug.Log(destPath);
+                System.IO.File.Copy(path, destPath, true);
+                destPaths.Add(destPath);
+            }
+            AssetDatabase.Refresh();
+        }
+
+        private static void CreateYHAnimation(List<string> destPaths, YHAnimationsObject outputObjects)
+        {
+            foreach (var destPath in destPaths)
+            {
+                // text->yaml
+                TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(destPath);
+                int removeIndex = textAsset.text.IndexOf("AnimationClip:");
+                string yamlText = textAsset.text.Remove(0, removeIndex);
+                Deserializer deserializer = new DeserializerBuilder().Build();
+                object yamlObject = deserializer.Deserialize(new StringReader(yamlText));
+
+                // yaml->json
+                Serializer serializer = new SerializerBuilder().JsonCompatible().Build();
+                string json = serializer.Serialize(yamlObject);
+
+                // json->rawAnim
+                YHRawAnimation rawAnim = JsonUtility.FromJson<YHRawAnimation>(json);
+
+                // rawAnim->yhAnim
+                YHAnimation anim = YHRawAnimationConverter.Convert(rawAnim);
+
+                outputObjects.animations.Add(anim);
+                System.IO.File.Delete(destPath);
+            }
+        }
+
     }
 
     [CustomEditor(typeof(AnimationToJson))]
@@ -52,14 +78,7 @@ namespace YYHS
             base.OnInspectorGUI();
 
             if (GUILayout.Button("Convert"))
-                (target as AnimationToJson).Main();
-
-            // if (GUILayout.Button("Inactive Character Sprite"))
-            //     (target as SpriteSetter).InactiveCharacterSprite();
-            // if (GUILayout.Button("Inactive BG Sprite"))
-            //     (target as SpriteSetter).InactiveBGSprite();
-            // if (GUILayout.Button("Inactive Effect Sprite"))
-            //     (target as SpriteSetter).InactiveEffectSprite();
+                (target as AnimationToJson).Convert();
 
         }
 
