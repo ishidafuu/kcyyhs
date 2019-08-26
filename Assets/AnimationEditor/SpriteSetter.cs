@@ -9,6 +9,7 @@ namespace YYHS
     [ExecuteInEditMode]
     public class SpriteSetter : MonoBehaviour
     {
+        [SerializeField] Animator m_animator;
         [SerializeField] GameObject m_character;
         [SerializeField] GameObject m_backGround;
         [SerializeField] GameObject m_effect;
@@ -24,8 +25,11 @@ namespace YYHS
         List<GameObject> m_backgroundList = new List<GameObject>();
         List<GameObject> m_effectList = new List<GameObject>();
 
+        public int GetCharaNo() => m_charaNo;
+
         public void InitObject()
         {
+            FindAnimationController();
             FindObject();
             ClearList();
             DeleteOldObject(m_character);
@@ -77,6 +81,14 @@ namespace YYHS
             m_backgroundList.Clear();
             m_effectList.Clear();
             m_charaList.Clear();
+        }
+
+        private void FindAnimationController()
+        {
+            m_animator = GetComponent<Animator>();
+            string path = $"Assets/GameAssets/Animations/Chara{m_charaNo.ToString("d2")}/Controller.controller";
+            RuntimeAnimatorController controller = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(path) as RuntimeAnimatorController;
+            m_animator.runtimeAnimatorController = controller;
         }
 
         private void FindObject()
@@ -204,7 +216,7 @@ namespace YYHS
             // listを回してDictionaryに格納
             for (var i = 0; i < list.Length; ++i)
             {
-                Debug.Log(list[i].name);
+                // Debug.Log(list[i].name);
                 var sprite = list[i] as Sprite;
 
                 var targetObj = GameObject.Find(sprite.name);
