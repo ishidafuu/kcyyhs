@@ -64,7 +64,7 @@ namespace YYHS
                 YHAnimation anim = YHRawAnimationConverter.Convert(rawAnim);
 
                 outputObjects.animations.Add(anim);
-                // System.IO.File.Delete(destPath);
+                System.IO.File.Delete(destPath);
             }
         }
 

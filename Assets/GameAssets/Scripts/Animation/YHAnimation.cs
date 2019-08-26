@@ -32,6 +32,8 @@ namespace YYHS
         public bool isActive;
         public bool isFlipX;
         public bool isFlipY;
+        public bool isBrink;
+
     }
 
     [Serializable]

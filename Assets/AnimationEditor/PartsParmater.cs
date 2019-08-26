@@ -9,9 +9,7 @@ namespace YYHS
     [ExecuteInEditMode]
     public class PartsParmater : MonoBehaviour
     {
-        public bool m_isFlash = false;
-        public bool m_isBrink = false;
-        public Color m_color = Color.white;
+        public bool m_IsBrink = false;
     }
 
     [CustomEditor(typeof(PartsParmater))]

@@ -108,7 +108,6 @@ namespace YYHS
                 string partsName = item.path.Remove(0, item.path.LastIndexOf("/") + 1);
                 YHAnimationParts parts = GetOrCreateParts(result, partsName);
                 string attr = item.attribute;
-
                 foreach (var curve in item.curve.m_Curve)
                 {
                     YHFrameData last = parts.frames.LastOrDefault();
@@ -124,6 +123,9 @@ namespace YYHS
                             break;
                         case "m_FlipY":
                             frameData.isFlipY = (curve.value != 0);
+                            break;
+                        case "m_IsBrink":
+                            frameData.isBrink = (curve.value != 0);
                             break;
                         default:
                             Debug.LogError($"Unknown attribute : {attr}");
