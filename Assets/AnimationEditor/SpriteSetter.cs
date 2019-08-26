@@ -86,6 +86,7 @@ namespace YYHS
         {
             LoadSprite(GetCharaPath());
             LoadSprite(GetBackGroundPath());
+            LoadSprite(PathSettings.CommonSprite);
         }
 
         private void ClearList()

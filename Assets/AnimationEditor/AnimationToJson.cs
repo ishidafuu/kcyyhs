@@ -18,16 +18,16 @@ namespace YYHS
             int charaNo = m_spriteSetter.GetCharaNo();
             List<string> destPaths = new List<string>();
             YHAnimationsObject outputObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
-            CreateByteFiles(destPaths);
+            CreateByteFiles(destPaths, charaNo);
             CreateYHAnimation(destPaths, outputObjects);
             AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/ScriptableObjects/YHAnimation/YHAnim_{charaNo.ToString("d2")}.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
 
-        private static void CreateByteFiles(List<string> destPaths)
+        private static void CreateByteFiles(List<string> destPaths, int charaNo)
         {
-            string[] animGuids = AssetDatabase.FindAssets("", new[] { "Assets/GameAssets/Resources/Animations/Common" });
+            string[] animGuids = AssetDatabase.FindAssets("", new[] { $"Assets/GameAssets/Animations/Chara{charaNo.ToString("d2")}" });
             foreach (var guid in animGuids)
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
@@ -64,7 +64,7 @@ namespace YYHS
                 YHAnimation anim = YHRawAnimationConverter.Convert(rawAnim);
 
                 outputObjects.animations.Add(anim);
-                System.IO.File.Delete(destPath);
+                // System.IO.File.Delete(destPath);
             }
         }
 
