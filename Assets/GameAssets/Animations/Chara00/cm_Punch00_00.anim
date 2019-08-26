@@ -66,7 +66,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -118,7 +118,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera/Character/cm_b_parts00
+    path: Character/cm_b_parts00
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -161,7 +161,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -195,7 +195,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera/BackGround/bg02
+    path: BackGround/bg02
   m_ScaleCurves:
   - curve:
       serializedVersion: 2
@@ -221,7 +221,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
   m_FloatCurves:
   - curve:
       serializedVersion: 2
@@ -275,7 +275,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -321,7 +321,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Camera/Character/cm_b_parts00
+    path: Character/cm_b_parts00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -367,7 +367,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -413,7 +413,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_FlipX
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 212
     script: {fileID: 0}
   - curve:
@@ -459,7 +459,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_FlipX
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 212
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -614,7 +614,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -669,7 +669,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -715,7 +715,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -761,7 +761,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -807,7 +807,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Camera/Character/cm_b_parts00
+    path: Character/cm_b_parts00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -862,7 +862,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera/Character/cm_b_parts00
+    path: Character/cm_b_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -917,7 +917,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera/Character/cm_b_parts00
+    path: Character/cm_b_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -972,7 +972,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera/Character/cm_b_parts00
+    path: Character/cm_b_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1018,7 +1018,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -1064,7 +1064,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_FlipX
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 212
     script: {fileID: 0}
   - curve:
@@ -1110,7 +1110,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1156,7 +1156,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1202,7 +1202,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1248,7 +1248,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_FlipX
-    path: Camera/Character/cm_stand03
+    path: Character/cm_stand03
     classID: 212
     script: {fileID: 0}
   - curve:
@@ -1276,7 +1276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1304,7 +1304,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1332,7 +1332,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Camera/Character/cm_a_parts00
+    path: Character/cm_a_parts00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1369,7 +1369,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera/BackGround/bg02
+    path: BackGround/bg02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1406,7 +1406,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera/BackGround/bg02
+    path: BackGround/bg02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1443,7 +1443,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera/BackGround/bg02
+    path: BackGround/bg02
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

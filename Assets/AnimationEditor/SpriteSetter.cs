@@ -13,7 +13,7 @@ namespace YYHS
         [SerializeField] GameObject m_character;
         [SerializeField] GameObject m_backGround;
         [SerializeField] GameObject m_effect;
-        [SerializeField] GameObject m_camera;
+        // [SerializeField] GameObject m_camera;
         [SerializeField] GameObject m_spriteRC;
         [SerializeField] GameObject m_characterRC;
         [SerializeField] GameObject m_backGroundRC;
@@ -108,7 +108,7 @@ namespace YYHS
             m_character = GameObject.Find("Character");
             m_backGround = GameObject.Find("BackGround");
             m_effect = GameObject.Find("Effect");
-            m_camera = GameObject.Find("Camera");
+            // m_camera = GameObject.Find("Camera");
             m_spriteRC = GameObject.Find("SpriteRC");
             m_characterRC = GameObject.Find("CharacterRC");
             m_backGroundRC = GameObject.Find("BackGroundRC");
@@ -118,9 +118,10 @@ namespace YYHS
         private void InitPosition()
         {
             Vector3 BASE_POS = new Vector3(0, 48, 0);
-            m_character.transform.localPosition = BASE_POS;
-            m_backGround.transform.localPosition = BASE_POS;
-            m_effect.transform.localPosition = BASE_POS;
+            transform.localPosition = BASE_POS;
+            m_character.transform.localPosition = Vector3.zero;
+            m_backGround.transform.localPosition = Vector3.zero;
+            m_effect.transform.localPosition = Vector3.zero;
         }
 
         private void CreateNewBGObject()
@@ -129,7 +130,7 @@ namespace YYHS
             {
                 m_backGround = Instantiate(m_backGroundRC);
                 m_backGround.name = "BackGround";
-                m_backGround.transform.SetParent(m_camera.transform);
+                m_backGround.transform.SetParent(transform);
             }
 
             string path = GetBackGroundPath();
@@ -160,7 +161,7 @@ namespace YYHS
             {
                 m_effect = Instantiate(m_effectRC);
                 m_effect.name = "Effect";
-                m_effect.transform.SetParent(m_camera.transform);
+                m_effect.transform.SetParent(transform);
             }
 
             UnityEngine.Object[] spriteList = Resources.LoadAll(path, typeof(Sprite));
@@ -179,7 +180,7 @@ namespace YYHS
             {
                 m_character = Instantiate(m_characterRC);
                 m_character.name = "Character";
-                m_character.transform.SetParent(m_camera.transform);
+                m_character.transform.SetParent(transform);
             }
 
             string path = GetCharaPath();
