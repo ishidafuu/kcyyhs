@@ -132,7 +132,7 @@
             <key>datafile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../Assets/GameAssets/Resources/Sprites/BackGround/bg00.tpsheet</filename>
+                <filename>../../Assets/GameAssets/Resources/Sprites/common.tpsheet</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -181,21 +181,40 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">bg00.png</key>
+            <key type="filename">cm_a_effect00.png</key>
+            <key type="filename">cm_a_effect01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>64,23,128,46</rect>
+                <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
-                <rect>64,23,128,46</rect>
+                <rect>16,16,32,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg01.png</key>
-            <key type="filename">bg06.png</key>
+            <key type="filename">cm_a_effect02_00.png</key>
+            <key type="filename">cm_a_effect02_01.png</key>
+            <key type="filename">cm_a_effect02_02.png</key>
+            <key type="filename">cm_a_effect03_00.png</key>
+            <key type="filename">cm_a_effect03_01.png</key>
+            <key type="filename">cm_a_effect04_00.png</key>
+            <key type="filename">cm_a_effect04_01.png</key>
+            <key type="filename">cm_a_effect04_02.png</key>
+            <key type="filename">cm_b_effect04_00.png</key>
+            <key type="filename">cm_b_effect06_00.png</key>
+            <key type="filename">cm_b_effect06_01.png</key>
+            <key type="filename">cm_b_effect06_02.png</key>
+            <key type="filename">cm_b_effect06_03.png</key>
+            <key type="filename">cm_b_effect06_04.png</key>
+            <key type="filename">cm_b_effect06_05.png</key>
+            <key type="filename">cm_b_effect07_00.png</key>
+            <key type="filename">cm_b_effect07_01.png</key>
+            <key type="filename">cm_b_effect07_02.png</key>
+            <key type="filename">cm_b_effect07_03.png</key>
+            <key type="filename">cm_b_effect07_04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -208,96 +227,183 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg02.png</key>
+            <key type="filename">cm_a_effect05_00.png</key>
+            <key type="filename">cm_a_effect05_01.png</key>
+            <key type="filename">cm_b_effect01_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>128,64,256,128</rect>
+                <rect>32,24,64,48</rect>
                 <key>scale9Paddings</key>
-                <rect>128,64,256,128</rect>
+                <rect>32,24,64,48</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg03.png</key>
+            <key type="filename">cm_b_effect00_00.png</key>
+            <key type="filename">cm_b_effect03_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>128,72,256,144</rect>
+                <rect>16,24,32,48</rect>
                 <key>scale9Paddings</key>
-                <rect>128,72,256,144</rect>
+                <rect>16,24,32,48</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg04.png</key>
+            <key type="filename">cm_b_effect02_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>64,60,128,120</rect>
+                <rect>64,32,128,64</rect>
                 <key>scale9Paddings</key>
-                <rect>64,60,128,120</rect>
+                <rect>64,32,128,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg05.png</key>
+            <key type="filename">cm_b_effect05_00.png</key>
+            <key type="filename">cm_b_effect05_01.png</key>
+            <key type="filename">cm_b_effect05_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>64,40,128,80</rect>
+                <rect>40,20,80,40</rect>
                 <key>scale9Paddings</key>
-                <rect>64,40,128,80</rect>
+                <rect>40,20,80,40</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg07.png</key>
+            <key type="filename">frame_bottom.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,62,64,124</rect>
+                <rect>64,29,128,57</rect>
                 <key>scale9Paddings</key>
-                <rect>32,62,64,124</rect>
+                <rect>64,29,128,57</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg08.png</key>
+            <key type="filename">frame_top.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,50,64,100</rect>
+                <rect>64,5,128,10</rect>
                 <key>scale9Paddings</key>
-                <rect>32,50,64,100</rect>
+                <rect>64,5,128,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">meter00.png</key>
+            <key type="filename">meter01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,1,48,2</rect>
+                <key>scale9Paddings</key>
+                <rect>24,1,48,2</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">meter02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,1,48,1</rect>
+                <key>scale9Paddings</key>
+                <rect>24,1,48,1</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">meter03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,1,32,2</rect>
+                <key>scale9Paddings</key>
+                <rect>16,1,32,2</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">meter04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>1,3,1,5</rect>
+                <key>scale9Paddings</key>
+                <rect>1,3,1,5</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>bg00.png</filename>
-            <filename>bg01.png</filename>
-            <filename>bg02.png</filename>
-            <filename>bg03.png</filename>
-            <filename>bg04.png</filename>
-            <filename>bg05.png</filename>
-            <filename>bg06.png</filename>
-            <filename>bg07.png</filename>
-            <filename>bg08.png</filename>
+            <filename>frame_bottom.png</filename>
+            <filename>frame_top.png</filename>
+            <filename>meter00.png</filename>
+            <filename>meter01.png</filename>
+            <filename>meter02.png</filename>
+            <filename>meter03.png</filename>
+            <filename>meter04.png</filename>
+            <filename>cm_a_effect00.png</filename>
+            <filename>cm_a_effect01.png</filename>
+            <filename>cm_a_effect02_00.png</filename>
+            <filename>cm_a_effect02_01.png</filename>
+            <filename>cm_a_effect02_02.png</filename>
+            <filename>cm_a_effect03_00.png</filename>
+            <filename>cm_a_effect03_01.png</filename>
+            <filename>cm_a_effect04_00.png</filename>
+            <filename>cm_a_effect04_01.png</filename>
+            <filename>cm_a_effect04_02.png</filename>
+            <filename>cm_a_effect05_00.png</filename>
+            <filename>cm_a_effect05_01.png</filename>
+            <filename>cm_b_effect00_00.png</filename>
+            <filename>cm_b_effect01_00.png</filename>
+            <filename>cm_b_effect02_00.png</filename>
+            <filename>cm_b_effect03_00.png</filename>
+            <filename>cm_b_effect04_00.png</filename>
+            <filename>cm_b_effect05_00.png</filename>
+            <filename>cm_b_effect05_01.png</filename>
+            <filename>cm_b_effect05_02.png</filename>
+            <filename>cm_b_effect06_00.png</filename>
+            <filename>cm_b_effect06_01.png</filename>
+            <filename>cm_b_effect06_02.png</filename>
+            <filename>cm_b_effect06_03.png</filename>
+            <filename>cm_b_effect06_04.png</filename>
+            <filename>cm_b_effect06_05.png</filename>
+            <filename>cm_b_effect07_00.png</filename>
+            <filename>cm_b_effect07_01.png</filename>
+            <filename>cm_b_effect07_02.png</filename>
+            <filename>cm_b_effect07_03.png</filename>
+            <filename>cm_b_effect07_04.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

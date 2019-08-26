@@ -27,6 +27,16 @@ namespace YYHS
 
         public int GetCharaNo() => m_charaNo;
 
+        private string GetCharaPath()
+        {
+            return string.Format(PathSettings.CharaSprite, m_charaNo.ToString("d2"));
+        }
+
+        private string GetBackGroundPath()
+        {
+            return string.Format(PathSettings.BackGroundSprite, m_bgNo.ToString("d2"));
+        }
+
         public void InitObject()
         {
             FindAnimationController();
@@ -39,6 +49,8 @@ namespace YYHS
             CreateNewBGObject();
             CreateNewEffectObject(GetCharaPath());
             CreateNewEffectObject(GetBackGroundPath());
+            CreateNewEffectObject(PathSettings.CommonSprite);
+
             InitPosition();
             LoadObject();
             InactiveBGSprite();
@@ -260,15 +272,7 @@ namespace YYHS
             }
         }
 
-        private string GetCharaPath()
-        {
-            return string.Format(PathSettings.CharaSprite, m_charaNo.ToString("d2"));
-        }
 
-        private string GetBackGroundPath()
-        {
-            return string.Format(PathSettings.BackGroundSprite, m_bgNo.ToString("d2"));
-        }
     }
 
     [CustomEditor(typeof(SpriteSetter))]
