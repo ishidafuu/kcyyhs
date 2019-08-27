@@ -6,10 +6,8 @@ using UnityEngine;
 namespace YYHS
 {
     [Serializable]
-    [CreateAssetMenu(menuName = "YYHS/YHFilterEffect", fileName = "YHFilterEffect_")]
-    public class YHFilterEffect : ScriptableObject
+    public struct YHFilterEffect
     {
-        public string imageName;
         public int width;
         public int height;
         public bool isOverChara;
@@ -18,6 +16,5 @@ namespace YYHS
         public int moveY;
         public int flipInterval;
         public int flipCount;
-        public Color[] color;
     }
 }
