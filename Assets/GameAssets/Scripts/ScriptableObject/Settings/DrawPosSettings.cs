@@ -9,7 +9,8 @@ namespace YYHS
     [CreateAssetMenu(menuName = "YYHS/Settings/DrawPosSettings", fileName = "DrawPosSettings")]
     public sealed class DrawPosSettings : ScriptableObject
     {
-        public int BgScrollWidth;
+        public int BgWidth;
+        public int BgHeight;
         public int BgScrollRangeFactor;
         public int BgScrollX;
         public int BgScrollY;

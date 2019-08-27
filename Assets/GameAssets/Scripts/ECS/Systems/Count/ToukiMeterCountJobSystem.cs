@@ -29,7 +29,7 @@ namespace YYHS
             var job = new CountToukiJob()
             {
                 toukiMeters = toukiMeters,
-                BgScrollRange = Settings.Instance.DrawPos.BgScrollWidth << Settings.Instance.DrawPos.BgScrollRangeFactor,
+                BgScrollRange = Settings.Instance.DrawPos.BgWidth << (Settings.Instance.DrawPos.BgScrollRangeFactor - 1),
                 ToukiWidth = Settings.Instance.DrawPos.ToukiWidth,
                 SpriteUl = uv[0].x,
                 SpriteUr = uv[1].x,
