@@ -6,7 +6,7 @@ namespace YYHS
     /// <summary>
     /// 座標移動設定
     /// </summary>
-    [CreateAssetMenu(menuName = "Settings/CommonSettings", fileName = "CommonSettings")]
+    [CreateAssetMenu(menuName = "YYHS/Settings/CommonSettings", fileName = "CommonSettings")]
     public sealed class CommonSettings : ScriptableObject
     {
         public int PlayerNum;

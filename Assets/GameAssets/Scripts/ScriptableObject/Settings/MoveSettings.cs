@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YYHS
 {
 
-    [CreateAssetMenu(menuName = "Settings/MoveSettings", fileName = "MoveSettings")]
+    [CreateAssetMenu(menuName = "YYHS/Settings/MoveSettings", fileName = "MoveSettings")]
     public sealed class MoveSettings : ScriptableObject
     {
         public int WalkSpeed;

@@ -20,7 +20,7 @@ namespace YYHS
             YHAnimationsObject outputObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
             CreateByteFiles(destPaths, charaNo);
             CreateYHAnimation(destPaths, outputObjects);
-            AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/ScriptableObjects/YHAnimation/YHAnim_{charaNo.ToString("d2")}.asset");
+            AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/ScriptableObjects/YHAnimation/YHCharaAnim{charaNo.ToString("d2")}.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }

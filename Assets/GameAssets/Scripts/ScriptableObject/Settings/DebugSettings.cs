@@ -8,7 +8,7 @@ namespace YYHS
     /// <summary>
     /// ゲーム設定
     /// </summary>
-    [CreateAssetMenu(menuName = "Settings/DebugSettings", fileName = "DebugSettings")]
+    [CreateAssetMenu(menuName = "YYHS/Settings/DebugSettings", fileName = "DebugSettings")]
     public sealed class DebugSettings : ScriptableObject
     {
         // // デバッグ用弾発射
