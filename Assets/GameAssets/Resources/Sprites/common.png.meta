@@ -245,6 +245,12 @@ TextureImporter:
   - first:
       213: 5567347046605785118
     second: cm_f_effect07_04
+  - first:
+      213: -7348632609861317457
+    second: cm_a_effect00_00
+  - first:
+      213: 953123230019585582
+    second: cm_a_effect01_00
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -317,7 +323,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cm_a_effect00
+      name: cm_a_effect00_00
       rect:
         serializedVersion: 2
         x: 937
@@ -332,13 +338,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8479665011327745660
+      internalID: -7348632609861317457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_a_effect01
+      name: cm_a_effect01_00
       rect:
         serializedVersion: 2
         x: 905
@@ -353,13 +359,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 6904320172654073911
+      internalID: 953123230019585582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_a_effect02
+      name: cm_a_effect02_00
       rect:
         serializedVersion: 2
         x: 971
@@ -374,7 +380,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 3640204827862938735
+      internalID: 5883165060336789382
       vertices: []
       indices: 
       edges: []
