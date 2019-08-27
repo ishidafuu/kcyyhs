@@ -89,8 +89,8 @@ namespace YYHS
                     }
 
                     float u = (float)toukiMeter.bgScroll / (float)BgScrollRange;
-                    toukiMeter.textureUl = SpriteUl + (u * width);
-                    toukiMeter.textureUr = toukiMeter.textureUl + width;
+                    toukiMeter.bgScrollTextureUL = SpriteUl + (u * width);
+                    toukiMeter.bgScrollTextureUR = toukiMeter.bgScrollTextureUL + width;
                     toukiMeters[i] = toukiMeter;
                 }
             }

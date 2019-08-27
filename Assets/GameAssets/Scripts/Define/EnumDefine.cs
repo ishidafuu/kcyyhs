@@ -21,6 +21,16 @@ namespace YYHS
         Y,
     }
 
+    public enum EnumDrawLayer
+    {
+        OverFrame,
+        Frame,
+        OverChara,
+        Chara,
+        OverBackGround,
+        BackGround,
+    }
+
     public enum EnumToukiMaterState
     {
         Active = 0,

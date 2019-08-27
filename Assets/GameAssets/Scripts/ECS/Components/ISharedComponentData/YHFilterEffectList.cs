@@ -8,11 +8,11 @@ namespace YYHS
     [Serializable]
     public struct YHFilterEffectList : IEquatable<YHFilterEffectList>, ISharedComponentData
     {
-        public Dictionary<string, YHFilterEffect> effectDict;
-
+        // public Dictionary<string, YHFilterEffect> effectDict;
+        public List<YHFilterEffect> effects;
         public void Init()
         {
-            effectDict = new Dictionary<string, YHFilterEffect>();
+            effects = new List<YHFilterEffect>();
 
             var loadObjects = Resources.FindObjectsOfTypeAll<YHFilterEffect>();
             if (loadObjects.Length == 0)
@@ -23,13 +23,10 @@ namespace YYHS
 
             foreach (var item in loadObjects)
             {
-                effectDict.Add(item.imageName, item as YHFilterEffect);
-            }
-
-            foreach (var item in effectDict)
-            {
-                Debug.Log(item.Key);
-
+                // int effectNo = 0;
+                // Int32.TryParse(item.name.Remove(0, item.name.IndexOf("_") + 1), out effectNo);
+                // Debug.Log(effectNo);
+                effects.Add(item as YHFilterEffect);
             }
         }
 

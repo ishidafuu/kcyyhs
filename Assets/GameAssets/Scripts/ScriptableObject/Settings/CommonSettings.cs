@@ -9,8 +9,9 @@ namespace YYHS
     [CreateAssetMenu(menuName = "YYHS/Settings/CommonSettings", fileName = "CommonSettings")]
     public sealed class CommonSettings : ScriptableObject
     {
-        public int PlayerNum;
-        public int CharaNum;
-        public int ButtonNum;
+        public int PlayerCount;
+        public int CharaCount;
+        public int ButtonCount;
+        public int FilterEffectCount;
     }
 }

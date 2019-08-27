@@ -53,6 +53,8 @@ namespace YYHS
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputJobSystem>());
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountJobSystem>());
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BGDrawSystem>());
+            // simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectDrawSystem>());
+            // simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<MeterDrawSystem>());
 
             initializationSystemGroup.SortSystemUpdateList();
             simulationSystemGroup.SortSystemUpdateList();
@@ -76,17 +78,26 @@ namespace YYHS
         void InitializeEntities(EntityManager manager)
         {
             CreateCharaEntity(manager);
+            CreateFilterEffectEntity(manager);
         }
 
         void CreateCharaEntity(EntityManager manager)
         {
-            for (int i = 0; i < Settings.Instance.Common.CharaNum; i++)
+            for (int i = 0; i < Settings.Instance.Common.CharaCount; i++)
             {
                 var playerEntity = (i < m_playerEntityList.Count)
                     ? m_playerEntityList[i]
                     : Entity.Null;
 
-                var entity = CharaEntityFactory.CreateEntity(i, manager, ref Shared.charaMeshMat);
+                var entity = CharaEntityFactory.CreateEntity(i, manager);
+            }
+        }
+
+        void CreateFilterEffectEntity(EntityManager manager)
+        {
+            for (int i = 0; i < Settings.Instance.Common.FilterEffectCount; i++)
+            {
+                var entity = FilterEffectEntityFactory.CreateEntity(i, manager);
             }
         }
     }

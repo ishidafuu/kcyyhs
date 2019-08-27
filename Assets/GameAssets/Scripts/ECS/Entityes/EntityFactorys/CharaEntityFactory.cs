@@ -24,9 +24,7 @@ namespace YYHS
         /// <param name="aniScriptSheet"></param>
         /// <param name="aniBasePos"></param>
         /// <returns></returns>
-        public static Entity CreateEntity(int _i, EntityManager _entityManager,
-            ref MeshMatList _meshMatList
-        )
+        public static Entity CreateEntity(int _i, EntityManager _entityManager)
         {
             var archetype = _entityManager.CreateArchetype(ComponentTypes.CharaComponentType);
 
@@ -42,9 +40,9 @@ namespace YYHS
             // entityManager.SetComponentData(entity, new CharaTag);
 
             // 必要なキャラのみインプットをつける
-            if (_i < Settings.Instance.Common.PlayerNum)
+            if (_i < Settings.Instance.Common.PlayerCount)
             {
-                _entityManager.AddComponent(entity, ComponentType.Create<PadScan>());
+                _entityManager.AddComponent(entity, ComponentType.ReadWrite<PadScan>());
             }
 
             // ID
@@ -96,7 +94,7 @@ namespace YYHS
             // });
 
             // SharedComponentDataのセット
-            _entityManager.AddSharedComponentData(entity, _meshMatList);
+            // _entityManager.AddSharedComponentData(entity, _meshMatList);
 
             return entity;
         }

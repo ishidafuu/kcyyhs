@@ -38,7 +38,7 @@ namespace YYHS
             m_group = GetEntityQuery(
                 ComponentType.ReadWrite<PadScan>());
 
-            var playerNum = Settings.Instance.Common.PlayerNum;
+            var playerNum = Settings.Instance.Common.PlayerCount;
             var tpmPlayerNames = new List<string>();
             for (int i = 0; i < playerNum; i++)
             {
@@ -52,7 +52,7 @@ namespace YYHS
 
         private void InitButtonTypeName(List<string> tpmPlayerNames)
         {
-            var ButtonNum = Settings.Instance.Common.ButtonNum;
+            var ButtonNum = Settings.Instance.Common.ButtonCount;
             ButtonTypeName = new ReadOnlyCollection<string>[ButtonNum];
 
             var buttonNames = new List<string>();
@@ -117,7 +117,7 @@ namespace YYHS
 
         void SetButton(ref PadScan padScan, int playerNo)
         {
-            var ButtonNum = Settings.Instance.Common.ButtonNum;
+            var ButtonNum = Settings.Instance.Common.ButtonCount;
 
             for (int i = 0; i < ButtonNum; i++)
             {
