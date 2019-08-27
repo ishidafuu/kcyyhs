@@ -30,8 +30,9 @@ namespace YYHS
             {
                 toukiMeters = toukiMeters,
                 BgScrollRange = Settings.Instance.DrawPos.BgScrollWidth << Settings.Instance.DrawPos.BgScrollRangeFactor,
-                spriteUl = uv[0].x,
-                spriteUr = uv[1].x,
+                ToukiWidth = Settings.Instance.DrawPos.ToukiWidth,
+                SpriteUl = uv[0].x,
+                SpriteUr = uv[1].x,
             };
 
             inputDeps = job.Schedule(inputDeps);
@@ -46,12 +47,13 @@ namespace YYHS
         {
             public NativeArray<ToukiMeter> toukiMeters;
             [ReadOnly] public int BgScrollRange;
-            [ReadOnly] public float spriteUl;
-            [ReadOnly] public float spriteUr;
+            [ReadOnly] public int ToukiWidth;
+            [ReadOnly] public float SpriteUl;
+            [ReadOnly] public float SpriteUr;
 
             public void Execute()
             {
-                float width = (spriteUr - spriteUl) / 2;
+                float width = (SpriteUr - SpriteUl) / 2;
 
                 for (int i = 0; i < toukiMeters.Length; i++)
                 {
@@ -59,9 +61,9 @@ namespace YYHS
                     if (toukiMeter.muki != EnumCrossType.None)
                     {
                         toukiMeter.value++;
-                        if (toukiMeter.value > 100)
+                        if (toukiMeter.value > ToukiWidth)
                         {
-                            toukiMeter.value = 100;
+                            toukiMeter.value = ToukiWidth;
                         }
                     }
 
@@ -87,7 +89,7 @@ namespace YYHS
                     }
 
                     float u = (float)toukiMeter.bgScroll / (float)BgScrollRange;
-                    toukiMeter.textureUl = spriteUl + (u * width);
+                    toukiMeter.textureUl = SpriteUl + (u * width);
                     toukiMeter.textureUr = toukiMeter.textureUl + width;
                     toukiMeters[i] = toukiMeter;
                 }

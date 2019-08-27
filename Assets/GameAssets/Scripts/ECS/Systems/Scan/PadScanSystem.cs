@@ -46,7 +46,7 @@ namespace YYHS
             }
 
             InitButtonTypeName(tpmPlayerNames);
-            InitHolizontalName(tpmPlayerNames);
+            InitHorizontalName(tpmPlayerNames);
             InitVerticalName(tpmPlayerNames);
         }
 
@@ -72,7 +72,7 @@ namespace YYHS
             }
         }
 
-        private void InitHolizontalName(List<string> tpmPlayerNames)
+        private void InitHorizontalName(List<string> tpmPlayerNames)
         {
             var tmpHorizontalNames = new List<string>();
             foreach (var item in tpmPlayerNames)

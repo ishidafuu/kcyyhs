@@ -36,17 +36,14 @@ namespace YYHS
             {
                 toukiMeters = toukiMeters,
                 toukiMeterMatrixes = toukiMeterMatrixes,
-                q = m_quaternion,
+                Q = m_quaternion,
+                ToukiWidth = Settings.Instance.DrawPos.ToukiWidth,
                 ToukiMeterX = Settings.Instance.DrawPos.ToukiMeterX,
                 ToukiMeterY = Settings.Instance.DrawPos.ToukiMeterY,
             };
             inputDeps = toukiMeterJob.Schedule(inputDeps);
-            // var bgScrolls = m_group.ToComponentDataArray<BgScroll>(Allocator.TempJob);
-            // var bgScrollsMatrixes = new NativeArray<Matrix4x4>(toukiMeters.Length, Allocator.TempJob);
-            // BgScrollJob bgScrollJob = DoBgScrollJob(ref inputDeps, toukiMeters, bgScrollsMatrixes);
 
             inputDeps.Complete();
-            // m_query.CopyFromComponentDataArray(toukiMeters);
 
             DrawBgScroll(toukiMeters);
             DrawFrame();
@@ -58,37 +55,35 @@ namespace YYHS
             return inputDeps;
         }
 
-        private ToukiMeterJob DoToukiMeterJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters, NativeArray<Matrix4x4> toukiMeterMatrixes)
-        {
-            var toukiMeterJob = new ToukiMeterJob()
-            {
-                toukiMeters = toukiMeters,
-                toukiMeterMatrixes = toukiMeterMatrixes,
-                q = m_quaternion,
-                ToukiMeterX = Settings.Instance.DrawPos.ToukiMeterX,
-                ToukiMeterY = Settings.Instance.DrawPos.ToukiMeterY,
-            };
-            inputDeps = toukiMeterJob.Schedule(inputDeps);
-            m_query.AddDependency(inputDeps);
-            return toukiMeterJob;
-        }
 
-        // private BgScrollJob DoBgScrollJob(ref JobHandle inputDeps, NativeArray<ToukiMeter> toukiMeters, NativeArray<Matrix4x4> bgScrollMatrixs)
-        // {
-        //     var bgScrollJob = new BgScrollJob()
-        //     {
-        //         toukiMeters = toukiMeters,
-        //         bgScrollMatrixes = bgScrollMatrixes,
-        //         q = m_quaternion,
-        //         BgScrollWidth = Settings.Instance.DrawPos.BgScrollWidth,
-        //         BgScrollRangeFactor = Settings.Instance.DrawPos.BgScrollRangeFactor,
-        //         BgScrollX = -Settings.Instance.DrawPos.BgScrollX,
-        //         BgScrollY = Settings.Instance.DrawPos.BgScrollY,
-        //     };
-        //     inputDeps = bgScrollJob.Schedule(inputDeps);
-        //     m_group.AddDependency(inputDeps);
-        //     return bgScrollJob;
-        // }
+        // [BurstCompileAttribute]
+        struct ToukiMeterJob : IJob
+        {
+            public NativeArray<Matrix4x4> toukiMeterMatrixes;
+            [ReadOnly] public NativeArray<ToukiMeter> toukiMeters;
+            [ReadOnly] public Quaternion Q;
+            [ReadOnly] public int ToukiWidth;
+            [ReadOnly] public int ToukiMeterX;
+            [ReadOnly] public int ToukiMeterY;
+
+            public void Execute()
+            {
+                for (int i = 0; i < toukiMeters.Length; i++)
+                {
+                    float width = (float)toukiMeters[i].value / (float)ToukiWidth;
+
+                    float posX = (i == 0)
+                    ? ToukiMeterX + ((float)toukiMeters[i].value / 2f)
+                    : -ToukiMeterX - ((float)toukiMeters[i].value / 2f);
+
+                    Matrix4x4 tmpMatrix = Matrix4x4.TRS(
+                        new Vector3(posX, ToukiMeterY, 0),
+                        Q, new Vector3(width, 1, 1));
+
+                    toukiMeterMatrixes[i] = tmpMatrix;
+                }
+            }
+        }
 
         private void DrawBgScroll(NativeArray<ToukiMeter> toukiMeters)
         {
@@ -119,9 +114,14 @@ namespace YYHS
 
         private void DrawFrame()
         {
-            Matrix4x4 frameMatrix = Matrix4x4.TRS(new Vector3(0, 0, 0), m_quaternion, Vector3.one);
+            Matrix4x4 frameTopMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameTopY, 0), m_quaternion, Vector3.one);
+            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_top.ToString()],
+                frameTopMatrix,
+                Shared.commonMeshMat.material, 0);
+
+            Matrix4x4 frameBottomMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameBottomY, 0), m_quaternion, Vector3.one);
             Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_bottom.ToString()],
-                frameMatrix,
+                frameBottomMatrix,
                 Shared.commonMeshMat.material, 0);
         }
 
@@ -135,67 +135,7 @@ namespace YYHS
             }
         }
 
-        // [BurstCompileAttribute]
-        struct ToukiMeterJob : IJob
-        {
-            public NativeArray<Matrix4x4> toukiMeterMatrixes;
-            [ReadOnly] public NativeArray<ToukiMeter> toukiMeters;
-            [ReadOnly] public Quaternion q;
-            [ReadOnly] public int ToukiMeterX;
-            [ReadOnly] public int ToukiMeterY;
 
-            public void Execute()
-            {
-                for (int i = 0; i < toukiMeters.Length; i++)
-                {
-                    var width = (float)toukiMeters[i].value / 100;
-                    Matrix4x4 tmpMatrix = Matrix4x4.TRS(
-                        new Vector3(ToukiMeterX, ToukiMeterY, 0),
-                        q, new Vector3(width, 1, 1));
-
-                    toukiMeterMatrixes[i] = tmpMatrix;
-                }
-            }
-        }
-
-        // [BurstCompileAttribute]
-        // struct BgScrollJob : IJob
-        // {
-        //     [ReadOnly]
-        //     // [DeallocateOnJobCompletion]
-        //     public NativeArray<ToukiMeter> toukiMeters;
-        //     [ReadOnly]
-        //     public Quaternion q;
-        //     [ReadOnly]
-        //     public int BgScrollWidth;
-        //     [ReadOnly]
-        //     public int BgScrollRangeFactor;
-        //     [ReadOnly]
-        //     public int BgScrollX;
-        //     [ReadOnly]
-        //     public int BgScrollY;
-        //     public NativeArray<Matrix4x4> bgScrollMatrixes;
-
-        //     public void Execute()
-        //     {
-        //         for (int i = 0; i < toukiMeters.Length; i++)
-        //         {
-        //             // var index = i * 2;
-        //             var posX = BgScrollX + (toukiMeters[i].bgScroll >> BgScrollRangeFactor);
-        //             var posX2 = (posX - BgScrollWidth);
-
-        //             Matrix4x4 tmpMatrix = Matrix4x4.TRS(new Vector3(posX, BgScrollY, 0),
-        //                 q, Vector3.one);
-
-        //             bgScrollMatrixes[i] = tmpMatrix;
-
-        //             // Matrix4x4 tmpMatrix2 = Matrix4x4.TRS(new Vector3(posX2, BgScrollY, 0),
-        //             //     q, Vector3.one);
-
-        //             // bgScrollMatrixs[index + 1] = tmpMatrix2;
-        //         }
-        //     }
-        // }
 
     }
 }
