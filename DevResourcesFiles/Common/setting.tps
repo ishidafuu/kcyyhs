@@ -181,8 +181,8 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">cm_a_effect00.png</key>
-            <key type="filename">cm_a_effect01.png</key>
+            <key type="filename">cm_a_effect00_00.png</key>
+            <key type="filename">cm_a_effect01_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -195,7 +195,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">cm_a_effect02.png</key>
+            <key type="filename">cm_a_effect02_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -422,9 +422,6 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>cm_a_effect00.png</filename>
-            <filename>cm_a_effect01.png</filename>
-            <filename>cm_a_effect02.png</filename>
             <filename>cm_a_effect03_00.png</filename>
             <filename>cm_a_effect03_01.png</filename>
             <filename>cm_d_effect00_00.png</filename>
@@ -468,6 +465,9 @@
             <filename>signal00.png</filename>
             <filename>signal01.png</filename>
             <filename>signal02.png</filename>
+            <filename>cm_a_effect01_00.png</filename>
+            <filename>cm_a_effect02_00.png</filename>
+            <filename>cm_a_effect00_00.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
