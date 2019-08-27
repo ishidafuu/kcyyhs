@@ -84,11 +84,13 @@ namespace YYHS
 
         private void DrawToukiMeter(ToukiMeterJob toukiMeterJob)
         {
+            string meter02 = EnumBGPartsType.meter02.ToString();
             for (int i = 0; i < toukiMeterJob.toukiMeterMatrixes.Length; i++)
             {
-                Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.meter02.ToString()],
+                Graphics.DrawMesh(
+                    Shared.commonMeshMat.meshDict[meter02],
                     toukiMeterJob.toukiMeterMatrixes[i],
-                    Shared.commonMeshMat.material, 0);
+                    Shared.commonMeshMat.materialDict[meter02], 0);
             }
         }
     }

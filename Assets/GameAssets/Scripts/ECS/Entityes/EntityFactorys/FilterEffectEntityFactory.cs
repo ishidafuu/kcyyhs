@@ -14,7 +14,7 @@ namespace YYHS
 {
     public static class FilterEffectEntityFactory
     {
-        public static Entity CreateEntity(int i, EntityManager entityManager)
+        public static Entity CreateEntity(int i, EntityManager entityManager, ref YHFilterEffectList effectList)
         {
             var archetype = entityManager.CreateArchetype(ComponentTypes.FilterEffectComponentType);
             var entity = entityManager.CreateEntity(archetype);
@@ -22,7 +22,11 @@ namespace YYHS
             entityManager.SetComponentData(entity, new FilterEffect
             {
                 id = i,
+                isActive = (i == 0),//TODO:仮
+                effectNo = 0,//TODO:仮
             });
+
+            // entityManager.SetSharedComponentData(entity, effectList);
 
             return entity;
         }

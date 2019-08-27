@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Jobs;
 // using Unity.Transforms;
 using UnityEngine;
+using Unity.Mathematics;
 using UnityEngine.Experimental.PlayerLoop;
 
 namespace YYHS
@@ -19,7 +20,7 @@ namespace YYHS
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(
-                ComponentType.ReadOnly<ToukiMeter>()
+                ComponentType.ReadOnly<FilterEffect>()
             // ComponentType.ReadOnly<BgScroll>()
             );
             m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
@@ -29,113 +30,104 @@ namespace YYHS
         {
             m_query.AddDependency(inputDeps);
 
-            var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            var toukiMeterMatrixes = new NativeArray<Matrix4x4>(toukiMeters.Length, Allocator.TempJob);
-
-            var toukiMeterJob = new ToukiMeterJob()
-            {
-                toukiMeters = toukiMeters,
-                toukiMeterMatrixes = toukiMeterMatrixes,
-                Q = m_quaternion,
-                ToukiWidth = Settings.Instance.DrawPos.ToukiWidth,
-                ToukiMeterX = Settings.Instance.DrawPos.ToukiMeterX,
-                ToukiMeterY = Settings.Instance.DrawPos.ToukiMeterY,
-            };
-            inputDeps = toukiMeterJob.Schedule(inputDeps);
-
-            inputDeps.Complete();
-
-            DrawBgScroll(toukiMeters);
-            DrawFrame();
-            DrawToukiMeter(toukiMeterJob);
-
-            toukiMeters.Dispose();
-            toukiMeterMatrixes.Dispose();
-
+            NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
+            DrawFilterEffect(filterEffects);
+            filterEffects.Dispose();
             return inputDeps;
         }
 
-
-        // [BurstCompileAttribute]
-        struct ToukiMeterJob : IJob
+        private void DrawFilterEffect(NativeArray<FilterEffect> filterEffects)
         {
-            public NativeArray<Matrix4x4> toukiMeterMatrixes;
-            [ReadOnly] public NativeArray<ToukiMeter> toukiMeters;
-            [ReadOnly] public Quaternion Q;
-            [ReadOnly] public int ToukiWidth;
-            [ReadOnly] public int ToukiMeterX;
-            [ReadOnly] public int ToukiMeterY;
-
-            public void Execute()
+            int BgWidthHalf = (Settings.Instance.DrawPos.BgWidth >> 1);
+            int BgHeightHalf = (Settings.Instance.DrawPos.BgHeight >> 1);
+            for (int i = 0; i < filterEffects.Length; i++)
             {
-                for (int i = 0; i < toukiMeters.Length; i++)
+                var filterEffect = filterEffects[i];
+                if (!filterEffect.isActive)
+                    continue;
+
+                var data = Shared.yhFilterEffectList.effects[filterEffect.id].data;
+                int flipNo = (data.flipCount >= 2 && data.flipInterval > 0)
+                    ? ((filterEffect.count / data.flipInterval) % data.flipCount)
+                    : 0;
+
+                string imageName = $"{Shared.yhFilterEffectList.effects[filterEffect.id].imageName}_{flipNo.ToString("d2")}";
+                Mesh mesh = Shared.commonMeshMat.meshDict[imageName];
+                Material mat = Shared.commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
+
+                int layer = (data.isOverChara)
+                    ? (int)EnumDrawLayer.OverChara
+                    : (int)EnumDrawLayer.OverBackGround;
+
+                int intervalWidth = (data.offsetY == 0)
+                    ? data.width
+                    : data.width * (data.height / data.offsetY);
+
+                int centerX = (filterEffect.count * data.moveX) % intervalWidth;
+                int centerY = (filterEffect.count * data.moveY) % data.height;
+                int leftCount = (int)math.ceil((float)(centerX + BgWidthHalf) / data.width) + 1;
+                int rightCount = (int)math.ceil((float)(BgWidthHalf - centerX) / data.width) + 1;
+
+                if (rightCount == 0)
                 {
-                    float width = (float)toukiMeters[i].value / (float)ToukiWidth;
+                    rightCount = 1;
+                }
 
-                    float posX = (i == 0)
-                    ? ToukiMeterX + ((float)toukiMeters[i].value / 2f)
-                    : -ToukiMeterX - ((float)toukiMeters[i].value / 2f);
-
-                    Matrix4x4 tmpMatrix = Matrix4x4.TRS(
-                        new Vector3(posX, ToukiMeterY, 0),
-                        Q, new Vector3(width, 1, 1));
-
-                    toukiMeterMatrixes[i] = tmpMatrix;
+                for (int x = 0; x < rightCount; x++)
+                {
+                    DrawYLine(ref filterEffect, mesh, mat, BgHeightHalf, centerX, centerY, +x, layer);
+                }
+                for (int x = 0; x < leftCount; x++)
+                {
+                    if (x == 0)
+                        continue;
+                    DrawYLine(ref filterEffect, mesh, mat, BgHeightHalf, centerX, centerY, -x, layer);
                 }
             }
         }
 
-        private void DrawBgScroll(NativeArray<ToukiMeter> toukiMeters)
+        private void DrawYLine(ref FilterEffect filterEffect, Mesh mesh, Material mat,
+             int BgHeightHalf, int centerX, int centerY, int x, int layer)
         {
-            for (int i = 0; i < toukiMeters.Length; i++)
-            {
-                Matrix4x4 bgScrollMatrixes = Matrix4x4.TRS(new Vector3(-Settings.Instance.DrawPos.BgScrollX,
-                        Settings.Instance.DrawPos.BgScrollY, 0),
-                    m_quaternion, new Vector3(0.5f, 1, 1));
+            var data = Shared.yhFilterEffectList.effects[filterEffect.id].data;
+            int posX = centerX + (data.width * x);
+            int baseY = centerY + (data.offsetY * x);
+            int topCount = (int)math.ceil((float)(BgHeightHalf - baseY) / data.height) + 1;
+            int bottomCount = (int)math.ceil((float)(baseY + BgHeightHalf) / data.height) + 1;
 
-                Mesh baseMesh = Shared.bgFrameMeshMat.meshDict[EnumBGPartsType.bg00.ToString()];
-                Mesh mesh = new Mesh()
-                {
-                    vertices = baseMesh.vertices,
-                    uv = new Vector2[]
-                    {
-                    new Vector2(toukiMeters[i].bgScrollTextureUL, baseMesh.uv[0].y),
-                    new Vector2(toukiMeters[i].bgScrollTextureUR, baseMesh.uv[1].y),
-                    new Vector2(toukiMeters[i].bgScrollTextureUL, baseMesh.uv[2].y),
-                    new Vector2(toukiMeters[i].bgScrollTextureUR, baseMesh.uv[3].y),
-                    },
-                    triangles = baseMesh.triangles,
-                };
-                Graphics.DrawMesh(mesh,
-                    bgScrollMatrixes,
-                    Shared.bgFrameMeshMat.material, 0);
+            if (topCount == 0)
+            {
+                topCount = 1;
+            }
+
+            for (int y = 0; y < topCount; y++)
+            {
+                Draw(mesh, mat, data, posX, baseY, +y, layer);
+            }
+
+            for (int y = 0; y < bottomCount; y++)
+            {
+                if (y == 0)
+                    continue;
+
+                Draw(mesh, mat, data, posX, baseY, -y, layer);
             }
         }
 
-        private void DrawFrame()
+        private void Draw(Mesh mesh, Material mat, YHFilterEffect data, int posX, int baseY, int y, int layer)
         {
-            Matrix4x4 frameTopMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameTopY, 0), m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_top.ToString()],
-                frameTopMatrix,
-                Shared.commonMeshMat.material, 0);
+            int posY = baseY + (data.height * y);
 
-            Matrix4x4 frameBottomMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameBottomY, 0), m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_bottom.ToString()],
-                frameBottomMatrix,
-                Shared.commonMeshMat.material, 0);
+            Matrix4x4 matrixes = Matrix4x4.TRS(
+                new Vector3(posX, posY + Settings.Instance.DrawPos.BgScrollY, layer),
+                m_quaternion, Vector3.one);
+
+
+            // Shared.commonMeshMat.propertyBlock.Clear();
+            // Shared.commonMeshMat.propertyBlock.SetColor(Shared.commonMeshMat.colorPropertyId, Color.red);
+            // Graphics.DrawMesh(ObjMesh, Obj.WorldPosition + new Vector3(ofst, 0, ofst), Obj.Rotation, Material1, 0, MainCamera, 0, _PropertyBlock);
+
+            Graphics.DrawMesh(mesh, matrixes, mat, 0);
         }
-
-        private void DrawToukiMeter(ToukiMeterJob toukiMeterJob)
-        {
-            for (int i = 0; i < toukiMeterJob.toukiMeterMatrixes.Length; i++)
-            {
-                Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.meter02.ToString()],
-                    toukiMeterJob.toukiMeterMatrixes[i],
-                    Shared.commonMeshMat.material, 0);
-            }
-        }
-
-
-
     }
 }

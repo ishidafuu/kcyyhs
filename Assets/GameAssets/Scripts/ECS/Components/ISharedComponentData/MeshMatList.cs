@@ -8,14 +8,15 @@ namespace YYHS
     [Serializable]
     public struct MeshMatList : IEquatable<MeshMatList>, ISharedComponentData
     {
-        public Material material;
+        public Dictionary<string, Material> materialDict;
         public Dictionary<string, Mesh> meshDict;
-        public Dictionary<string, Sprite> spriteDict;
+        int colorPropertyId;
 
         public MeshMatList(string path, string shader)
         {
             meshDict = new Dictionary<string, Mesh>();
-            spriteDict = new Dictionary<string, Sprite>();
+            materialDict = new Dictionary<string, Material>();
+            // spriteDict = new Dictionary<string, Sprite>();
             UnityEngine.Object[] list = Resources.LoadAll(path, typeof(Sprite));
 
             // listがnullまたは空ならエラーで返す
@@ -23,9 +24,10 @@ namespace YYHS
             {
                 Debug.LogWarning(path);
             }
+
             // マテリアル用シェーダー
             var matShader = Shader.Find(shader);
-            material = new Material(matShader);
+            colorPropertyId = Shader.PropertyToID("_Color");
 
             if (matShader == null)
             {
@@ -37,15 +39,12 @@ namespace YYHS
             {
                 // Debug.Log(list[i].name);
                 var sprite = list[i] as Sprite;
-                spriteDict.Add(list[i].name, sprite);
-
                 var mesh = GenerateQuadMesh(sprite);
+                var material = new Material(matShader);
+                material.mainTexture = sprite.texture;
 
                 meshDict.Add(list[i].name, mesh);
-                if (i == 0)
-                {
-                    material.mainTexture = sprite.texture;
-                }
+                materialDict.Add(list[i].name, material);
             }
         }
 
@@ -59,14 +58,8 @@ namespace YYHS
             };
 
             // Debug.Log(sprite.name);
-            // foreach (var item in sprite.vertices)
-            // {
-            // 	Debug.Log(item);
-            // }
-            // foreach (var item in sprite.uv)
-            // {
-            // 	Debug.Log(item);
-            // }
+            // foreach (var item in sprite.vertices)Debug.Log(item);
+            // foreach (var item in sprite.uv)Debug.Log(item);
 
             int[] triangles = {
                 sprite.triangles[0],
@@ -83,6 +76,13 @@ namespace YYHS
                 uv = sprite.uv,
                 triangles = triangles
             };
+        }
+
+        public Material SetColor(string imageName, Color color)
+        {
+            Material mat = materialDict[imageName];
+            mat.SetColor(colorPropertyId, color);
+            return mat;
         }
 
         public bool Equals(MeshMatList obj)

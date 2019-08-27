@@ -18,7 +18,7 @@ namespace YYHS
         public static MeshMatList bgFrameMeshMat;
         public static MeshMatList commonMeshMat;
 
-        public static YHFilterEffectList effectList;
+        public static YHFilterEffectList yhFilterEffectList;
 
         static readonly string DefaultShader = "Sprites/DefaultSprite";
 
@@ -26,8 +26,8 @@ namespace YYHS
         {
             bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
             commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
-            effectList = new YHFilterEffectList();
-            effectList.Init();
+            yhFilterEffectList = new YHFilterEffectList();
+            yhFilterEffectList.Init();
         }
 
         private static string GetBackGroundPath(int bgNo)

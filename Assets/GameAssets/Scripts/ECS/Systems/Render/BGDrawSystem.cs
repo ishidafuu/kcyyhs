@@ -40,13 +40,14 @@ namespace YYHS
 
         private void DrawBackGround(NativeArray<ToukiMeter> toukiMeters)
         {
+            Mesh baseMesh = Shared.bgFrameMeshMat.meshDict[EnumBGPartsType.bg00.ToString()];
+            Material mat = Shared.bgFrameMeshMat.materialDict[EnumBGPartsType.bg00.ToString()];
             for (int i = 0; i < toukiMeters.Length; i++)
             {
                 Matrix4x4 bgScrollMatrixes = Matrix4x4.TRS(new Vector3(-Settings.Instance.DrawPos.BgScrollX,
                         Settings.Instance.DrawPos.BgScrollY, (int)EnumDrawLayer.BackGround),
                     m_quaternion, new Vector3(0.5f, 1, 1));
 
-                Mesh baseMesh = Shared.bgFrameMeshMat.meshDict[EnumBGPartsType.bg00.ToString()];
                 Mesh mesh = new Mesh()
                 {
                     vertices = baseMesh.vertices,
@@ -59,9 +60,7 @@ namespace YYHS
                     },
                     triangles = baseMesh.triangles,
                 };
-                Graphics.DrawMesh(mesh,
-                    bgScrollMatrixes,
-                    Shared.bgFrameMeshMat.material, 0);
+                Graphics.DrawMesh(mesh, bgScrollMatrixes, mat, 0);
             }
         }
 
@@ -72,13 +71,13 @@ namespace YYHS
                 m_quaternion, Vector3.one);
             Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_top.ToString()],
                 frameTopMatrix,
-                Shared.commonMeshMat.material, 0);
+                Shared.commonMeshMat.materialDict[EnumBGPartsType.frame_top.ToString()], 0);
 
             Matrix4x4 frameBottomMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameBottomY, (int)EnumDrawLayer.Frame),
                 m_quaternion, Vector3.one);
             Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_bottom.ToString()],
                 frameBottomMatrix,
-                Shared.commonMeshMat.material, 0);
+                Shared.commonMeshMat.materialDict[EnumBGPartsType.frame_bottom.ToString()], 0);
         }
     }
 }
