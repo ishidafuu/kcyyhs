@@ -41,6 +41,10 @@ namespace YYHS
     {
         public int frame;
         public Vector2Int position;
+        public Vector2 inTangent;
+        public Vector2 outTangent;
+        public Vector2 inWeight;
+        public Vector2 outWeight;
     }
 
     [Serializable]
@@ -48,6 +52,11 @@ namespace YYHS
     {
         public int frame;
         public Vector2 scale;
+
+        public Vector2 inTangent;
+        public Vector2 outTangent;
+        public Vector2 inWeight;
+        public Vector2 outWeight;
     }
 
     [Serializable]
@@ -55,6 +64,11 @@ namespace YYHS
     {
         public int frame;
         public float rotation;
+
+        public float inTangent;
+        public float outTangent;
+        public float inWeight;
+        public float outWeight;
     }
 
     [Serializable]

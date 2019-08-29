@@ -44,6 +44,10 @@ namespace YYHS
                     {
                         frame = TimeToFrame(curve.time),
                         position = position,
+                        inTangent = curve.inSlope,
+                        outTangent = curve.outSlope,
+                        inWeight = curve.inWeight,
+                        outWeight = curve.outWeight,
                     };
 
                     parts.positions.Add(framePosition);
@@ -69,6 +73,10 @@ namespace YYHS
                     {
                         frame = TimeToFrame(curve.time),
                         scale = scale,
+                        inTangent = curve.inSlope,
+                        outTangent = curve.outSlope,
+                        inWeight = curve.inWeight,
+                        outWeight = curve.outWeight,
                     };
 
                     parts.scales.Add(frameScale);
@@ -94,6 +102,10 @@ namespace YYHS
                     {
                         frame = TimeToFrame(curve.time),
                         rotation = rotation,
+                        inTangent = curve.inSlope.z,
+                        outTangent = curve.outSlope.z,
+                        inWeight = curve.inWeight.z,
+                        outWeight = curve.outWeight.z,
                     };
 
                     parts.rotations.Add(frameRotation);

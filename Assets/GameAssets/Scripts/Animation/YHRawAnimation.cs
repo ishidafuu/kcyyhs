@@ -44,6 +44,12 @@ namespace YYHS
     {
         public float time;
         public Vector3 value;
+        public Vector3 inSlope;
+        public Vector3 outSlope;
+        public int tangentMode;
+        public int weightedMode;
+        public Vector3 inWeight;
+        public Vector3 outWeight;
     }
 
     [Serializable]
