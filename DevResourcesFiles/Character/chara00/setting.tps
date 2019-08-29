@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.12.1</string>
+        <string>5.1.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -181,40 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">a_effect00.png</key>
-            <key type="filename">a_effect01.png</key>
-            <key type="filename">b_parts00.png</key>
-            <key type="filename">bullet00.png</key>
-            <key type="filename">cm_a_parts00.png</key>
-            <key type="filename">cm_b_parts00.png</key>
-            <key type="filename">cm_miss00.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>16,16,32,32</rect>
-                <key>scale9Paddings</key>
-                <rect>16,16,32,32</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">a_effect02.png</key>
-            <key type="filename">a_effect03.png</key>
-            <key type="filename">a_effect04.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>64,24,128,48</rect>
-                <key>scale9Paddings</key>
-                <rect>64,24,128,48</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">a_parts00.png</key>
             <key type="filename">cm_a_face00.png</key>
             <key type="filename">cm_a_face01.png</key>
@@ -242,6 +208,23 @@
                 <rect>24,16,48,32</rect>
                 <key>scale9Paddings</key>
                 <rect>24,16,48,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">b_parts00.png</key>
+            <key type="filename">bullet00.png</key>
+            <key type="filename">cm_a_parts00.png</key>
+            <key type="filename">cm_b_parts00.png</key>
+            <key type="filename">cm_miss00.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -308,16 +291,6 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>cm_miss00.png</filename>
-            <filename>cm_stand00.png</filename>
-            <filename>cm_stand01.png</filename>
-            <filename>cm_stand02.png</filename>
-            <filename>cm_stand03.png</filename>
-            <filename>a_effect00.png</filename>
-            <filename>a_effect01.png</filename>
-            <filename>a_effect02.png</filename>
-            <filename>a_effect03.png</filename>
-            <filename>a_effect04.png</filename>
             <filename>a_parts00.png</filename>
             <filename>a_parts01.png</filename>
             <filename>b_parts00.png</filename>
@@ -336,6 +309,11 @@
             <filename>cm_jump01.png</filename>
             <filename>cm_jump02.png</filename>
             <filename>cm_jump03.png</filename>
+            <filename>cm_miss00.png</filename>
+            <filename>cm_stand00.png</filename>
+            <filename>cm_stand01.png</filename>
+            <filename>cm_stand02.png</filename>
+            <filename>cm_stand03.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
