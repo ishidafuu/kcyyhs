@@ -20,7 +20,7 @@ namespace YYHS
             YHAnimationsObject outputObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
             CreateByteFiles(destPaths, charaNo);
             CreateYHAnimation(destPaths, outputObjects);
-            AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/ScriptableObjects/YHAnimation/YHCharaAnim{charaNo.ToString("d2")}.asset");
+            AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnim{charaNo.ToString("d2")}.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
@@ -64,6 +64,8 @@ namespace YYHS
                 YHAnimation anim = YHRawAnimationConverter.Convert(rawAnim);
 
                 outputObjects.animations.Add(anim);
+
+                // .bytesファイル削除（要素確認の際はここをコメントアウト）
                 System.IO.File.Delete(destPath);
             }
         }
