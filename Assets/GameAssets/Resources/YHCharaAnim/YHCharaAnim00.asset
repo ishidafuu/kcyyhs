@@ -1,0 +1,348 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daca190aefaf47445b2cb5e35a876a82, type: 3}
+  m_Name: YHCharaAnim00
+  m_EditorClassIdentifier: 
+  animations:
+  - name: cm_Air
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Charge00
+    length: 60
+    parts:
+    - name: cm_stand01
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 30
+        position: {x: 0, y: -2}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 60
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations: []
+    events: []
+  - name: cm_Charge01
+    length: 60
+    parts:
+    - name: cm_stand02
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 30
+        position: {x: 0, y: -2}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 60
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations: []
+    events: []
+  - name: cm_Decision00
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Decision01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_DefenseA00
+    length: 60
+    parts:
+    - name: cm_dodge00
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 168, y: -21}
+        inTangent: {x: -468.081, y: 75.02905}
+        outTangent: {x: -468.081, y: 75.02905}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.14138658, y: 0.20592599}
+      - frame: 60
+        position: {x: -170, y: -21}
+        inTangent: {x: -299.91907, y: -80.66913}
+        outTangent: {x: -299.91907, y: -80.66913}
+        inWeight: {x: 0.17297274, y: 0.17629606}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations:
+      - frame: 0
+        rotation: 0
+        inTangent: 0
+        outTangent: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - frame: 60
+        rotation: 180
+        inTangent: 0
+        outTangent: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+    events: []
+  - name: cm_DefenseA01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_DefenseA02
+    length: 60
+    parts: []
+    events: []
+  - name: cm_DefenseB00
+    length: 60
+    parts: []
+    events: []
+  - name: cm_DefenseB01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_DefenseB02
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Down
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Fall00
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Fall01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Jump00
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Jump01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Miss
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Punch00_00
+    length: 70
+    parts:
+    - name: cm_stand03
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      - frame: 40
+        isActive: 1
+        isFlipX: 1
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 20, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 30
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations: []
+    - name: cm_b_parts00
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      - frame: 40
+        isActive: 0
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 80, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 30
+        position: {x: 40, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations: []
+    - name: cm_a_parts00
+      frames:
+      - frame: 0
+        isActive: 0
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      - frame: 40
+        isActive: 1
+        isFlipX: 1
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 40
+        position: {x: 23, y: -42}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 55
+        position: {x: 23, y: -28}
+        inTangent: {x: 0, y: 28.000004}
+        outTangent: {x: 0, y: 28.000004}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 70
+        position: {x: 23, y: -25}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales:
+      - frame: 40
+        scale: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 70
+        scale: {x: 2, y: 2}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      rotations: []
+    - name: bg02
+      frames: []
+      positions:
+      - frame: 0
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 30
+        position: {x: 30, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations: []
+    events:
+    - frame: 30
+      functionName: EventEffect
+      data: 
+      floatParameter: 0
+      intParameter: 9999
+  - name: cm_Punch00_01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Punch01_00
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Punch01_01
+    length: 60
+    parts: []
+    events: []
+  - name: cm_Stand
+    length: 60
+    parts:
+    - name: cm_stand00
+      frames:
+      - frame: 0
+        isActive: 1
+        isFlipX: 0
+        isFlipY: 0
+        isBrink: 0
+      positions:
+      - frame: 0
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 30
+        position: {x: 0, y: -2}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      - frame: 60
+        position: {x: 0, y: 0}
+        inTangent: {x: 0, y: 0}
+        outTangent: {x: 0, y: 0}
+        inWeight: {x: 0.33333334, y: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334}
+      scales: []
+      rotations: []
+    events: []
