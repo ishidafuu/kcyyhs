@@ -39,15 +39,21 @@ namespace YYHS
 
                     if (last != null && last.position == position)
                         continue;
+                    int frame = TimeToFrame(curve.time);
+                    Keyframe keyFrameX = new Keyframe(frame, position.x,
+                        curve.inSlope.x, curve.outSlope.x,
+                        curve.inWeight.x, curve.outWeight.x);
+
+                    Keyframe keyFrameY = new Keyframe(frame, position.y,
+                        curve.inSlope.y, curve.outSlope.y,
+                        curve.inWeight.y, curve.outWeight.y);
 
                     YHFramePosition framePosition = new YHFramePosition()
                     {
-                        frame = TimeToFrame(curve.time),
+                        frame = frame,
                         position = position,
-                        inTangent = curve.inSlope,
-                        outTangent = curve.outSlope,
-                        inWeight = curve.inWeight,
-                        outWeight = curve.outWeight,
+                        keyFrameX = keyFrameX,
+                        keyFrameY = keyFrameY,
                     };
 
                     parts.positions.Add(framePosition);
@@ -69,14 +75,22 @@ namespace YYHS
                     if (last != null && last.scale == scale)
                         continue;
 
+                    int frame = TimeToFrame(curve.time);
+
+                    Keyframe keyFrameX = new Keyframe(frame, scale.x,
+                        curve.inSlope.x, curve.outSlope.x,
+                        curve.inWeight.x, curve.outWeight.x);
+
+                    Keyframe keyFrameY = new Keyframe(frame, scale.y,
+                        curve.inSlope.y, curve.outSlope.y,
+                        curve.inWeight.y, curve.outWeight.y);
+
                     YHFrameScale frameScale = new YHFrameScale()
                     {
-                        frame = TimeToFrame(curve.time),
+                        frame = frame,
                         scale = scale,
-                        inTangent = curve.inSlope,
-                        outTangent = curve.outSlope,
-                        inWeight = curve.inWeight,
-                        outWeight = curve.outWeight,
+                        keyFrameX = keyFrameX,
+                        keyFrameY = keyFrameY,
                     };
 
                     parts.scales.Add(frameScale);
@@ -98,14 +112,17 @@ namespace YYHS
                     if (last != null && last.rotation == rotation)
                         continue;
 
+                    int frame = TimeToFrame(curve.time);
+
+                    Keyframe keyFrame = new Keyframe(frame, rotation,
+                        curve.inSlope.z, curve.outSlope.z,
+                        curve.inWeight.z, curve.outWeight.z);
+
                     YHFrameRotation frameRotation = new YHFrameRotation()
                     {
                         frame = TimeToFrame(curve.time),
                         rotation = rotation,
-                        inTangent = curve.inSlope.z,
-                        outTangent = curve.outSlope.z,
-                        inWeight = curve.inWeight.z,
-                        outWeight = curve.outWeight.z,
+                        keyFrame = keyFrame,
                     };
 
                     parts.rotations.Add(frameRotation);
