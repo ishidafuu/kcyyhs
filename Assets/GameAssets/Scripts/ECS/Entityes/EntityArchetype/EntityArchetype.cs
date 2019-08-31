@@ -15,5 +15,9 @@ namespace YYHS
         public static ComponentType[] FilterEffectComponentType = {
             typeof(FilterEffect),
         };
+
+        public static ComponentType[] BattleComponentType = {
+            typeof(BattleSequencer),
+        };
     }
 }

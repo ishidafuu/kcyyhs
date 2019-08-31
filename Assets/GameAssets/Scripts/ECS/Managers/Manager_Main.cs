@@ -50,9 +50,12 @@ namespace YYHS
 
 
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<PadScanSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputJobSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountJobSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountJobSystem>());
+            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputSystem>());
+            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<CharaInputSystem>());
+
+            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountSystem>());
+            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
+            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
 
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BGDrawSystem>());
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectDrawSystem>());
@@ -81,7 +84,7 @@ namespace YYHS
         {
             CreateCharaEntity(manager);
             CreateFilterEffectEntity(manager);
-
+            CreateBattleEntity(manager);
             // manager.SetSharedComponentData(entity, _meshMatList);
         }
 
@@ -103,6 +106,11 @@ namespace YYHS
             {
                 var entity = FilterEffectEntityFactory.CreateEntity(i, manager, ref Shared.yhFilterEffectList);
             }
+        }
+
+        void CreateBattleEntity(EntityManager manager)
+        {
+            var entity = BattleEntityFactory.CreateEntity(manager, ref Shared.yhFilterEffectList);
         }
     }
 }

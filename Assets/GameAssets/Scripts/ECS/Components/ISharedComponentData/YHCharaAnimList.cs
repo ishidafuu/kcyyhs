@@ -9,10 +9,10 @@ namespace YYHS
     public struct YHCharaAnimList : IEquatable<YHCharaAnimList>, ISharedComponentData
     {
         // public Dictionary<string, YHFilterEffect> effectDict;
-        public List<YHAnimationsObject> animations;
+        public List<YHAnimationsObject> charaAnimList;
         public void Init()
         {
-            animations = new List<YHAnimationsObject>();
+            charaAnimList = new List<YHAnimationsObject>();
 
             var loadObjects = Resources.FindObjectsOfTypeAll<YHAnimationsObject>();
             if (loadObjects.Length == 0)
@@ -26,11 +26,14 @@ namespace YYHS
                 // int effectNo = 0;
                 // Int32.TryParse(item.name.Remove(0, item.name.IndexOf("_") + 1), out effectNo);
                 // Debug.Log(effectNo);
-                animations.Add(item);
+                charaAnimList.Add(item);
             }
         }
 
-
+        public YHAnimation GetAnim(int charaNo, EnumAnimationName animName)
+        {
+            return charaAnimList[charaNo].animations[(int)animName];
+        }
 
         public bool Equals(YHCharaAnimList obj)
         {
