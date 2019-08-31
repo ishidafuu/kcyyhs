@@ -9,7 +9,7 @@ using UnityEngine;
 namespace YYHS
 {
     [UpdateInGroup(typeof(CountGroup))]
-    public class FilterEffectCountJobSystem : JobComponentSystem
+    public class FilterEffectCountSystem : JobComponentSystem
     {
         EntityQuery m_query;
 

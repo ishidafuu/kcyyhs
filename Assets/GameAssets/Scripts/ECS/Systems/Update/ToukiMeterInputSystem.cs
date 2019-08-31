@@ -9,7 +9,7 @@ using UnityEngine;
 namespace YYHS
 {
     [UpdateInGroup(typeof(ScanGroup))]
-    public class ToukiMeterInputJobSystem : JobComponentSystem
+    public class ToukiMeterInputSystem : JobComponentSystem
     {
         EntityQuery m_query;
 
@@ -34,7 +34,7 @@ namespace YYHS
             };
             inputDeps = job.Schedule(inputDeps);
 
-            m_query.AddDependency(inputDeps);
+            // m_query.AddDependency(inputDeps);
             inputDeps.Complete();
             m_query.CopyFromComponentDataArray(toukiMeters);
 
