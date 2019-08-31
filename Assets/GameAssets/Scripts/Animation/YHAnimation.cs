@@ -19,10 +19,11 @@ namespace YYHS
     {
         public string name;
         public List<YHFrameData> frames = new List<YHFrameData>();
-        public List<YHFramePosition> positions = new List<YHFramePosition>();
-        public List<YHFrameScale> scales = new List<YHFrameScale>();
-        public List<YHFrameRotation> rotations = new List<YHFrameRotation>();
-
+        public AnimationCurve positionX;
+        public AnimationCurve positionY;
+        public AnimationCurve scaleX;
+        public AnimationCurve scaleY;
+        public AnimationCurve rotation;
     }
 
     [Serializable]

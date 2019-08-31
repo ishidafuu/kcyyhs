@@ -32,32 +32,27 @@ namespace YYHS
             {
                 string partsName = item.path.Remove(0, item.path.LastIndexOf("/") + 1);
                 YHAnimationParts parts = GetOrCreateParts(result, partsName);
+
+                List<Keyframe> keyFramesX = new List<Keyframe>();
+                List<Keyframe> keyFramesY = new List<Keyframe>();
                 foreach (var curve in item.curve.m_Curve)
                 {
-                    Vector2Int position = Vector2Int.FloorToInt(curve.value);
-                    YHFramePosition last = parts.positions.LastOrDefault();
-
-                    if (last != null && last.position == position)
-                        continue;
                     int frame = TimeToFrame(curve.time);
-                    Keyframe keyFrameX = new Keyframe(frame, position.x,
+
+                    Keyframe keyFrameX = new Keyframe(frame, curve.value.x,
                         curve.inSlope.x, curve.outSlope.x,
                         curve.inWeight.x, curve.outWeight.x);
 
-                    Keyframe keyFrameY = new Keyframe(frame, position.y,
+                    Keyframe keyFrameY = new Keyframe(frame, curve.value.y,
                         curve.inSlope.y, curve.outSlope.y,
                         curve.inWeight.y, curve.outWeight.y);
 
-                    YHFramePosition framePosition = new YHFramePosition()
-                    {
-                        frame = frame,
-                        position = position,
-                        keyFrameX = keyFrameX,
-                        keyFrameY = keyFrameY,
-                    };
-
-                    parts.positions.Add(framePosition);
+                    keyFramesX.Add(keyFrameX);
+                    keyFramesY.Add(keyFrameY);
                 }
+
+                parts.positionX = new AnimationCurve(keyFramesX.ToArray());
+                parts.positionY = new AnimationCurve(keyFramesY.ToArray());
             }
         }
 
@@ -67,34 +62,27 @@ namespace YYHS
             {
                 string partsName = item.path.Remove(0, item.path.LastIndexOf("/") + 1);
                 YHAnimationParts parts = GetOrCreateParts(result, partsName);
+
+                List<Keyframe> keyFramesX = new List<Keyframe>();
+                List<Keyframe> keyFramesY = new List<Keyframe>();
                 foreach (var curve in item.curve.m_Curve)
                 {
-                    Vector2Int scale = Vector2Int.FloorToInt(curve.value);
-                    YHFrameScale last = parts.scales.LastOrDefault();
-
-                    if (last != null && last.scale == scale)
-                        continue;
-
                     int frame = TimeToFrame(curve.time);
 
-                    Keyframe keyFrameX = new Keyframe(frame, scale.x,
+                    Keyframe keyFrameX = new Keyframe(frame, curve.value.x,
                         curve.inSlope.x, curve.outSlope.x,
                         curve.inWeight.x, curve.outWeight.x);
 
-                    Keyframe keyFrameY = new Keyframe(frame, scale.y,
+                    Keyframe keyFrameY = new Keyframe(frame, curve.value.y,
                         curve.inSlope.y, curve.outSlope.y,
                         curve.inWeight.y, curve.outWeight.y);
 
-                    YHFrameScale frameScale = new YHFrameScale()
-                    {
-                        frame = frame,
-                        scale = scale,
-                        keyFrameX = keyFrameX,
-                        keyFrameY = keyFrameY,
-                    };
-
-                    parts.scales.Add(frameScale);
+                    keyFramesX.Add(keyFrameX);
+                    keyFramesY.Add(keyFrameY);
                 }
+
+                parts.scaleX = new AnimationCurve(keyFramesX.ToArray());
+                parts.scaleY = new AnimationCurve(keyFramesY.ToArray());
             }
         }
 
@@ -104,29 +92,19 @@ namespace YYHS
             {
                 string partsName = item.path.Remove(0, item.path.LastIndexOf("/") + 1);
                 YHAnimationParts parts = GetOrCreateParts(result, partsName);
+                List<Keyframe> keyFrames = new List<Keyframe>();
                 foreach (var curve in item.curve.m_Curve)
                 {
-                    float rotation = curve.value.z;
-                    YHFrameRotation last = parts.rotations.LastOrDefault();
-
-                    if (last != null && last.rotation == rotation)
-                        continue;
-
                     int frame = TimeToFrame(curve.time);
 
-                    Keyframe keyFrame = new Keyframe(frame, rotation,
+                    Keyframe keyFrame = new Keyframe(frame, curve.value.z,
                         curve.inSlope.z, curve.outSlope.z,
                         curve.inWeight.z, curve.outWeight.z);
 
-                    YHFrameRotation frameRotation = new YHFrameRotation()
-                    {
-                        frame = TimeToFrame(curve.time),
-                        rotation = rotation,
-                        keyFrame = keyFrame,
-                    };
-
-                    parts.rotations.Add(frameRotation);
+                    keyFrames.Add(keyFrame);
                 }
+
+                parts.rotation = new AnimationCurve(keyFrames.ToArray());
             }
         }
 
