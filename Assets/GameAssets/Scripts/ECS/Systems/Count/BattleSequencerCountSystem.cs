@@ -2,29 +2,26 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-// using Unity.Mathematics;
-// using Unity.Transforms;
 using UnityEngine;
 
 namespace YYHS
 {
     [UpdateInGroup(typeof(CountGroup))]
-    public class BattleSequencerCountSystem : JobComponentSystem
+    public class BattleSequencerCountSystem : ComponentSystem
     {
         protected override void OnCreate()
         {
             RequireSingletonForUpdate<BattleSequencer>();
         }
 
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
             if (!seq.isPlay)
-                return inputDeps;
+                return;
 
             UpdateSequencer(ref seq);
-            return inputDeps;
         }
 
         private void UpdateSequencer(ref BattleSequencer seq)
@@ -33,19 +30,27 @@ namespace YYHS
             EnumAnimationName animName = seq.animation.animName;
             YHAnimation anim = Shared.yhCharaAnimList.GetAnim(charaNo, animName);
 
-            seq.animation.count++;
-
-            if (seq.animation.count >= anim.length)
+            // TODO:最初の入力から最初のアニメ開始もここで行う
+            if (seq.isTransition)
             {
-                seq.sequenceStep++;
-                seq.animation.count = 0;
-                if (seq.isLastSideA)
+                seq.isTransition = false;
+            }
+            else
+            {
+                seq.animation.count++;
+
+                if (seq.animation.count >= anim.length)
                 {
-                    UpdateSequencer2(ref seq, ref seq.sideA, ref seq.sideB);
-                }
-                else
-                {
-                    UpdateSequencer2(ref seq, ref seq.sideB, ref seq.sideA);
+                    seq.sequenceStep++;
+                    seq.animation.count = 0;
+                    if (seq.isLastSideA)
+                    {
+                        UpdateSequencer2(ref seq, ref seq.sideA, ref seq.sideB);
+                    }
+                    else
+                    {
+                        UpdateSequencer2(ref seq, ref seq.sideB, ref seq.sideA);
+                    }
                 }
             }
 
@@ -59,7 +64,7 @@ namespace YYHS
             if (waitSide.actionType != EnumActionType.None)
             {
                 // 未始動であれば始動へ
-                if (waitSide.animStep == EnumAnimationStep.Wait)
+                if (waitSide.animStep == EnumAnimationStep.Ready)
                 {
                     NextStep(ref seq, ref waitSide);
                 }
@@ -149,10 +154,10 @@ namespace YYHS
             return (EnumAnimationName)index;
         }
 
-        private EnumAnimationName GetDeffenceName(int deffenceType, EnumDamageLv damageLv)
+        private EnumAnimationName GetDeffenceName(EnumDefenceType deffenceType, EnumDamageLv damageLv)
         {
             int step = 3;
-            int index = (int)EnumAnimationName.DefenceA00 + (deffenceType * step) + (int)damageLv;
+            int index = (int)EnumAnimationName.DefenceA00 + ((int)deffenceType * step) + (int)damageLv;
             return (EnumAnimationName)index;
         }
 
