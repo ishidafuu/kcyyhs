@@ -10,7 +10,7 @@ namespace YYHS
 {
 
     [UpdateInGroup(typeof(RenderGroup))]
-    public class BGDrawSystem : JobComponentSystem
+    public class BGDrawSystem : ComponentSystem
     {
         EntityQuery m_query;
         Quaternion m_quaternion;
@@ -23,9 +23,8 @@ namespace YYHS
             m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
         }
 
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
-            m_query.AddDependency(inputDeps);
 
             // TODO:攻撃アニメーション状態に入ったら、処理を変える
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
@@ -33,8 +32,6 @@ namespace YYHS
             DrawFrame();
 
             toukiMeters.Dispose();
-
-            return inputDeps;
         }
 
 

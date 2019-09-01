@@ -11,7 +11,7 @@ namespace YYHS
 {
 
     [UpdateInGroup(typeof(RenderGroup))]
-    public class FilterEffectDrawSystem : JobComponentSystem
+    public class FilterEffectDrawSystem : ComponentSystem
     {
         EntityQuery m_query;
         Quaternion m_quaternion;
@@ -26,14 +26,11 @@ namespace YYHS
             m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
         }
 
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
-            m_query.AddDependency(inputDeps);
-
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
-            return inputDeps;
         }
 
         private void DrawFilterEffect(NativeArray<FilterEffect> filterEffects)
