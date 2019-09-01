@@ -55,14 +55,9 @@ namespace YYHS
                 for (int i = 0; i < padScans.Length; i++)
                 {
                     var toukiMeter = toukiMeters[i];
-                    var a = true;
-                    var b = true;
-                    var c = true;
-                    var v = a || (b && c);
                     if (toukiMeter.state != EnumToukiMaterState.Active)
-                    {
                         break;
-                    }
+
 
                     if (toukiMeter.muki != padScans[i].GetPressCross())
                     {
