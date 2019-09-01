@@ -4,6 +4,7 @@ namespace YYHS
 {
     public struct ToukiMeter : IComponentData
     {
+        public int charaNo;
         public EnumCrossType muki;
         public int value;
         public EnumToukiMaterState state;

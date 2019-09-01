@@ -73,7 +73,8 @@ namespace YYHS
 
     public enum EnumAnimationStep
     {
-        Wait,
+        Sleep,
+        Ready,
         Start,
         Fire,
         Finished,
@@ -96,6 +97,14 @@ namespace YYHS
         ShortAttack,
         MiddleAttack,
         LongAttack,
+    }
+
+    public enum EnumDefenceType
+    {
+        Stand,
+        Fly,
+        Step,
+        Jumping,
     }
 
     public enum EnumAnimationName

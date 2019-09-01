@@ -5,6 +5,7 @@ namespace YYHS
     public struct BattleSequencer : IComponentData
     {
         public bool isPlay;
+        public bool isTransition;
         public int sequenceStep;
         public bool isLastSideA;
         public SideState sideA;
@@ -16,11 +17,11 @@ namespace YYHS
     public struct SideState
     {
         public bool isSideA;
-        public EnumActionType actionType;
         public int charaNo;
+        public EnumActionType actionType;
         public int actionNo;
         public EnumAnimationStep animStep;
-        public int enemyDeffenceType;
+        public EnumDefenceType enemyDeffenceType;
         public EnumDamageLv enemyDamageLv;
     }
 
@@ -28,7 +29,6 @@ namespace YYHS
     {
         public int charaNo;
         public EnumAnimationName animName;
-
         public int count;
         public bool isSideA;
     }
