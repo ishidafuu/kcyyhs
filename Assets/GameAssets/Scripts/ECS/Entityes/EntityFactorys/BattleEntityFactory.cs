@@ -19,10 +19,10 @@ namespace YYHS
             var archetype = entityManager.CreateArchetype(ComponentTypes.BattleComponentType);
             var entity = entityManager.CreateEntity(archetype);
 
-            entityManager.SetComponentData(entity, new BattleSequencer
-            {
-
-            });
+            BattleSequencer seq = new BattleSequencer();
+            seq.sideA.isSideA = true;
+            seq.sideB.isSideA = false;
+            entityManager.SetComponentData(entity, seq);
 
 
             return entity;
