@@ -64,11 +64,9 @@ namespace YYHS
 
     public enum EnumAnimType
     {
-        NoGuard,
-        ShortAttack,
-        LongAttack,
-        Technique,
-        Guard,
+        Action,
+        Defence,
+        DefenceReaction,
     }
 
     public enum EnumAnimationStep
@@ -88,6 +86,13 @@ namespace YYHS
         CleanHit,
     }
 
+    public enum EnumDamageReaction
+    {
+        None,
+        Shaky,
+        Down,
+    }
+
 
     public enum EnumActionType
     {
@@ -97,6 +102,8 @@ namespace YYHS
         ShortAttack,
         MiddleAttack,
         LongAttack,
+        GroundAttack,
+        WaveAttack,
     }
 
     public enum EnumDefenceType
@@ -106,6 +113,7 @@ namespace YYHS
         Step,
         Jumping,
     }
+
 
     public enum EnumAnimationName
     {
@@ -140,6 +148,7 @@ namespace YYHS
         DefenceB01,
         DefenceB02,
         Down,
+        Shaky,
         Miss,
 
     }

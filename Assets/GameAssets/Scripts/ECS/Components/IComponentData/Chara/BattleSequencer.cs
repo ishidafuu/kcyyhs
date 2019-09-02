@@ -8,6 +8,7 @@ namespace YYHS
         public bool isTransition;
         public int sequenceStep;
         public bool isLastSideA;
+        public EnumAnimType animType;
         public SideState sideA;
         public SideState sideB;
 
@@ -20,9 +21,12 @@ namespace YYHS
         public int charaNo;
         public EnumActionType actionType;
         public int actionNo;
-        public EnumAnimationStep animStep;
         public EnumDefenceType enemyDeffenceType;
         public EnumDamageLv enemyDamageLv;
+        public EnumDamageReaction enemyDamageReaction;
+        public bool isNeedDefence;
+        public EnumAnimationStep animStep;
+        public bool isEndDefence;
     }
 
     public struct BattleAnim

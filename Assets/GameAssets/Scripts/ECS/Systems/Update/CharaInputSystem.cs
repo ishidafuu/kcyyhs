@@ -62,6 +62,9 @@ namespace YYHS
 
                 EnumActionType actionType = EnumActionType.ShortAttack;
                 int actionNo = 0;
+                // 霊力アップなどの相手にディフェンスステップが発生しない場合はfalseにする
+                bool isNeedDefence = true;
+
                 // TODO:技情報から引いてくる
                 switch (padScans[i].GetPressButton())
                 {
@@ -97,11 +100,13 @@ namespace YYHS
 
                 if (sideInfos[i].isSideA)
                 {
-                    InitActionSide(sideInfos[i], ref battleSequencer.sideA, actionNo, actionType, defenceType);
+                    InitActionSide(sideInfos[i], ref battleSequencer.sideA, actionNo, actionType,
+                        defenceType, isNeedDefence);
                 }
                 else
                 {
-                    InitActionSide(sideInfos[i], ref battleSequencer.sideB, actionNo, actionType, defenceType);
+                    InitActionSide(sideInfos[i], ref battleSequencer.sideB, actionNo, actionType,
+                        defenceType, isNeedDefence);
                 }
 
                 JudgeDamage(ref sideInfos, ref battleSequencer, i, isStartAnim);
@@ -134,6 +139,9 @@ namespace YYHS
                 int sideBDamage = UnityEngine.Random.Range(0, 3);
                 battleSequencer.sideA.enemyDamageLv = (EnumDamageLv)sideADamage;
                 battleSequencer.sideB.enemyDamageLv = (EnumDamageLv)sideBDamage;
+                // TODO:バランス値で変化させる
+                battleSequencer.sideA.enemyDamageReaction = EnumDamageReaction.None;
+                battleSequencer.sideB.enemyDamageReaction = EnumDamageReaction.None;
             }
         }
 
@@ -150,14 +158,16 @@ namespace YYHS
         }
 
         private static void InitActionSide(SideInfo sideInfo, ref SideState sideState,
-            int actionNo, EnumActionType actionType, EnumDefenceType defenceType)
+            int actionNo, EnumActionType actionType, EnumDefenceType defenceType, bool isNeedDefence)
         {
             sideState.isSideA = sideInfo.isSideA;
             sideState.charaNo = sideInfo.charaNo;
             sideState.actionNo = actionNo;
             sideState.actionType = actionType;
             sideState.enemyDeffenceType = defenceType;
+            sideState.isNeedDefence = isNeedDefence;
             sideState.animStep = EnumAnimationStep.Start;
+            sideState.isEndDefence = false;
         }
 
     }
