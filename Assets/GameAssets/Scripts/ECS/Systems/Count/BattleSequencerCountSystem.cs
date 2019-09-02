@@ -30,10 +30,18 @@ namespace YYHS
             EnumAnimationName animName = seq.animation.animName;
             YHAnimation anim = Shared.yhCharaAnimList.GetAnim(charaNo, animName);
 
-            // TODO:最初の入力から最初のアニメ開始もここで行う
+            // 最初の入力から最初のアニメ開始もここで行う
             if (seq.isTransition)
             {
                 seq.isTransition = false;
+                if (seq.isLastSideA)
+                {
+                    NextStep(ref seq, ref seq.sideA);
+                }
+                else
+                {
+                    NextStep(ref seq, ref seq.sideB);
+                }
             }
             else
             {
@@ -45,11 +53,11 @@ namespace YYHS
                     seq.animation.count = 0;
                     if (seq.isLastSideA)
                     {
-                        UpdateSequencer2(ref seq, ref seq.sideA, ref seq.sideB);
+                        SelectNextStep(ref seq, ref seq.sideA, ref seq.sideB);
                     }
                     else
                     {
-                        UpdateSequencer2(ref seq, ref seq.sideB, ref seq.sideA);
+                        SelectNextStep(ref seq, ref seq.sideB, ref seq.sideA);
                     }
                 }
             }
@@ -57,7 +65,7 @@ namespace YYHS
             SetSingleton(seq);
         }
 
-        private void UpdateSequencer2(ref BattleSequencer seq,
+        private void SelectNextStep(ref BattleSequencer seq,
             ref SideState lastSide, ref SideState waitSide)
         {
             // 直前がディフェンスアニメーションの場合（条件でダウンへ分岐なども行う）
