@@ -113,6 +113,7 @@ namespace YYHS
                         }
                         else
                         {
+                            // ディフェンス不要の場合はアニメ終了
                             EndAnimation(ref seq);
                         }
                         break;
@@ -196,6 +197,7 @@ namespace YYHS
                 }
                 else
                 {
+                    // アニメ終了
                     EndAnimation(ref seq);
                 }
 
