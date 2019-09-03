@@ -28,11 +28,31 @@ namespace YYHS
 
             int charaNo = seq.animation.charaNo;
             EnumAnimationName animName = seq.animation.animName;
+            Debug.Log(animName);
             YHAnimation anim = Shared.yhCharaAnimList.GetAnim(charaNo, animName);
             int count = seq.animation.count;
 
+            YHFrameData emptyFrameData = new YHFrameData();
             foreach (YHAnimationParts item in anim.parts)
             {
+                YHFrameData targetFrame = emptyFrameData;
+                foreach (YHFrameData frame in item.frames)
+                {
+                    if (frame.frame > count)
+                        break;
+
+                    targetFrame = frame;
+                }
+
+                if (!targetFrame.isActive)
+                    continue;
+
+
+                Debug.Log(item.name);
+                // TODO:背景なども適切なメッシュから描画する
+                if (!Shared.charaMeshMat.meshDict.ContainsKey(item.name))
+                    continue;
+
                 Mesh mesh = Shared.charaMeshMat.meshDict[item.name];
                 Material mat = Shared.charaMeshMat.materialDict[item.name];
                 float posX = (item.positionX.length == 0)
@@ -53,9 +73,17 @@ namespace YYHS
 
                 int layer = (int)EnumDrawLayer.Chara;
 
+                int flipX = (targetFrame.isFlipX)
+                    ? 180
+                    : 0;
+
+                int flipY = (targetFrame.isFlipY)
+                    ? +90
+                    : -90;
+
                 Matrix4x4 matrixes = Matrix4x4.TRS(
                     new Vector3(posX, posY, layer),
-                    Quaternion.Euler(new Vector3(-90, 0, rotate)),
+                    Quaternion.Euler(new Vector3(flipY, flipX, rotate)),
                     new Vector3(scaleX, scaleY, 1));
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
