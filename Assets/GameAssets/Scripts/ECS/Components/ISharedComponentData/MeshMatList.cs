@@ -37,7 +37,7 @@ namespace YYHS
             // listを回してDictionaryに格納
             for (var i = 0; i < list.Length; ++i)
             {
-                // Debug.Log(list[i].name);
+                // Debug.LogWarning(list[i].name);
                 var sprite = list[i] as Sprite;
                 var mesh = GenerateQuadMesh(sprite);
                 var material = new Material(matShader);
@@ -45,21 +45,17 @@ namespace YYHS
 
                 meshDict.Add(list[i].name, mesh);
                 materialDict.Add(list[i].name, material);
+
             }
         }
 
         Mesh GenerateQuadMesh(Sprite sprite)
         {
-            Vector3[] _vertices = {
-                new Vector3(sprite.vertices[0].x, 0, sprite.vertices[0].y),
-                new Vector3(sprite.vertices[1].x, 0, sprite.vertices[1].y),
-                new Vector3(sprite.vertices[2].x, 0, sprite.vertices[2].y),
-                new Vector3(sprite.vertices[3].x, 0, sprite.vertices[3].y)
-            };
-
-            // Debug.Log(sprite.name);
-            // foreach (var item in sprite.vertices)Debug.Log(item);
-            // foreach (var item in sprite.uv)Debug.Log(item);
+            List<Vector3> _vertices = new List<Vector3>();
+            for (int i = 0; i < sprite.uv.Length; i++)
+            {
+                _vertices.Add(new Vector3(sprite.vertices[i].x, 0, sprite.vertices[i].y));
+            }
 
             int[] triangles = {
                 sprite.triangles[0],
@@ -72,7 +68,7 @@ namespace YYHS
 
             return new Mesh
             {
-                vertices = _vertices,
+                vertices = _vertices.ToArray(),
                 uv = sprite.uv,
                 triangles = triangles
             };
