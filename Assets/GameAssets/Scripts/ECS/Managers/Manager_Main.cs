@@ -45,10 +45,9 @@ namespace YYHS
             World.Active = world;
 
             InitializationSystemGroup initializationSystemGroup = world.GetOrCreateSystem<InitializationSystemGroup>();
+
+
             SimulationSystemGroup simulationSystemGroup = world.GetOrCreateSystem<SimulationSystemGroup>();
-            PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
-
-
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<PadScanSystem>());
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputSystem>());
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<CharaInputSystem>());
@@ -57,9 +56,12 @@ namespace YYHS
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
 
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BGDrawSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectDrawSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<MeterDrawSystem>());
+            PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BGDrawSystem>());
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectDrawSystem>());
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<MeterDrawSystem>());
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleDrawDrawSystem>());
+
 
             initializationSystemGroup.SortSystemUpdateList();
             simulationSystemGroup.SortSystemUpdateList();
