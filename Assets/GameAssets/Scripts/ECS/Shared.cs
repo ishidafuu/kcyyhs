@@ -26,6 +26,7 @@ namespace YYHS
 
         public static void ReadySharedComponentData()
         {
+            charaMeshMat = new MeshMatList(GetCharaPath(0), DefaultShader);
             bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
             commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
 
@@ -39,6 +40,11 @@ namespace YYHS
         private static string GetBackGroundPath(int bgNo)
         {
             return string.Format(PathSettings.BackGroundSprite, bgNo.ToString("d2"));
+        }
+
+        private static string GetCharaPath(int charaNo)
+        {
+            return string.Format(PathSettings.CharaSprite, charaNo.ToString("d2"));
         }
 
     }
