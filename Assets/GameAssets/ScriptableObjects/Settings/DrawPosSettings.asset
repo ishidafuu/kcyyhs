@@ -18,7 +18,7 @@ MonoBehaviour:
   BgScrollX: 64
   BgScrollY: 48
   ToukiWidth: 96
-  ToukiMeterX: -24
-  ToukiMeterY: -146
+  ToukiMeterX: -120
+  ToukiMeterY: -36
   FrameTopY: 103
   FrameBottomY: -55
