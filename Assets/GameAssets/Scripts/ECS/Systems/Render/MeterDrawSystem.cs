@@ -70,11 +70,11 @@ namespace YYHS
                     float width = (float)toukiMeters[i].value / (float)ToukiWidth;
 
                     float posX = (i == 0)
-                    ? ToukiMeterX + ((float)toukiMeters[i].value / 2f)
-                    : -ToukiMeterX - ((float)toukiMeters[i].value / 2f);
+                        ? ToukiMeterX + ((float)toukiMeters[i].value / 2f)
+                        : -ToukiMeterX - ((float)toukiMeters[i].value / 2f);
 
                     Matrix4x4 tmpMatrix = Matrix4x4.TRS(
-                        new Vector3(posX, ToukiMeterY, (int)EnumDrawLayer.Frame),
+                        new Vector3(posX, ToukiMeterY, (int)EnumDrawLayer.OverFrame),
                         Q, new Vector3(width, 1, 1));
 
                     toukiMeterMatrixes[i] = tmpMatrix;
@@ -84,9 +84,10 @@ namespace YYHS
 
         private void DrawToukiMeter(ToukiMeterJob toukiMeterJob)
         {
-            string meter02 = EnumBGPartsType.meter02.ToString();
+            string meter02 = EnumCommonPartsType.meter02.ToString();
             for (int i = 0; i < toukiMeterJob.toukiMeterMatrixes.Length; i++)
             {
+
                 Graphics.DrawMesh(
                     Shared.commonMeshMat.meshDict[meter02],
                     toukiMeterJob.toukiMeterMatrixes[i],

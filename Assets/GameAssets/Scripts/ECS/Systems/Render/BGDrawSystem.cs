@@ -66,15 +66,15 @@ namespace YYHS
         {
             Matrix4x4 frameTopMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameTopY, (int)EnumDrawLayer.Frame),
                 m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_top.ToString()],
+            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumCommonPartsType.frame_top.ToString()],
                 frameTopMatrix,
-                Shared.commonMeshMat.materialDict[EnumBGPartsType.frame_top.ToString()], 0);
+                Shared.commonMeshMat.materialDict[EnumCommonPartsType.frame_top.ToString()], 0);
 
             Matrix4x4 frameBottomMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameBottomY, (int)EnumDrawLayer.Frame),
                 m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumBGPartsType.frame_bottom.ToString()],
+            Graphics.DrawMesh(Shared.commonMeshMat.meshDict[EnumCommonPartsType.frame_bottom.ToString()],
                 frameBottomMatrix,
-                Shared.commonMeshMat.materialDict[EnumBGPartsType.frame_bottom.ToString()], 0);
+                Shared.commonMeshMat.materialDict[EnumCommonPartsType.frame_bottom.ToString()], 0);
         }
     }
 }
