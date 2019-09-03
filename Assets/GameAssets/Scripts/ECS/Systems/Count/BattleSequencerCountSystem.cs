@@ -242,7 +242,7 @@ namespace YYHS
         private EnumAnimationName GetActionName(int actionNo, EnumAnimationStep animStep)
         {
             int step = 2;
-            int index = (int)EnumAnimationName.Action00_00 + (actionNo * step) + (int)animStep;
+            int index = (int)EnumAnimationName.Action00_00 + (actionNo * step) + (int)(animStep - EnumAnimationStep.Start);
             return (EnumAnimationName)index;
         }
 
