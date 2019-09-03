@@ -14,7 +14,7 @@ namespace YYHS
         {
             charaAnimList = new List<YHAnimationsObject>();
 
-            var loadObjects = Resources.FindObjectsOfTypeAll<YHAnimationsObject>();
+            var loadObjects = Resources.LoadAll<YHAnimationsObject>("YHCharaAnim");
             if (loadObjects.Length == 0)
             {
                 Debug.LogError("YHAnimationsObject None");

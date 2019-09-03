@@ -14,7 +14,7 @@ namespace YYHS
         {
             effects = new List<YHFilterEffectObject>();
 
-            var loadObjects = Resources.FindObjectsOfTypeAll<YHFilterEffectObject>();
+            var loadObjects = Resources.LoadAll<YHFilterEffectObject>("YHFilterEffect");
             if (loadObjects.Length == 0)
             {
                 Debug.LogError("YHFilterEffect None");
