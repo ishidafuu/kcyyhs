@@ -68,9 +68,11 @@ namespace YYHS
         private void SelectNextStep(ref BattleSequencer seq,
             ref SideState lastSide, ref SideState waitSide)
         {
+            Debug.Log("SelectNextStep");
             // 直前がディフェンスアニメーションの場合（条件でダウンへ分岐なども行う）
             if (seq.animType != EnumAnimType.Action)
             {
+                Debug.Log("SelectNextStep 1");
                 // リアクションあり
                 if (seq.animType == EnumAnimType.Defence
                     && waitSide.enemyDamageReaction != EnumDamageReaction.None)
@@ -103,32 +105,29 @@ namespace YYHS
             // 待ち側のアクションがない場合は直前のサイドを連続させる
             else if (waitSide.actionType == EnumActionType.None)
             {
-                switch (lastSide.animStep)
+                Debug.Log("SelectNextStep 2" + lastSide.animStep);
+                if (lastSide.animStep == EnumAnimationStep.Finished)
                 {
-                    // 発動ステップの場合はディフェンス
-                    case EnumAnimationStep.Fire:
-                        if (lastSide.isNeedDefence)
-                        {
-                            DeffenceStep(ref seq, ref lastSide, ref waitSide);
-                        }
-                        else
-                        {
-                            // ディフェンス不要の場合はアニメ終了
-                            EndAnimation(ref seq);
-                        }
-                        break;
-                    // 完了ステップの場合はアニメ終了
-                    case EnumAnimationStep.Finished:
+                    // ディフェンス
+                    if (!waitSide.isEndDefence && lastSide.isNeedDefence)
+                    {
+                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                    }
+                    else
+                    {
+                        // ディフェンス不要の場合はアニメ終了
                         EndAnimation(ref seq);
-                        break;
+                    }
+                }
+                else
+                {
                     // 直前サイドを進行
-                    default:
-                        NextStep(ref seq, ref lastSide);
-                        break;
+                    NextStep(ref seq, ref lastSide);
                 }
             }
             else
             {
+                Debug.Log("SelectNextStep 3");
                 // 待ち側のアクション始動
 
                 // 未始動であれば始動へ
@@ -206,13 +205,16 @@ namespace YYHS
 
         private void EndAnimation(ref BattleSequencer seq)
         {
+            Debug.Log("EndAnimation");
             seq.isPlay = false;
         }
 
         private void NextStep(ref BattleSequencer seq, ref SideState nextSide)
         {
+            Debug.Log("NextStep");
             seq.animation.charaNo = nextSide.charaNo;
             seq.animation.animName = GetActionName(nextSide.actionNo, nextSide.animStep);
+            Debug.Log($"actionNo{nextSide.actionNo} animStep{nextSide.animStep} animName{seq.animation.animName}");
             seq.animType = EnumAnimType.Action;
             seq.isLastSideA = nextSide.isSideA;
             nextSide.animStep++;
@@ -220,6 +222,7 @@ namespace YYHS
 
         private void DeffenceStep(ref BattleSequencer seq, ref SideState attackSide, ref SideState deffenceSide)
         {
+            Debug.Log("DeffenceStep");
             seq.animation.charaNo = deffenceSide.charaNo;
             seq.animation.isSideA = deffenceSide.isSideA;
             seq.animation.animName = GetDeffenceName(attackSide.enemyDeffenceType, attackSide.enemyDamageLv);
@@ -232,6 +235,7 @@ namespace YYHS
 
         private void DamageReactionStep(ref BattleSequencer seq, ref SideState attackSide, ref SideState deffenceSide)
         {
+            Debug.Log("DamageReactionStep");
             seq.animation.charaNo = deffenceSide.charaNo;
             seq.animation.isSideA = deffenceSide.isSideA;
             seq.animation.animName = GetDamageReactionName(attackSide.enemyDamageReaction);
