@@ -71,7 +71,7 @@ namespace YYHS
                     ? 0
                     : item.rotation.Evaluate(count);
 
-                int layer = (int)EnumDrawLayer.Chara;
+                float layer = (int)EnumDrawLayer.Chara + item.orderInLayer;
 
                 int flipX = (targetFrame.isFlipX)
                     ? 180

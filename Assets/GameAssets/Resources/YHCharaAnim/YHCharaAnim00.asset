@@ -21,6 +21,7 @@ MonoBehaviour:
     length: 60
     parts:
     - name: cm_stand01
+      orderInLayer: 0
       frames:
       - frame: 0
         isActive: 1
@@ -116,6 +117,7 @@ MonoBehaviour:
     length: 60
     parts:
     - name: cm_stand02
+      orderInLayer: 0
       frames:
       - frame: 0
         isActive: 1
@@ -227,6 +229,7 @@ MonoBehaviour:
     length: 60
     parts:
     - name: cm_stand00
+      orderInLayer: 0
       frames:
       - frame: 0
         isActive: 1
@@ -322,6 +325,7 @@ MonoBehaviour:
     length: 40
     parts:
     - name: cm_stand03
+      orderInLayer: 0
       frames:
       - frame: 0
         isActive: 1
@@ -417,7 +421,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - name: cm_b_parts00
+    - name: cm_l_parts00
+      orderInLayer: 0.3
       frames:
       - frame: 0
         isActive: 1
@@ -508,7 +513,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - name: cm_a_parts00
+    - name: cm_u_parts00
+      orderInLayer: -0.3
       frames:
       - frame: 0
         isActive: 0
@@ -564,6 +570,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     - name: bg02
+      orderInLayer: 0
       frames: []
       positionX:
         serializedVersion: 2
@@ -659,6 +666,7 @@ MonoBehaviour:
     length: 40
     parts:
     - name: cm_stand03
+      orderInLayer: 0
       frames:
       - frame: 0
         isActive: 1
@@ -772,7 +780,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - name: cm_b_parts00
+    - name: cm_l_parts00
+      orderInLayer: 0.3
       frames:
       - frame: 0
         isActive: 1
@@ -886,7 +895,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - name: cm_a_parts00
+    - name: cm_u_parts00
+      orderInLayer: -0.3
       frames:
       - frame: 0
         isActive: 0
@@ -1019,6 +1029,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     - name: bg02
+      orderInLayer: 0
       frames: []
       positionX:
         serializedVersion: 2
@@ -1115,6 +1126,7 @@ MonoBehaviour:
     length: 60
     parts:
     - name: cm_dodge00
+      orderInLayer: 0
       frames:
       - frame: 0
         isActive: 1

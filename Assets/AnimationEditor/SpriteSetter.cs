@@ -259,13 +259,29 @@ namespace YYHS
                 else
                 {
                     // 描画プライオリティ
-                    if (targetSpriteRenderer.name.IndexOf("a_") >= 0)
+                    if (targetSpriteRenderer.name.IndexOf("uuu_") >= 0)
+                    {
+                        targetSpriteRenderer.sortingOrder = +30;
+                    }
+                    else if (targetSpriteRenderer.name.IndexOf("uu_") >= 0)
+                    {
+                        targetSpriteRenderer.sortingOrder = +20;
+                    }
+                    else if (targetSpriteRenderer.name.IndexOf("u_") >= 0)
                     {
                         targetSpriteRenderer.sortingOrder = +10;
                     }
-                    else if (targetSpriteRenderer.name.IndexOf("b_") >= 0)
+                    else if (targetSpriteRenderer.name.IndexOf("l_") >= 0)
                     {
                         targetSpriteRenderer.sortingOrder = -10;
+                    }
+                    else if (targetSpriteRenderer.name.IndexOf("ll_") >= 0)
+                    {
+                        targetSpriteRenderer.sortingOrder = -20;
+                    }
+                    else if (targetSpriteRenderer.name.IndexOf("lll_") >= 0)
+                    {
+                        targetSpriteRenderer.sortingOrder = -30;
                     }
                 }
                 targetSpriteRenderer.transform.localPosition = Vector3.zero;

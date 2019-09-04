@@ -18,6 +18,7 @@ namespace YYHS
     public class YHAnimationParts
     {
         public string name;
+        public float orderInLayer;
         public List<YHFrameData> frames = new List<YHFrameData>();
         public AnimationCurve positionX;
         public AnimationCurve positionY;

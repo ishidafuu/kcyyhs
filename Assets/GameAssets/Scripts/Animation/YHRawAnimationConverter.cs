@@ -195,8 +195,10 @@ namespace YYHS
             {
                 parts = new YHAnimationParts()
                 {
-                    name = partsName
+                    name = partsName,
+                    orderInLayer = GetLayer(partsName)
                 };
+
                 result.parts.Add(parts);
             }
             return parts;
@@ -218,5 +220,28 @@ namespace YYHS
 
         private static int TimeToFrame(float time) => (int)Mathf.Round(time * 60f);
 
+
+        private static float GetLayer(string partsName)
+        {
+            if (partsName.IndexOf("uuu_") >= 0)
+                return -0.5f;
+
+            if (partsName.IndexOf("uu_") >= 0)
+                return -0.4f;
+
+            if (partsName.IndexOf("u_") >= 0)
+                return -0.3f;
+
+            if (partsName.IndexOf("l_") >= 0)
+                return +0.3f;
+
+            if (partsName.IndexOf("ll_") >= 0)
+                return +0.4f;
+
+            if (partsName.IndexOf("lll_") >= 0)
+                return +0.5f;
+
+            return 0;
+        }
     }
 }
