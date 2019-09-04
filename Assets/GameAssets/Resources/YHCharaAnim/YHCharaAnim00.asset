@@ -22,12 +22,14 @@ MonoBehaviour:
     parts:
     - name: cm_stand01
       orderInLayer: 0
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      - frame: 60
+        value: 1
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -118,12 +120,14 @@ MonoBehaviour:
     parts:
     - name: cm_stand02
       orderInLayer: 0
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      - frame: 60
+        value: 1
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -230,12 +234,14 @@ MonoBehaviour:
     parts:
     - name: cm_stand00
       orderInLayer: 0
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      - frame: 60
+        value: 1
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -322,21 +328,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     events: []
   - name: Action00_00
-    length: 40
+    length: 60
     parts:
     - name: cm_stand03
       orderInLayer: 0
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 1
-        isFlipY: 0
-        isBrink: 0
-      - frame: 30
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      isFlipX:
+      - frame: 0
+        value: 1
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -359,7 +362,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 40
+          time: 60
           value: 0
           inSlope: 0
           outSlope: 0
@@ -392,7 +395,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 40
+          time: 60
           value: 0
           inSlope: 0
           outSlope: 0
@@ -423,12 +426,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: cm_l_parts00
       orderInLayer: 0.3
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -451,7 +454,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 40
+          time: 60
           value: -26
           inSlope: 0
           outSlope: 0
@@ -484,7 +487,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 40
+          time: 60
           value: 0
           inSlope: 0
           outSlope: 0
@@ -515,12 +518,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: cm_u_parts00
       orderInLayer: -0.3
-      frames:
+      isActive:
       - frame: 0
-        isActive: 0
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 0
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -571,7 +574,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: bg02
       orderInLayer: 0
-      frames: []
+      isActive: []
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -594,7 +600,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 40
+          time: 60
           value: 30
           inSlope: 0
           outSlope: 0
@@ -627,7 +633,7 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 40
+          time: 60
           value: 0
           inSlope: 0
           outSlope: 0
@@ -667,17 +673,22 @@ MonoBehaviour:
     parts:
     - name: cm_stand03
       orderInLayer: 0
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 1
-        isFlipY: 0
-        isBrink: 0
+        value: 1
       - frame: 5
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      - frame: 20
+        value: 1
+      - frame: 40
+        value: 1
+      isFlipX:
+      - frame: 0
+        value: 1
+      - frame: 5
+        value: 0
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -782,17 +793,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: cm_l_parts00
       orderInLayer: 0.3
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
       - frame: 5
-        isActive: 0
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 0
+      - frame: 20
+        value: 0
+      - frame: 40
+        value: 0
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -897,17 +909,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: cm_u_parts00
       orderInLayer: -0.3
-      frames:
+      isActive:
       - frame: 0
-        isActive: 0
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 0
       - frame: 5
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      - frame: 20
+        value: 1
+      - frame: 40
+        value: 1
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -1030,7 +1043,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: bg02
       orderInLayer: 0
-      frames: []
+      isActive: []
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:
@@ -1127,12 +1143,12 @@ MonoBehaviour:
     parts:
     - name: cm_dodge00
       orderInLayer: 0
-      frames:
+      isActive:
       - frame: 0
-        isActive: 1
-        isFlipX: 0
-        isFlipY: 0
-        isBrink: 0
+        value: 1
+      isFlipX: []
+      isFlipY: []
+      isBrink: []
       positionX:
         serializedVersion: 2
         m_Curve:

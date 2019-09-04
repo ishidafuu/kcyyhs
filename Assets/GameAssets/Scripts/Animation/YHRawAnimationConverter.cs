@@ -21,7 +21,7 @@ namespace YYHS
             ConvertRotate(rawAnim, result);
             ConvertFloat(rawAnim, result);
             ConvertEvent(rawAnim, result);
-            DistinctFrames(result);
+            // DistinctFrames(result);
 
             return result;
         }
@@ -117,30 +117,29 @@ namespace YYHS
                 string attr = item.attribute;
                 foreach (var curve in item.curve.m_Curve)
                 {
-                    YHFrameData last = parts.frames.LastOrDefault();
-
-                    YHFrameData frameData = GetOrCreateFrameData(parts, TimeToFrame(curve.time));
+                    YHFrameData data = null;
                     switch (attr)
                     {
                         case "m_IsActive":
-                            frameData.isActive = (curve.value != 0);
+                            data = GetOrCreateFrameData(parts.isActive, TimeToFrame(curve.time));
                             break;
                         case "m_FlipX":
-                            frameData.isFlipX = (curve.value != 0);
+                            data = GetOrCreateFrameData(parts.isFlipX, TimeToFrame(curve.time));
                             break;
                         case "m_FlipY":
-                            frameData.isFlipY = (curve.value != 0);
+                            data = GetOrCreateFrameData(parts.isFlipY, TimeToFrame(curve.time));
                             break;
                         case "m_IsBrink":
-                            frameData.isBrink = (curve.value != 0);
+                            data = GetOrCreateFrameData(parts.isBrink, TimeToFrame(curve.time));
                             break;
                         default:
                             Debug.LogError($"Unknown attribute : {attr}");
                             break;
                     }
+                    data.value = (curve.value != 0);
                 }
 
-                parts.frames = parts.frames.OrderBy(x => x.frame).ToList();
+                // parts.frames = parts.frames.OrderBy(x => x.frame).ToList();
             }
         }
 
@@ -161,32 +160,32 @@ namespace YYHS
             }
         }
 
-        private static void DistinctFrames(YHAnimation result)
-        {
-            foreach (var item in result.parts)
-            {
-                List<YHFrameData> distinctFrames = new List<YHFrameData>();
-                for (int i = 0; i < item.frames.Count; i++)
-                {
-                    YHFrameData nowFrame = item.frames[i];
-                    if (i == 0)
-                    {
-                        distinctFrames.Add(nowFrame);
-                        continue;
-                    }
-                    YHFrameData lastFrame = item.frames[i - 1];
+        // private static void DistinctFrames(YHAnimation result)
+        // {
+        //     foreach (var item in result.parts)
+        //     {
+        //         List<YHFrameData> distinctFrames = new List<YHFrameData>();
+        //         for (int i = 0; i < item.frames.Count; i++)
+        //         {
+        //             YHFrameData nowFrame = item.frames[i];
+        //             if (i == 0)
+        //             {
+        //                 distinctFrames.Add(nowFrame);
+        //                 continue;
+        //             }
+        //             YHFrameData lastFrame = item.frames[i - 1];
 
-                    if (nowFrame.isActive != lastFrame.isActive
-                        || nowFrame.isFlipX != lastFrame.isFlipX
-                        || nowFrame.isFlipY != lastFrame.isFlipY)
-                    {
-                        distinctFrames.Add(nowFrame);
-                    }
-                }
+        //             if (nowFrame.isActive != lastFrame.isActive
+        //                 || nowFrame.isFlipX != lastFrame.isFlipX
+        //                 || nowFrame.isFlipY != lastFrame.isFlipY)
+        //             {
+        //                 distinctFrames.Add(nowFrame);
+        //             }
+        //         }
 
-                item.frames = distinctFrames;
-            }
-        }
+        //         item.frames = distinctFrames;
+        //     }
+        // }
 
         private static YHAnimationParts GetOrCreateParts(YHAnimation result, string partsName)
         {
@@ -204,18 +203,23 @@ namespace YYHS
             return parts;
         }
 
-        private static YHFrameData GetOrCreateFrameData(YHAnimationParts parts, int frame)
+        private static YHFrameData GetOrCreateFrameData(List<YHFrameData> frameData, int frame)
         {
-            YHFrameData frameData = parts.frames.FirstOrDefault(x => x.frame == frame);
-            if (frameData == null)
+            var data = new YHFrameData()
             {
-                frameData = new YHFrameData()
-                {
-                    frame = frame
-                };
-                parts.frames.Add(frameData);
+                frame = frame,
+            };
+
+            YHFrameData lastFrameData = frameData.Where(x => x.frame < frame).LastOrDefault();
+
+            if (lastFrameData != null)
+            {
+                data.value = lastFrameData.value;
             }
-            return frameData;
+
+            frameData.Add(data);
+
+            return data;
         }
 
         private static int TimeToFrame(float time) => (int)Mathf.Round(time * 60f);

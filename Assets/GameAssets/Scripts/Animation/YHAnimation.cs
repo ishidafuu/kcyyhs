@@ -19,7 +19,10 @@ namespace YYHS
     {
         public string name;
         public float orderInLayer;
-        public List<YHFrameData> frames = new List<YHFrameData>();
+        public List<YHFrameData> isActive = new List<YHFrameData>();
+        public List<YHFrameData> isFlipX = new List<YHFrameData>();
+        public List<YHFrameData> isFlipY = new List<YHFrameData>();
+        public List<YHFrameData> isBrink = new List<YHFrameData>();
         public AnimationCurve positionX;
         public AnimationCurve positionY;
         public AnimationCurve scaleX;
@@ -31,11 +34,7 @@ namespace YYHS
     public class YHFrameData
     {
         public int frame;
-        public bool isActive;
-        public bool isFlipX;
-        public bool isFlipY;
-        public bool isBrink;
-
+        public bool value;
     }
 
     [Serializable]
