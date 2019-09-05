@@ -1,12 +1,8 @@
-﻿using UnityEngine.Experimental.PlayerLoop;
+﻿
 using UnityEngine;
 using Unity.Mathematics;
-using Unity.Jobs;
 using Unity.Entities;
-using Unity.Collections;
-using Unity.Burst;
 using System.Collections.Generic;
-// using Unity.Transforms;
 
 namespace YYHS
 {
@@ -24,7 +20,7 @@ namespace YYHS
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            if (!seq.isPlay)
+            if (!seq.isPlay || seq.isTransition)
                 return;
 
             int charaNo = seq.animation.charaNo;
