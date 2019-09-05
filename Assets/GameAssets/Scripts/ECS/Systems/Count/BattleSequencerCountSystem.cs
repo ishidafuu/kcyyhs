@@ -207,6 +207,8 @@ namespace YYHS
         {
             Debug.Log("EndAnimation");
             seq.isPlay = false;
+            seq.sideA.animStep = EnumAnimationStep.Sleep;
+            seq.sideB.animStep = EnumAnimationStep.Sleep;
         }
 
         private void NextStep(ref BattleSequencer seq, ref SideState nextSide)

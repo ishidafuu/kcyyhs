@@ -7,7 +7,6 @@ namespace YYHS
         public int charaNo;
         public EnumCrossType muki;
         public int value;
-        public EnumToukiMaterState state;
         public int bgScroll;
         public float bgScrollTextureUL;
         public float bgScrollTextureUR;

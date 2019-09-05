@@ -22,6 +22,10 @@ namespace YYHS
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
+            BattleSequencer seq = GetSingleton<BattleSequencer>();
+            if (seq.isPlay)
+                return inputDeps;
+
             m_query.AddDependency(inputDeps);
 
             NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);

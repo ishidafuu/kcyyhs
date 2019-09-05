@@ -36,7 +36,6 @@ namespace YYHS
             {
                 muki = EnumCrossType.None,
                 value = 0,
-                state = EnumToukiMaterState.Active
             });
 
             return entity;

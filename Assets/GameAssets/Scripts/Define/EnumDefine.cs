@@ -31,13 +31,6 @@ namespace YYHS
         BackGround,
     }
 
-    public enum EnumToukiMaterState
-    {
-        Active = 0,
-        Inactive,
-        Decide,
-    }
-
     public enum EnumBGPartsType
     {
         bg00,

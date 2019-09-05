@@ -23,6 +23,8 @@ namespace YYHS
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
+            BattleSequencer seq = GetSingleton<BattleSequencer>();
+
             m_query.AddDependency(inputDeps);
 
             NativeArray<PadScan> padScans = m_query.ToComponentDataArray<PadScan>(Allocator.TempJob);
@@ -31,6 +33,7 @@ namespace YYHS
             {
                 padScans = padScans,
                 toukiMeters = toukiMeters,
+                seq = seq,
             };
             inputDeps = job.Schedule(inputDeps);
 
@@ -49,15 +52,17 @@ namespace YYHS
         {
             public NativeArray<ToukiMeter> toukiMeters;
             [ReadOnly] public NativeArray<PadScan> padScans;
+            [ReadOnly] public BattleSequencer seq;
+
 
             public void Execute()
             {
                 for (int i = 0; i < padScans.Length; i++)
                 {
                     var toukiMeter = toukiMeters[i];
-                    if (toukiMeter.state != EnumToukiMaterState.Active)
-                        break;
 
+                    if (seq.sideA.animStep != EnumAnimationStep.Sleep)
+                        continue;
 
                     if (toukiMeter.muki != padScans[i].GetPressCross())
                     {
