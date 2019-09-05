@@ -8,48 +8,47 @@ namespace YYHS
     public struct PadScan : IComponentData
     {
         // 十字のバッファ
-        Vector2 axis;
+        Vector2 m_axis;
         // 十字
-        public Button crossUp;
-        public Button crossDown;
-        public Button crossLeft;
-        public Button crossRight;
+        public Button m_crossUp;
+        public Button m_crossDown;
+        public Button m_crossLeft;
+        public Button m_crossRight;
         // ボタン
-        public Button buttonA;
-        public Button buttonB;
-        public Button buttonX;
-        public Button buttonY;
-        public void SetCross(Vector2 _axis, float _time)
+        public Button m_buttonA;
+        public Button m_buttonB;
+        public Button m_buttonX;
+        public Button m_buttonY;
+        public void SetCross(Vector2 axis, float time)
         {
             // 直前キーから変更無ければ処理しない
-            if (_axis != axis)
+            if (axis != m_axis)
             {
-                var isUp = (_axis.y > +0.1f);
-                var isDown = (_axis.y < -0.1f);
-                var isRight = (_axis.x > +0.1f);
-                var isLeft = (_axis.x < -0.1f);
+                bool isUp = (axis.y > +0.1f);
+                bool isDown = (axis.y < -0.1f);
+                bool isRight = (axis.x > +0.1f);
+                bool isLeft = (axis.x < -0.1f);
 
-                axis = _axis;
-                crossUp.SetCrossData(isUp, Time.time);
-                crossDown.SetCrossData(isDown, Time.time);
-                crossRight.SetCrossData(isRight, Time.time);
-                crossLeft.SetCrossData(isLeft, Time.time);
-                // Debug.Log(axis);
+                m_axis = axis;
+                m_crossUp.SetCrossData(isUp, Time.time);
+                m_crossDown.SetCrossData(isDown, Time.time);
+                m_crossRight.SetCrossData(isRight, Time.time);
+                m_crossLeft.SetCrossData(isLeft, Time.time);
             }
         }
 
         public EnumCrossType GetPressCross()
         {
-            if (crossUp.IsPress())
+            if (m_crossUp.m_isPress)
                 return EnumCrossType.Up;
 
-            if (crossDown.IsPress())
+            if (m_crossDown.m_isPress)
                 return EnumCrossType.Down;
 
-            if (crossLeft.IsPress())
+            if (m_crossLeft.m_isPress)
                 return EnumCrossType.Left;
 
-            if (crossRight.IsPress())
+            if (m_crossRight.m_isPress)
                 return EnumCrossType.Right;
 
             return EnumCrossType.None;
@@ -57,37 +56,30 @@ namespace YYHS
 
         public EnumButtonType GetPressButton()
         {
-            if (buttonA.IsPress())
+            if (m_buttonA.m_isPress)
                 return EnumButtonType.A;
 
-            if (buttonB.IsPress())
+            if (m_buttonB.m_isPress)
                 return EnumButtonType.B;
 
-            if (buttonX.IsPress())
+            if (m_buttonX.m_isPress)
                 return EnumButtonType.X;
 
-            if (buttonY.IsPress())
+            if (m_buttonY.m_isPress)
                 return EnumButtonType.Y;
 
             return EnumButtonType.None;
         }
 
-        /// <summary>
-        /// どれか十字が押されてる
-        /// </summary>
-        /// <returns></returns>
         public bool IsAnyCrossPress()
         {
-            return (crossUp.IsPress() || crossDown.IsPress() || crossLeft.IsPress() || crossRight.IsPress());
+            return (m_crossUp.m_isPress || m_crossDown.m_isPress || m_crossLeft.m_isPress || m_crossRight.m_isPress);
         }
-        /// <summary>
-        /// ジャンプ入力
-        /// </summary>
-        /// <returns></returns>
+
         public bool IsJumpPush()
         {
-            return ((buttonA.IsPress() && buttonB.IsPush())
-                || (buttonA.IsPush() && buttonB.IsPress()));
+            return ((m_buttonA.m_isPress && m_buttonB.m_isPush)
+                || (m_buttonA.m_isPush && m_buttonB.m_isPress));
         }
 
     }
@@ -95,69 +87,38 @@ namespace YYHS
     public struct Button
     {
         // 連打受付時間
-        const float DOUBLE_TIME = 0.4f;
+        const float Double_Time = 0.4f;
         // 押した瞬間
-        byte isPush;
+        public boolean m_isPush;
         // 押してる
-        byte isPress;
+        public boolean m_isPress;
         // 離した瞬間
-        byte isPop;
+        public boolean m_isPop;
         // 連打
-        byte isDouble;
+        public boolean m_isDouble;
         // ダッシュ用直前押した瞬間時間
-        float lastPushTime;
+        float m_lastPushTime;
 
-        public bool IsPush()
+        public void SetButtonData(boolean isPush, boolean isPress, boolean isPop, float time)
         {
-            return isPush != 0;
-        }
-
-        public bool IsPress()
-        {
-            return isPress != 0;
-        }
-
-        public bool IsPop()
-        {
-            return isPop != 0;
-        }
-
-        public bool IsDouble()
-        {
-            return isDouble != 0;
-        }
-
-        public void SetButtonData(bool _isPush, bool _isPress, bool _isPop, float _time)
-        {
-            isPush = BoolToByte(_isPush);
-            isPress = BoolToByte(_isPress);
-            isPop = BoolToByte(_isPop);
-            isDouble = BoolToByte(IsPush() && ((_time - lastPushTime) < DOUBLE_TIME));
-            if (IsPush())
-                lastPushTime = _time;
+            m_isPush = isPush;
+            m_isPress = isPress;
+            m_isPop = isPop;
+            m_isDouble = m_isPush && ((time - m_lastPushTime) < Double_Time);
+            if (m_isPush)
+                m_lastPushTime = time;
 
         }
 
-        public void SetCrossData(bool _isPress, float _time)
+        public void SetCrossData(boolean isPress, float time)
         {
-            isPush = BoolToByte((isPress == 0) && _isPress);
-            isPress = BoolToByte(_isPress);
-            isPop = BoolToByte((isPress != 0) && !_isPress);
-            isDouble = BoolToByte(IsPush() && ((_time - lastPushTime) < DOUBLE_TIME));
-            if (IsPush())
-                lastPushTime = _time;
+            m_isPush = !m_isPress && isPress;
+            m_isPress = isPress;
+            m_isPop = m_isPress && !isPress;
+            m_isDouble = (m_isPush && ((time - m_lastPushTime) < Double_Time));
+            if (m_isPush)
+                m_lastPushTime = time;
 
-            // if (IsPress())
-            // 	Debug.Log("isPress");
         }
-        byte BoolToByte(bool value)
-        {
-            return (value) ? (byte)1 : (byte)0;
-        }
-
-        // bool ByteToBool(byte value)
-        // {
-        // 	return (value != 0);
-        // }
     }
 }

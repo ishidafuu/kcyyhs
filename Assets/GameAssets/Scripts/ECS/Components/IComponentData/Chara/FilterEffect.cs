@@ -4,9 +4,9 @@ namespace YYHS
 {
     public struct FilterEffect : IComponentData
     {
-        public int id;
-        public bool isActive;
-        public int effectNo;
-        public int count;
+        public int m_id;
+        public bool m_isActive;
+        public int m_effectNo;
+        public int m_count;
     }
 }

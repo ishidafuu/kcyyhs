@@ -39,15 +39,15 @@ namespace YYHS
             for (int i = 0; i < filterEffects.Length; i++)
             {
                 var filterEffect = filterEffects[i];
-                if (!filterEffect.isActive)
+                if (!filterEffect.m_isActive)
                     continue;
 
-                var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.id].data;
+                var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.m_id].data;
                 int flipNo = (data.flipCount >= 2 && data.flipInterval > 0)
-                    ? ((filterEffect.count / data.flipInterval) % data.flipCount)
+                    ? ((filterEffect.m_count / data.flipInterval) % data.flipCount)
                     : 0;
 
-                string imageName = $"{Shared.m_yhFilterEffectList.m_effects[filterEffect.id].imageName}_{flipNo.ToString("d2")}";
+                string imageName = $"{Shared.m_yhFilterEffectList.m_effects[filterEffect.m_id].imageName}_{flipNo.ToString("d2")}";
                 Mesh mesh = Shared.m_commonMeshMat.m_meshDict[imageName];
                 Material mat = Shared.m_commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
 
@@ -59,8 +59,8 @@ namespace YYHS
                     ? data.width
                     : data.width * (data.height / data.offsetY);
 
-                int centerX = (filterEffect.count * data.moveX) % intervalWidth;
-                int centerY = (filterEffect.count * data.moveY) % data.height;
+                int centerX = (filterEffect.m_count * data.moveX) % intervalWidth;
+                int centerY = (filterEffect.m_count * data.moveY) % data.height;
                 int leftCount = (int)math.ceil((float)(centerX + BgWidthHalf) / data.width) + 1;
                 int rightCount = (int)math.ceil((float)(BgWidthHalf - centerX) / data.width) + 1;
 
@@ -85,7 +85,7 @@ namespace YYHS
         private void DrawYLine(ref FilterEffect filterEffect, Mesh mesh, Material mat,
              int BgHeightHalf, int centerX, int centerY, int x, int layer)
         {
-            var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.id].data;
+            var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.m_id].data;
             int posX = centerX + (data.width * x);
             int baseY = centerY + (data.offsetY * x);
             int topCount = (int)math.ceil((float)(BgHeightHalf - baseY) / data.height) + 1;

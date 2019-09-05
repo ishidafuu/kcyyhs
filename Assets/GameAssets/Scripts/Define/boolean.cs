@@ -1,5 +1,5 @@
 ﻿
-namespace NKPB
+namespace YYHS
 {
     public struct boolean
     {

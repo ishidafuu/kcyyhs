@@ -24,7 +24,6 @@ namespace YYHS
             seq.m_sideB.m_isSideA = false;
             entityManager.SetComponentData(entity, seq);
 
-
             return entity;
         }
     }

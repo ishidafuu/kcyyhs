@@ -60,10 +60,10 @@ namespace YYHS
                 for (int i = 0; i < m_filterEffects.Length; i++)
                 {
                     var item = m_filterEffects[i];
-                    if (!item.isActive)
+                    if (!item.m_isActive)
                         continue;
 
-                    item.count++;
+                    item.m_count++;
 
 
                     // TODO:終わりのタイミングここで
