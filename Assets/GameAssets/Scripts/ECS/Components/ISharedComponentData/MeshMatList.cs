@@ -8,14 +8,14 @@ namespace YYHS
     [Serializable]
     public struct MeshMatList : IEquatable<MeshMatList>, ISharedComponentData
     {
-        public Dictionary<string, Material> materialDict;
-        public Dictionary<string, Mesh> meshDict;
-        int colorPropertyId;
+        public Dictionary<string, Material> m_materialDict;
+        public Dictionary<string, Mesh> m_meshDict;
+        int m_colorPropertyId;
 
         public MeshMatList(string path, string shader)
         {
-            meshDict = new Dictionary<string, Mesh>();
-            materialDict = new Dictionary<string, Material>();
+            m_meshDict = new Dictionary<string, Mesh>();
+            m_materialDict = new Dictionary<string, Material>();
             // spriteDict = new Dictionary<string, Sprite>();
             UnityEngine.Object[] list = Resources.LoadAll(path, typeof(Sprite));
 
@@ -27,7 +27,7 @@ namespace YYHS
 
             // マテリアル用シェーダー
             var matShader = Shader.Find(shader);
-            colorPropertyId = Shader.PropertyToID("_Color");
+            m_colorPropertyId = Shader.PropertyToID("_Color");
 
             if (matShader == null)
             {
@@ -43,8 +43,8 @@ namespace YYHS
                 var material = new Material(matShader);
                 material.mainTexture = sprite.texture;
 
-                meshDict.Add(list[i].name, mesh);
-                materialDict.Add(list[i].name, material);
+                m_meshDict.Add(list[i].name, mesh);
+                m_materialDict.Add(list[i].name, material);
 
             }
         }
@@ -76,8 +76,8 @@ namespace YYHS
 
         public Material SetColor(string imageName, Color color)
         {
-            Material mat = materialDict[imageName];
-            mat.SetColor(colorPropertyId, color);
+            Material mat = m_materialDict[imageName];
+            mat.SetColor(m_colorPropertyId, color);
             return mat;
         }
 

@@ -20,21 +20,21 @@ namespace YYHS
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            if (!seq.isPlay || seq.isTransition)
+            if (!seq.m_isPlay || seq.m_isTransition)
                 return;
 
-            int charaNo = seq.animation.charaNo;
-            EnumAnimationName animName = seq.animation.animName;
+            int charaNo = seq.m_animation.m_charaNo;
+            EnumAnimationName animName = seq.m_animation.m_animName;
             // Debug.Log(animName);
-            YHAnimation anim = Shared.yhCharaAnimList.GetAnim(charaNo, animName);
-            int count = seq.animation.count;
+            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
+            int count = seq.m_animation.m_count;
 
             YHFrameData emptyFrameData = new YHFrameData();
             foreach (YHAnimationParts item in anim.parts)
             {
 
                 // TODO:背景なども適切なメッシュから描画する
-                if (!Shared.charaMeshMat.meshDict.ContainsKey(item.name))
+                if (!Shared.m_charaMeshMat.m_meshDict.ContainsKey(item.name))
                     continue;
 
                 YHFrameData isActive = emptyFrameData;
@@ -80,8 +80,8 @@ namespace YYHS
                 YHFrameData isBrink = emptyFrameData;
                 GetNowFrameData(count, item.isBrink, ref isBrink);
 
-                Mesh mesh = Shared.charaMeshMat.meshDict[item.name];
-                Material mat = Shared.charaMeshMat.materialDict[item.name];
+                Mesh mesh = Shared.m_charaMeshMat.m_meshDict[item.name];
+                Material mat = Shared.m_charaMeshMat.m_materialDict[item.name];
                 Matrix4x4 matrixes = Matrix4x4.TRS(
                     new Vector3(posX, posY, layer),
                     Quaternion.Euler(new Vector3(flipY, flipX, rotate)),

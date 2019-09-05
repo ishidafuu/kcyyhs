@@ -16,7 +16,6 @@ namespace YYHS
         EntityQuery m_query;
         Quaternion m_quaternion;
 
-
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(
@@ -29,7 +28,7 @@ namespace YYHS
         protected override void OnUpdate()
         {
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
-            DrawFilterEffect(filterEffects);
+            // DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
         }
 
@@ -43,14 +42,14 @@ namespace YYHS
                 if (!filterEffect.isActive)
                     continue;
 
-                var data = Shared.yhFilterEffectList.effects[filterEffect.id].data;
+                var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.id].data;
                 int flipNo = (data.flipCount >= 2 && data.flipInterval > 0)
                     ? ((filterEffect.count / data.flipInterval) % data.flipCount)
                     : 0;
 
-                string imageName = $"{Shared.yhFilterEffectList.effects[filterEffect.id].imageName}_{flipNo.ToString("d2")}";
-                Mesh mesh = Shared.commonMeshMat.meshDict[imageName];
-                Material mat = Shared.commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
+                string imageName = $"{Shared.m_yhFilterEffectList.m_effects[filterEffect.id].imageName}_{flipNo.ToString("d2")}";
+                Mesh mesh = Shared.m_commonMeshMat.m_meshDict[imageName];
+                Material mat = Shared.m_commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
 
                 int layer = (data.isOverChara)
                     ? (int)EnumDrawLayer.OverChara
@@ -86,7 +85,7 @@ namespace YYHS
         private void DrawYLine(ref FilterEffect filterEffect, Mesh mesh, Material mat,
              int BgHeightHalf, int centerX, int centerY, int x, int layer)
         {
-            var data = Shared.yhFilterEffectList.effects[filterEffect.id].data;
+            var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.id].data;
             int posX = centerX + (data.width * x);
             int baseY = centerY + (data.offsetY * x);
             int topCount = (int)math.ceil((float)(BgHeightHalf - baseY) / data.height) + 1;

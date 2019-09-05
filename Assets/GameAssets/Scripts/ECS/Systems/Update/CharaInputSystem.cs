@@ -35,16 +35,16 @@ namespace YYHS
             {
                 var toukiMeter = toukiMeters[i];
 
-                if (seq.isPlay)
+                if (seq.m_isPlay)
                 {
                     if (i == 0)
                     {
-                        if (seq.sideA.actionType != EnumActionType.None)
+                        if (seq.m_sideA.m_actionType != EnumActionType.None)
                             break;
                     }
                     else
                     {
-                        if (seq.sideB.actionType != EnumActionType.None)
+                        if (seq.m_sideB.m_actionType != EnumActionType.None)
                             break;
                     }
                 }
@@ -54,10 +54,10 @@ namespace YYHS
                     break;
 
                 // TODO:アイテム使用が入る場合、０でも発動する
-                if (toukiMeter.value == 0)
+                if (toukiMeter.m_value == 0)
                     break;
 
-                bool isStartAnim = !seq.isPlay;
+                bool isStartAnim = !seq.m_isPlay;
 
                 if (isStartAnim)
                 {
@@ -110,12 +110,12 @@ namespace YYHS
 
                 if (sideInfos[i].isSideA)
                 {
-                    InitActionSide(sideInfos[i], ref seq.sideA, actionNo, actionType,
+                    InitActionSide(sideInfos[i], ref seq.m_sideA, actionNo, actionType,
                         defenceType, isNeedDefence);
                 }
                 else
                 {
-                    InitActionSide(sideInfos[i], ref seq.sideB, actionNo, actionType,
+                    InitActionSide(sideInfos[i], ref seq.m_sideB, actionNo, actionType,
                         defenceType, isNeedDefence);
                 }
 
@@ -135,11 +135,11 @@ namespace YYHS
             {
                 if (sideInfos[i].isSideA)
                 {
-                    battleSequencer.sideA.enemyDamageLv = EnumDamageLv.Hit;
+                    battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.Hit;
                 }
                 else
                 {
-                    battleSequencer.sideA.enemyDamageLv = EnumDamageLv.Hit;
+                    battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.Hit;
                 }
             }
             else
@@ -147,37 +147,37 @@ namespace YYHS
                 // TODO:確率算出
                 int sideADamage = UnityEngine.Random.Range(0, 3);
                 int sideBDamage = UnityEngine.Random.Range(0, 3);
-                battleSequencer.sideA.enemyDamageLv = (EnumDamageLv)sideADamage;
-                battleSequencer.sideB.enemyDamageLv = (EnumDamageLv)sideBDamage;
+                battleSequencer.m_sideA.m_enemyDamageLv = (EnumDamageLv)sideADamage;
+                battleSequencer.m_sideB.m_enemyDamageLv = (EnumDamageLv)sideBDamage;
                 // TODO:バランス値で変化させる
-                battleSequencer.sideA.enemyDamageReaction = EnumDamageReaction.None;
-                battleSequencer.sideB.enemyDamageReaction = EnumDamageReaction.None;
+                battleSequencer.m_sideA.m_enemyDamageReaction = EnumDamageReaction.None;
+                battleSequencer.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
             }
         }
 
         private static void InitSequencer(ref BattleSequencer battleSequencer, bool isSideA)
         {
-            battleSequencer.isPlay = true;
-            battleSequencer.isTransition = true;
-            battleSequencer.sequenceStep = 0;
-            battleSequencer.isLastSideA = isSideA;
-            battleSequencer.sideA.actionType = EnumActionType.None;
-            battleSequencer.sideA.animStep = EnumAnimationStep.Sleep;
-            battleSequencer.sideB.actionType = EnumActionType.None;
-            battleSequencer.sideA.animStep = EnumAnimationStep.Sleep;
+            battleSequencer.m_isPlay = true;
+            battleSequencer.m_isTransition = true;
+            battleSequencer.m_sequenceStep = 0;
+            battleSequencer.m_isLastSideA = isSideA;
+            battleSequencer.m_sideA.m_actionType = EnumActionType.None;
+            battleSequencer.m_sideA.m_animStep = EnumAnimationStep.Sleep;
+            battleSequencer.m_sideB.m_actionType = EnumActionType.None;
+            battleSequencer.m_sideA.m_animStep = EnumAnimationStep.Sleep;
         }
 
         private static void InitActionSide(SideInfo sideInfo, ref SideState sideState,
             int actionNo, EnumActionType actionType, EnumDefenceType defenceType, bool isNeedDefence)
         {
-            sideState.isSideA = sideInfo.isSideA;
-            sideState.charaNo = sideInfo.charaNo;
-            sideState.actionNo = actionNo;
-            sideState.actionType = actionType;
-            sideState.enemyDeffenceType = defenceType;
-            sideState.isNeedDefence = isNeedDefence;
-            sideState.animStep = EnumAnimationStep.Start;
-            sideState.isEndDefence = false;
+            sideState.m_isSideA = sideInfo.isSideA;
+            sideState.m_charaNo = sideInfo.charaNo;
+            sideState.m_actionNo = actionNo;
+            sideState.m_actionType = actionType;
+            sideState.m_enemyDeffenceType = defenceType;
+            sideState.m_isNeedDefence = isNeedDefence;
+            sideState.m_animStep = EnumAnimationStep.Start;
+            sideState.m_isEndDefence = false;
         }
 
     }

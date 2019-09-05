@@ -15,7 +15,6 @@ namespace YYHS
         EntityQuery m_query;
         Quaternion m_quaternion;
 
-
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(
@@ -34,8 +33,8 @@ namespace YYHS
 
             var toukiMeterJob = new ToukiMeterJob()
             {
-                toukiMeters = toukiMeters,
-                toukiMeterMatrixes = toukiMeterMatrixes,
+                m_toukiMeters = toukiMeters,
+                m_toukiMeterMatrixes = toukiMeterMatrixes,
                 Q = m_quaternion,
                 ToukiWidth = Settings.Instance.DrawPos.ToukiWidth,
                 ToukiMeterX = Settings.Instance.DrawPos.ToukiMeterX,
@@ -56,8 +55,8 @@ namespace YYHS
         // [BurstCompileAttribute]
         struct ToukiMeterJob : IJob
         {
-            public NativeArray<Matrix4x4> toukiMeterMatrixes;
-            [ReadOnly] public NativeArray<ToukiMeter> toukiMeters;
+            public NativeArray<Matrix4x4> m_toukiMeterMatrixes;
+            [ReadOnly] public NativeArray<ToukiMeter> m_toukiMeters;
             [ReadOnly] public Quaternion Q;
             [ReadOnly] public int ToukiWidth;
             [ReadOnly] public int ToukiMeterX;
@@ -65,19 +64,19 @@ namespace YYHS
 
             public void Execute()
             {
-                for (int i = 0; i < toukiMeters.Length; i++)
+                for (int i = 0; i < m_toukiMeters.Length; i++)
                 {
-                    float width = (float)toukiMeters[i].value / (float)ToukiWidth;
+                    float width = (float)m_toukiMeters[i].m_value / (float)ToukiWidth;
 
                     float posX = (i == 0)
-                        ? ToukiMeterX + ((float)toukiMeters[i].value / 2f)
-                        : -ToukiMeterX - ((float)toukiMeters[i].value / 2f);
+                        ? ToukiMeterX + ((float)m_toukiMeters[i].m_value / 2f)
+                        : -ToukiMeterX - ((float)m_toukiMeters[i].m_value / 2f);
 
                     Matrix4x4 tmpMatrix = Matrix4x4.TRS(
                         new Vector3(posX, ToukiMeterY, (int)EnumDrawLayer.OverFrame),
                         Q, new Vector3(width, 1, 1));
 
-                    toukiMeterMatrixes[i] = tmpMatrix;
+                    m_toukiMeterMatrixes[i] = tmpMatrix;
                 }
             }
         }
@@ -85,13 +84,13 @@ namespace YYHS
         private void DrawToukiMeter(ToukiMeterJob toukiMeterJob)
         {
             string meter02 = EnumCommonPartsType.meter02.ToString();
-            for (int i = 0; i < toukiMeterJob.toukiMeterMatrixes.Length; i++)
+            for (int i = 0; i < toukiMeterJob.m_toukiMeterMatrixes.Length; i++)
             {
 
                 Graphics.DrawMesh(
-                    Shared.commonMeshMat.meshDict[meter02],
-                    toukiMeterJob.toukiMeterMatrixes[i],
-                    Shared.commonMeshMat.materialDict[meter02], 0);
+                    Shared.m_commonMeshMat.m_meshDict[meter02],
+                    toukiMeterJob.m_toukiMeterMatrixes[i],
+                    Shared.m_commonMeshMat.m_materialDict[meter02], 0);
             }
         }
     }

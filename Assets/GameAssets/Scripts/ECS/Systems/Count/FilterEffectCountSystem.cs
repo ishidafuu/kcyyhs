@@ -28,16 +28,16 @@ namespace YYHS
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             NativeArray<YHFilterEffect> yhFilterEffects
                 = new NativeArray<YHFilterEffect>(Settings.Instance.Common.FilterEffectCount, Allocator.TempJob);
-            for (int i = 0; i < Shared.yhFilterEffectList.effects.Count; i++)
+            for (int i = 0; i < Shared.m_yhFilterEffectList.m_effects.Count; i++)
             {
-                yhFilterEffects[i] = Shared.yhFilterEffectList.effects[i].data;
+                yhFilterEffects[i] = Shared.m_yhFilterEffectList.m_effects[i].data;
             }
 
-            var uv = Shared.yhFilterEffectList.effects[0];
+            var uv = Shared.m_yhFilterEffectList.m_effects[0];
             var job = new CountJob()
             {
-                filterEffects = filterEffects,
-                yhFilterEffects = yhFilterEffects,
+                m_filterEffects = filterEffects,
+                m_yhFilterEffects = yhFilterEffects,
             };
 
             inputDeps = job.Schedule(inputDeps);
@@ -52,14 +52,14 @@ namespace YYHS
         // [BurstCompileAttribute]
         struct CountJob : IJob
         {
-            public NativeArray<FilterEffect> filterEffects;
-            [ReadOnly] public NativeArray<YHFilterEffect> yhFilterEffects;
+            public NativeArray<FilterEffect> m_filterEffects;
+            [ReadOnly] public NativeArray<YHFilterEffect> m_yhFilterEffects;
 
             public void Execute()
             {
-                for (int i = 0; i < filterEffects.Length; i++)
+                for (int i = 0; i < m_filterEffects.Length; i++)
                 {
-                    var item = filterEffects[i];
+                    var item = m_filterEffects[i];
                     if (!item.isActive)
                         continue;
 
@@ -74,7 +74,7 @@ namespace YYHS
 
 
                     // Debug.Log(SpriteUr.imageName);
-                    filterEffects[i] = item;
+                    m_filterEffects[i] = item;
                 }
             }
         }

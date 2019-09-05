@@ -20,8 +20,8 @@ namespace YYHS
             var entity = entityManager.CreateEntity(archetype);
 
             BattleSequencer seq = new BattleSequencer();
-            seq.sideA.isSideA = true;
-            seq.sideB.isSideA = false;
+            seq.m_sideA.m_isSideA = true;
+            seq.m_sideB.m_isSideA = false;
             entityManager.SetComponentData(entity, seq);
 
 

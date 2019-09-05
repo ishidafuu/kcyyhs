@@ -31,9 +31,9 @@ namespace YYHS
             NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var job = new InputToToukiJob()
             {
-                padScans = padScans,
-                toukiMeters = toukiMeters,
-                seq = seq,
+                m_padScans = padScans,
+                m_toukiMeters = toukiMeters,
+                m_seq = seq,
             };
             inputDeps = job.Schedule(inputDeps);
 
@@ -50,27 +50,27 @@ namespace YYHS
         // [BurstCompileAttribute]
         struct InputToToukiJob : IJob
         {
-            public NativeArray<ToukiMeter> toukiMeters;
-            [ReadOnly] public NativeArray<PadScan> padScans;
-            [ReadOnly] public BattleSequencer seq;
+            public NativeArray<ToukiMeter> m_toukiMeters;
+            [ReadOnly] public NativeArray<PadScan> m_padScans;
+            [ReadOnly] public BattleSequencer m_seq;
 
 
             public void Execute()
             {
-                for (int i = 0; i < padScans.Length; i++)
+                for (int i = 0; i < m_padScans.Length; i++)
                 {
-                    var toukiMeter = toukiMeters[i];
+                    var toukiMeter = m_toukiMeters[i];
 
-                    if (seq.sideA.animStep != EnumAnimationStep.Sleep)
+                    if (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
                         continue;
 
-                    if (toukiMeter.muki != padScans[i].GetPressCross())
+                    if (toukiMeter.m_muki != m_padScans[i].GetPressCross())
                     {
-                        toukiMeter.muki = padScans[i].GetPressCross();
-                        toukiMeter.value = 0;
+                        toukiMeter.m_muki = m_padScans[i].GetPressCross();
+                        toukiMeter.m_value = 0;
                     }
 
-                    toukiMeters[i] = toukiMeter;
+                    m_toukiMeters[i] = toukiMeter;
                 }
             }
 

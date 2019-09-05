@@ -14,27 +14,27 @@ namespace YYHS
     public static class Shared
     {
         // SharedComponentData
-        public static MeshMatList charaMeshMat;
-        public static MeshMatList bgFrameMeshMat;
-        public static MeshMatList commonMeshMat;
+        public static MeshMatList m_charaMeshMat;
+        public static MeshMatList m_bgFrameMeshMat;
+        public static MeshMatList m_commonMeshMat;
 
-        public static YHFilterEffectList yhFilterEffectList;
-        public static YHCharaAnimList yhCharaAnimList;
+        public static YHFilterEffectList m_yhFilterEffectList;
+        public static YHCharaAnimList m_yhCharaAnimList;
 
 
         static readonly string DefaultShader = "Sprites/DefaultSprite";
 
         public static void ReadySharedComponentData()
         {
-            charaMeshMat = new MeshMatList(GetCharaPath(0), DefaultShader);
-            bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
-            commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
+            m_charaMeshMat = new MeshMatList(GetCharaPath(0), DefaultShader);
+            m_bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
+            m_commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
 
-            yhFilterEffectList = new YHFilterEffectList();
-            yhFilterEffectList.Init();
+            m_yhFilterEffectList = new YHFilterEffectList();
+            m_yhFilterEffectList.Init();
 
-            yhCharaAnimList = new YHCharaAnimList();
-            yhCharaAnimList.Init();
+            m_yhCharaAnimList = new YHCharaAnimList();
+            m_yhCharaAnimList.Init();
         }
 
         private static string GetBackGroundPath(int bgNo)

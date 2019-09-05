@@ -74,7 +74,7 @@ namespace YYHS
 
         void ComponentCache()
         {
-            Cache.pixelPerfectCamera = FindObjectOfType<PixelPerfectCamera>();
+            Cache.m_pixelPerfectCamera = FindObjectOfType<PixelPerfectCamera>();
         }
 
         void ReadySharedComponentData()
@@ -106,13 +106,13 @@ namespace YYHS
         {
             for (int i = 0; i < Settings.Instance.Common.FilterEffectCount; i++)
             {
-                var entity = FilterEffectEntityFactory.CreateEntity(i, manager, ref Shared.yhFilterEffectList);
+                var entity = FilterEffectEntityFactory.CreateEntity(i, manager, ref Shared.m_yhFilterEffectList);
             }
         }
 
         void CreateBattleEntity(EntityManager manager)
         {
-            var entity = BattleEntityFactory.CreateEntity(manager, ref Shared.yhFilterEffectList);
+            var entity = BattleEntityFactory.CreateEntity(manager, ref Shared.m_yhFilterEffectList);
         }
     }
 }
