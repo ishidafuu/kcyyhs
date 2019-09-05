@@ -29,21 +29,26 @@ namespace YYHS
             NativeArray<PadScan> padScans = m_queryChara.ToComponentDataArray<PadScan>(Allocator.TempJob);
             NativeArray<SideInfo> sideInfos = m_queryChara.ToComponentDataArray<SideInfo>(Allocator.TempJob);
             NativeArray<ToukiMeter> toukiMeters = m_queryChara.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            var battleSequencer = GetSingleton<BattleSequencer>();
+            var seq = GetSingleton<BattleSequencer>();
 
             for (int i = 0; i < padScans.Length; i++)
             {
                 var toukiMeter = toukiMeters[i];
-                if (i == 0)
+
+                if (seq.isPlay)
                 {
-                    if (battleSequencer.sideA.actionType != EnumActionType.None)
-                        break;
+                    if (i == 0)
+                    {
+                        if (seq.sideA.actionType != EnumActionType.None)
+                            break;
+                    }
+                    else
+                    {
+                        if (seq.sideB.actionType != EnumActionType.None)
+                            break;
+                    }
                 }
-                else
-                {
-                    if (battleSequencer.sideB.actionType != EnumActionType.None)
-                        break;
-                }
+
 
                 if (padScans[i].GetPressButton() == EnumButtonType.None)
                     break;
@@ -52,11 +57,11 @@ namespace YYHS
                 if (toukiMeter.value == 0)
                     break;
 
-                bool isStartAnim = !battleSequencer.isPlay;
+                bool isStartAnim = !seq.isPlay;
 
                 if (isStartAnim)
                 {
-                    InitSequencer(ref battleSequencer, sideInfos[i].isSideA);
+                    InitSequencer(ref seq, sideInfos[i].isSideA);
                 }
 
 
@@ -86,6 +91,11 @@ namespace YYHS
                         break;
                 }
 
+                // TODO:仮
+                isNeedDefence = false;
+                actionNo = 0;
+                actionType = EnumActionType.ShortAttack;
+
                 EnumDefenceType defenceType = EnumDefenceType.Stand;
                 switch (actionType)
                 {
@@ -100,19 +110,19 @@ namespace YYHS
 
                 if (sideInfos[i].isSideA)
                 {
-                    InitActionSide(sideInfos[i], ref battleSequencer.sideA, actionNo, actionType,
+                    InitActionSide(sideInfos[i], ref seq.sideA, actionNo, actionType,
                         defenceType, isNeedDefence);
                 }
                 else
                 {
-                    InitActionSide(sideInfos[i], ref battleSequencer.sideB, actionNo, actionType,
+                    InitActionSide(sideInfos[i], ref seq.sideB, actionNo, actionType,
                         defenceType, isNeedDefence);
                 }
 
-                JudgeDamage(ref sideInfos, ref battleSequencer, i, isStartAnim);
+                JudgeDamage(ref sideInfos, ref seq, i, isStartAnim);
             }
 
-            SetSingleton<BattleSequencer>(battleSequencer);
+            SetSingleton<BattleSequencer>(seq);
 
             padScans.Dispose();
             sideInfos.Dispose();
