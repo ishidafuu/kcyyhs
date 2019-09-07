@@ -95,6 +95,11 @@ namespace YYHS
                     float u = (float)toukiMeter.m_bgScroll / (float)BgScrollRange;
                     toukiMeter.m_bgScrollTextureUL = SpriteUl + (u * width);
                     toukiMeter.m_bgScrollTextureUR = toukiMeter.m_bgScrollTextureUL + width;
+                    toukiMeter.m_count++;
+                    if (toukiMeter.m_count >= 60)
+                    {
+                        toukiMeter.m_count = 0;
+                    }
                     m_toukiMeters[i] = toukiMeter;
                 }
             }
