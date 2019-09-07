@@ -33,72 +33,122 @@ namespace YYHS
             foreach (YHAnimationParts item in anim.parts)
             {
 
-                // TODO:背景なども適切なメッシュから描画する
-                if (!Shared.m_charaMeshMat.m_meshDict.ContainsKey(item.name))
+                YHFrameData isActive = GetNowFrameData(count, item.isActive);
+
+                if (isActive == null || !isActive.value)
                     continue;
 
-                YHFrameData isActive = emptyFrameData;
-                GetNowFrameData(count, item.isActive, ref isActive);
+                YHFrameData isBrink = GetNowFrameData(count, item.isBrink);
+                if (isBrink != null && isBrink.value)
+                {
+                    if (count % 4 >= 2)
+                        continue;
+                }
 
-                if (!isActive.value)
+                Mesh mesh = GetMesh(item);
+                if (mesh == null)
                     continue;
 
-                // Debug.Log(item.name);
+                Material mat = GetMaterial(item);
+                if (mat == null)
+                    continue;
 
-                float posX = (item.positionX.length == 0)
-                    ? 0
-                    : item.positionX.Evaluate(count);
-                float posY = (item.positionY.length == 0)
-                    ? 0
-                    : item.positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
+                Vector3 pos = EvalutePos(item, count);
+                Quaternion q = EvaluteQuaternion(item, count);
+                Vector3 scale = EvaluteScale(item, count);
 
-                float scaleX = (item.scaleX.length == 0)
-                    ? 1
-                    : item.scaleX.Evaluate(count);
-                float scaleY = (item.scaleY.length == 0)
-                    ? 1
-                    : item.scaleY.Evaluate(count);
-
-                float rotate = (item.rotation.length == 0)
-                    ? 0
-                    : item.rotation.Evaluate(count);
-
-                float layer = (int)EnumDrawLayer.Chara + item.orderInLayer;
-
-                YHFrameData isFlipX = emptyFrameData;
-                GetNowFrameData(count, item.isFlipX, ref isFlipX);
-                int flipX = (isFlipX.value)
-                    ? 180
-                    : 0;
-
-                YHFrameData isFlipY = emptyFrameData;
-                GetNowFrameData(count, item.isFlipY, ref isFlipY);
-                int flipY = (isFlipY.value)
-                    ? +90
-                    : -90;
-
-                YHFrameData isBrink = emptyFrameData;
-                GetNowFrameData(count, item.isBrink, ref isBrink);
-
-                Mesh mesh = Shared.m_charaMeshMat.m_meshDict[item.name];
-                Material mat = Shared.m_charaMeshMat.m_materialDict[item.name];
-                Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(posX, posY, layer),
-                    Quaternion.Euler(new Vector3(flipY, flipX, rotate)),
-                    new Vector3(scaleX, 1, scaleY));
-
+                Matrix4x4 matrixes = Matrix4x4.TRS(pos, q, scale);
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
         }
 
-        private static void GetNowFrameData(int count, List<YHFrameData> srcList, ref YHFrameData nowData)
+        private static Vector3 EvalutePos(YHAnimationParts item, int count)
         {
+            float posX = (item.positionX.length == 0)
+                ? 0
+                : item.positionX.Evaluate(count);
+            float posY = (item.positionY.length == 0)
+                ? 0
+                : item.positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
+
+            float layer = (int)EnumDrawLayer.Chara + item.orderInLayer;
+
+            return new Vector3(posX, posY, layer);
+        }
+
+        private static Quaternion EvaluteQuaternion(YHAnimationParts item, int count)
+        {
+            float rotate = (item.rotation.length == 0)
+                ? 0
+                : item.rotation.Evaluate(count);
+
+
+            YHFrameData isFlipX = GetNowFrameData(count, item.isFlipX);
+            int flipX = (isFlipX != null && isFlipX.value)
+                ? 180
+                : 0;
+
+            YHFrameData isFlipY = GetNowFrameData(count, item.isFlipY);
+            int flipY = (isFlipY != null && isFlipY.value)
+                ? +90
+                : -90;
+
+            return Quaternion.Euler(new Vector3(flipY, flipX, rotate));
+        }
+
+        private static Vector3 EvaluteScale(YHAnimationParts item, int count)
+        {
+            float scaleX = (item.scaleX.length == 0)
+                ? 1
+                : item.scaleX.Evaluate(count);
+            float scaleY = (item.scaleY.length == 0)
+                ? 1
+                : item.scaleY.Evaluate(count);
+
+            return new Vector3(scaleX, 1, scaleY);
+        }
+
+        private static Material GetMaterial(YHAnimationParts item)
+        {
+            if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.name))
+                return Shared.m_charaMeshMat.m_materialDict[item.name];
+            else if (Shared.m_bgFrameMeshMat.m_materialDict.ContainsKey(item.name))
+                return Shared.m_bgFrameMeshMat.m_materialDict[item.name];
+            else if (Shared.m_commonMeshMat.m_materialDict.ContainsKey(item.name))
+                return Shared.m_commonMeshMat.m_materialDict[item.name];
+            else
+                Debug.LogError($"NotFoundMaterial {item.name}");
+
+
+            return null;
+        }
+
+        private static Mesh GetMesh(YHAnimationParts item)
+        {
+            if (Shared.m_charaMeshMat.m_meshDict.ContainsKey(item.name))
+                return Shared.m_charaMeshMat.m_meshDict[item.name];
+            else if (Shared.m_bgFrameMeshMat.m_meshDict.ContainsKey(item.name))
+                return Shared.m_bgFrameMeshMat.m_meshDict[item.name];
+            else if (Shared.m_commonMeshMat.m_meshDict.ContainsKey(item.name))
+                return Shared.m_commonMeshMat.m_meshDict[item.name];
+            else
+                Debug.LogError($"NotFoundMesh {item.name}");
+
+
+            return null;
+        }
+
+        private static YHFrameData GetNowFrameData(int count, List<YHFrameData> srcList)
+        {
+            YHFrameData result = null;
             foreach (var data in srcList)
             {
                 if (data.frame > count)
                     break;
-                nowData = data;
+                result = data;
             }
+
+            return result;
         }
     }
 }
