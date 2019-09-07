@@ -574,7 +574,11 @@ MonoBehaviour:
         m_RotationOrder: 4
     - name: bg02
       orderInLayer: 0
-      isActive: []
+      isActive:
+      - frame: 0
+        value: 1
+      - frame: 60
+        value: 1
       isFlipX: []
       isFlipY: []
       isBrink: []
@@ -591,17 +595,8 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 30
-          value: 30
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 3
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
           time: 60
-          value: 30
+          value: -30
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -616,15 +611,6 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 3
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 30
           value: 0
           inSlope: 0
           outSlope: 0
