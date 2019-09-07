@@ -10,7 +10,7 @@ namespace YYHS
 {
 
     [UpdateInGroup(typeof(RenderGroup))]
-    public class MeterDrawSystem : JobComponentSystem
+    public class FrameDrawSystem : JobComponentSystem
     {
         EntityQuery m_query;
         Quaternion m_quaternion;

@@ -59,7 +59,7 @@ namespace YYHS
             PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<SpritBackGroundDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectDrawSystem>());
-            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<MeterDrawSystem>());
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FrameDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleDrawDrawSystem>());
 
 
