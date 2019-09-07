@@ -121,11 +121,6 @@ namespace YYHS
                 new Vector3(posX, posY + Settings.Instance.DrawPos.BgScrollY, layer),
                 m_quaternion, Vector3.one);
 
-
-            // Shared.commonMeshMat.propertyBlock.Clear();
-            // Shared.commonMeshMat.propertyBlock.SetColor(Shared.commonMeshMat.colorPropertyId, Color.red);
-            // Graphics.DrawMesh(ObjMesh, Obj.WorldPosition + new Vector3(ofst, 0, ofst), Obj.Rotation, Material1, 0, MainCamera, 0, _PropertyBlock);
-
             Graphics.DrawMesh(mesh, matrixes, mat, 0);
         }
     }
