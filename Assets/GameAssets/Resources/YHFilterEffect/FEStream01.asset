@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c0d840703c9f4d9d591d2ba305c16, type: 3}
+  m_Name: FEStream01
+  m_EditorClassIdentifier: 
+  m_imageBaseName: cm_ll_effect01
+  m_color: []
+  m_data:
+    m_width: 128
+    m_height: 96
+    m_isOverChara: 0
+    m_offsetY: 0
+    m_moveX: 0
+    m_moveY: 4
+    m_flipInterval: 0
+    m_flipCount: 0

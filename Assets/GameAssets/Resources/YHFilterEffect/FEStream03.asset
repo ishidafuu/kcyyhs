@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 605c0d840703c9f4d9d591d2ba305c16, type: 3}
-  m_Name: YHFilterEffect00
+  m_Name: FEStream03
   m_EditorClassIdentifier: 
-  imageName: cm_e_effect00
-  color: []
-  data:
-    width: 64
-    height: 96
-    isOverChara: 0
-    offsetY: 32
-    moveX: 4
-    moveY: 0
-    flipInterval: 0
-    flipCount: 0
+  m_imageBaseName: cm_ll_effect03
+  m_color: []
+  m_data:
+    m_width: 64
+    m_height: 96
+    m_isOverChara: 0
+    m_offsetY: 32
+    m_moveX: 4
+    m_moveY: 4
+    m_flipInterval: 0
+    m_flipCount: 0
