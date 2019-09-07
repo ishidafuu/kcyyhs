@@ -45,15 +45,35 @@ namespace YYHS
                         continue;
                 }
 
-                Mesh mesh = GetMesh(item);
-                if (mesh == null)
-                    continue;
+                Mesh mesh = null;
+                Material mat = null;
+                int layer = 0;
 
-                Material mat = GetMaterial(item);
-                if (mat == null)
+                if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.name))
+                {
+                    mesh = Shared.m_charaMeshMat.m_meshDict[item.name];
+                    mat = Shared.m_charaMeshMat.m_materialDict[item.name];
+                    layer = (int)EnumDrawLayer.Chara;
+                }
+                else if (Shared.m_commonMeshMat.m_materialDict.ContainsKey(item.name))
+                {
+                    mesh = Shared.m_commonMeshMat.m_meshDict[item.name];
+                    mat = Shared.m_commonMeshMat.m_materialDict[item.name];
+                    layer = (int)EnumDrawLayer.Chara;
+                }
+                else if (Shared.m_bgFrameMeshMat.m_materialDict.ContainsKey(item.name))
+                {
+                    mesh = Shared.m_bgFrameMeshMat.m_meshDict[item.name];
+                    mat = Shared.m_bgFrameMeshMat.m_materialDict[item.name];
+                    layer = (int)EnumDrawLayer.BackGround;
+                }
+                else
+                {
+                    Debug.LogError($"Not Found Material or Mesh {item.name}");
                     continue;
+                }
 
-                Vector3 pos = EvalutePos(item, count);
+                Vector3 pos = EvalutePos(item, count, layer);
                 Quaternion q = EvaluteQuaternion(item, count);
                 Vector3 scale = EvaluteScale(item, count);
 
@@ -62,7 +82,7 @@ namespace YYHS
             }
         }
 
-        private static Vector3 EvalutePos(YHAnimationParts item, int count)
+        private static Vector3 EvalutePos(YHAnimationParts item, int count, int layer)
         {
             float posX = (item.positionX.length == 0)
                 ? 0
@@ -71,9 +91,7 @@ namespace YYHS
                 ? 0
                 : item.positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
 
-            float layer = (int)EnumDrawLayer.Chara + item.orderInLayer;
-
-            return new Vector3(posX, posY, layer);
+            return new Vector3(posX, posY, (float)layer + item.orderInLayer);
         }
 
         private static Quaternion EvaluteQuaternion(YHAnimationParts item, int count)
@@ -81,7 +99,6 @@ namespace YYHS
             float rotate = (item.rotation.length == 0)
                 ? 0
                 : item.rotation.Evaluate(count);
-
 
             YHFrameData isFlipX = GetNowFrameData(count, item.isFlipX);
             int flipX = (isFlipX != null && isFlipX.value)
@@ -106,36 +123,6 @@ namespace YYHS
                 : item.scaleY.Evaluate(count);
 
             return new Vector3(scaleX, 1, scaleY);
-        }
-
-        private static Material GetMaterial(YHAnimationParts item)
-        {
-            if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.name))
-                return Shared.m_charaMeshMat.m_materialDict[item.name];
-            else if (Shared.m_bgFrameMeshMat.m_materialDict.ContainsKey(item.name))
-                return Shared.m_bgFrameMeshMat.m_materialDict[item.name];
-            else if (Shared.m_commonMeshMat.m_materialDict.ContainsKey(item.name))
-                return Shared.m_commonMeshMat.m_materialDict[item.name];
-            else
-                Debug.LogError($"NotFoundMaterial {item.name}");
-
-
-            return null;
-        }
-
-        private static Mesh GetMesh(YHAnimationParts item)
-        {
-            if (Shared.m_charaMeshMat.m_meshDict.ContainsKey(item.name))
-                return Shared.m_charaMeshMat.m_meshDict[item.name];
-            else if (Shared.m_bgFrameMeshMat.m_meshDict.ContainsKey(item.name))
-                return Shared.m_bgFrameMeshMat.m_meshDict[item.name];
-            else if (Shared.m_commonMeshMat.m_meshDict.ContainsKey(item.name))
-                return Shared.m_commonMeshMat.m_meshDict[item.name];
-            else
-                Debug.LogError($"NotFoundMesh {item.name}");
-
-
-            return null;
         }
 
         private static YHFrameData GetNowFrameData(int count, List<YHFrameData> srcList)

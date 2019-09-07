@@ -10,7 +10,7 @@ namespace YYHS
 {
 
     [UpdateInGroup(typeof(RenderGroup))]
-    public class BGDrawSystem : ComponentSystem
+    public class SpritBackGroundDrawSystem : ComponentSystem
     {
         EntityQuery m_query;
         Quaternion m_quaternion;
@@ -25,17 +25,18 @@ namespace YYHS
 
         protected override void OnUpdate()
         {
+            BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            // TODO:攻撃アニメーション状態に入ったら、処理を変える
+            if (seq.m_isPlay)
+                return;
+
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            DrawBackGround(toukiMeters);
-            DrawFrame();
-
+            DrawSpritBackGround(toukiMeters);
             toukiMeters.Dispose();
         }
 
 
-        private void DrawBackGround(NativeArray<ToukiMeter> toukiMeters)
+        private void DrawSpritBackGround(NativeArray<ToukiMeter> toukiMeters)
         {
             Mesh baseMesh = Shared.m_bgFrameMeshMat.m_meshDict[EnumBGPartsType.bg00.ToString()];
             Material mat = Shared.m_bgFrameMeshMat.m_materialDict[EnumBGPartsType.bg00.ToString()];
@@ -62,19 +63,6 @@ namespace YYHS
         }
 
 
-        private void DrawFrame()
-        {
-            Matrix4x4 frameTopMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameTopY, (int)EnumDrawLayer.Frame),
-                m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.m_commonMeshMat.m_meshDict[EnumCommonPartsType.frame_top.ToString()],
-                frameTopMatrix,
-                Shared.m_commonMeshMat.m_materialDict[EnumCommonPartsType.frame_top.ToString()], 0);
 
-            Matrix4x4 frameBottomMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameBottomY, (int)EnumDrawLayer.Frame),
-                m_quaternion, Vector3.one);
-            Graphics.DrawMesh(Shared.m_commonMeshMat.m_meshDict[EnumCommonPartsType.frame_bottom.ToString()],
-                frameBottomMatrix,
-                Shared.m_commonMeshMat.m_materialDict[EnumCommonPartsType.frame_bottom.ToString()], 0);
-        }
     }
 }

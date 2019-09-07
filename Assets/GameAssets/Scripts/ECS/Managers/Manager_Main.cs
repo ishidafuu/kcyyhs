@@ -57,7 +57,7 @@ namespace YYHS
             simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
 
             PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
-            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BGDrawSystem>());
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<SpritBackGroundDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<MeterDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleDrawDrawSystem>());

@@ -44,6 +44,7 @@ namespace YYHS
 
             inputDeps.Complete();
 
+            DrawFrame();
             DrawToukiMeter(toukiMeterJob);
 
             toukiMeters.Dispose();
@@ -92,6 +93,21 @@ namespace YYHS
                     toukiMeterJob.m_toukiMeterMatrixes[i],
                     Shared.m_commonMeshMat.m_materialDict[meter02], 0);
             }
+        }
+
+        private void DrawFrame()
+        {
+            Matrix4x4 frameTopMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameTopY, (int)EnumDrawLayer.Frame),
+                m_quaternion, Vector3.one);
+            Graphics.DrawMesh(Shared.m_commonMeshMat.m_meshDict[EnumCommonPartsType.frame_top.ToString()],
+                frameTopMatrix,
+                Shared.m_commonMeshMat.m_materialDict[EnumCommonPartsType.frame_top.ToString()], 0);
+
+            Matrix4x4 frameBottomMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.FrameBottomY, (int)EnumDrawLayer.Frame),
+                m_quaternion, Vector3.one);
+            Graphics.DrawMesh(Shared.m_commonMeshMat.m_meshDict[EnumCommonPartsType.frame_bottom.ToString()],
+                frameBottomMatrix,
+                Shared.m_commonMeshMat.m_materialDict[EnumCommonPartsType.frame_bottom.ToString()], 0);
         }
     }
 }
