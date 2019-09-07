@@ -760,7 +760,7 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: EventEffect
-    data: FEStrream00
+    data: FEStream00
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

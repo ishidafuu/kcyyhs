@@ -651,7 +651,7 @@ MonoBehaviour:
     m_events:
     - m_frame: 0
       m_functionName: 2
-      m_stringParameter: FEStrream00
+      m_stringParameter: FEStream00
       m_floatParameter: 0
       m_intParameter: 0
   - m_name: Action00_01

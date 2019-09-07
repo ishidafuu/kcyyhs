@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605c0d840703c9f4d9d591d2ba305c16, type: 3}
   m_Name: FEStream00
   m_EditorClassIdentifier: 
-  m_imageBaseName: cm_ll_effect01
+  m_imageBaseName: cm_ll_effect00
   m_color: []
   m_data:
     m_width: 64
