@@ -28,14 +28,14 @@ namespace YYHS
             Fire6,
         }
 
-        EntityQuery m_group;
+        EntityQuery m_query;
         ReadOnlyCollection<string>[] ButtonTypeName;
         ReadOnlyCollection<string> HorizontalName;
         ReadOnlyCollection<string> VerticalName;
 
         protected override void OnCreate()
         {
-            m_group = GetEntityQuery(
+            m_query = GetEntityQuery(
                 ComponentType.ReadWrite<PadScan>());
 
             var playerNum = Settings.Instance.Common.PlayerCount;
@@ -94,7 +94,7 @@ namespace YYHS
 
         protected override void OnUpdate()
         {
-            var PadScans = m_group.ToComponentDataArray<PadScan>(Allocator.TempJob);
+            var PadScans = m_query.ToComponentDataArray<PadScan>(Allocator.TempJob);
             for (int i = 0; i < PadScans.Length; i++)
             {
                 var PadScan = PadScans[i];
@@ -102,7 +102,7 @@ namespace YYHS
                 SetButton(ref PadScan, i);
                 PadScans[i] = PadScan;
             }
-            m_group.CopyFromComponentDataArray(PadScans);
+            m_query.CopyFromComponentDataArray(PadScans);
             PadScans.Dispose();
 
         }

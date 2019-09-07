@@ -163,7 +163,6 @@ namespace YYHS
         {
             battleSequencer.m_isPlay = true;
             battleSequencer.m_isTransition = true;
-            battleSequencer.m_sequenceStep = 0;
             battleSequencer.m_isLastSideA = isSideA;
             battleSequencer.m_sideA.m_actionType = EnumActionType.None;
             battleSequencer.m_sideA.m_animStep = EnumAnimationStep.Sleep;
