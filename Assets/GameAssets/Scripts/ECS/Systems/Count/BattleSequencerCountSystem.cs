@@ -91,31 +91,33 @@ namespace YYHS
             }
 
 
-            int charaNo = seq.m_animation.m_charaNo;
-            EnumAnimationName animName = seq.m_animation.m_animName;
-            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
-            foreach (var item in anim.m_events)
+            if (seq.m_isPlay)
             {
-                if (item.m_frame != seq.m_animation.m_count)
-                    continue;
-
-                if (item.m_functionName == EnumEventFunctionName.EventEffect)
+                int charaNo = seq.m_animation.m_charaNo;
+                EnumAnimationName animName = seq.m_animation.m_animName;
+                YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
+                foreach (var item in anim.m_events)
                 {
-                    for (int i = 0; i < filterEffects.Length; i++)
+                    if (item.m_frame != seq.m_animation.m_count)
+                        continue;
+
+                    if (item.m_functionName == EnumEventFunctionName.EventEffect)
                     {
-                        FilterEffect effect = filterEffects[i];
+                        for (int i = 0; i < filterEffects.Length; i++)
+                        {
+                            FilterEffect effect = filterEffects[i];
 
-                        if (effect.m_isActive)
-                            continue;
+                            if (effect.m_isActive)
+                                continue;
 
-                        effect.m_isActive = true;
-                        effect.m_effectIndex = Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
-                        effect.m_count = 0;
-                        filterEffects[i] = effect;
+                            effect.m_isActive = true;
+                            effect.m_effectIndex = Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
+                            effect.m_count = 0;
+                            filterEffects[i] = effect;
 
-                        isEffectUpdate = true;
+                            isEffectUpdate = true;
+                        }
                     }
-
                 }
             }
 
