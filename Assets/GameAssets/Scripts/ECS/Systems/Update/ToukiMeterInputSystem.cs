@@ -60,14 +60,24 @@ namespace YYHS
                 for (int i = 0; i < m_padScans.Length; i++)
                 {
                     var toukiMeter = m_toukiMeters[i];
+                    var padScan = m_padScans[i];
 
-                    if (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
-                        continue;
-
-                    if (toukiMeter.m_muki != m_padScans[i].GetPressCross())
+                    if (i == 0)
                     {
-                        toukiMeter.m_muki = m_padScans[i].GetPressCross();
+                        if (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
+                            continue;
+                    }
+                    else
+                    {
+                        if (m_seq.m_sideB.m_animStep != EnumAnimationStep.Sleep)
+                            continue;
+                    }
+
+                    if (toukiMeter.m_muki != padScan.GetPressCross())
+                    {
+                        toukiMeter.m_muki = padScan.GetPressCross();
                         toukiMeter.m_value = 0;
+                        toukiMeter.m_count = 0;
                     }
 
                     m_toukiMeters[i] = toukiMeter;
