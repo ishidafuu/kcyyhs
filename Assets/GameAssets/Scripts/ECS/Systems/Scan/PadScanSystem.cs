@@ -111,8 +111,7 @@ namespace YYHS
         {
             var nowAxis = new Vector2(Input.GetAxis(HorizontalName[playerNo]), Input.GetAxis(VerticalName[playerNo]));
             PadScan.SetCross(nowAxis, Time.time);
-            // if (nowAxis != Vector2.zero)
-            // 	Debug.Log(nowAxis);
+            // if (nowAxis != Vector2.zero) Debug.Log(nowAxis);
         }
 
         void SetButton(ref PadScan padScan, int playerNo)
@@ -140,8 +139,7 @@ namespace YYHS
                         padScan.m_buttonY.SetButtonData(isPush, isPress, isPop, Time.time);
                         break;
                 }
-                // if (isPush)
-                // 	Debug.Log(buttonName);
+                // if (isPush)  Debug.Log((EnumUnityButtonType)i);
             }
         }
     }

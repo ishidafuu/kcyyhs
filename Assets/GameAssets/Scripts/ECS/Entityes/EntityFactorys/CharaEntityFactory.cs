@@ -27,8 +27,8 @@ namespace YYHS
 
             entityManager.SetComponentData(entity, new SideInfo
             {
-                charaNo = 0,
-                isSideA = (i == 0),
+                m_charaNo = 0,
+                m_isSideA = (i == 0),
             });
 
             // 闘気メーター

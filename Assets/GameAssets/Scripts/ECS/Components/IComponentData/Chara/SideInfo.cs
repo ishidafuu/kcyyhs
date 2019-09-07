@@ -3,7 +3,7 @@ namespace YYHS
 {
     public struct SideInfo : IComponentData
     {
-        public int charaNo;
-        public bool isSideA;
+        public int m_charaNo;
+        public bool m_isSideA;
     }
 }

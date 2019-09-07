@@ -33,35 +33,37 @@ namespace YYHS
 
             for (int i = 0; i < padScans.Length; i++)
             {
+                var padScan = padScans[i];
                 var toukiMeter = toukiMeters[i];
+                var sideInfo = sideInfos[i];
 
                 if (seq.m_isPlay)
                 {
                     if (i == 0)
                     {
                         if (seq.m_sideA.m_actionType != EnumActionType.None)
-                            break;
+                            continue;
                     }
                     else
                     {
                         if (seq.m_sideB.m_actionType != EnumActionType.None)
-                            break;
+                            continue;
                     }
                 }
 
 
-                if (padScans[i].GetPressButton() == EnumButtonType.None)
-                    break;
+                if (padScan.GetPressButton() == EnumButtonType.None)
+                    continue;
 
                 // TODO:アイテム使用が入る場合、０でも発動する
                 if (toukiMeter.m_value == 0)
-                    break;
+                    continue;
 
                 bool isStartAnim = !seq.m_isPlay;
 
                 if (isStartAnim)
                 {
-                    InitSequencer(ref seq, sideInfos[i].isSideA);
+                    InitSequencer(ref seq, sideInfo.m_isSideA);
                 }
 
 
@@ -71,7 +73,7 @@ namespace YYHS
                 bool isNeedDefence = true;
 
                 // TODO:技情報から引いてくる
-                switch (padScans[i].GetPressButton())
+                switch (padScan.GetPressButton())
                 {
                     case EnumButtonType.A:
                         actionType = EnumActionType.MiddleAttack;
@@ -108,18 +110,20 @@ namespace YYHS
                         break;
                 }
 
-                if (sideInfos[i].isSideA)
+                if (sideInfo.m_isSideA)
                 {
-                    InitActionSide(sideInfos[i], ref seq.m_sideA, actionNo, actionType,
+                    InitActionSide(sideInfo, ref seq.m_sideA, actionNo, actionType,
                         defenceType, isNeedDefence);
+                    Debug.Log("inputA");
                 }
                 else
                 {
-                    InitActionSide(sideInfos[i], ref seq.m_sideB, actionNo, actionType,
+                    InitActionSide(sideInfo, ref seq.m_sideB, actionNo, actionType,
                         defenceType, isNeedDefence);
+                    Debug.Log("inputB");
                 }
 
-                JudgeDamage(ref sideInfos, ref seq, i, isStartAnim);
+                JudgeDamage(ref sideInfo, ref seq, i, isStartAnim);
             }
 
             SetSingleton<BattleSequencer>(seq);
@@ -129,11 +133,11 @@ namespace YYHS
             toukiMeters.Dispose();
         }
 
-        private static void JudgeDamage(ref NativeArray<SideInfo> sideInfos, ref BattleSequencer battleSequencer, int i, bool isStartAnim)
+        private static void JudgeDamage(ref SideInfo sideInfo, ref BattleSequencer battleSequencer, int i, bool isStartAnim)
         {
             if (isStartAnim)
             {
-                if (sideInfos[i].isSideA)
+                if (sideInfo.m_isSideA)
                 {
                     battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.Hit;
                 }
@@ -170,8 +174,8 @@ namespace YYHS
         private static void InitActionSide(SideInfo sideInfo, ref SideState sideState,
             int actionNo, EnumActionType actionType, EnumDefenceType defenceType, bool isNeedDefence)
         {
-            sideState.m_isSideA = sideInfo.isSideA;
-            sideState.m_charaNo = sideInfo.charaNo;
+            sideState.m_isSideA = sideInfo.m_isSideA;
+            sideState.m_charaNo = sideInfo.m_charaNo;
             sideState.m_actionNo = actionNo;
             sideState.m_actionType = actionType;
             sideState.m_enemyDeffenceType = defenceType;
