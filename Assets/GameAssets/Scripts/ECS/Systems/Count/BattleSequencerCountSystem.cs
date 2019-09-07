@@ -276,11 +276,10 @@ namespace YYHS
 
         private void NextStep(ref BattleSequencer seq, ref SideState nextSide)
         {
-            Debug.Log("NextStep");
+            Debug.Log($"NextStepactionNo:{nextSide.m_actionNo} animStep:{nextSide.m_animStep} animName:{seq.m_animation.m_animName}");
             seq.m_animation.m_charaNo = nextSide.m_charaNo;
             seq.m_animation.m_isSideA = nextSide.m_isSideA;
             seq.m_animation.m_animName = GetActionName(nextSide.m_actionNo, nextSide.m_animStep);
-            Debug.Log($"actionNo{nextSide.m_actionNo} animStep{nextSide.m_animStep} animName{seq.m_animation.m_animName}");
             seq.m_animType = EnumAnimType.Action;
             seq.m_isLastSideA = nextSide.m_isSideA;
             nextSide.m_animStep++;

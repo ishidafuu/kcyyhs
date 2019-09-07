@@ -114,13 +114,11 @@ namespace YYHS
                 {
                     InitActionSide(sideInfo, ref seq.m_sideA, actionNo, actionType,
                         defenceType, isNeedDefence);
-                    Debug.Log("inputA");
                 }
                 else
                 {
                     InitActionSide(sideInfo, ref seq.m_sideB, actionNo, actionType,
                         defenceType, isNeedDefence);
-                    Debug.Log("inputB");
                 }
 
                 JudgeDamage(ref sideInfo, ref seq, i, isStartAnim);
