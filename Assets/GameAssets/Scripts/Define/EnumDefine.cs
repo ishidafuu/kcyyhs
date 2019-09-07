@@ -185,4 +185,14 @@ namespace YYHS
 
     }
 
+    public enum EnumEventFunctionName
+    {
+        None,
+        EventPlaySE,
+        EventEffect,
+        EventFlash,
+        EventBlink,
+        EventColor,
+    }
+
 }

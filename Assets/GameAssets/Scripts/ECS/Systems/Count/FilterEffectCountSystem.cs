@@ -9,6 +9,7 @@ using UnityEngine;
 namespace YYHS
 {
     [UpdateInGroup(typeof(CountGroup))]
+    [UpdateAfter(typeof(BattleSequencerCountSystem))]
     public class FilterEffectCountSystem : JobComponentSystem
     {
         EntityQuery m_query;
@@ -26,18 +27,20 @@ namespace YYHS
             m_query.AddDependency(inputDeps);
 
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
-            NativeArray<YHFilterEffect> yhFilterEffects
-                = new NativeArray<YHFilterEffect>(Settings.Instance.Common.FilterEffectCount, Allocator.TempJob);
-            for (int i = 0; i < Shared.m_yhFilterEffectList.m_effects.Count; i++)
-            {
-                yhFilterEffects[i] = Shared.m_yhFilterEffectList.m_effects[i].data;
-            }
+
+            // NativeArray<YHFilterEffect> yhFilterEffects
+            //     = new NativeArray<YHFilterEffect>(Settings.Instance.Common.FilterEffectCount, Allocator.TempJob);
+
+            // for (int i = 0; i < Shared.m_yhFilterEffectList.m_effects.Count; i++)
+            // {
+            //     yhFilterEffects[i] = Shared.m_yhFilterEffectList.m_effects[i].m_data;
+            // }
 
             var uv = Shared.m_yhFilterEffectList.m_effects[0];
             var job = new CountJob()
             {
                 m_filterEffects = filterEffects,
-                m_yhFilterEffects = yhFilterEffects,
+                // m_yhFilterEffects = yhFilterEffects,
             };
 
             inputDeps = job.Schedule(inputDeps);
@@ -45,7 +48,7 @@ namespace YYHS
             m_query.CopyFromComponentDataArray(filterEffects);
 
             filterEffects.Dispose();
-            yhFilterEffects.Dispose();
+            // yhFilterEffects.Dispose();
             return inputDeps;
         }
 
@@ -53,26 +56,19 @@ namespace YYHS
         struct CountJob : IJob
         {
             public NativeArray<FilterEffect> m_filterEffects;
-            [ReadOnly] public NativeArray<YHFilterEffect> m_yhFilterEffects;
+            // [ReadOnly] public NativeArray<YHFilterEffect> m_yhFilterEffects;
 
             public void Execute()
             {
                 for (int i = 0; i < m_filterEffects.Length; i++)
                 {
                     var item = m_filterEffects[i];
+
                     if (!item.m_isActive)
                         continue;
 
                     item.m_count++;
-
-
                     // TODO:終わりのタイミングここで
-                    // item.c
-
-                    // filterEffect.count
-
-
-
                     // Debug.Log(SpriteUr.imageName);
                     m_filterEffects[i] = item;
                 }

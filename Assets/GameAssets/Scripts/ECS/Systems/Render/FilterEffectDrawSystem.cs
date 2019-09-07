@@ -28,7 +28,7 @@ namespace YYHS
         protected override void OnUpdate()
         {
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
-            // DrawFilterEffect(filterEffects);
+            DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
         }
 
@@ -42,27 +42,30 @@ namespace YYHS
                 if (!filterEffect.m_isActive)
                     continue;
 
-                var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.m_id].data;
-                int flipNo = (data.flipCount >= 2 && data.flipInterval > 0)
-                    ? ((filterEffect.m_count / data.flipInterval) % data.flipCount)
+                var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.m_effectIndex].m_data;
+                int flipNo = (data.m_flipCount >= 2 && data.m_flipInterval > 0)
+                    ? ((filterEffect.m_count / data.m_flipInterval) % data.m_flipCount)
                     : 0;
 
-                string imageName = $"{Shared.m_yhFilterEffectList.m_effects[filterEffect.m_id].imageName}_{flipNo.ToString("d2")}";
+                string imageName = $"{Shared.m_yhFilterEffectList.m_effects[filterEffect.m_effectIndex].m_imageBaseName}_{flipNo.ToString("d2")}";
+                if (!Shared.m_commonMeshMat.m_meshDict.ContainsKey(imageName))
+                    Debug.LogError($"Not Found ImageName:{imageName}");
+
                 Mesh mesh = Shared.m_commonMeshMat.m_meshDict[imageName];
                 Material mat = Shared.m_commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
 
-                int layer = (data.isOverChara)
+                int layer = (data.m_isOverChara)
                     ? (int)EnumDrawLayer.OverChara
                     : (int)EnumDrawLayer.OverBackGround;
 
-                int intervalWidth = (data.offsetY == 0)
-                    ? data.width
-                    : data.width * (data.height / data.offsetY);
+                int intervalWidth = (data.m_offsetY == 0)
+                    ? data.m_width
+                    : data.m_width * (data.m_height / data.m_offsetY);
 
-                int centerX = (filterEffect.m_count * data.moveX) % intervalWidth;
-                int centerY = (filterEffect.m_count * data.moveY) % data.height;
-                int leftCount = (int)math.ceil((float)(centerX + BgWidthHalf) / data.width) + 1;
-                int rightCount = (int)math.ceil((float)(BgWidthHalf - centerX) / data.width) + 1;
+                int centerX = (filterEffect.m_count * data.m_moveX) % intervalWidth;
+                int centerY = (filterEffect.m_count * data.m_moveY) % data.m_height;
+                int leftCount = (int)math.ceil((float)(centerX + BgWidthHalf) / data.m_width) + 1;
+                int rightCount = (int)math.ceil((float)(BgWidthHalf - centerX) / data.m_width) + 1;
 
                 if (rightCount == 0)
                 {
@@ -85,11 +88,11 @@ namespace YYHS
         private void DrawYLine(ref FilterEffect filterEffect, Mesh mesh, Material mat,
              int BgHeightHalf, int centerX, int centerY, int x, int layer)
         {
-            var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.m_id].data;
-            int posX = centerX + (data.width * x);
-            int baseY = centerY + (data.offsetY * x);
-            int topCount = (int)math.ceil((float)(BgHeightHalf - baseY) / data.height) + 1;
-            int bottomCount = (int)math.ceil((float)(baseY + BgHeightHalf) / data.height) + 1;
+            var data = Shared.m_yhFilterEffectList.m_effects[filterEffect.m_effectIndex].m_data;
+            int posX = centerX + (data.m_width * x);
+            int baseY = centerY + (data.m_offsetY * x);
+            int topCount = (int)math.ceil((float)(BgHeightHalf - baseY) / data.m_height) + 1;
+            int bottomCount = (int)math.ceil((float)(baseY + BgHeightHalf) / data.m_height) + 1;
 
             if (topCount == 0)
             {
@@ -112,7 +115,7 @@ namespace YYHS
 
         private void Draw(Mesh mesh, Material mat, YHFilterEffect data, int posX, int baseY, int y, int layer)
         {
-            int posY = baseY + (data.height * y);
+            int posY = baseY + (data.m_height * y);
 
             Matrix4x4 matrixes = Matrix4x4.TRS(
                 new Vector3(posX, posY + Settings.Instance.DrawPos.BgScrollY, layer),

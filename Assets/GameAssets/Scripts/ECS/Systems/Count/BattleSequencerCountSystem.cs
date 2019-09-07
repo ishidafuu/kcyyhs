@@ -9,9 +9,14 @@ namespace YYHS
     [UpdateInGroup(typeof(CountGroup))]
     public class BattleSequencerCountSystem : ComponentSystem
     {
+        EntityQuery m_query;
+
         protected override void OnCreate()
         {
             RequireSingletonForUpdate<BattleSequencer>();
+            m_query = GetEntityQuery(
+                ComponentType.ReadWrite<FilterEffect>()
+            );
         }
 
         protected override void OnUpdate()
@@ -47,9 +52,8 @@ namespace YYHS
             {
                 seq.m_animation.m_count++;
 
-                if (seq.m_animation.m_count >= anim.length)
+                if (seq.m_animation.m_count >= anim.m_length)
                 {
-                    seq.m_sequenceStep++;
                     seq.m_animation.m_count = 0;
                     if (seq.m_isLastSideA)
                     {
@@ -62,7 +66,64 @@ namespace YYHS
                 }
             }
 
+            // seqが更新された直後に行う
+            UpdateFilterEffect(seq);
+
             SetSingleton(seq);
+        }
+
+        private void UpdateFilterEffect(BattleSequencer seq)
+        {
+            bool isEffectUpdate = false;
+            NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
+
+            // アニメが切り替わったタイミングでフィルターエフェクトはすべてリセット
+            if (seq.m_animation.m_count == 0)
+            {
+                for (int i = 0; i < filterEffects.Length; i++)
+                {
+                    FilterEffect effect = filterEffects[i];
+                    effect.m_isActive = false;
+                    effect.m_count = 0;
+                    filterEffects[i] = effect;
+                }
+                isEffectUpdate = true;
+            }
+
+
+            int charaNo = seq.m_animation.m_charaNo;
+            EnumAnimationName animName = seq.m_animation.m_animName;
+            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
+            foreach (var item in anim.m_events)
+            {
+                if (item.m_frame != seq.m_animation.m_count)
+                    continue;
+
+                if (item.m_functionName == EnumEventFunctionName.EventEffect)
+                {
+                    for (int i = 0; i < filterEffects.Length; i++)
+                    {
+                        FilterEffect effect = filterEffects[i];
+
+                        if (effect.m_isActive)
+                            continue;
+
+                        effect.m_isActive = true;
+                        effect.m_effectIndex = Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
+                        effect.m_count = 0;
+                        filterEffects[i] = effect;
+
+                        isEffectUpdate = true;
+                    }
+
+                }
+            }
+
+            if (isEffectUpdate)
+            {
+                m_query.CopyFromComponentDataArray(filterEffects);
+            }
+            filterEffects.Dispose();
         }
 
         private void SelectNextStep(ref BattleSequencer seq,

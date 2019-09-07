@@ -14,16 +14,16 @@ namespace YYHS
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
 
 
-            foreach (YHAnimationParts item in anim.parts)
+            foreach (YHAnimationParts item in anim.m_parts)
             {
 
-                YHFrameData isActive = YHAnimationUtils.GetNowFrameData(count, item.isActive);
+                YHFrameData isActive = YHAnimationUtils.GetNowFrameData(count, item.m_isActive);
 
-                if (isActive == null || !isActive.value)
+                if (isActive == null || !isActive.m_value)
                     continue;
 
-                YHFrameData isBrink = YHAnimationUtils.GetNowFrameData(count, item.isBrink);
-                if (isBrink != null && isBrink.value)
+                YHFrameData isBrink = YHAnimationUtils.GetNowFrameData(count, item.m_isBrink);
+                if (isBrink != null && isBrink.m_value)
                 {
                     if (count % 4 >= 2)
                         continue;
@@ -33,27 +33,27 @@ namespace YYHS
                 Material mat = null;
                 int layer = 0;
 
-                if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.name))
+                if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.m_name))
                 {
-                    mesh = Shared.m_charaMeshMat.m_meshDict[item.name];
-                    mat = Shared.m_charaMeshMat.m_materialDict[item.name];
+                    mesh = Shared.m_charaMeshMat.m_meshDict[item.m_name];
+                    mat = Shared.m_charaMeshMat.m_materialDict[item.m_name];
                     layer = (int)EnumDrawLayer.Chara;
                 }
-                else if (Shared.m_commonMeshMat.m_materialDict.ContainsKey(item.name))
+                else if (Shared.m_commonMeshMat.m_materialDict.ContainsKey(item.m_name))
                 {
-                    mesh = Shared.m_commonMeshMat.m_meshDict[item.name];
-                    mat = Shared.m_commonMeshMat.m_materialDict[item.name];
+                    mesh = Shared.m_commonMeshMat.m_meshDict[item.m_name];
+                    mat = Shared.m_commonMeshMat.m_materialDict[item.m_name];
                     layer = (int)EnumDrawLayer.Chara;
                 }
-                else if (Shared.m_bgFrameMeshMat.m_materialDict.ContainsKey(item.name))
+                else if (Shared.m_bgFrameMeshMat.m_materialDict.ContainsKey(item.m_name))
                 {
-                    mesh = Shared.m_bgFrameMeshMat.m_meshDict[item.name];
-                    mat = Shared.m_bgFrameMeshMat.m_materialDict[item.name];
+                    mesh = Shared.m_bgFrameMeshMat.m_meshDict[item.m_name];
+                    mat = Shared.m_bgFrameMeshMat.m_materialDict[item.m_name];
                     layer = (int)EnumDrawLayer.BackGround;
                 }
                 else
                 {
-                    Debug.LogError($"Not Found Material or Mesh {item.name}");
+                    Debug.LogError($"Not Found Material or Mesh {item.m_name}");
                     continue;
                 }
 
@@ -72,31 +72,31 @@ namespace YYHS
             int sign = (isSideA)
                 ? +1
                 : -1;
-            float posX = (item.positionX.length == 0)
+            float posX = (item.m_positionX.length == 0)
                 ? 0
-                : item.positionX.Evaluate(count);
+                : item.m_positionX.Evaluate(count);
 
-            float posY = (item.positionY.length == 0)
+            float posY = (item.m_positionY.length == 0)
                 ? 0
-                : item.positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
+                : item.m_positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
 
-            return new Vector3((sign * posX) + basePosX, posY, (float)layer + item.orderInLayer);
+            return new Vector3((sign * posX) + basePosX, posY, (float)layer + item.m_orderInLayer);
         }
 
         public static Quaternion EvaluteQuaternion(YHAnimationParts item, int count, bool isSideA)
         {
-            float rotate = (item.rotation.length == 0)
+            float rotate = (item.m_rotation.length == 0)
                 ? 0
-                : item.rotation.Evaluate(count);
+                : item.m_rotation.Evaluate(count);
 
-            YHFrameData isFlipX = GetNowFrameData(count, item.isFlipX);
-            bool isFlipX2 = (isFlipX != null && isFlipX.value);
+            YHFrameData isFlipX = GetNowFrameData(count, item.m_isFlipX);
+            bool isFlipX2 = (isFlipX != null && isFlipX.m_value);
             int flipX = (isFlipX2 ^ !isSideA)
                 ? 180
                 : 0;
 
-            YHFrameData isFlipY = GetNowFrameData(count, item.isFlipY);
-            int flipY = (isFlipY != null && isFlipY.value)
+            YHFrameData isFlipY = GetNowFrameData(count, item.m_isFlipY);
+            int flipY = (isFlipY != null && isFlipY.m_value)
                 ? +90
                 : -90;
 
@@ -105,12 +105,12 @@ namespace YYHS
 
         public static Vector3 EvaluteScale(YHAnimationParts item, int count)
         {
-            float scaleX = (item.scaleX.length == 0)
+            float scaleX = (item.m_scaleX.length == 0)
                 ? 1
-                : item.scaleX.Evaluate(count);
-            float scaleY = (item.scaleY.length == 0)
+                : item.m_scaleX.Evaluate(count);
+            float scaleY = (item.m_scaleY.length == 0)
                 ? 1
-                : item.scaleY.Evaluate(count);
+                : item.m_scaleY.Evaluate(count);
 
             return new Vector3(scaleX, 1, scaleY);
         }
@@ -120,7 +120,7 @@ namespace YYHS
             YHFrameData result = null;
             foreach (var data in srcList)
             {
-                if (data.frame > count)
+                if (data.m_frame > count)
                     break;
                 result = data;
             }
