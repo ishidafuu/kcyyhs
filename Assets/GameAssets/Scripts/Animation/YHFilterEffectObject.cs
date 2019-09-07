@@ -9,8 +9,8 @@ namespace YYHS
     [CreateAssetMenu(menuName = "YYHS/YHFilterEffectObject", fileName = "YHFilterEffect_")]
     public class YHFilterEffectObject : ScriptableObject
     {
-        public string imageName;
-        public Color[] color;
-        public YHFilterEffect data;
+        public string m_imageBaseName;
+        public Color[] m_color;
+        public YHFilterEffect m_data;
     }
 }

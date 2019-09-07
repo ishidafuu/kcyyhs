@@ -12,8 +12,8 @@ namespace YYHS
         {
             YHAnimation result = new YHAnimation()
             {
-                name = rawAnim.AnimationClip.m_Name,
-                length = TimeToFrame(rawAnim.AnimationClip.m_AnimationClipSettings.m_StopTime),
+                m_name = rawAnim.AnimationClip.m_Name,
+                m_length = TimeToFrame(rawAnim.AnimationClip.m_AnimationClipSettings.m_StopTime),
             };
 
             ConvertPosition(rawAnim, result);
@@ -51,8 +51,8 @@ namespace YYHS
                     keyFramesY.Add(keyFrameY);
                 }
 
-                parts.positionX = new AnimationCurve(keyFramesX.ToArray());
-                parts.positionY = new AnimationCurve(keyFramesY.ToArray());
+                parts.m_positionX = new AnimationCurve(keyFramesX.ToArray());
+                parts.m_positionY = new AnimationCurve(keyFramesY.ToArray());
             }
         }
 
@@ -81,8 +81,8 @@ namespace YYHS
                     keyFramesY.Add(keyFrameY);
                 }
 
-                parts.scaleX = new AnimationCurve(keyFramesX.ToArray());
-                parts.scaleY = new AnimationCurve(keyFramesY.ToArray());
+                parts.m_scaleX = new AnimationCurve(keyFramesX.ToArray());
+                parts.m_scaleY = new AnimationCurve(keyFramesY.ToArray());
             }
         }
 
@@ -104,7 +104,7 @@ namespace YYHS
                     keyFrames.Add(keyFrame);
                 }
 
-                parts.rotation = new AnimationCurve(keyFrames.ToArray());
+                parts.m_rotation = new AnimationCurve(keyFrames.ToArray());
             }
         }
 
@@ -121,22 +121,22 @@ namespace YYHS
                     switch (attr)
                     {
                         case "m_IsActive":
-                            data = GetOrCreateFrameData(parts.isActive, TimeToFrame(curve.time));
+                            data = GetOrCreateFrameData(parts.m_isActive, TimeToFrame(curve.time));
                             break;
                         case "m_FlipX":
-                            data = GetOrCreateFrameData(parts.isFlipX, TimeToFrame(curve.time));
+                            data = GetOrCreateFrameData(parts.m_isFlipX, TimeToFrame(curve.time));
                             break;
                         case "m_FlipY":
-                            data = GetOrCreateFrameData(parts.isFlipY, TimeToFrame(curve.time));
+                            data = GetOrCreateFrameData(parts.m_isFlipY, TimeToFrame(curve.time));
                             break;
                         case "m_IsBrink":
-                            data = GetOrCreateFrameData(parts.isBrink, TimeToFrame(curve.time));
+                            data = GetOrCreateFrameData(parts.m_isBrink, TimeToFrame(curve.time));
                             break;
                         default:
                             Debug.LogError($"Unknown attribute : {attr}");
                             break;
                     }
-                    data.value = (curve.value != 0);
+                    data.m_value = (curve.value != 0);
                 }
 
                 // parts.frames = parts.frames.OrderBy(x => x.frame).ToList();
@@ -147,18 +147,35 @@ namespace YYHS
         {
             foreach (var item in rawAnim.AnimationClip.m_Events)
             {
+                EnumEventFunctionName functionName = EnumEventFunctionName.None;
+                foreach (EnumEventFunctionName evFuncName in Enum.GetValues(typeof(EnumEventFunctionName)))
+                {
+                    if (evFuncName.ToString() == item.functionName)
+                    {
+                        functionName = evFuncName;
+                        break;
+                    }
+                }
+
+                if (functionName == EnumEventFunctionName.None)
+                {
+                    Debug.LogError($"Not Found FunctionName:{item.functionName}");
+                }
+
                 YHFrameEvent newEvent = new YHFrameEvent()
                 {
-                    frame = TimeToFrame(item.time),
-                    functionName = item.functionName,
-                    data = item.data,
-                    floatParameter = item.floatParameter,
-                    intParameter = item.intParameter,
+                    m_frame = TimeToFrame(item.time),
+                    m_functionName = functionName,
+                    m_stringParameter = item.data,
+                    m_floatParameter = item.floatParameter,
+                    m_intParameter = item.intParameter,
                 };
 
-                result.events.Add(newEvent);
+                result.m_events.Add(newEvent);
             }
         }
+
+
 
         // private static void DistinctFrames(YHAnimation result)
         // {
@@ -189,16 +206,16 @@ namespace YYHS
 
         private static YHAnimationParts GetOrCreateParts(YHAnimation result, string partsName)
         {
-            YHAnimationParts parts = result.parts.FirstOrDefault(x => x.name == partsName);
+            YHAnimationParts parts = result.m_parts.FirstOrDefault(x => x.m_name == partsName);
             if (parts == null)
             {
                 parts = new YHAnimationParts()
                 {
-                    name = partsName,
-                    orderInLayer = GetLayer(partsName)
+                    m_name = partsName,
+                    m_orderInLayer = GetLayer(partsName)
                 };
 
-                result.parts.Add(parts);
+                result.m_parts.Add(parts);
             }
             return parts;
         }
@@ -207,14 +224,14 @@ namespace YYHS
         {
             var data = new YHFrameData()
             {
-                frame = frame,
+                m_frame = frame,
             };
 
-            YHFrameData lastFrameData = frameData.Where(x => x.frame < frame).LastOrDefault();
+            YHFrameData lastFrameData = frameData.Where(x => x.m_frame < frame).LastOrDefault();
 
             if (lastFrameData != null)
             {
-                data.value = lastFrameData.value;
+                data.m_value = lastFrameData.m_value;
             }
 
             frameData.Add(data);

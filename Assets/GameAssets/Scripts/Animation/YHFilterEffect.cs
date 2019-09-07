@@ -8,13 +8,13 @@ namespace YYHS
     [Serializable]
     public struct YHFilterEffect
     {
-        public int width;
-        public int height;
-        public bool isOverChara;
-        public int offsetY;
-        public int moveX;
-        public int moveY;
-        public int flipInterval;
-        public int flipCount;
+        public int m_width;
+        public int m_height;
+        public bool m_isOverChara;
+        public int m_offsetY;
+        public int m_moveX;
+        public int m_moveY;
+        public int m_flipInterval;
+        public int m_flipCount;
     }
 }

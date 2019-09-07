@@ -21,9 +21,7 @@ namespace YYHS
 
             entityManager.SetComponentData(entity, new FilterEffect
             {
-                m_id = i,
-                m_isActive = (i == 0),//TODO:仮
-                m_effectNo = 0,//TODO:仮
+
             });
 
             // entityManager.SetSharedComponentData(entity, effectList);

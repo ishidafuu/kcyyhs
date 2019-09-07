@@ -6,7 +6,6 @@ namespace YYHS
     {
         public bool m_isPlay;
         public bool m_isTransition;
-        public int m_sequenceStep;
         public bool m_isLastSideA;
         public EnumAnimType m_animType;
         public SideState m_sideA;
