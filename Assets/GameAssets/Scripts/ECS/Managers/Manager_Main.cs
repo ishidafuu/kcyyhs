@@ -48,13 +48,16 @@ namespace YYHS
 
 
             SimulationSystemGroup simulationSystemGroup = world.GetOrCreateSystem<SimulationSystemGroup>();
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<PadScanSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<CharaInputSystem>());
-
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
-            simulationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
+            ScanGroup scanGroup = world.GetOrCreateSystem<ScanGroup>();
+            simulationSystemGroup.AddSystemToUpdateList(scanGroup);
+            scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<PadScanSystem>());
+            scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputSystem>());
+            scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<CharaInputSystem>());
+            CountGroup countGroup = world.GetOrCreateSystem<CountGroup>();
+            simulationSystemGroup.AddSystemToUpdateList(countGroup);
+            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountSystem>());
+            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
+            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
 
             PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<SpritBackGroundDrawSystem>());
