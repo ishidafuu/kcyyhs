@@ -8,6 +8,7 @@ namespace YYHS
 {
     public static class YHRawAnimationConverter
     {
+        const float SlopeToTangent = 60f;
         public static YHAnimation Convert(YHRawAnimation rawAnim)
         {
             YHAnimation result = new YHAnimation()
@@ -40,11 +41,11 @@ namespace YYHS
                     int frame = TimeToFrame(curve.time);
 
                     Keyframe keyFrameX = new Keyframe(frame, curve.value.x,
-                        curve.inSlope.x, curve.outSlope.x,
+                        curve.inSlope.x / SlopeToTangent, curve.outSlope.x / SlopeToTangent,
                         curve.inWeight.x, curve.outWeight.x);
 
                     Keyframe keyFrameY = new Keyframe(frame, curve.value.y,
-                        curve.inSlope.y, curve.outSlope.y,
+                        curve.inSlope.y / SlopeToTangent, curve.outSlope.y / SlopeToTangent,
                         curve.inWeight.y, curve.outWeight.y);
 
                     keyFramesX.Add(keyFrameX);
@@ -70,11 +71,11 @@ namespace YYHS
                     int frame = TimeToFrame(curve.time);
 
                     Keyframe keyFrameX = new Keyframe(frame, curve.value.x,
-                        curve.inSlope.x, curve.outSlope.x,
+                        curve.inSlope.x / SlopeToTangent, curve.outSlope.x / SlopeToTangent,
                         curve.inWeight.x, curve.outWeight.x);
 
                     Keyframe keyFrameY = new Keyframe(frame, curve.value.y,
-                        curve.inSlope.y, curve.outSlope.y,
+                        curve.inSlope.y / SlopeToTangent, curve.outSlope.y / SlopeToTangent,
                         curve.inWeight.y, curve.outWeight.y);
 
                     keyFramesX.Add(keyFrameX);
@@ -98,7 +99,7 @@ namespace YYHS
                     int frame = TimeToFrame(curve.time);
 
                     Keyframe keyFrame = new Keyframe(frame, curve.value.z,
-                        curve.inSlope.z, curve.outSlope.z,
+                        curve.inSlope.z / SlopeToTangent, curve.outSlope.z / SlopeToTangent,
                         curve.inWeight.z, curve.outWeight.z);
 
                     keyFrames.Add(keyFrame);

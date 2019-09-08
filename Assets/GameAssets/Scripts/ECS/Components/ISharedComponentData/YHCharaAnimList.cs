@@ -28,6 +28,8 @@ namespace YYHS
 
         public YHAnimation GetAnim(int charaNo, EnumAnimationName animName)
         {
+            if ((int)animName >= m_charaAnimList[charaNo].animations.Count)
+                Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[charaNo].animations.Count} animName:{(int)animName}({animName})");
             return m_charaAnimList[charaNo].animations[(int)animName];
         }
 
