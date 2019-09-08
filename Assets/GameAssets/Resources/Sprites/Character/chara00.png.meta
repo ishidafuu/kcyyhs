@@ -122,6 +122,15 @@ TextureImporter:
   - first:
       213: -8430117984951361993
     second: cm_u_face01
+  - first:
+      213: -1385333410007056770
+    second: cm_air00
+  - first:
+      213: -4346771555783271133
+    second: cm_air01
+  - first:
+      213: 4799603982626165116
+    second: cm_air02
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -281,6 +290,69 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: cm_air00
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 759
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -1385333410007056770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cm_air01
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 725
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -4346771555783271133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cm_air02
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 691
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 4799603982626165116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: cm_dodge00
       rect:
         serializedVersion: 2
@@ -360,27 +432,6 @@ TextureImporter:
       bones: []
       spriteID: 
       internalID: 21300040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cm_jump02
-      rect:
-        serializedVersion: 2
-        x: 455
-        y: 759
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 
-      internalID: 21300042
       vertices: []
       indices: 
       edges: []
@@ -642,7 +693,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 455
-        y: 725
+        y: 657
         width: 32
         height: 32
       alignment: 0

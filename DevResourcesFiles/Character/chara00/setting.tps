@@ -213,6 +213,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">cm_air00.png</key>
+            <key type="filename">cm_air01.png</key>
+            <key type="filename">cm_air02.png</key>
+            <key type="filename">u_bullet01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">cm_dodge00.png</key>
             <key type="filename">cm_down00.png</key>
             <key type="filename">u_parts01.png</key>
@@ -239,20 +255,6 @@
                 <rect>16,24,32,48</rect>
                 <key>scale9Paddings</key>
                 <rect>16,24,32,48</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">cm_jump02.png</key>
-            <key type="filename">u_bullet01.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
-                <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -334,7 +336,6 @@
             <filename>cm_down00.png</filename>
             <filename>cm_jump00.png</filename>
             <filename>cm_jump01.png</filename>
-            <filename>cm_jump02.png</filename>
             <filename>cm_jump03.png</filename>
             <filename>cm_l_parts00.png</filename>
             <filename>cm_miss00.png</filename>
@@ -344,6 +345,9 @@
             <filename>u_bullet01.png</filename>
             <filename>cm_u_face00.png</filename>
             <filename>cm_u_face01.png</filename>
+            <filename>cm_air01.png</filename>
+            <filename>cm_air00.png</filename>
+            <filename>cm_air02.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
