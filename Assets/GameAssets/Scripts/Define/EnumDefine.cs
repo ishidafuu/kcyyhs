@@ -151,8 +151,6 @@ namespace YYHS
         _Air00,
         _Air01,
         _Air02,
-        _Fall00,
-        _Fall01,
         _Jump00,
         _Jump01,
         _Stand00,
