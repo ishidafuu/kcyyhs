@@ -241,6 +241,12 @@ namespace YYHS
                         DeffenceStep(ref seq, ref lastSide, ref waitSide);
                     }
                 }
+                // 直前が始動、待ち側が発動完了（先手後手ともに飛び道具で、後手が追いかけるような場合）
+                else if (waitSide.m_animStep == EnumAnimationStep.Finished
+                        && lastSide.m_animStep == EnumAnimationStep.WaitPageB)
+                {
+                    NextStep(ref seq, ref lastSide);
+                }
                 // 近接攻撃を避けた後などの後手側アクションの後
                 else if (waitSide.m_animStep == EnumAnimationStep.Finished
                     && lastSide.m_animStep == EnumAnimationStep.Finished)
@@ -248,13 +254,17 @@ namespace YYHS
                     if (lastSide.m_isEnemyNeedDefence && !waitSide.m_isDefenceFinished)
                     {
                         Debug.Log("DeffenceStepD ");
-                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        DeffenceStep(ref seq, ref waitSide, ref lastSide);
                     }
                     else
                     {
                         // アニメ終了
                         EndAnimation(ref seq);
                     }
+                }
+                else
+                {
+                    Debug.LogError($"SelectNextStepError waitStep:{waitSide.m_animStep} lastStep:{lastSide.m_animStep}");
                 }
 
             }

@@ -98,6 +98,7 @@ namespace YYHS
                 isNeedDefence = true;
                 actionNo = 0;
                 actionType = EnumActionType.ShortAttack;
+                actionType = EnumActionType.LongAttack;
 
                 EnumDefenceType defenceType = EnumDefenceType.Stand;
                 switch (actionType)
@@ -110,6 +111,8 @@ namespace YYHS
                         defenceType = EnumDefenceType.Stand;
                         break;
                 }
+                // TODO:仮
+                defenceType = EnumDefenceType.Stand;
 
                 if (sideInfo.m_isSideA)
                 {
