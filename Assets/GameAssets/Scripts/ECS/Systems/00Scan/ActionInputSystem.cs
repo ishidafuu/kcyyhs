@@ -10,7 +10,7 @@ using UnityEngine;
 namespace YYHS
 {
     [UpdateInGroup(typeof(ScanGroup))]
-    public class CharaInputSystem : ComponentSystem
+    public class ActionInputSystem : ComponentSystem
     {
         EntityQuery m_queryChara;
         EntityQuery m_queryBattle;
@@ -94,7 +94,7 @@ namespace YYHS
                 }
 
                 // TODO:仮
-                isNeedDefence = false;
+                isNeedDefence = true;
                 actionNo = 0;
                 actionType = EnumActionType.ShortAttack;
 
@@ -164,8 +164,10 @@ namespace YYHS
             battleSequencer.m_isLastSideA = isSideA;
             battleSequencer.m_sideA.m_actionType = EnumActionType.None;
             battleSequencer.m_sideA.m_animStep = EnumAnimationStep.Sleep;
+            battleSequencer.m_sideA.m_isEndDefence = false;
             battleSequencer.m_sideB.m_actionType = EnumActionType.None;
-            battleSequencer.m_sideA.m_animStep = EnumAnimationStep.Sleep;
+            battleSequencer.m_sideB.m_animStep = EnumAnimationStep.Sleep;
+            battleSequencer.m_sideB.m_isEndDefence = false;
         }
 
         private static void InitActionSide(SideInfo sideInfo, ref SideState sideState,

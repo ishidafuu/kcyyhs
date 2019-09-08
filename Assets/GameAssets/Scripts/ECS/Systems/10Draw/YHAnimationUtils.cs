@@ -62,6 +62,7 @@ namespace YYHS
                 Vector3 scale = YHAnimationUtils.EvaluteScale(item, count);
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(pos, q, scale);
+                Debug.Log(item.m_name);
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
         }
@@ -85,9 +86,6 @@ namespace YYHS
 
         public static Quaternion EvaluteQuaternion(YHAnimationParts item, int count, bool isSideA)
         {
-            float rotate = (item.m_rotation.length == 0)
-                ? 0
-                : item.m_rotation.Evaluate(count);
 
             YHFrameData isFlipX = GetNowFrameData(count, item.m_isFlipX);
             bool isFlipX2 = (isFlipX != null && isFlipX.m_value);
@@ -100,7 +98,18 @@ namespace YYHS
                 ? +90
                 : -90;
 
-            return Quaternion.Euler(new Vector3(flipY, flipX, rotate));
+            quaternion result = Quaternion.Euler(new Vector3(flipY, flipX, 0));
+
+            float rotate = (item.m_rotation.length == 0)
+                ? 0
+                : item.m_rotation.Evaluate(count);
+            if (rotate != 0)
+            {
+                Quaternion rot = Quaternion.AngleAxis(rotate, Vector3.down);
+                result = result * rot;
+            }
+
+            return result;
         }
 
         public static Vector3 EvaluteScale(YHAnimationParts item, int count)

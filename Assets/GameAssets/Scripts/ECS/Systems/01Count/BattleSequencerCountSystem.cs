@@ -287,10 +287,10 @@ namespace YYHS
 
         private void DeffenceStep(ref BattleSequencer seq, ref SideState attackSide, ref SideState deffenceSide)
         {
-            Debug.Log("DeffenceStep");
             seq.m_animation.m_charaNo = deffenceSide.m_charaNo;
             seq.m_animation.m_isSideA = deffenceSide.m_isSideA;
             seq.m_animation.m_animName = GetDeffenceName(attackSide.m_enemyDeffenceType, attackSide.m_enemyDamageLv);
+            Debug.Log($"DeffenceStep animName:{seq.m_animation.m_animName}");
             seq.m_animType = EnumAnimType.Defence;
             seq.m_isLastSideA = deffenceSide.m_isSideA;
             // 攻撃側のみ進める、防御側は進めない
