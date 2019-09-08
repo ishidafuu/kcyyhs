@@ -23,9 +23,9 @@ namespace YYHS
         public EnumDefenceType m_enemyDeffenceType;
         public EnumDamageLv m_enemyDamageLv;
         public EnumDamageReaction m_enemyDamageReaction;
-        public bool m_isNeedDefence;
+        public bool m_isEnemyNeedDefence;
         public EnumAnimationStep m_animStep;
-        public bool m_isEndDefence;
+        public bool m_isDefenceFinished;
     }
 
     public struct BattleAnim

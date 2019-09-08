@@ -62,7 +62,7 @@ namespace YYHS
                 Vector3 scale = YHAnimationUtils.EvaluteScale(item, count);
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(pos, q, scale);
-                Debug.Log(item.m_name);
+                // Debug.Log(item.m_name);
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
         }

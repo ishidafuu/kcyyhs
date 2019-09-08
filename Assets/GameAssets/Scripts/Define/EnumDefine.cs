@@ -104,9 +104,8 @@ namespace YYHS
     public enum EnumAnimationStep
     {
         Sleep,
-        Ready,
-        Start,
-        Fire,
+        WaitPageA,
+        WaitPageB,
         Finished,
     }
 

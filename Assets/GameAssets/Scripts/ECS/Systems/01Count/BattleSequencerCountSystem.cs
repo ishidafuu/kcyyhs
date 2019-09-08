@@ -131,11 +131,10 @@ namespace YYHS
         private void SelectNextStep(ref BattleSequencer seq,
             ref SideState lastSide, ref SideState waitSide)
         {
-            Debug.Log("SelectNextStep");
             // 直前がディフェンスアニメーションの場合（条件でダウンへ分岐なども行う）
             if (seq.m_animType != EnumAnimType.Action)
             {
-                Debug.Log("SelectNextStep 1");
+                Debug.Log("SelectNextStep1");
                 // リアクションあり
                 if (seq.m_animType == EnumAnimType.Defence
                     && waitSide.m_enemyDamageReaction != EnumDamageReaction.None)
@@ -147,14 +146,16 @@ namespace YYHS
                 {
                     // 直前側が攻撃完了していて相手のディフェンスが終わってない場合は、相手側のディフェンス
                     if (lastSide.m_animStep == EnumAnimationStep.Finished
-                        && !waitSide.m_isEndDefence
-                        && lastSide.m_isNeedDefence)
+                        && !waitSide.m_isDefenceFinished
+                        && lastSide.m_isEnemyNeedDefence)
                     {
+                        Debug.Log("DeffenceStepA ");
                         DeffenceStep(ref seq, ref lastSide, ref waitSide);
                     }
-                    // 直撃もしくはOK以外で、直前側が攻撃完了していない場合は、直前側の進行
+                    // 直撃もしくはKO以外で、直前側が攻撃完了していない場合は、直前側の進行
                     else if (waitSide.m_enemyDamageLv <= EnumDamageLv.Tip
-                     && (lastSide.m_animStep == EnumAnimationStep.Ready || lastSide.m_animStep == EnumAnimationStep.Start))
+                        && (lastSide.m_animStep == EnumAnimationStep.WaitPageA
+                            || lastSide.m_animStep == EnumAnimationStep.WaitPageB))
                     {
                         NextStep(ref seq, ref lastSide);
                     }
@@ -168,12 +169,13 @@ namespace YYHS
             // 待ち側のアクションがない場合は直前のサイドを連続させる
             else if (waitSide.m_actionType == EnumActionType.None)
             {
-                Debug.Log("SelectNextStep 2" + lastSide.m_animStep);
+                Debug.Log("SelectNextStep2 " + lastSide.m_animStep);
                 if (lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
                     // ディフェンス
-                    if (!waitSide.m_isEndDefence && lastSide.m_isNeedDefence)
+                    if (!waitSide.m_isDefenceFinished && lastSide.m_isEnemyNeedDefence)
                     {
+                        Debug.Log("DeffenceStepB ");
                         DeffenceStep(ref seq, ref lastSide, ref waitSide);
                     }
                     else
@@ -190,17 +192,17 @@ namespace YYHS
             }
             else
             {
-                Debug.Log("SelectNextStep 3");
+                Debug.Log($"SelectNextStep3 {waitSide.m_animStep}");
                 // 待ち側のアクション始動
 
                 // 未始動であれば始動へ
-                if (waitSide.m_animStep == EnumAnimationStep.Ready)
+                if (waitSide.m_animStep == EnumAnimationStep.WaitPageA)
                 {
                     NextStep(ref seq, ref waitSide);
                 }
                 // 両方の始動ステップが終わった
-                else if (waitSide.m_animStep == EnumAnimationStep.Start
-                        && lastSide.m_animStep == EnumAnimationStep.Start)
+                else if (waitSide.m_animStep == EnumAnimationStep.WaitPageB
+                        && lastSide.m_animStep == EnumAnimationStep.WaitPageB)
                 {
                     // 直前のアクションが待ちアクションよりプライオリティが高ければ追い越して、直前を再度進める
                     if (lastSide.m_actionType > waitSide.m_actionType)
@@ -214,53 +216,45 @@ namespace YYHS
                     }
                 }
                 // 直前が発動、待ち側が始動
-                else if (waitSide.m_animStep == EnumAnimationStep.Start
-                        && lastSide.m_animStep == EnumAnimationStep.Fire)
+                else if (waitSide.m_animStep == EnumAnimationStep.WaitPageB
+                        && lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
                     // 待ちアクションが直前の結果を待たずに発動できる場合は発動する
                     // 通常、同一プライオリティは同着を許すが、直接攻撃同士は先手解決後に発動する
-                    if (!lastSide.m_isNeedDefence
+                    if (!lastSide.m_isEnemyNeedDefence
                      || waitSide.m_actionType > lastSide.m_actionType
                      || (waitSide.m_actionType == lastSide.m_actionType && waitSide.m_actionType != EnumActionType.ShortAttack))
                     {
-                        NextStep(ref seq, ref waitSide);
+                        // 直撃でなければ待ち側のアクションを進める
+                        if (lastSide.m_enemyDamageLv < EnumDamageLv.Hit)
+                        {
+                            NextStep(ref seq, ref waitSide);
+                        }
+                        else
+                        {
+                            EndAnimation(ref seq);
+                        }
                     }
                     else
                     {
+                        Debug.Log("DeffenceStepC ");
                         DeffenceStep(ref seq, ref lastSide, ref waitSide);
                     }
                 }
-                else if (waitSide.m_animStep == EnumAnimationStep.Start
+                // 近接攻撃を避けた後などの後手側アクションの後
+                else if (waitSide.m_animStep == EnumAnimationStep.Finished
                     && lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
-                    // 直撃でなければ待ち側のアクションを進める
-                    if (lastSide.m_enemyDamageLv < EnumDamageLv.Hit)
+                    if (lastSide.m_isEnemyNeedDefence && !waitSide.m_isDefenceFinished)
                     {
-                        NextStep(ref seq, ref waitSide);
+                        Debug.Log("DeffenceStepD ");
+                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
                     }
                     else
                     {
+                        // アニメ終了
                         EndAnimation(ref seq);
                     }
-                }
-                // 飛び道具同士など、先手側の攻撃の後手側ディフェンス
-                else if (waitSide.m_isNeedDefence
-                    && waitSide.m_animStep == EnumAnimationStep.Fire
-                    && lastSide.m_animStep == EnumAnimationStep.Fire)
-                {
-                    DeffenceStep(ref seq, ref waitSide, ref lastSide);
-                }
-                // 飛び道具同士など、後手側の攻撃の先手側ディフェンス
-                else if (waitSide.m_isNeedDefence
-                    && waitSide.m_animStep == EnumAnimationStep.Fire
-                    && lastSide.m_animStep == EnumAnimationStep.Finished)
-                {
-                    DeffenceStep(ref seq, ref waitSide, ref lastSide);
-                }
-                else
-                {
-                    // アニメ終了
-                    EndAnimation(ref seq);
                 }
 
             }
@@ -293,9 +287,7 @@ namespace YYHS
             Debug.Log($"DeffenceStep animName:{seq.m_animation.m_animName}");
             seq.m_animType = EnumAnimType.Defence;
             seq.m_isLastSideA = deffenceSide.m_isSideA;
-            // 攻撃側のみ進める、防御側は進めない
-            attackSide.m_animStep++;
-            deffenceSide.m_isEndDefence = true;
+            deffenceSide.m_isDefenceFinished = true;
         }
 
         private void DamageReactionStep(ref BattleSequencer seq, ref SideState attackSide, ref SideState deffenceSide)
@@ -311,7 +303,7 @@ namespace YYHS
         private EnumAnimationName GetActionName(int actionNo, EnumAnimationStep animStep)
         {
             int step = 2;
-            int index = (int)EnumAnimationName.Action00_00 + (actionNo * step) + (int)(animStep - EnumAnimationStep.Start);
+            int index = (int)EnumAnimationName.Action00_00 + (actionNo * step) + (int)(animStep - EnumAnimationStep.WaitPageA);
             return (EnumAnimationName)index;
         }
 
