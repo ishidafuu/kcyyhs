@@ -161,6 +161,7 @@ namespace YYHS
                     }
                     else
                     {
+                        Debug.Log("EndAnimationA");
                         // アニメ終了
                         EndAnimation(ref seq);
                     }
@@ -169,7 +170,7 @@ namespace YYHS
             // 待ち側のアクションがない場合は直前のサイドを連続させる
             else if (waitSide.m_actionType == EnumActionType.None)
             {
-                Debug.Log("SelectNextStep2 " + lastSide.m_animStep);
+                Debug.Log($"SelectNextStep2 {lastSide.m_isSideA} {lastSide.m_animStep}");
                 if (lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
                     // ディフェンス
@@ -181,6 +182,7 @@ namespace YYHS
                     else
                     {
                         // ディフェンス不要の場合はアニメ終了
+                        Debug.Log("EndAnimationB");
                         EndAnimation(ref seq);
                     }
                 }
@@ -192,7 +194,7 @@ namespace YYHS
             }
             else
             {
-                Debug.Log($"SelectNextStep3 {waitSide.m_animStep}");
+                Debug.Log($"SelectNextStep3 {waitSide.m_isSideA} {waitSide.m_animStep}");
                 // 待ち側のアクション始動
 
                 // 未始動であれば始動へ
@@ -219,11 +221,10 @@ namespace YYHS
                 else if (waitSide.m_animStep == EnumAnimationStep.WaitPageB
                         && lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
-                    // 待ちアクションが直前の結果を待たずに発動できる場合は発動する
+                    // 待ち側が追いつき可能な場合は発動する
                     // 通常、同一プライオリティは同着を許すが、直接攻撃同士は先手解決後に発動する
                     if (!lastSide.m_isEnemyNeedDefence
-                     || waitSide.m_actionType > lastSide.m_actionType
-                     || (waitSide.m_actionType == lastSide.m_actionType && waitSide.m_actionType != EnumActionType.ShortAttack))
+                        || CheckChasable(waitSide.m_actionType, lastSide.m_actionType))
                     {
                         // 直撃でなければ待ち側のアクションを進める
                         if (lastSide.m_enemyDamageLv < EnumDamageLv.Hit)
@@ -232,6 +233,7 @@ namespace YYHS
                         }
                         else
                         {
+                            Debug.Log("EndAnimationC");
                             EndAnimation(ref seq);
                         }
                     }
@@ -245,19 +247,33 @@ namespace YYHS
                 else if (waitSide.m_animStep == EnumAnimationStep.Finished
                         && lastSide.m_animStep == EnumAnimationStep.WaitPageB)
                 {
-                    NextStep(ref seq, ref lastSide);
+                    // 直前側が追いつき可能な場合は、連続する
+                    if (CheckChasable(lastSide.m_actionType, waitSide.m_actionType))
+                    {
+                        NextStep(ref seq, ref lastSide);
+                    }
+                    else
+                    {
+                        DeffenceStep(ref seq, ref waitSide, ref lastSide);
+                    }
                 }
                 // 近接攻撃を避けた後などの後手側アクションの後
                 else if (waitSide.m_animStep == EnumAnimationStep.Finished
                     && lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
-                    if (lastSide.m_isEnemyNeedDefence && !waitSide.m_isDefenceFinished)
+                    if (waitSide.m_isEnemyNeedDefence && !lastSide.m_isDefenceFinished)
                     {
                         Debug.Log("DeffenceStepD ");
                         DeffenceStep(ref seq, ref waitSide, ref lastSide);
                     }
+                    else if (lastSide.m_isEnemyNeedDefence && !waitSide.m_isDefenceFinished)
+                    {
+                        Debug.Log("DeffenceStepE ");
+                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                    }
                     else
                     {
+                        Debug.Log("EndAnimationD");
                         // アニメ終了
                         EndAnimation(ref seq);
                     }
@@ -270,9 +286,15 @@ namespace YYHS
             }
         }
 
+        private bool CheckChasable(EnumActionType chaseType, EnumActionType targetType)
+        {
+            return (chaseType > targetType
+                || (chaseType == targetType && chaseType != EnumActionType.ShortAttack));
+        }
+
+
         private void EndAnimation(ref BattleSequencer seq)
         {
-            Debug.Log("EndAnimation");
             seq.m_isPlay = false;
             seq.m_sideA.m_animStep = EnumAnimationStep.Sleep;
             seq.m_sideB.m_animStep = EnumAnimationStep.Sleep;
@@ -280,7 +302,7 @@ namespace YYHS
 
         private void NextStep(ref BattleSequencer seq, ref SideState nextSide)
         {
-            Debug.Log($"NextStepactionNo:{nextSide.m_actionNo} animStep:{nextSide.m_animStep} animName:{seq.m_animation.m_animName}");
+            Debug.Log($"NextStepactionNo:{nextSide.m_actionNo} isSideA:{nextSide.m_isSideA} animStep:{nextSide.m_animStep} animName:{seq.m_animation.m_animName}");
             seq.m_animation.m_charaNo = nextSide.m_charaNo;
             seq.m_animation.m_isSideA = nextSide.m_isSideA;
             seq.m_animation.m_animName = GetActionName(nextSide.m_actionNo, nextSide.m_animStep);
@@ -294,7 +316,7 @@ namespace YYHS
             seq.m_animation.m_charaNo = deffenceSide.m_charaNo;
             seq.m_animation.m_isSideA = deffenceSide.m_isSideA;
             seq.m_animation.m_animName = GetDeffenceName(attackSide.m_enemyDeffenceType, attackSide.m_enemyDamageLv);
-            Debug.Log($"DeffenceStep animName:{seq.m_animation.m_animName}");
+            Debug.Log($"DeffenceStep isSideA:{deffenceSide.m_isSideA} animName:{seq.m_animation.m_animName}");
             seq.m_animType = EnumAnimType.Defence;
             seq.m_isLastSideA = deffenceSide.m_isSideA;
             deffenceSide.m_isDefenceFinished = true;

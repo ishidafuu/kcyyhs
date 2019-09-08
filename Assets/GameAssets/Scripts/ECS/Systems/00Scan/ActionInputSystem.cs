@@ -97,8 +97,9 @@ namespace YYHS
                 // TODO:仮
                 isNeedDefence = true;
                 actionNo = 0;
-                actionType = EnumActionType.ShortAttack;
-                actionType = EnumActionType.LongAttack;
+                actionType = (i == 0)
+                    ? EnumActionType.LongAttack
+                    : EnumActionType.ShortAttack;
 
                 EnumDefenceType defenceType = EnumDefenceType.Stand;
                 switch (actionType)
