@@ -245,7 +245,7 @@
                 <false/>
             </struct>
             <key type="filename">cm_jump01.png</key>
-            <key type="filename">cm_jump03.png</key>
+            <key type="filename">cm_jump02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -336,7 +336,6 @@
             <filename>cm_down00.png</filename>
             <filename>cm_jump00.png</filename>
             <filename>cm_jump01.png</filename>
-            <filename>cm_jump03.png</filename>
             <filename>cm_l_parts00.png</filename>
             <filename>cm_miss00.png</filename>
             <filename>cm_stand00.png</filename>
@@ -348,6 +347,7 @@
             <filename>cm_air01.png</filename>
             <filename>cm_air00.png</filename>
             <filename>cm_air02.png</filename>
+            <filename>cm_jump02.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

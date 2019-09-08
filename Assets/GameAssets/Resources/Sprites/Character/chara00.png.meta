@@ -437,7 +437,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump03
+      name: cm_jump02
       rect:
         serializedVersion: 2
         x: 389
@@ -452,7 +452,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300044
+      internalID: 21300042
       vertices: []
       indices: 
       edges: []

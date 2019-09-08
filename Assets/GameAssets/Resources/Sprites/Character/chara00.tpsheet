@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:51ed1b28c5dee30517c23a943252a7f8:d3e74decac0f891ab6e9111f1326d9f7:4e510d9a0f5fdc853471384d293cc02a$
+# $TexturePacker:SmartUpdate:01d527bcfcde1c19fca4b10d657f0e06:d3e74decac0f891ab6e9111f1326d9f7:4e510d9a0f5fdc853471384d293cc02a$
 #
 :format=40300
 :texture=chara00.png
@@ -23,7 +23,7 @@ cm_dodge00;389;959;96;64; 0.5;0.5; 0;0;0;0
 cm_down00;389;893;96;64; 0.5;0.5; 0;0;0;0
 cm_jump00;1;633;128;96; 0.5;0.5; 0;0;0;0
 cm_jump01;389;729;64;96; 0.5;0.5; 0;0;0;0
-cm_jump03;389;631;64;96; 0.5;0.5; 0;0;0;0
+cm_jump02;389;631;64;96; 0.5;0.5; 0;0;0;0
 cm_l_parts00;131;665;64;64; 0.5;0.5; 0;0;0;0
 cm_miss00;131;599;64;64; 0.5;0.5; 0;0;0;0
 cm_stand00;197;601;128;96; 0.5;0.5; 0;0;0;0
