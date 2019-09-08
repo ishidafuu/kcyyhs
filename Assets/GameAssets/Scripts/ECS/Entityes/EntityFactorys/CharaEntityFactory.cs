@@ -24,7 +24,7 @@ namespace YYHS
             // 闘気メーター
             entityManager.SetComponentData(entity, new ToukiMeter
             {
-                m_muki = EnumCrossType.None,
+                m_cross = EnumCrossType.None,
                 m_value = 0,
             });
 

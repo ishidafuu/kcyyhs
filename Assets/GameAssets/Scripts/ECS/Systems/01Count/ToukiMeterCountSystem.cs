@@ -62,7 +62,7 @@ namespace YYHS
                 for (int i = 0; i < m_toukiMeters.Length; i++)
                 {
                     var toukiMeter = m_toukiMeters[i];
-                    if (toukiMeter.m_muki != EnumCrossType.None)
+                    if (toukiMeter.m_cross != EnumCrossType.None)
                     {
                         toukiMeter.m_value++;
                         if (toukiMeter.m_value > ToukiWidth)
@@ -72,7 +72,7 @@ namespace YYHS
                     }
 
                     // 背景スクロール
-                    switch (toukiMeter.m_muki)
+                    switch (toukiMeter.m_cross)
                     {
                         case EnumCrossType.Left:
                         case EnumCrossType.Down:

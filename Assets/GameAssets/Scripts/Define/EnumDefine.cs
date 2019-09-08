@@ -148,14 +148,16 @@ namespace YYHS
 
     public enum EnumAnimationName
     {
-        _Air,
-        _Charge00,
-        _Charge01,
+        _Air00,
+        _Air01,
+        _Air02,
         _Fall00,
         _Fall01,
         _Jump00,
         _Jump01,
-        _Stand,
+        _Stand00,
+        _Stand01,
+        _Stand02,
         Action00_00,
         Action00_01,
         Action01_00,

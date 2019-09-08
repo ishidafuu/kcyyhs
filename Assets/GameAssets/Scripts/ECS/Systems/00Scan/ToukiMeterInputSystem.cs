@@ -73,9 +73,9 @@ namespace YYHS
                             continue;
                     }
 
-                    if (toukiMeter.m_muki != padScan.GetPressCross())
+                    if (toukiMeter.m_cross != padScan.GetPressCross())
                     {
-                        toukiMeter.m_muki = padScan.GetPressCross();
+                        toukiMeter.m_cross = padScan.GetPressCross();
                         toukiMeter.m_value = 0;
                         toukiMeter.m_count = 0;
                     }

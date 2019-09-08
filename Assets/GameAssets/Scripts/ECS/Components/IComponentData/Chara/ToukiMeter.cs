@@ -4,7 +4,7 @@ namespace YYHS
 {
     public struct ToukiMeter : IComponentData
     {
-        public EnumCrossType m_muki;
+        public EnumCrossType m_cross;
         public int m_value;
         public int m_bgScroll;
         public float m_bgScrollTextureUL;

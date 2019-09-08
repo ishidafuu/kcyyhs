@@ -54,19 +54,19 @@ namespace YYHS
                     ? -Settings.Instance.DrawPos.BgScrollX
                     : +Settings.Instance.DrawPos.BgScrollX;
 
-                EnumAnimationName animName = EnumAnimationName._Stand;
+                EnumAnimationName animName = EnumAnimationName._Stand00;
 
-                if (toukiMeter.m_muki == EnumCrossType.Right && sideInfo.m_isSideA
-                 || toukiMeter.m_muki == EnumCrossType.Left && !sideInfo.m_isSideA
-                 || toukiMeter.m_muki == EnumCrossType.Down)
+                if (toukiMeter.m_cross == EnumCrossType.Right && sideInfo.m_isSideA
+                 || toukiMeter.m_cross == EnumCrossType.Left && !sideInfo.m_isSideA
+                 || toukiMeter.m_cross == EnumCrossType.Down)
                 {
-                    animName = EnumAnimationName._Charge00;
+                    animName = EnumAnimationName._Stand01;
                 }
-                else if (toukiMeter.m_muki == EnumCrossType.Right && !sideInfo.m_isSideA
-                 || toukiMeter.m_muki == EnumCrossType.Left && sideInfo.m_isSideA
-                 || toukiMeter.m_muki == EnumCrossType.Up)
+                else if (toukiMeter.m_cross == EnumCrossType.Right && !sideInfo.m_isSideA
+                 || toukiMeter.m_cross == EnumCrossType.Left && sideInfo.m_isSideA
+                 || toukiMeter.m_cross == EnumCrossType.Up)
                 {
-                    animName = EnumAnimationName._Charge01;
+                    animName = EnumAnimationName._Stand02;
                 }
 
                 int count = toukiMeter.m_count;
