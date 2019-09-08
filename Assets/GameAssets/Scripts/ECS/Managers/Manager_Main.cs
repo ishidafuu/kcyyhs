@@ -52,7 +52,7 @@ namespace YYHS
             simulationSystemGroup.AddSystemToUpdateList(scanGroup);
             scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<PadScanSystem>());
             scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterInputSystem>());
-            scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<CharaInputSystem>());
+            scanGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ActionInputSystem>());
             CountGroup countGroup = world.GetOrCreateSystem<CountGroup>();
             simulationSystemGroup.AddSystemToUpdateList(countGroup);
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountSystem>());
