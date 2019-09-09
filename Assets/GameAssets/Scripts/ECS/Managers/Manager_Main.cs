@@ -27,6 +27,8 @@ namespace YYHS
             ReadySharedComponentData();
             ComponentCache();
             InitializeEntities(manager);
+
+            SoundManager.Instance.PlayBgm(0);
         }
 
         void OnDestroy()
