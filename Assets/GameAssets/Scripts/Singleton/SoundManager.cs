@@ -10,11 +10,11 @@ namespace YYHS
         readonly string SEPath = "Audio/SE";
         readonly int SeResourceCount = 5;
 
-        float m_bgmVolume = 1;
-        float m_seVolume = 1;
+        [SerializeField, Range(0, 1)] float m_bgmVolume = 0.5f;
+        [SerializeField, Range(0, 1)] float m_seVolume = 0.5f;
 
-        private AudioSource m_bgmSource;
-        private List<AudioSource> m_seSourceList = new List<AudioSource>();
+        AudioSource m_bgmSource;
+        List<AudioSource> m_seSourceList = new List<AudioSource>();
 
         AudioClip[] m_bgmArray;
         AudioClip[] m_seArray;

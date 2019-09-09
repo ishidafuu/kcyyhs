@@ -28,7 +28,7 @@ namespace YYHS
             ComponentCache();
             InitializeEntities(manager);
 
-            SoundManager.Instance.PlayBgm(0);
+            SoundManager.Instance.PlayBgm(UnityEngine.Random.Range(0, 4));
         }
 
         void OnDestroy()
