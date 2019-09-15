@@ -55,7 +55,7 @@ namespace YYHS
                 // Mesh mesh = Shared.m_commonMeshMat.m_meshDict[imageName];
                 // Material mat = Shared.m_commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
 
-                int effectNo = 0;
+                int effectNo = 1;
                 Mesh mesh = Shared.m_effectMeshMatList.m_meshMatList[effectNo].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_meshMatList[effectNo].m_material;
 
