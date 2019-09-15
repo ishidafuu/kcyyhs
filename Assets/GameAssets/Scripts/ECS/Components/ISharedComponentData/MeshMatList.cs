@@ -16,9 +16,7 @@ namespace YYHS
         {
             m_meshDict = new Dictionary<string, Mesh>();
             m_materialDict = new Dictionary<string, Material>();
-            // spriteDict = new Dictionary<string, Sprite>();
             UnityEngine.Object[] list = Resources.LoadAll(path, typeof(Sprite));
-
             // listがnullまたは空ならエラーで返す
             if (list == null || list.Length == 0)
             {

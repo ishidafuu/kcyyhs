@@ -27,6 +27,7 @@ namespace YYHS
 
         protected override void OnUpdate()
         {
+
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
@@ -51,8 +52,13 @@ namespace YYHS
                 if (!Shared.m_commonMeshMat.m_meshDict.ContainsKey(imageName))
                     Debug.LogError($"Not Found ImageName:{imageName}");
 
-                Mesh mesh = Shared.m_commonMeshMat.m_meshDict[imageName];
-                Material mat = Shared.m_commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
+                // Mesh mesh = Shared.m_commonMeshMat.m_meshDict[imageName];
+                // Material mat = Shared.m_commonMeshMat.SetColor(imageName, new Color(1f, 0.5f, 0.5f, 0.5f));
+
+                int effectNo = 0;
+                Mesh mesh = Shared.m_effectMeshMatList.m_meshMatList[effectNo].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_meshMatList[effectNo].m_material;
+
 
                 int layer = (data.m_isOverChara)
                     ? (int)EnumDrawLayer.OverChara
@@ -76,12 +82,13 @@ namespace YYHS
                 {
                     DrawYLine(ref filterEffect, mesh, mat, BgHeightHalf, centerX, centerY, +x, layer);
                 }
-                for (int x = 0; x < leftCount; x++)
-                {
-                    if (x == 0)
-                        continue;
-                    DrawYLine(ref filterEffect, mesh, mat, BgHeightHalf, centerX, centerY, -x, layer);
-                }
+                // TODO:一時的に消す
+                // for (int x = 0; x < leftCount; x++)
+                // {
+                //     if (x == 0)
+                //         continue;
+                //     DrawYLine(ref filterEffect, mesh, mat, BgHeightHalf, centerX, centerY, -x, layer);
+                // }
             }
         }
 

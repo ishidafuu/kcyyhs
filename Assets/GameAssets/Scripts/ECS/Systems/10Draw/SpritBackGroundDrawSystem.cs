@@ -34,7 +34,7 @@ namespace YYHS
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var sideInfos = m_query.ToComponentDataArray<SideInfo>(Allocator.TempJob);
 
-            DrawChara(toukiMeters, sideInfos);
+            // DrawChara(toukiMeters, sideInfos);
             DrawSpritBackGround(toukiMeters);
             toukiMeters.Dispose();
             sideInfos.Dispose();
@@ -80,6 +80,8 @@ namespace YYHS
             string bgName = EnumBGPartsType.bg00.ToString();
             Mesh baseMesh = Shared.m_bgFrameMeshMat.m_meshDict[bgName];
             Material mat = Shared.m_bgFrameMeshMat.m_materialDict[bgName];
+
+
 
             for (int i = 0; i < toukiMeters.Length; i++)
             {

@@ -17,5 +17,8 @@ namespace YYHS
         public static readonly string CharaSprite = "Sprites/Character/chara{0}";
         public static readonly string BackGroundSprite = "Sprites/BackGround/bg{0}";
 
+        public static readonly string EffectSprite = "Sprites/Effect/effect{0}";
+        public static readonly string EffectMaterial = "Materials/Effect/effect{0}";
+        public static readonly string EffectShader = "Shader Graphs/effect{0}";
     }
 }
