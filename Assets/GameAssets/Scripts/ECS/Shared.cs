@@ -52,6 +52,14 @@ namespace YYHS
                 GetEffectMaterialPath(4),
                 GetEffectShaderName(4));
 
+            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
+                GetEffectMaterialPath(5),
+                GetEffectShaderName(5));
+
+            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
+                GetEffectMaterialPath(6),
+                GetEffectShaderName(6));
+
             m_yhFilterEffectList = new YHFilterEffectList();
             m_yhFilterEffectList.Init();
 
