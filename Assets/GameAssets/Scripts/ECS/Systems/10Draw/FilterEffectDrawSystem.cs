@@ -37,7 +37,7 @@ namespace YYHS
 
         private void DrawShaderGraphTest()
         {
-            int effectNo = 3;
+            int effectNo = 4;
             Mesh mesh = Shared.m_effectMeshMatList.m_meshMatList[effectNo].m_mesh;
             Material mat = Shared.m_effectMeshMatList.m_meshMatList[effectNo].m_material;
 
