@@ -33,15 +33,15 @@ namespace YYHS
             // m_colorPropertyId = Shader.PropertyToID("_Color");
             if (sprite == null)
             {
-                Debug.LogError(spritePath);
+                Debug.LogError("(sprite == null)" + spritePath);
             }
             if (newMeshMat.m_material == null)
             {
-                Debug.LogError(matPath);
+                Debug.LogError("(newMeshMat.m_material == null)" + matPath);
             }
             if (shader == null)
             {
-                Debug.LogError(shaderName);
+                Debug.LogError("(shader == null)" + shaderName);
             }
 
             List<Vector3> _vertices = new List<Vector3>();

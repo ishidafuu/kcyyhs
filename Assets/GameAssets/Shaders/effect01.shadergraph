@@ -894,7 +894,7 @@
             "m_Guid": ""
         }
     },
-    "m_Path": "",
+    "m_Path": "YHShader",
     "m_ConcretePrecision": 0,
     "m_ActiveOutputNodeGuidSerialized": "0cb0481b-e07a-481e-9c84-a5a1ed197ed2"
 }

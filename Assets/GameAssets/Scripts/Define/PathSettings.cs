@@ -19,6 +19,6 @@ namespace YYHS
 
         public static readonly string EffectSprite = "Sprites/Effect/effect{0}";
         public static readonly string EffectMaterial = "Materials/Effect/effect{0}";
-        public static readonly string EffectShader = "Shader Graphs/effect{0}";
+        public static readonly string EffectShader = "YHShader/effect{0}";
     }
 }

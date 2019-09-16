@@ -31,8 +31,23 @@ namespace YYHS
             m_charaMeshMat = new MeshMatList(GetCharaPath(0), DefaultShader);
             m_bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
             m_commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
-            m_effectMeshMatList.Add(GetEffectSpritePath(0), GetEffectMaterialPath(0), GetEffectShaderName(0));
-            m_effectMeshMatList.Add(GetEffectSpritePath(1), GetEffectMaterialPath(1), GetEffectShaderName(1));
+
+            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.Screen),
+                GetEffectMaterialPath(0),
+                GetEffectShaderName(0));
+
+            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.Screen),
+                GetEffectMaterialPath(1),
+                GetEffectShaderName(1));
+
+            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
+                GetEffectMaterialPath(2),
+                GetEffectShaderName(2));
+
+            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
+                GetEffectMaterialPath(3),
+                GetEffectShaderName(3));
+
             m_yhFilterEffectList = new YHFilterEffectList();
             m_yhFilterEffectList.Init();
 
@@ -42,7 +57,7 @@ namespace YYHS
 
         private static string GetBackGroundPath(int bgNo) => string.Format(PathSettings.BackGroundSprite, bgNo.ToString("d2"));
         private static string GetCharaPath(int charaNo) => string.Format(PathSettings.CharaSprite, charaNo.ToString("d2"));
-        private static string GetEffectSpritePath(int effectNo) => string.Format(PathSettings.EffectSprite, effectNo.ToString("d2"));
+        private static string GetEffectSpritePath(EnumShaderBaseTexture effectNo) => string.Format(PathSettings.EffectSprite, ((int)effectNo).ToString("d2"));
         private static string GetEffectMaterialPath(int effectNo) => string.Format(PathSettings.EffectMaterial, effectNo.ToString("d2"));
         private static string GetEffectShaderName(int effectNo) => string.Format(PathSettings.EffectShader, effectNo.ToString("d2"));
 

@@ -194,4 +194,12 @@ namespace YYHS
         EventColor,
     }
 
+
+    public enum EnumShaderBaseTexture
+    {
+        Screen,
+        BigQuad,
+        SmallQuad,
+    }
+
 }
