@@ -32,39 +32,30 @@ namespace YYHS
             m_bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
             m_commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
 
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.Screen),
-                GetEffectMaterialPath(0),
-                GetEffectShaderName(0));
+            Sprite sprite = CreateFilterSprite();
 
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.Screen),
-                GetEffectMaterialPath(1),
-                GetEffectShaderName(1));
-
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
-                GetEffectMaterialPath(2),
-                GetEffectShaderName(2));
-
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
-                GetEffectMaterialPath(3),
-                GetEffectShaderName(3));
-
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
-                GetEffectMaterialPath(4),
-                GetEffectShaderName(4));
-
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
-                GetEffectMaterialPath(5),
-                GetEffectShaderName(5));
-
-            m_effectMeshMatList.Add(GetEffectSpritePath(EnumShaderBaseTexture.BigQuad),
-                GetEffectMaterialPath(6),
-                GetEffectShaderName(6));
+            int effectCount = 8;
+            for (int i = 0; i < effectCount; i++)
+            {
+                m_effectMeshMatList.Add(sprite,
+                GetEffectShaderName(i));
+            }
+            //GetEffectSpritePath(EnumShaderBaseTexture.BigQuad)
 
             m_yhFilterEffectList = new YHFilterEffectList();
             m_yhFilterEffectList.Init();
 
             m_yhCharaAnimList = new YHCharaAnimList();
             m_yhCharaAnimList.Init();
+        }
+
+        private static Sprite CreateFilterSprite()
+        {
+            const int SIZE = 256;
+            const float PIVOT = 0.5f;
+            const int PIXEL_PER_UNIT = 1;
+            Texture2D texture2D = new Texture2D(SIZE, SIZE);
+            return Sprite.Create(texture2D, new Rect(0.0f, 0.0f, SIZE, SIZE), new Vector2(PIVOT, PIVOT), PIXEL_PER_UNIT);
         }
 
         private static string GetBackGroundPath(int bgNo) => string.Format(PathSettings.BackGroundSprite, bgNo.ToString("d2"));

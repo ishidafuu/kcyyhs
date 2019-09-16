@@ -18,7 +18,7 @@ namespace YYHS
         public List<MeshMat> m_meshMatList;
         // int m_colorPropertyId;
 
-        public void Add(string spritePath, string matPath, string shaderName)
+        public void Add(Sprite sprite, string shaderName)
         {
             if (m_meshMatList == null)
             {
@@ -27,18 +27,10 @@ namespace YYHS
 
             MeshMat newMeshMat = new MeshMat();
 
-            var sprite = Resources.Load(spritePath, typeof(Sprite)) as Sprite;
+            // var sprite = Resources.Load(spritePath, typeof(Sprite)) as Sprite;
             var shader = Shader.Find(shaderName);
-            newMeshMat.m_material = Resources.Load(matPath, typeof(Material)) as Material;
-            // m_colorPropertyId = Shader.PropertyToID("_Color");
-            if (sprite == null)
-            {
-                Debug.LogError("(sprite == null)" + spritePath);
-            }
-            if (newMeshMat.m_material == null)
-            {
-                Debug.LogError("(newMeshMat.m_material == null)" + matPath);
-            }
+            newMeshMat.m_material = new Material(shader);
+
             if (shader == null)
             {
                 Debug.LogError("(shader == null)" + shaderName);
