@@ -23,6 +23,7 @@ namespace YYHS
             // ComponentType.ReadOnly<BgScroll>()
             );
             m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
+            // m_quaternion = Quaternion.Euler(new Vector3(-90, 180, 0));
         }
 
         protected override void OnUpdate()

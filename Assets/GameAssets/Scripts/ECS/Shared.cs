@@ -23,7 +23,7 @@ namespace YYHS
         public static YHFilterEffectList m_yhFilterEffectList;
         public static YHCharaAnimList m_yhCharaAnimList;
 
-        public static int m_testShaderNo = 8;
+        public static int m_testShaderNo = 10;
 
 
         static readonly string DefaultShader = "Sprites/DefaultSprite";
@@ -36,7 +36,7 @@ namespace YYHS
 
             Sprite sprite = CreateFilterSprite();
 
-            int effectCount = 9;
+            int effectCount = 11;
             for (int i = 0; i < effectCount; i++)
             {
                 m_effectMeshMatList.Add(sprite,
@@ -53,7 +53,7 @@ namespace YYHS
 
         private static Sprite CreateFilterSprite()
         {
-            const int SIZE = 128;
+            const int SIZE = 256;
             const float PIVOT = 0.5f;
             const int PIXEL_PER_UNIT = 1;
             Texture2D texture2D = new Texture2D(SIZE, SIZE);
