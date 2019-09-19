@@ -23,7 +23,7 @@ namespace YYHS
         public static YHFilterEffectList m_yhFilterEffectList;
         public static YHCharaAnimList m_yhCharaAnimList;
 
-        public static int m_testShaderNo = 10;
+        public static int m_testShaderNo = 11;
 
 
         static readonly string DefaultShader = "Sprites/DefaultSprite";
@@ -36,7 +36,7 @@ namespace YYHS
 
             Sprite sprite = CreateFilterSprite();
 
-            int effectCount = 11;
+            int effectCount = 12;
             for (int i = 0; i < effectCount; i++)
             {
                 m_effectMeshMatList.Add(sprite,
