@@ -41,11 +41,13 @@ namespace YYHS
                     int frame = TimeToFrame(curve.time);
 
                     Keyframe keyFrameX = new Keyframe(frame, curve.value.x,
-                        curve.inSlope.x / SlopeToTangent, curve.outSlope.x / SlopeToTangent,
+                        ParseSlope(curve.inSlope.x) / SlopeToTangent,
+                        ParseSlope(curve.outSlope.x) / SlopeToTangent,
                         curve.inWeight.x, curve.outWeight.x);
 
                     Keyframe keyFrameY = new Keyframe(frame, curve.value.y,
-                        curve.inSlope.y / SlopeToTangent, curve.outSlope.y / SlopeToTangent,
+                        ParseSlope(curve.inSlope.y) / SlopeToTangent,
+                        ParseSlope(curve.outSlope.y) / SlopeToTangent,
                         curve.inWeight.y, curve.outWeight.y);
 
                     keyFramesX.Add(keyFrameX);
@@ -55,6 +57,18 @@ namespace YYHS
                 parts.m_positionX = new AnimationCurve(keyFramesX.ToArray());
                 parts.m_positionY = new AnimationCurve(keyFramesY.ToArray());
             }
+        }
+
+        private static float ParseSlope(string strNumber)
+        {
+            decimal px = 0;
+            float fx = Mathf.Infinity;
+            if (decimal.TryParse(strNumber, out px))
+            {
+                fx = (float)px;
+            }
+
+            return fx;
         }
 
         private static void ConvertScale(YHRawAnimation rawAnim, YHAnimation result)
@@ -71,11 +85,13 @@ namespace YYHS
                     int frame = TimeToFrame(curve.time);
 
                     Keyframe keyFrameX = new Keyframe(frame, curve.value.x,
-                        curve.inSlope.x / SlopeToTangent, curve.outSlope.x / SlopeToTangent,
+                        ParseSlope(curve.inSlope.x) / SlopeToTangent,
+                        ParseSlope(curve.outSlope.x) / SlopeToTangent,
                         curve.inWeight.x, curve.outWeight.x);
 
                     Keyframe keyFrameY = new Keyframe(frame, curve.value.y,
-                        curve.inSlope.y / SlopeToTangent, curve.outSlope.y / SlopeToTangent,
+                        ParseSlope(curve.inSlope.y) / SlopeToTangent,
+                        ParseSlope(curve.outSlope.y) / SlopeToTangent,
                         curve.inWeight.y, curve.outWeight.y);
 
                     keyFramesX.Add(keyFrameX);
@@ -99,7 +115,8 @@ namespace YYHS
                     int frame = TimeToFrame(curve.time);
 
                     Keyframe keyFrame = new Keyframe(frame, curve.value.z,
-                        curve.inSlope.z / SlopeToTangent, curve.outSlope.z / SlopeToTangent,
+                        ParseSlope(curve.inSlope.z) / SlopeToTangent,
+                        ParseSlope(curve.outSlope.z) / SlopeToTangent,
                         curve.inWeight.z, curve.outWeight.z);
 
                     keyFrames.Add(keyFrame);
@@ -140,7 +157,6 @@ namespace YYHS
                     data.m_value = (curve.value != 0);
                 }
 
-                // parts.frames = parts.frames.OrderBy(x => x.frame).ToList();
             }
         }
 
@@ -176,34 +192,6 @@ namespace YYHS
             }
         }
 
-
-
-        // private static void DistinctFrames(YHAnimation result)
-        // {
-        //     foreach (var item in result.parts)
-        //     {
-        //         List<YHFrameData> distinctFrames = new List<YHFrameData>();
-        //         for (int i = 0; i < item.frames.Count; i++)
-        //         {
-        //             YHFrameData nowFrame = item.frames[i];
-        //             if (i == 0)
-        //             {
-        //                 distinctFrames.Add(nowFrame);
-        //                 continue;
-        //             }
-        //             YHFrameData lastFrame = item.frames[i - 1];
-
-        //             if (nowFrame.isActive != lastFrame.isActive
-        //                 || nowFrame.isFlipX != lastFrame.isFlipX
-        //                 || nowFrame.isFlipY != lastFrame.isFlipY)
-        //             {
-        //                 distinctFrames.Add(nowFrame);
-        //             }
-        //         }
-
-        //         item.frames = distinctFrames;
-        //     }
-        // }
 
         private static YHAnimationParts GetOrCreateParts(YHAnimation result, string partsName)
         {
