@@ -10,7 +10,6 @@ namespace YYHS
     [UpdateInGroup(typeof(RenderGroup))]
     public class BattleDrawDrawSystem : ComponentSystem
     {
-
         protected override void OnCreate()
         {
             RequireSingletonForUpdate<BattleSequencer>();
@@ -20,7 +19,7 @@ namespace YYHS
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            if (!seq.m_isPlay || seq.m_isTransition)
+            if (seq.m_seqState <= EnumBattleSequenceState.Start)
                 return;
 
             int charaNo = seq.m_animation.m_charaNo;

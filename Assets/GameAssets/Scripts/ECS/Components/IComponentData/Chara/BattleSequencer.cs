@@ -4,14 +4,15 @@ namespace YYHS
 {
     public struct BattleSequencer : IComponentData
     {
-        public bool m_isPlay;
-        public bool m_isTransition;
+        public EnumBattleSequenceState m_seqState;
         public bool m_isLastSideA;
         public EnumAnimType m_animType;
         public SideState m_sideA;
         public SideState m_sideB;
 
         public BattleAnim m_animation;
+
+        public int m_endCount;
     }
 
     public struct SideState

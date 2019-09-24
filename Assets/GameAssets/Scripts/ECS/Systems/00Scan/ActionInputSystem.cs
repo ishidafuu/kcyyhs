@@ -36,10 +36,11 @@ namespace YYHS
                 var padScan = padScans[i];
                 var toukiMeter = toukiMeters[i];
                 var sideInfo = sideInfos[i];
+                bool isSideA = i == 0;
 
-                if (seq.m_isPlay)
+                if (seq.m_seqState >= EnumBattleSequenceState.Start)
                 {
-                    if (i == 0)
+                    if (isSideA)
                     {
                         if (seq.m_sideA.m_actionType != EnumActionType.None)
                             continue;
@@ -60,7 +61,7 @@ namespace YYHS
                 // if (toukiMeter.m_value == 0)
                 //     continue;
 
-                bool isStartAnim = !seq.m_isPlay;
+                bool isStartAnim = seq.m_seqState == EnumBattleSequenceState.Idle;
 
                 if (isStartAnim)
                 {
@@ -97,7 +98,7 @@ namespace YYHS
                 // TODO:仮
                 isNeedDefence = true;
                 actionNo = 0;
-                actionType = (i == 0)
+                actionType = (isSideA)
                     ? EnumActionType.LongAttack
                     : EnumActionType.ShortAttack;
 
@@ -163,14 +164,13 @@ namespace YYHS
 
             battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.NoDamage;
             battleSequencer.m_sideB.m_enemyDamageLv = EnumDamageLv.NoDamage;
-            Debug.Log(battleSequencer.m_sideA.m_enemyDamageLv);
-            Debug.Log(battleSequencer.m_sideB.m_enemyDamageLv);
+            // Debug.Log(battleSequencer.m_sideA.m_enemyDamageLv);
+            // Debug.Log(battleSequencer.m_sideB.m_enemyDamageLv);
         }
 
         private static void InitSequencer(ref BattleSequencer battleSequencer, bool isSideA)
         {
-            battleSequencer.m_isPlay = true;
-            battleSequencer.m_isTransition = true;
+            battleSequencer.m_seqState = EnumBattleSequenceState.Start;
             battleSequencer.m_isLastSideA = isSideA;
 
             battleSequencer.m_sideA.m_actionType = EnumActionType.None;

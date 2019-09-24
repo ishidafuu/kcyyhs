@@ -9,6 +9,18 @@ namespace YYHS
     [UpdateInGroup(typeof(CountGroup))]
     public class BattleSequencerCountSystem : ComponentSystem
     {
+        enum NextStepType
+        {
+            None,
+            DamageReactionStep,
+            DeffenceStepWaitSide,
+            DeffenceStepLastSide,
+            NextStepLastSide,
+            NextStepWaitSide,
+            EndAnimation,
+        }
+
+
         EntityQuery m_query;
 
         protected override void OnCreate()
@@ -23,7 +35,7 @@ namespace YYHS
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            if (!seq.m_isPlay)
+            if (seq.m_seqState == EnumBattleSequenceState.Idle)
                 return;
 
             UpdateSequencer(ref seq);
@@ -38,43 +50,118 @@ namespace YYHS
             seq.m_animation.m_count++;
 
             // 最初の入力から最初のアニメ開始もここで行う
-            if (seq.m_isTransition)
+            switch (seq.m_seqState)
             {
-                if (seq.m_animation.m_count > Settings.Instance.Animation.TransitionTime)
-                {
-                    seq.m_isTransition = false;
-                    seq.m_animation.m_count = 0;
-                    if (seq.m_isLastSideA)
+                case EnumBattleSequenceState.Start:
+                    if (seq.m_animation.m_count > Settings.Instance.Animation.TransitionTime)
                     {
-                        NextStep(ref seq, ref seq.m_sideA);
+                        seq.m_seqState = EnumBattleSequenceState.Play;
+                        seq.m_animation.m_count = 0;
+                        if (seq.m_isLastSideA)
+                        {
+                            NextStep(ref seq, ref seq.m_sideA);
+                        }
+                        else
+                        {
+                            NextStep(ref seq, ref seq.m_sideB);
+                        }
+                        // seqが更新された直後にエフェクトの発生を行う
+                        UpdateFilterEffect(seq);
                     }
-                    else
-                    {
-                        NextStep(ref seq, ref seq.m_sideB);
-                    }
-                }
-            }
-            else
-            {
+                    break;
+                case EnumBattleSequenceState.Play:
 
-                if (seq.m_animation.m_count >= anim.m_length)
-                {
-                    seq.m_animation.m_count = 0;
-                    if (seq.m_isLastSideA)
+                    if (seq.m_animation.m_count >= anim.m_length)
                     {
-                        SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
-                    }
-                    else
-                    {
-                        SelectNextStep(ref seq, ref seq.m_sideB, ref seq.m_sideA);
-                    }
-                }
-            }
+                        seq.m_animation.m_count = 0;
+                        if (seq.m_isLastSideA)
+                        {
+                            NextStepType step = SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
+                            ShiftNextStep(step, ref seq, ref seq.m_sideA, ref seq.m_sideB);
+                        }
+                        else
+                        {
+                            NextStepType step = SelectNextStep(ref seq, ref seq.m_sideB, ref seq.m_sideA);
+                            ShiftNextStep(step, ref seq, ref seq.m_sideB, ref seq.m_sideA);
+                        }
 
-            // seqが更新された直後にエフェクトの発生を行う
-            UpdateFilterEffect(seq);
+                        // EnumBattleSequenceState.Endに切り替わるタイミングでアニメ処理は入っているのでここで行わない
+                        if (seq.m_seqState == EnumBattleSequenceState.Play)
+                        {
+                            // seqが更新された直後にエフェクトの発生を行う
+                            UpdateFilterEffect(seq);
+                        }
+                    }
+                    // 切り替えフィルタ表示
+                    else if (seq.m_animation.m_count == anim.m_length - 30)
+                    {
+                        NextStepType step = SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
+
+                        if (step == NextStepType.EndAnimation)
+                        {
+                            NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
+                            for (int i = 0; i < filterEffects.Length; i++)
+                            {
+                                FilterEffect effect = filterEffects[i];
+
+                                if (effect.m_isActive)
+                                    continue;
+
+                                effect.m_isActive = true;
+                                effect.m_effectType = EnumEffectType.Fillter;
+                                effect.m_effectIndex = (int)EnumFillter.EndBattleSequence;
+                                effect.m_count = 0;
+                                filterEffects[i] = effect;
+                                break;
+                            }
+
+                            m_query.CopyFromComponentDataArray(filterEffects);
+                            filterEffects.Dispose();
+                        }
+                    }
+
+                    break;
+                    // case EnumBattleSequenceState.End:
+                    //     seq.m_endCount++;
+                    //     if (seq.m_endCount > Settings.Instance.Animation.TransitionTime)
+                    //     {
+                    //         seq.m_seqState = EnumBattleSequenceState.Idle;
+                    //         seq.m_animation.m_count = 0;
+                    //         NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
+                    //         ResetEffect(ref filterEffects);
+                    //         m_query.CopyFromComponentDataArray(filterEffects);
+                    //         filterEffects.Dispose();
+                    //     }
+                    //     break;
+            }
 
             SetSingleton(seq);
+        }
+
+        private void ShiftNextStep(NextStepType step, ref BattleSequencer seq,
+            ref SideState lastSide, ref SideState waitSide)
+        {
+            switch (step)
+            {
+                case NextStepType.DamageReactionStep:
+                    DamageReactionStep(ref seq, ref lastSide, ref waitSide);
+                    break;
+                case NextStepType.DeffenceStepWaitSide:
+                    DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                    break;
+                case NextStepType.DeffenceStepLastSide:
+                    DeffenceStep(ref seq, ref waitSide, ref lastSide);
+                    break;
+                case NextStepType.NextStepLastSide:
+                    NextStep(ref seq, ref lastSide);
+                    break;
+                case NextStepType.NextStepWaitSide:
+                    NextStep(ref seq, ref waitSide);
+                    break;
+                case NextStepType.EndAnimation:
+                    EndAnimation(ref seq);
+                    break;
+            }
         }
 
         private void UpdateFilterEffect(BattleSequencer seq)
@@ -83,48 +170,41 @@ namespace YYHS
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
 
             // アニメが切り替わったタイミングでフィルターエフェクトはすべてリセット
+
             if (seq.m_animation.m_count == 0)
             {
-                for (int i = 0; i < filterEffects.Length; i++)
-                {
-                    FilterEffect effect = filterEffects[i];
-                    effect.m_isActive = false;
-                    effect.m_count = 0;
-                    filterEffects[i] = effect;
-                }
+                ResetEffect(ref filterEffects);
                 isEffectUpdate = true;
             }
 
-
-            if (seq.m_isPlay)
+            int charaNo = seq.m_animation.m_charaNo;
+            EnumAnimationName animName = seq.m_animation.m_animName;
+            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
+            foreach (var item in anim.m_events)
             {
-                int charaNo = seq.m_animation.m_charaNo;
-                EnumAnimationName animName = seq.m_animation.m_animName;
-                YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
-                foreach (var item in anim.m_events)
+                if (item.m_frame != seq.m_animation.m_count)
+                    continue;
+
+                if (item.m_functionName == EnumEventFunctionName.EventEffect)
                 {
-                    if (item.m_frame != seq.m_animation.m_count)
-                        continue;
-
-                    if (item.m_functionName == EnumEventFunctionName.EventEffect)
+                    for (int i = 0; i < filterEffects.Length; i++)
                     {
-                        for (int i = 0; i < filterEffects.Length; i++)
-                        {
-                            FilterEffect effect = filterEffects[i];
+                        FilterEffect effect = filterEffects[i];
 
-                            if (effect.m_isActive)
-                                continue;
+                        if (effect.m_isActive)
+                            continue;
 
-                            effect.m_isActive = true;
-                            effect.m_effectIndex = Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
-                            effect.m_count = 0;
-                            filterEffects[i] = effect;
+                        effect.m_isActive = true;
+                        effect.m_effectIndex = 0;//TODO:Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
+                        effect.m_count = 0;
+                        filterEffects[i] = effect;
 
-                            isEffectUpdate = true;
-                        }
+                        isEffectUpdate = true;
+                        // 複数ある可能性があるのでBreakはしない
                     }
                 }
             }
+
 
             if (isEffectUpdate)
             {
@@ -133,9 +213,23 @@ namespace YYHS
             filterEffects.Dispose();
         }
 
-        private void SelectNextStep(ref BattleSequencer seq,
+        private static void ResetEffect(ref NativeArray<FilterEffect> filterEffects)
+        {
+            for (int i = 0; i < filterEffects.Length; i++)
+            {
+                FilterEffect effect = filterEffects[i];
+                effect.m_isActive = false;
+                effect.m_count = 0;
+                filterEffects[i] = effect;
+            }
+        }
+
+
+        private NextStepType SelectNextStep(ref BattleSequencer seq,
             ref SideState lastSide, ref SideState waitSide)
         {
+            NextStepType step = NextStepType.None;
+
             // 直前がディフェンスアニメーションの場合（条件でダウンへ分岐なども行う）
             if (seq.m_animType != EnumAnimType.Action)
             {
@@ -144,7 +238,8 @@ namespace YYHS
                 if (seq.m_animType == EnumAnimType.Defence
                     && waitSide.m_enemyDamageReaction != EnumDamageReaction.None)
                 {
-                    DamageReactionStep(ref seq, ref lastSide, ref waitSide);
+                    // DamageReactionStep(ref seq, ref lastSide, ref waitSide);
+                    step = NextStepType.DamageReactionStep;
                 }
                 // リアクションなし
                 else
@@ -155,20 +250,23 @@ namespace YYHS
                         && lastSide.m_isEnemyNeedDefence)
                     {
                         Debug.Log("DeffenceStepA ");
-                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        // DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        step = NextStepType.DeffenceStepWaitSide;
                     }
                     // 直撃もしくはKO以外で、直前側が攻撃完了していない場合は、直前側の進行
                     else if (waitSide.m_enemyDamageLv <= EnumDamageLv.Tip
                         && (lastSide.m_animStep == EnumAnimationStep.WaitPageA
                             || lastSide.m_animStep == EnumAnimationStep.WaitPageB))
                     {
-                        NextStep(ref seq, ref lastSide);
+                        // NextStep(ref seq, ref lastSide);
+                        step = NextStepType.NextStepLastSide;
                     }
                     else
                     {
                         Debug.Log("EndAnimationA");
                         // アニメ終了
-                        EndAnimation(ref seq);
+                        // EndAnimation(ref seq);
+                        step = NextStepType.EndAnimation;
                     }
                 }
             }
@@ -182,19 +280,22 @@ namespace YYHS
                     if (!waitSide.m_isDefenceFinished && lastSide.m_isEnemyNeedDefence)
                     {
                         Debug.Log("DeffenceStepB ");
-                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        // DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        step = NextStepType.DeffenceStepWaitSide;
                     }
                     else
                     {
                         // ディフェンス不要の場合はアニメ終了
                         Debug.Log("EndAnimationB");
-                        EndAnimation(ref seq);
+                        // EndAnimation(ref seq);
+                        step = NextStepType.EndAnimation;
                     }
                 }
                 else
                 {
                     // 直前サイドを進行
-                    NextStep(ref seq, ref lastSide);
+                    // NextStep(ref seq, ref lastSide);
+                    step = NextStepType.NextStepLastSide;
                 }
             }
             else
@@ -212,12 +313,14 @@ namespace YYHS
                     )
                 {
                     Debug.Log("DeffenceStepC ");
-                    DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                    // DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                    step = NextStepType.NextStepWaitSide;
                 }
                 // 未始動であれば始動へ
                 else if (waitSide.m_animStep == EnumAnimationStep.WaitPageA)
                 {
-                    NextStep(ref seq, ref waitSide);
+                    // NextStep(ref seq, ref waitSide);
+                    step = NextStepType.NextStepWaitSide;
                 }
                 // 両方の始動ステップが終わった
                 else if (waitSide.m_animStep == EnumAnimationStep.WaitPageB
@@ -226,12 +329,14 @@ namespace YYHS
                     // 直前のアクションが待ちアクションよりプライオリティが高ければ追い越して、直前を再度進める
                     if (lastSide.m_actionType > waitSide.m_actionType)
                     {
-                        NextStep(ref seq, ref lastSide);
+                        // NextStep(ref seq, ref lastSide);
+                        step = NextStepType.NextStepLastSide;
                     }
                     else
                     {
                         // 待ち側の発動ステップ
-                        NextStep(ref seq, ref waitSide);
+                        // NextStep(ref seq, ref waitSide);
+                        step = NextStepType.NextStepWaitSide;
                     }
                 }
                 // 直前が発動、待ち側が始動
@@ -244,18 +349,21 @@ namespace YYHS
                         // 直撃でなければ待ち側のアクションを進める
                         if (lastSide.m_enemyDamageLv < EnumDamageLv.Hit)
                         {
-                            NextStep(ref seq, ref waitSide);
+                            // NextStep(ref seq, ref waitSide);
+                            step = NextStepType.NextStepWaitSide;
                         }
                         else
                         {
                             Debug.Log("EndAnimationC");
-                            EndAnimation(ref seq);
+                            // EndAnimation(ref seq);
+                            step = NextStepType.EndAnimation;
                         }
                     }
                     else
                     {
                         Debug.Log("DeffenceStepE ");
-                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        // DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        step = NextStepType.DeffenceStepWaitSide;
                     }
                 }
                 // 直前が始動、待ち側が発動完了（先手後手ともに飛び道具で、後手が追いかけるような場合）
@@ -267,12 +375,14 @@ namespace YYHS
                     if (CheckChasable(ref lastSide, ref waitSide)
                     || lastSide.m_isDefenceFinished)
                     {
-                        NextStep(ref seq, ref lastSide);
+                        // NextStep(ref seq, ref lastSide);
+                        step = NextStepType.NextStepLastSide;
                     }
                     else
                     {
                         Debug.Log("DeffenceStepF ");
-                        DeffenceStep(ref seq, ref waitSide, ref lastSide);
+                        // DeffenceStep(ref seq, ref waitSide, ref lastSide);
+                        step = NextStepType.DeffenceStepLastSide;
                     }
                 }
                 // 近接攻撃を避けた後などの後手側アクションの後
@@ -282,18 +392,21 @@ namespace YYHS
                     if (waitSide.m_isEnemyNeedDefence && !lastSide.m_isDefenceFinished)
                     {
                         Debug.Log("DeffenceStepGS ");
-                        DeffenceStep(ref seq, ref waitSide, ref lastSide);
+                        // DeffenceStep(ref seq, ref waitSide, ref lastSide);
+                        step = NextStepType.DeffenceStepLastSide;
                     }
                     else if (lastSide.m_isEnemyNeedDefence && !waitSide.m_isDefenceFinished)
                     {
                         Debug.Log("DeffenceStepH ");
-                        DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        // DeffenceStep(ref seq, ref lastSide, ref waitSide);
+                        step = NextStepType.DeffenceStepWaitSide;
                     }
                     else
                     {
                         Debug.Log("EndAnimationD");
                         // アニメ終了
-                        EndAnimation(ref seq);
+                        // EndAnimation(ref seq);
+                        step = NextStepType.EndAnimation;
                     }
                 }
                 else
@@ -302,6 +415,8 @@ namespace YYHS
                 }
 
             }
+
+            return step;
         }
 
         private bool CheckChasable(ref SideState chaseSide, ref SideState targetSide)
@@ -315,7 +430,7 @@ namespace YYHS
 
         private void EndAnimation(ref BattleSequencer seq)
         {
-            seq.m_isPlay = false;
+            seq.m_seqState = EnumBattleSequenceState.Idle;
             seq.m_sideA.m_animStep = EnumAnimationStep.Sleep;
             seq.m_sideB.m_animStep = EnumAnimationStep.Sleep;
         }

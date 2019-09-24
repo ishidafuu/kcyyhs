@@ -28,7 +28,7 @@ namespace YYHS
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            if (seq.m_isPlay && !seq.m_isTransition)
+            if (seq.m_seqState >= EnumBattleSequenceState.Play)
                 return;
 
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
