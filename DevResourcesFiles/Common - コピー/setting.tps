@@ -189,6 +189,18 @@
             <key type="filename">cm_l_effect02_00.png</key>
             <key type="filename">cm_l_effect02_01.png</key>
             <key type="filename">cm_l_effect02_02.png</key>
+            <key type="filename">cm_ll_effect04_00.png</key>
+            <key type="filename">cm_ll_effect06_00.png</key>
+            <key type="filename">cm_ll_effect06_01.png</key>
+            <key type="filename">cm_ll_effect06_02.png</key>
+            <key type="filename">cm_ll_effect06_03.png</key>
+            <key type="filename">cm_ll_effect06_04.png</key>
+            <key type="filename">cm_ll_effect06_05.png</key>
+            <key type="filename">cm_lll_effect07_00.png</key>
+            <key type="filename">cm_lll_effect07_01.png</key>
+            <key type="filename">cm_lll_effect07_02.png</key>
+            <key type="filename">cm_lll_effect07_03.png</key>
+            <key type="filename">cm_lll_effect07_04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -198,6 +210,63 @@
                 <rect>64,24,128,48</rect>
                 <key>scale9Paddings</key>
                 <rect>64,24,128,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">cm_ll_effect00_00.png</key>
+            <key type="filename">cm_ll_effect03_00.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,24,32,48</rect>
+                <key>scale9Paddings</key>
+                <rect>16,24,32,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">cm_ll_effect01_00.png</key>
+            <key type="filename">cm_u_effect03_00.png</key>
+            <key type="filename">cm_u_effect03_01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,24,64,48</rect>
+                <key>scale9Paddings</key>
+                <rect>32,24,64,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">cm_ll_effect02_00.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>64,32,128,64</rect>
+                <key>scale9Paddings</key>
+                <rect>64,32,128,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">cm_lll_effect00_00.png</key>
+            <key type="filename">cm_lll_effect00_01.png</key>
+            <key type="filename">cm_lll_effect00_02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>40,20,80,40</rect>
+                <key>scale9Paddings</key>
+                <rect>40,20,80,40</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -364,9 +433,30 @@
             <filename>cm_l_effect02_00.png</filename>
             <filename>cm_l_effect02_01.png</filename>
             <filename>cm_l_effect02_02.png</filename>
+            <filename>cm_ll_effect00_00.png</filename>
+            <filename>cm_ll_effect01_00.png</filename>
+            <filename>cm_ll_effect02_00.png</filename>
+            <filename>cm_ll_effect03_00.png</filename>
+            <filename>cm_ll_effect04_00.png</filename>
+            <filename>cm_ll_effect06_00.png</filename>
+            <filename>cm_ll_effect06_01.png</filename>
+            <filename>cm_ll_effect06_02.png</filename>
+            <filename>cm_ll_effect06_03.png</filename>
+            <filename>cm_ll_effect06_04.png</filename>
+            <filename>cm_ll_effect06_05.png</filename>
+            <filename>cm_lll_effect00_00.png</filename>
+            <filename>cm_lll_effect00_01.png</filename>
+            <filename>cm_lll_effect00_02.png</filename>
+            <filename>cm_lll_effect07_00.png</filename>
+            <filename>cm_lll_effect07_01.png</filename>
+            <filename>cm_lll_effect07_02.png</filename>
+            <filename>cm_lll_effect07_03.png</filename>
+            <filename>cm_lll_effect07_04.png</filename>
             <filename>cm_u_effect00_00.png</filename>
             <filename>cm_u_effect01_00.png</filename>
             <filename>cm_u_effect02_00.png</filename>
+            <filename>cm_u_effect03_00.png</filename>
+            <filename>cm_u_effect03_01.png</filename>
             <filename>energy.png</filename>
             <filename>fire00.png</filename>
             <filename>fire01.png</filename>
