@@ -111,13 +111,13 @@ namespace YYHS
         {
             for (int i = 0; i < Settings.Instance.Common.FilterEffectCount; i++)
             {
-                var entity = FilterEffectEntityFactory.CreateEntity(i, manager, ref Shared.m_yhFilterEffectList);
+                var entity = FilterEffectEntityFactory.CreateEntity(i, manager);
             }
         }
 
         void CreateBattleEntity(EntityManager manager)
         {
-            var entity = BattleEntityFactory.CreateEntity(manager, ref Shared.m_yhFilterEffectList);
+            var entity = BattleEntityFactory.CreateEntity(manager);
         }
     }
 }

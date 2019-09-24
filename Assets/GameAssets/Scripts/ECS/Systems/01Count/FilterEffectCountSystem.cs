@@ -36,7 +36,7 @@ namespace YYHS
             //     yhFilterEffects[i] = Shared.m_yhFilterEffectList.m_effects[i].m_data;
             // }
 
-            var uv = Shared.m_yhFilterEffectList.m_effects[0];
+            // var uv = Shared.m_yhFilterEffectList.m_effects[0];
             var job = new CountJob()
             {
                 m_filterEffects = filterEffects,

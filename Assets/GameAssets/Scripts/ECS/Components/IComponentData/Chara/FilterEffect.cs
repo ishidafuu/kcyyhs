@@ -7,5 +7,6 @@ namespace YYHS
         public bool m_isActive;
         public int m_effectIndex;
         public int m_count;
+        public EnumEffectType m_effectType;
     }
 }

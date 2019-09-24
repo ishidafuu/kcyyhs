@@ -101,6 +101,13 @@ namespace YYHS
         DefenceReaction,
     }
 
+    public enum EnumBattleSequenceState
+    {
+        Idle,
+        Start,
+        Play,
+    }
+
     public enum EnumAnimationStep
     {
         Sleep,
@@ -200,6 +207,17 @@ namespace YYHS
         Screen,
         BigQuad,
         SmallQuad,
+    }
+
+    public enum EnumEffectType
+    {
+        Effect,
+        Fillter,
+    }
+
+    public enum EnumFillter
+    {
+        EndBattleSequence,
     }
 
 }

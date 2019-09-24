@@ -15,14 +15,24 @@ namespace YYHS
     [Serializable]
     public struct EffectMeshMatList : IEquatable<EffectMeshMatList>, ISharedComponentData
     {
-        public List<MeshMat> m_meshMatList;
-        // int m_colorPropertyId;
+        public List<MeshMat> m_effectList;
+        public List<MeshMat> m_filterList;
 
-        public void Add(Sprite sprite, string shaderName)
+        public void AddEffect(Sprite sprite, string shaderName)
         {
-            if (m_meshMatList == null)
+            Add(m_effectList, sprite, shaderName);
+        }
+
+        public void AddFilter(Sprite sprite, string shaderName)
+        {
+            Add(m_filterList, sprite, shaderName);
+        }
+
+        void Add(List<MeshMat> list, Sprite sprite, string shaderName)
+        {
+            if (list == null)
             {
-                m_meshMatList = new List<MeshMat>();
+                list = new List<MeshMat>();
             }
 
             MeshMat newMeshMat = new MeshMat();
@@ -58,7 +68,7 @@ namespace YYHS
                 triangles = triangles
             };
 
-            m_meshMatList.Add(newMeshMat);
+            list.Add(newMeshMat);
 
         }
 

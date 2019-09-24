@@ -40,7 +40,6 @@ namespace YYHS
                 var mesh = GenerateQuadMesh(sprite);
                 var material = new Material(matShader);
                 material.mainTexture = sprite.texture;
-
                 m_meshDict.Add(list[i].name, mesh);
                 m_materialDict.Add(list[i].name, material);
 

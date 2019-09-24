@@ -4,7 +4,7 @@ namespace YYHS
 {
     public static class BattleEntityFactory
     {
-        public static Entity CreateEntity(EntityManager entityManager, ref YHFilterEffectList effectList)
+        public static Entity CreateEntity(EntityManager entityManager)
         {
             var archetype = entityManager.CreateArchetype(ComponentTypes.BattleComponentType);
             var entity = entityManager.CreateEntity(archetype);
