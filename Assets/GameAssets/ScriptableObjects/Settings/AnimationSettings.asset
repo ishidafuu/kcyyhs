@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd011744c7f62934f8cb49d31e5b51d1, type: 3}
-  m_Name: MoveSettings
+  m_Name: AnimationSettings
   m_EditorClassIdentifier: 
-  WalkSpeed: 100
-  DashSpeed: 300
-  BrakeDelta: 0
+  TransitionTime: 60
+  ToukiAnimationInterval: 60
+  HighScrollSpeed: 2
+  LowScrollSpeed: 1
+  DecideScrollSpeed: 8

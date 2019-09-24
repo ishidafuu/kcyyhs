@@ -14,7 +14,7 @@ namespace YYHS
     public class Settings : SingletonMonoBehaviour<Settings>
     {
         public CommonSettings Common;
-        public MoveSettings Move;
+        public AnimationSettings Animation;
         public DrawPosSettings DrawPos;
         public DebugSettings Debug;
         public int PixelSize { get; private set; }
@@ -25,7 +25,7 @@ namespace YYHS
         public void LoadObject()
         {
             Common = Resources.FindObjectsOfTypeAll<CommonSettings>().First() as CommonSettings;
-            Move = Resources.FindObjectsOfTypeAll<MoveSettings>().First() as MoveSettings;
+            Animation = Resources.FindObjectsOfTypeAll<AnimationSettings>().First() as AnimationSettings;
             Debug = Resources.FindObjectsOfTypeAll<DebugSettings>().First() as DebugSettings;
             DrawPos = Resources.FindObjectsOfTypeAll<DrawPosSettings>().First() as DrawPosSettings;
         }
