@@ -77,7 +77,7 @@ namespace YYHS
                     {
                         toukiMeter.m_cross = padScan.GetPressCross();
                         toukiMeter.m_value = 0;
-                        toukiMeter.m_count = 0;
+                        toukiMeter.m_animationCount = 0;
                     }
 
                     m_toukiMeters[i] = toukiMeter;

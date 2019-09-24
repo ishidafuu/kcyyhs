@@ -31,7 +31,7 @@ namespace YYHS
 
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             // DrawFilterEffect(filterEffects);
-            DrawShaderGraphTest();
+            // DrawShaderGraphTest();
             filterEffects.Dispose();
         }
 

@@ -35,22 +35,27 @@ namespace YYHS
             EnumAnimationName animName = seq.m_animation.m_animName;
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
 
+            seq.m_animation.m_count++;
+
             // 最初の入力から最初のアニメ開始もここで行う
             if (seq.m_isTransition)
             {
-                seq.m_isTransition = false;
-                if (seq.m_isLastSideA)
+                if (seq.m_animation.m_count > Settings.Instance.Animation.TransitionTime)
                 {
-                    NextStep(ref seq, ref seq.m_sideA);
-                }
-                else
-                {
-                    NextStep(ref seq, ref seq.m_sideB);
+                    seq.m_isTransition = false;
+                    seq.m_animation.m_count = 0;
+                    if (seq.m_isLastSideA)
+                    {
+                        NextStep(ref seq, ref seq.m_sideA);
+                    }
+                    else
+                    {
+                        NextStep(ref seq, ref seq.m_sideB);
+                    }
                 }
             }
             else
             {
-                seq.m_animation.m_count++;
 
                 if (seq.m_animation.m_count >= anim.m_length)
                 {

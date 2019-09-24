@@ -9,6 +9,6 @@ namespace YYHS
         public int m_bgScroll;
         public float m_bgScrollTextureUL;
         public float m_bgScrollTextureUR;
-        public int m_count;
+        public int m_animationCount;
     }
 }

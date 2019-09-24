@@ -28,13 +28,13 @@ namespace YYHS
         {
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
-            if (seq.m_isPlay)
+            if (seq.m_isPlay && !seq.m_isTransition)
                 return;
 
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var sideInfos = m_query.ToComponentDataArray<SideInfo>(Allocator.TempJob);
 
-            // DrawChara(toukiMeters, sideInfos);
+            DrawChara(toukiMeters, sideInfos);
             DrawSpritBackGround(toukiMeters);
             toukiMeters.Dispose();
             sideInfos.Dispose();
@@ -58,18 +58,18 @@ namespace YYHS
 
                 if (toukiMeter.m_cross == EnumCrossType.Right && sideInfo.m_isSideA
                  || toukiMeter.m_cross == EnumCrossType.Left && !sideInfo.m_isSideA
-                 || toukiMeter.m_cross == EnumCrossType.Down)
+                 || toukiMeter.m_cross == EnumCrossType.Up)
                 {
                     animName = EnumAnimationName._Stand01;
                 }
                 else if (toukiMeter.m_cross == EnumCrossType.Right && !sideInfo.m_isSideA
                  || toukiMeter.m_cross == EnumCrossType.Left && sideInfo.m_isSideA
-                 || toukiMeter.m_cross == EnumCrossType.Up)
+                 || toukiMeter.m_cross == EnumCrossType.Down)
                 {
                     animName = EnumAnimationName._Stand02;
                 }
 
-                int count = toukiMeter.m_count;
+                int count = toukiMeter.m_animationCount;
                 YHAnimationUtils.DrawYHAnimation(animName, charaNo, count, basePosX, sideInfo.m_isSideA);
             }
         }
