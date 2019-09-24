@@ -24,7 +24,8 @@ namespace YYHS
         public static YHCharaAnimList m_yhCharaAnimList;
 
         public static readonly int EffectCount = 14;
-        public static readonly int FillterCount = 1;
+        public static readonly int ScreenFillterCount = 1;
+        public static readonly int BGFillterCount = 0;
         public static int m_testShaderNo = EffectCount - 1;
 
 
@@ -43,9 +44,14 @@ namespace YYHS
                 m_effectMeshMatList.AddEffect(sprite, GetEffectShaderName(i));
             }
 
-            for (int i = 0; i < FillterCount; i++)
+            for (int i = 0; i < ScreenFillterCount; i++)
             {
-                m_effectMeshMatList.AddFilter(sprite, GetFillterShaderName(i));
+                m_effectMeshMatList.AddScreenFilter(sprite, GetScreenFillterShaderName(i));
+            }
+
+            for (int i = 0; i < BGFillterCount; i++)
+            {
+                m_effectMeshMatList.AddBGFilter(sprite, GetBGFillterShaderName(i));
             }
             //GetEffectSpritePath(EnumShaderBaseTexture.BigQuad)
 
@@ -59,7 +65,7 @@ namespace YYHS
         private static Sprite CreateFilterSprite()
         {
             const int WIDTH = 256;
-            const int HEIGHT = 128;
+            const int HEIGHT = 256;
             const float PIVOT = 0.5f;
             const int PIXEL_PER_UNIT = 1;
             Texture2D texture2D = new Texture2D(WIDTH, HEIGHT);
@@ -71,6 +77,7 @@ namespace YYHS
         private static string GetEffectSpritePath(EnumShaderBaseTexture effectNo) => string.Format(PathSettings.EffectSprite, ((int)effectNo).ToString("d2"));
         private static string GetEffectMaterialPath(int effectNo) => string.Format(PathSettings.EffectMaterial, effectNo.ToString("d2"));
         private static string GetEffectShaderName(int effectNo) => string.Format(PathSettings.EffectShader, effectNo.ToString("d2"));
-        private static string GetFillterShaderName(int fillterNo) => string.Format(PathSettings.FillterShader, fillterNo.ToString("d2"));
+        private static string GetScreenFillterShaderName(int fillterNo) => string.Format(PathSettings.ScreenFillterShader, fillterNo.ToString("d2"));
+        private static string GetBGFillterShaderName(int fillterNo) => string.Format(PathSettings.BGFillterShader, fillterNo.ToString("d2"));
     }
 }

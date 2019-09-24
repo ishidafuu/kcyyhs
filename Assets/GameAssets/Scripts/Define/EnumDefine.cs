@@ -212,7 +212,8 @@ namespace YYHS
     public enum EnumEffectType
     {
         Effect,
-        Fillter,
+        ScreenFillter,
+        BGFillter,
     }
 
     public enum EnumFillter

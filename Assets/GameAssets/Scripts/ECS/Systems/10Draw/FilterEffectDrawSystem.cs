@@ -32,6 +32,7 @@ namespace YYHS
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             // DrawFilterEffect(filterEffects);
             // DrawShaderGraphTest();
+            DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
         }
 
@@ -45,6 +46,57 @@ namespace YYHS
 
             Matrix4x4 matrixes = Matrix4x4.TRS(
                 new Vector3(0, Settings.Instance.DrawPos.BgScrollY, layer),
+                m_quaternion, Vector3.one);
+
+            Graphics.DrawMesh(mesh, matrixes, mat, 0);
+        }
+
+        private void DrawFilterEffect(NativeArray<FilterEffect> filterEffects)
+        {
+            int BgWidthHalf = (Settings.Instance.DrawPos.BgWidth >> 1);
+            int BgHeightHalf = (Settings.Instance.DrawPos.BgHeight >> 1);
+            for (int i = 0; i < filterEffects.Length; i++)
+            {
+                var filterEffect = filterEffects[i];
+                if (!filterEffect.m_isActive)
+                    continue;
+                MeshMat meshMat;
+                EnumDrawLayer layer = EnumDrawLayer.OverChara;
+
+                Debug.Log("filterEffect.m_effectIndex" + filterEffect.m_effectIndex);
+                switch (filterEffect.m_effectType)
+                {
+                    case EnumEffectType.Effect:
+                        meshMat = Shared.m_effectMeshMatList.m_effectList[filterEffect.m_effectIndex];
+                        break;
+                    case EnumEffectType.ScreenFillter:
+                        meshMat = Shared.m_effectMeshMatList.m_screenFilterList[filterEffect.m_effectIndex];
+                        break;
+                    case EnumEffectType.BGFillter:
+                        layer = EnumDrawLayer.OverBackGround;
+                        meshMat = Shared.m_effectMeshMatList.m_bgFilterList[filterEffect.m_effectIndex];
+                        break;
+                    default:
+                        return;
+                }
+
+                Mesh mesh = meshMat.m_mesh;
+                Material mat = meshMat.m_material;
+
+                Matrix4x4 matrixes = Matrix4x4.TRS(
+                    new Vector3(0, Settings.Instance.DrawPos.BgScrollY, (int)layer),
+                    m_quaternion, Vector3.one);
+
+                Graphics.DrawMesh(mesh, matrixes, mat, 0);
+            }
+        }
+
+        private void Draw(Mesh mesh, Material mat, YHFilterEffect data, int posX, int baseY, int y, int layer)
+        {
+            int posY = baseY + (data.m_height * y);
+
+            Matrix4x4 matrixes = Matrix4x4.TRS(
+                new Vector3(posX, posY + Settings.Instance.DrawPos.BgScrollY, layer),
                 m_quaternion, Vector3.one);
 
             Graphics.DrawMesh(mesh, matrixes, mat, 0);

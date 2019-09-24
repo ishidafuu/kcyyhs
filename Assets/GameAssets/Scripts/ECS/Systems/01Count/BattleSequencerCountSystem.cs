@@ -85,12 +85,10 @@ namespace YYHS
                             ShiftNextStep(step, ref seq, ref seq.m_sideB, ref seq.m_sideA);
                         }
 
-                        // EnumBattleSequenceState.Endに切り替わるタイミングでアニメ処理は入っているのでここで行わない
-                        if (seq.m_seqState == EnumBattleSequenceState.Play)
-                        {
-                            // seqが更新された直後にエフェクトの発生を行う
-                            UpdateFilterEffect(seq);
-                        }
+
+                        // seqが更新された直後にエフェクトの発生を行う
+                        UpdateFilterEffect(seq);
+
                     }
                     // 切り替えフィルタ表示
                     else if (seq.m_animation.m_count == anim.m_length - 30)
@@ -108,7 +106,7 @@ namespace YYHS
                                     continue;
 
                                 effect.m_isActive = true;
-                                effect.m_effectType = EnumEffectType.Fillter;
+                                effect.m_effectType = EnumEffectType.ScreenFillter;
                                 effect.m_effectIndex = (int)EnumFillter.EndBattleSequence;
                                 effect.m_count = 0;
                                 filterEffects[i] = effect;
@@ -196,6 +194,7 @@ namespace YYHS
 
                         effect.m_isActive = true;
                         effect.m_effectIndex = 0;//TODO:Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
+                        effect.m_effectType = EnumEffectType.Effect;
                         effect.m_count = 0;
                         filterEffects[i] = effect;
 
@@ -431,6 +430,7 @@ namespace YYHS
         private void EndAnimation(ref BattleSequencer seq)
         {
             seq.m_seqState = EnumBattleSequenceState.Idle;
+            seq.m_animation.m_count = 0;
             seq.m_sideA.m_animStep = EnumAnimationStep.Sleep;
             seq.m_sideB.m_animStep = EnumAnimationStep.Sleep;
         }

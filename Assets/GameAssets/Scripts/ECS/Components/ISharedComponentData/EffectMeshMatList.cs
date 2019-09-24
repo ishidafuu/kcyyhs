@@ -16,24 +16,39 @@ namespace YYHS
     public struct EffectMeshMatList : IEquatable<EffectMeshMatList>, ISharedComponentData
     {
         public List<MeshMat> m_effectList;
-        public List<MeshMat> m_filterList;
+        public List<MeshMat> m_screenFilterList;
+        public List<MeshMat> m_bgFilterList;
 
         public void AddEffect(Sprite sprite, string shaderName)
         {
+            if (m_effectList == null)
+            {
+                m_effectList = new List<MeshMat>();
+            }
             Add(m_effectList, sprite, shaderName);
         }
 
-        public void AddFilter(Sprite sprite, string shaderName)
+        public void AddScreenFilter(Sprite sprite, string shaderName)
         {
-            Add(m_filterList, sprite, shaderName);
+            if (m_screenFilterList == null)
+            {
+                m_screenFilterList = new List<MeshMat>();
+            }
+            Add(m_screenFilterList, sprite, shaderName);
+        }
+
+        public void AddBGFilter(Sprite sprite, string shaderName)
+        {
+            if (m_bgFilterList == null)
+            {
+                m_bgFilterList = new List<MeshMat>();
+            }
+            Add(m_bgFilterList, sprite, shaderName);
         }
 
         void Add(List<MeshMat> list, Sprite sprite, string shaderName)
         {
-            if (list == null)
-            {
-                list = new List<MeshMat>();
-            }
+
 
             MeshMat newMeshMat = new MeshMat();
 
