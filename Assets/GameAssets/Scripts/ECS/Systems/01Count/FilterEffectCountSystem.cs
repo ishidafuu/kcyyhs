@@ -47,9 +47,40 @@ namespace YYHS
             inputDeps.Complete();
             m_query.CopyFromComponentDataArray(filterEffects);
 
+            UpdateShaderFrame(filterEffects);
+
             filterEffects.Dispose();
             // yhFilterEffects.Dispose();
             return inputDeps;
+        }
+
+        private static void UpdateShaderFrame(NativeArray<FilterEffect> filterEffects)
+        {
+            for (int i = 0; i < filterEffects.Length; i++)
+            {
+                var item = filterEffects[i];
+
+                if (!item.m_isActive)
+                    continue;
+
+                MeshMat meshMat;
+                switch (item.m_effectType)
+                {
+                    case EnumEffectType.Effect:
+                        meshMat = Shared.m_effectMeshMatList.m_effectList[item.m_effectIndex];
+                        break;
+                    case EnumEffectType.ScreenFillter:
+                        meshMat = Shared.m_effectMeshMatList.m_screenFilterList[item.m_effectIndex];
+                        break;
+                    case EnumEffectType.BGFillter:
+                        meshMat = Shared.m_effectMeshMatList.m_bgFilterList[item.m_effectIndex];
+                        break;
+                    default:
+                        continue;
+                }
+
+                meshMat.m_material.SetInt("_Frame", item.m_count);
+            }
         }
 
         // [BurstCompileAttribute]
