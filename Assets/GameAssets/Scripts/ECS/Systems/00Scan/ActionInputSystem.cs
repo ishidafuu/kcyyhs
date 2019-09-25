@@ -10,6 +10,7 @@ using UnityEngine;
 namespace YYHS
 {
     [UpdateInGroup(typeof(ScanGroup))]
+    [UpdateAfter(typeof(ToukiMeterInputSystem))]
     public class ActionInputSystem : ComponentSystem
     {
         EntityQuery m_queryChara;
@@ -58,8 +59,8 @@ namespace YYHS
 
                 // TODO:アイテム使用が入る場合、０でも発動する
                 // TODO:一時的に０でも技出るように
-                // if (toukiMeter.m_value == 0)
-                //     continue;
+                if (toukiMeter.m_value == 0)
+                    continue;
 
                 bool isStartAnim = seq.m_seqState == EnumBattleSequenceState.Idle;
 

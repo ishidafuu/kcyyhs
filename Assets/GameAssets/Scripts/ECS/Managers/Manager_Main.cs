@@ -58,8 +58,8 @@ namespace YYHS
             CountGroup countGroup = world.GetOrCreateSystem<CountGroup>();
             simulationSystemGroup.AddSystemToUpdateList(countGroup);
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ToukiMeterCountSystem>());
-            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
+            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
 
             PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<SpritBackGroundDrawSystem>());
