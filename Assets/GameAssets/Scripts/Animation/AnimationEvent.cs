@@ -12,9 +12,35 @@ namespace YYHS
             // 効果音再生
         }
 
-        public void EventEffect(string effectName)
+        public void EventEffect(int effectNo)
         {
             // 汎用エフェクト再生（無限）
+        }
+
+        public void EventEffectArg(string arg)
+        {
+            // 汎用エフェクト再生（無限）
+        }
+
+        public void EventScreenFillter(int fillterNo)
+        {
+            // フィルター再生（無限）
+        }
+
+        public void EventScreenFillterArg(string arg)
+        {
+            // フィルター再生（無限）
+        }
+
+
+        public void EventBGFillter(int fillterNo)
+        {
+            // フィルター再生（無限）
+        }
+
+        public void EventBGFillterArg(string arg)
+        {
+            // フィルター再生（無限）
         }
 
         public void EventFlash()

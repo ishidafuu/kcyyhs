@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd011744c7f62934f8cb49d31e5b51d1, type: 3}
   m_Name: AnimationSettings
   m_EditorClassIdentifier: 
-  TransitionTime: 60
+  StartTransitionTime: 60
+  EndTransitionTime: 30
   ToukiAnimationInterval: 60
   HighScrollSpeed: 2
   LowScrollSpeed: 1

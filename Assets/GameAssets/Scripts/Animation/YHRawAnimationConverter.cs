@@ -178,7 +178,7 @@ namespace YYHS
                 {
                     Debug.LogError($"Not Found FunctionName:{item.functionName}");
                 }
-
+                // Debug.Log(functionName);
                 YHFrameEvent newEvent = new YHFrameEvent()
                 {
                     m_frame = TimeToFrame(item.time),
