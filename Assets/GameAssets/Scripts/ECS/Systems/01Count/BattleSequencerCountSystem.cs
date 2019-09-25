@@ -49,11 +49,12 @@ namespace YYHS
 
             seq.m_animation.m_count++;
 
+            bool isEndTransitionFilter = false;
             // 最初の入力から最初のアニメ開始もここで行う
             switch (seq.m_seqState)
             {
                 case EnumBattleSequenceState.Start:
-                    if (seq.m_animation.m_count > Settings.Instance.Animation.TransitionTime)
+                    if (seq.m_animation.m_count > Settings.Instance.Animation.StartTransitionTime)
                     {
                         seq.m_seqState = EnumBattleSequenceState.Play;
                         seq.m_animation.m_count = 0;
@@ -66,7 +67,7 @@ namespace YYHS
                             NextStep(ref seq, ref seq.m_sideB);
                         }
                         // seqが更新された直後にエフェクトの発生を行う
-                        UpdateFilterEffect(seq);
+                        UpdateFilterEffect(seq, isEndTransitionFilter);
                     }
                     break;
                 case EnumBattleSequenceState.Play:
@@ -84,39 +85,20 @@ namespace YYHS
                             NextStepType step = SelectNextStep(ref seq, ref seq.m_sideB, ref seq.m_sideA);
                             ShiftNextStep(step, ref seq, ref seq.m_sideB, ref seq.m_sideA);
                         }
-
-
-                        // seqが更新された直後にエフェクトの発生を行う
-                        UpdateFilterEffect(seq);
-
                     }
                     // 切り替えフィルタ表示
-                    else if (seq.m_animation.m_count == anim.m_length - 30)
+                    else if (seq.m_animation.m_count == anim.m_length - Settings.Instance.Animation.EndTransitionTime)
                     {
                         NextStepType step = SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
 
                         if (step == NextStepType.EndAnimation)
                         {
-                            NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
-                            for (int i = 0; i < filterEffects.Length; i++)
-                            {
-                                FilterEffect effect = filterEffects[i];
-
-                                if (effect.m_isActive)
-                                    continue;
-
-                                effect.m_isActive = true;
-                                effect.m_effectType = EnumEffectType.ScreenFillter;
-                                effect.m_effectIndex = (int)EnumFillter.EndBattleSequence;
-                                effect.m_count = 0;
-                                filterEffects[i] = effect;
-                                break;
-                            }
-
-                            m_query.CopyFromComponentDataArray(filterEffects);
-                            filterEffects.Dispose();
+                            isEndTransitionFilter = true;
                         }
                     }
+
+                    // seqが更新された直後にエフェクトの発生を行う
+                    UpdateFilterEffect(seq, isEndTransitionFilter);
 
                     break;
                     // case EnumBattleSequenceState.End:
@@ -162,7 +144,7 @@ namespace YYHS
             }
         }
 
-        private void UpdateFilterEffect(BattleSequencer seq)
+        private void UpdateFilterEffect(BattleSequencer seq, bool isEndTransitionFilter)
         {
             bool isEffectUpdate = false;
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
@@ -183,25 +165,41 @@ namespace YYHS
                 if (item.m_frame != seq.m_animation.m_count)
                     continue;
 
-                if (item.m_functionName == EnumEventFunctionName.EventEffect)
+
+                switch (item.m_functionName)
                 {
-                    for (int i = 0; i < filterEffects.Length; i++)
-                    {
-                        FilterEffect effect = filterEffects[i];
-
-                        if (effect.m_isActive)
-                            continue;
-
-                        effect.m_isActive = true;
-                        effect.m_effectIndex = 0;//TODO:Shared.m_yhFilterEffectList.GetEffectIndex(item.m_stringParameter);
-                        effect.m_effectType = EnumEffectType.Effect;
-                        effect.m_count = 0;
-                        filterEffects[i] = effect;
-
+                    case EnumEventFunctionName.EventEffect:
+                        SetEvent(ref filterEffects, item.m_intParameter, EnumEffectType.Effect);
                         isEffectUpdate = true;
-                        // 複数ある可能性があるのでBreakはしない
-                    }
+                        break;
+                    case EnumEventFunctionName.EventScreenFillter:
+                        SetEvent(ref filterEffects, item.m_intParameter, EnumEffectType.ScreenFillter);
+                        isEffectUpdate = true;
+                        break;
+                    case EnumEventFunctionName.EventBGFillter:
+                        SetEvent(ref filterEffects, item.m_intParameter, EnumEffectType.BGFillter);
+                        isEffectUpdate = true;
+                        break;
                 }
+            }
+
+            if (isEndTransitionFilter)
+            {
+                for (int i = 0; i < filterEffects.Length; i++)
+                {
+                    FilterEffect effect = filterEffects[i];
+
+                    if (effect.m_isActive)
+                        continue;
+
+                    effect.m_isActive = true;
+                    effect.m_effectType = EnumEffectType.ScreenFillter;
+                    effect.m_effectIndex = (int)EnumFillter.EndBattleSequence;
+                    effect.m_count = 0;
+                    filterEffects[i] = effect;
+                    break;
+                }
+                isEffectUpdate = true;
             }
 
 
@@ -210,6 +208,25 @@ namespace YYHS
                 m_query.CopyFromComponentDataArray(filterEffects);
             }
             filterEffects.Dispose();
+        }
+
+        private static void SetEvent(ref NativeArray<FilterEffect> filterEffects,
+        int effectIndex, EnumEffectType effectType)
+        {
+            for (int i = 0; i < filterEffects.Length; i++)
+            {
+                FilterEffect effect = filterEffects[i];
+
+                if (effect.m_isActive)
+                    continue;
+
+                effect.m_isActive = true;
+                effect.m_effectIndex = effectIndex;
+                effect.m_effectType = effectType;
+                effect.m_count = 0;
+                filterEffects[i] = effect;
+                // 複数ある可能性があるのでBreakはしない
+            }
         }
 
         private static void ResetEffect(ref NativeArray<FilterEffect> filterEffects)
