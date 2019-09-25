@@ -33,6 +33,8 @@ namespace YYHS
                 Material mat = null;
                 int layer = 0;
 
+                bool isBG = false;
+
                 if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.m_name))
                 {
                     mesh = Shared.m_charaMeshMat.m_meshDict[item.m_name];
@@ -50,6 +52,7 @@ namespace YYHS
                     mesh = Shared.m_bgFrameMeshMat.m_meshDict[item.m_name];
                     mat = Shared.m_bgFrameMeshMat.m_materialDict[item.m_name];
                     layer = (int)EnumDrawLayer.BackGround;
+                    isBG = true;
                 }
                 else
                 {
@@ -60,13 +63,34 @@ namespace YYHS
                 Vector3 pos = YHAnimationUtils.EvalutePos(item, count, layer, basePosX, isSideA);
                 Quaternion q = YHAnimationUtils.EvaluteQuaternion(item, count, isSideA);
                 Vector3 scale = YHAnimationUtils.EvaluteScale(item, count);
+                Draw(mesh, mat, q, scale, pos);
 
-                Matrix4x4 matrixes = Matrix4x4.TRS(pos, q, scale);
-                // Debug.Log(item.m_name);
-                Graphics.DrawMesh(mesh, matrixes, mat, 0);
+                // 不足背景追加描画
+                if (isBG && pos.x != 0)
+                {
+                    int BgWidthHalf = Settings.Instance.DrawPos.BgWidth >> 1;
+                    int sizeHalf = (int)(mesh.bounds.size.x * 0.5f);
+                    if ((pos.x + BgWidthHalf - sizeHalf) > 0)
+                    {
+                        Vector3 posL = pos;
+                        posL.x -= mesh.bounds.size.x;
+                        Draw(mesh, mat, q, scale, posL);
+                    }
+                    else if ((pos.x + sizeHalf) < BgWidthHalf)
+                    {
+                        Vector3 posR = pos;
+                        posR.x += mesh.bounds.size.x;
+                        Draw(mesh, mat, q, scale, posR);
+                    }
+                }
             }
         }
 
+        private static void Draw(Mesh mesh, Material mat, Quaternion q, Vector3 scale, Vector3 pos)
+        {
+            Matrix4x4 matrixes = Matrix4x4.TRS(pos, q, scale);
+            Graphics.DrawMesh(mesh, matrixes, mat, 0);
+        }
 
         public static Vector3 EvalutePos(YHAnimationParts item, int count, int layer, int basePosX, bool isSideA)
         {

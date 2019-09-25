@@ -53,8 +53,6 @@ namespace YYHS
 
         private void DrawFilterEffect(NativeArray<FilterEffect> filterEffects)
         {
-            int BgWidthHalf = (Settings.Instance.DrawPos.BgWidth >> 1);
-            int BgHeightHalf = (Settings.Instance.DrawPos.BgHeight >> 1);
             for (int i = 0; i < filterEffects.Length; i++)
             {
                 var filterEffect = filterEffects[i];
@@ -63,7 +61,6 @@ namespace YYHS
                 MeshMat meshMat;
                 EnumDrawLayer layer = EnumDrawLayer.OverChara;
 
-                Debug.Log("filterEffect.m_effectIndex" + filterEffect.m_effectIndex);
                 switch (filterEffect.m_effectType)
                 {
                     case EnumEffectType.Effect:
