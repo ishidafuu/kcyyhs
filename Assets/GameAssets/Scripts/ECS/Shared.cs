@@ -24,7 +24,7 @@ namespace YYHS
         public static YHCharaAnimList m_yhCharaAnimList;
 
         public static readonly int EffectCount = 14;
-        public static readonly int ScreenFillterCount = 1;
+        public static readonly int ScreenFillterCount = 2;
         public static readonly int BGFillterCount = 1;
         public static int m_testShaderNo = EffectCount - 1;
 

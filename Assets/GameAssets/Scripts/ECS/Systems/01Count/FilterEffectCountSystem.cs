@@ -28,19 +28,9 @@ namespace YYHS
 
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
 
-            // NativeArray<YHFilterEffect> yhFilterEffects
-            //     = new NativeArray<YHFilterEffect>(Settings.Instance.Common.FilterEffectCount, Allocator.TempJob);
-
-            // for (int i = 0; i < Shared.m_yhFilterEffectList.m_effects.Count; i++)
-            // {
-            //     yhFilterEffects[i] = Shared.m_yhFilterEffectList.m_effects[i].m_data;
-            // }
-
-            // var uv = Shared.m_yhFilterEffectList.m_effects[0];
             var job = new CountJob()
             {
                 m_filterEffects = filterEffects,
-                // m_yhFilterEffects = yhFilterEffects,
             };
 
             inputDeps = job.Schedule(inputDeps);
@@ -50,7 +40,6 @@ namespace YYHS
             UpdateShaderFrame(filterEffects);
 
             filterEffects.Dispose();
-            // yhFilterEffects.Dispose();
             return inputDeps;
         }
 

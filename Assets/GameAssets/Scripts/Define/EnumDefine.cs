@@ -224,6 +224,7 @@ namespace YYHS
     public enum EnumFillter
     {
         EndBattleSequence,
+        SwitchSplitView,
     }
 
 }

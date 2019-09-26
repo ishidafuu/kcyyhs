@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AnimationSettings
   m_EditorClassIdentifier: 
   StartTransitionTime: 60
-  EndTransitionTime: 30
+  EndTransitionTime: 40
   ToukiAnimationInterval: 60
   HighScrollSpeed: 2
   LowScrollSpeed: 1
