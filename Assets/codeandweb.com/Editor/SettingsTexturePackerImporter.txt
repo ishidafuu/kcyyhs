@@ -3,12 +3,15 @@ importPivots: 1
 tpsheetFileNames:
 - Assets/GameAssets/Resources/Sprites/BackGround/bg00.tpsheet
 - Assets/GameAssets/Resources/Sprites/Character/chara00.tpsheet
+- Assets/GameAssets/Resources/Sprites/Character/chara01.tpsheet
 - Assets/GameAssets/Resources/Sprites/common.tpsheet
 textureFileNames:
 - Assets/GameAssets/Resources/Sprites/BackGround/bg00.png
 - Assets/GameAssets/Resources/Sprites/Character/chara00.png
+- Assets/GameAssets/Resources/Sprites/Character/chara01.png
 - Assets/GameAssets/Resources/Sprites/common.png
 normalmapFileNames:
+- 
 - 
 - 
 - 
