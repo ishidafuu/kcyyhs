@@ -14,7 +14,7 @@ namespace YYHS
     public static class Shared
     {
         // SharedComponentData
-        public static MeshMatList m_charaMeshMat;
+        public static MeshMatList[] m_charaMeshMat = new MeshMatList[2];
         public static MeshMatList m_bgFrameMeshMat;
         public static MeshMatList m_commonMeshMat;
 
@@ -23,7 +23,7 @@ namespace YYHS
         // public static YHFilterEffectList m_yhFilterEffectList;
         public static YHCharaAnimList m_yhCharaAnimList;
 
-        public static readonly int EffectCount = 14;
+        public static readonly int EffectCount = 16;
         public static readonly int ScreenFillterCount = 2;
         public static readonly int BGFillterCount = 1;
         public static int m_testShaderNo = EffectCount - 1;
@@ -33,7 +33,8 @@ namespace YYHS
 
         public static void ReadySharedComponentData()
         {
-            m_charaMeshMat = new MeshMatList(GetCharaPath(0), DefaultShader);
+            m_charaMeshMat[0] = new MeshMatList(GetCharaPath(0), DefaultShader);
+            m_charaMeshMat[1] = new MeshMatList(GetCharaPath(1), DefaultShader);
             m_bgFrameMeshMat = new MeshMatList(GetBackGroundPath(0), DefaultShader);
             m_commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
 

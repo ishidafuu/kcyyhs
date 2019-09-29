@@ -32,13 +32,16 @@ namespace YYHS
                 Mesh mesh = null;
                 Material mat = null;
                 int layer = 0;
+                int sideNo = (isSideA)
+                ? 0
+                : 1;
 
                 bool isBG = false;
 
-                if (Shared.m_charaMeshMat.m_materialDict.ContainsKey(item.m_name))
+                if (Shared.m_charaMeshMat[sideNo].m_materialDict.ContainsKey(item.m_name))
                 {
-                    mesh = Shared.m_charaMeshMat.m_meshDict[item.m_name];
-                    mat = Shared.m_charaMeshMat.m_materialDict[item.m_name];
+                    mesh = Shared.m_charaMeshMat[sideNo].m_meshDict[item.m_name];
+                    mat = Shared.m_charaMeshMat[sideNo].m_materialDict[item.m_name];
                     layer = (int)EnumDrawLayer.Chara;
                 }
                 else if (Shared.m_commonMeshMat.m_materialDict.ContainsKey(item.m_name))

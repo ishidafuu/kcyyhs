@@ -50,7 +50,8 @@ namespace YYHS
 
                 int charaNo = sideInfo.m_charaNo;
 
-                int basePosX = (i == 0)
+                bool isSideA = sideInfo.m_isSideA;
+                int basePosX = isSideA
                     ? -Settings.Instance.DrawPos.BgScrollX
                     : +Settings.Instance.DrawPos.BgScrollX;
 

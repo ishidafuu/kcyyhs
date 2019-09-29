@@ -17,7 +17,7 @@ namespace YYHS
 
             entityManager.SetComponentData(entity, new SideInfo
             {
-                m_charaNo = 0,
+                m_charaNo = i,
                 m_isSideA = (i == 0),
             });
 

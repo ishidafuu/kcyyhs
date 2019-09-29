@@ -26,11 +26,11 @@ namespace YYHS
             }
         }
 
-        public YHAnimation GetAnim(int charaNo, EnumAnimationName animName)
+        public YHAnimation GetAnim(int sideNo, EnumAnimationName animName)
         {
-            if ((int)animName >= m_charaAnimList[charaNo].animations.Count)
-                Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[charaNo].animations.Count} animName:{(int)animName}({animName})");
-            return m_charaAnimList[charaNo].animations[(int)animName];
+            if ((int)animName >= m_charaAnimList[sideNo].animations.Count)
+                Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[sideNo].animations.Count} animName:{(int)animName}({animName})");
+            return m_charaAnimList[sideNo].animations[(int)animName];
         }
 
         public bool Equals(YHCharaAnimList obj)

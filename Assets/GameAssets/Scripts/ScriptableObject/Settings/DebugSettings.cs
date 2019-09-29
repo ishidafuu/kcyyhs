@@ -11,19 +11,7 @@ namespace YYHS
     [CreateAssetMenu(menuName = "YYHS/Settings/DebugSettings", fileName = "DebugSettings")]
     public sealed class DebugSettings : ScriptableObject
     {
-        // // デバッグ用弾発射
-        // [Serializable]
-        // public struct SpawnBulletData
-        // {
-        //     [SerializeField] public Vector2 CreatePosition;
-        //     [SerializeField] public float Angle;
-        //     [SerializeField] public float Speed;
-        //     [SerializeField] public float Lifespan;
-        // }
-
-        // [Header("【Spawn Enemy】")]
-        // [SerializeField] public BarrageType CreateBarrageType;
-        // [SerializeField] public Vector2 CreatePosition;
+        public int ShaderFrame;
     }
 }
 

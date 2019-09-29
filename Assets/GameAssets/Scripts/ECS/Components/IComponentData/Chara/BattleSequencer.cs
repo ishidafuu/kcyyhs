@@ -31,9 +31,9 @@ namespace YYHS
 
     public struct BattleAnim
     {
+        public bool m_isSideA;
         public int m_charaNo;
         public EnumAnimationName m_animName;
         public int m_count;
-        public bool m_isSideA;
     }
 }

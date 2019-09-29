@@ -31,7 +31,7 @@ namespace YYHS
 
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             // DrawFilterEffect(filterEffects);
-            // DrawShaderGraphTest();
+            DrawShaderGraphTest();
             DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
         }
@@ -47,6 +47,8 @@ namespace YYHS
             Matrix4x4 matrixes = Matrix4x4.TRS(
                 new Vector3(0, Settings.Instance.DrawPos.BgScrollY, layer),
                 m_quaternion, Vector3.one);
+
+            mat.SetInt("_Frame", Settings.Instance.Debug.ShaderFrame);
 
             Graphics.DrawMesh(mesh, matrixes, mat, 0);
         }
