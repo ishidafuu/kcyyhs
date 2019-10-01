@@ -269,6 +269,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">frame_line.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>1,24,1,48</rect>
+                <key>scale9Paddings</key>
+                <rect>1,24,1,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">frame_top.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -378,6 +391,7 @@
             <filename>meter02.png</filename>
             <filename>meter03.png</filename>
             <filename>meter04.png</filename>
+            <filename>frame_line.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:bdade6aa5c8c369053e9f2b15cac31cb:9db506455b4b6f66cdbf2530b8cb8c37:0f89ce481a20e4a5527810f3d83d1c61$
+# $TexturePacker:SmartUpdate:cfdd8d69a95231b691171b84c0606357:1ae2b44d4c2042b7be38dcf82f790e74:0f89ce481a20e4a5527810f3d83d1c61$
 #
 :format=40300
 :texture=common.png
@@ -29,12 +29,13 @@ fire00;489;1007;16;16; 0.5;0.5; 0;0;0;0
 fire01;489;989;16;16; 0.5;0.5; 0;0;0;0
 fire02;489;971;16;16; 0.5;0.5; 0;0;0;0
 frame_bottom;1;909;256;114; 0.5;0.5; 0;0;0;0
+frame_line;507;927;2;96; 0.5;0.5; 0;0;0;0
 frame_top;1;103;256;20; 0.5;0.5; 0;0;0;0
 meter00;259;1019;96;4; 0.5;0.5; 0;0;0;0
 meter01;357;1019;96;4; 0.5;0.5; 0;0;0;0
 meter02;259;1013;96;4; 0.5;0.5; 0;0;0;0
 meter03;259;1007;64;4; 0.5;0.5; 0;0;0;0
-meter04;507;1013;2;10; 0.5;0.5; 0;0;0;0
+meter04;499;929;2;10; 0.5;0.5; 0;0;0;0
 signal00;489;961;16;8; 0.5;0.5; 0;0;0;0
 signal01;489;951;16;8; 0.5;0.5; 0;0;0;0
 signal02;489;941;16;8; 0.5;0.5; 0;0;0;0

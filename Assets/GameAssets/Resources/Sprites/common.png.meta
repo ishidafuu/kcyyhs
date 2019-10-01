@@ -347,6 +347,9 @@ TextureImporter:
   - first:
       213: 3610361176271150688
     second: cm_u_effect03_01
+  - first:
+      213: 5954873061768168511
+    second: frame_line
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -779,6 +782,27 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: frame_line
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 927
+        width: 2
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 5954873061768168511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: frame_top
       rect:
         serializedVersion: 2
@@ -887,8 +911,8 @@ TextureImporter:
       name: meter04
       rect:
         serializedVersion: 2
-        x: 507
-        y: 1013
+        x: 499
+        y: 929
         width: 2
         height: 10
       alignment: 0
