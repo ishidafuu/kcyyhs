@@ -82,6 +82,7 @@ namespace YYHS
         fire01,
         fire02,
         frame_bottom,
+        frame_line,
         frame_top,
         meter,
         meter00,
