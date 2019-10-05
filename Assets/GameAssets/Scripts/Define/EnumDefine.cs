@@ -229,6 +229,7 @@ namespace YYHS
         Touki,
         Life,
         Balance,
+        Rei,
     }
 
 

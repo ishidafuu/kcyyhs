@@ -16,5 +16,6 @@ namespace YYHS
         public int ToukiMax;
         public int LifeMax;
         public int BalanceMax;
+        public int ReiMax;
     }
 }

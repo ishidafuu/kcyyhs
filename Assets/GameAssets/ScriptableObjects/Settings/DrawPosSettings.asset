@@ -23,5 +23,8 @@ MonoBehaviour:
   LifeMeterY: 100
   BalanceMeterX: -88
   BalanceMeterY: -52
+  ReiMeterX: 0
+  ReiMeterY: 0
+  ReiSeparate: 5
   FrameTopY: 103
   FrameBottomY: -55

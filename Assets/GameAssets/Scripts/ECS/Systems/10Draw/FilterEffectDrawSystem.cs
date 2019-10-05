@@ -16,6 +16,7 @@ namespace YYHS
         EntityQuery m_query;
         Quaternion m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
 
+
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(

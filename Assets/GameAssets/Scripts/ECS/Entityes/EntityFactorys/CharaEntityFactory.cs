@@ -30,8 +30,9 @@ namespace YYHS
 
             entityManager.SetComponentData(entity, new StateMeter
             {
-                m_life = Settings.Instance.Common.LifeMax,
-                m_balance = Settings.Instance.Common.BalanceMax,
+                m_life = Settings.Instance.Common.LifeMax / 3,
+                m_balance = Settings.Instance.Common.BalanceMax / 2,
+                m_rei = Settings.Instance.Common.ReiMax / 2,
             });
 
             return entity;

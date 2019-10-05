@@ -27,7 +27,7 @@ namespace YYHS
         public static readonly int EffectCount = 18;
         public static readonly int ScreenFillterCount = 2;
         public static readonly int BGFillterCount = 1;
-        public static readonly int GaugeCount = 3;
+        public static readonly int GaugeCount = 4;
         // public static int m_testShaderNo = EffectCount - 1;
         public static int m_testShaderNo = 0;
 
@@ -68,13 +68,17 @@ namespace YYHS
         private static void AddGauge()
         {
             Sprite sprite0 = CreateFilterSprite(96, 4);
-            m_effectMeshMatList.AddGauge(sprite0, GetGaugeShaderName(0));
+            m_effectMeshMatList.AddGauge(sprite0, GetGaugeShaderName(EnumGauge.Touki));
 
             Sprite sprite1 = CreateFilterSprite(96, 4);
-            m_effectMeshMatList.AddGauge(sprite1, GetGaugeShaderName(1));
+            m_effectMeshMatList.AddGauge(sprite1, GetGaugeShaderName(EnumGauge.Life));
 
             Sprite sprite2 = CreateFilterSprite(64, 4);
-            m_effectMeshMatList.AddGauge(sprite2, GetGaugeShaderName(2));
+            m_effectMeshMatList.AddGauge(sprite2, GetGaugeShaderName(EnumGauge.Balance));
+
+            Sprite sprite3 = CreateFilterSprite(58, 12);
+            m_effectMeshMatList.AddGauge(sprite3, GetGaugeShaderName(EnumGauge.Rei));
+
         }
 
         private static string GetBGFillterShaderName(object i)
@@ -99,6 +103,6 @@ namespace YYHS
         private static string GetEffectShaderName(int effectNo) => string.Format(PathSettings.EffectShader, effectNo.ToString("d2"));
         private static string GetScreenFillterShaderName(int fillterNo) => string.Format(PathSettings.ScreenFillterShader, fillterNo.ToString("d2"));
         private static string GetBGFillterShaderName(int fillterNo) => string.Format(PathSettings.BGFillterShader, fillterNo.ToString("d2"));
-        private static string GetGaugeShaderName(int gaugeNo) => string.Format(PathSettings.GaugeShader, gaugeNo.ToString("d2"));
+        private static string GetGaugeShaderName(EnumGauge gaugeNo) => string.Format(PathSettings.GaugeShader, ((int)gaugeNo).ToString("d2"));
     }
 }

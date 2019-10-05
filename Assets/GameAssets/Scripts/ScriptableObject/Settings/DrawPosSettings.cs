@@ -20,6 +20,9 @@ namespace YYHS
         public int LifeMeterY;
         public int BalanceMeterX;
         public int BalanceMeterY;
+        public int ReiMeterX;
+        public int ReiMeterY;
+        public int ReiSeparate;
         public int FrameTopY;
         public int FrameBottomY;
 
