@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DebugSettings
   m_EditorClassIdentifier: 
   ShaderFrame: 0
+  ShaderValue: 0.65

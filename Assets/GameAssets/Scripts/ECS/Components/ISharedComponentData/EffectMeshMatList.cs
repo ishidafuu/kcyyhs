@@ -5,11 +5,25 @@ using UnityEngine;
 
 namespace YYHS
 {
-    public struct MeshMat
+    public class MeshMat
     {
-        public Material m_material;
+        List<Material> m_materials;
         public Mesh m_mesh;
-        int m_colorPropertyId;
+
+        public MeshMat()
+        {
+            m_materials = new List<Material>();
+        }
+
+        public void AddMaterial(Material material)
+        {
+            m_materials.Add(material);
+        }
+
+        public Material GetMaterial(int index = 0)
+        {
+            return m_materials[index];
+        }
     }
 
     [Serializable]
@@ -18,6 +32,7 @@ namespace YYHS
         public List<MeshMat> m_effectList;
         public List<MeshMat> m_screenFilterList;
         public List<MeshMat> m_bgFilterList;
+        public List<MeshMat> m_gaugeList;
 
         public void AddEffect(Sprite sprite, string shaderName)
         {
@@ -25,7 +40,7 @@ namespace YYHS
             {
                 m_effectList = new List<MeshMat>();
             }
-            Add(m_effectList, sprite, shaderName);
+            Add(m_effectList, sprite, shaderName, 1);
         }
 
         public void AddScreenFilter(Sprite sprite, string shaderName)
@@ -34,7 +49,7 @@ namespace YYHS
             {
                 m_screenFilterList = new List<MeshMat>();
             }
-            Add(m_screenFilterList, sprite, shaderName);
+            Add(m_screenFilterList, sprite, shaderName, 1);
         }
 
         public void AddBGFilter(Sprite sprite, string shaderName)
@@ -43,18 +58,30 @@ namespace YYHS
             {
                 m_bgFilterList = new List<MeshMat>();
             }
-            Add(m_bgFilterList, sprite, shaderName);
+            Add(m_bgFilterList, sprite, shaderName, 1);
         }
 
-        void Add(List<MeshMat> list, Sprite sprite, string shaderName)
+        public void AddGauge(Sprite sprite, string shaderName)
         {
+            if (m_gaugeList == null)
+            {
+                m_gaugeList = new List<MeshMat>();
+            }
+            Add(m_gaugeList, sprite, shaderName, Settings.Instance.Common.PlayerCount);
+        }
 
-
+        void Add(List<MeshMat> list, Sprite sprite, string shaderName, int materialCount)
+        {
             MeshMat newMeshMat = new MeshMat();
+
 
             // var sprite = Resources.Load(spritePath, typeof(Sprite)) as Sprite;
             var shader = Shader.Find(shaderName);
-            newMeshMat.m_material = new Material(shader);
+
+            for (int i = 0; i < materialCount; i++)
+            {
+                newMeshMat.AddMaterial(new Material(shader));
+            }
 
             if (shader == null)
             {

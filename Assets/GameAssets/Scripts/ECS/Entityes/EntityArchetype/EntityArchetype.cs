@@ -7,6 +7,7 @@ namespace YYHS
         public static ComponentType[] CharaComponentType = {
             typeof(SideInfo), // キャラ番号など
             typeof(ToukiMeter), // 闘気メーター
+            typeof(StateMeter), // 状態
             // typeof(PadScan), // 入力（CharaEntityFactoryで必要なキャラのみつける）
         };
 

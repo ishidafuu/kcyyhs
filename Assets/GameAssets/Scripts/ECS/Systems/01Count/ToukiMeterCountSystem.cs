@@ -32,7 +32,7 @@ namespace YYHS
                 m_toukiMeters = toukiMeters,
                 m_seq = seq,
                 BgScrollRange = Settings.Instance.DrawPos.BgWidth << (Settings.Instance.DrawPos.BgScrollRangeFactor - 1),
-                ToukiWidth = Settings.Instance.DrawPos.ToukiWidth,
+                ToukiMax = Settings.Instance.Common.ToukiMax,
                 ToukiAnimationInterval = Settings.Instance.Animation.ToukiAnimationInterval,
                 DecideScrollSpeed = Settings.Instance.Animation.DecideScrollSpeed,
                 HighScrollSpeed = Settings.Instance.Animation.HighScrollSpeed,
@@ -54,7 +54,7 @@ namespace YYHS
             public NativeArray<ToukiMeter> m_toukiMeters;
             [ReadOnly] public BattleSequencer m_seq;
             [ReadOnly] public int BgScrollRange;
-            [ReadOnly] public int ToukiWidth;
+            [ReadOnly] public int ToukiMax;
             [ReadOnly] public float SpriteUl;
             [ReadOnly] public float SpriteUr;
             [ReadOnly] public int ToukiAnimationInterval;
@@ -125,9 +125,9 @@ namespace YYHS
                 if (toukiMeter.m_cross != EnumCrossType.None)
                 {
                     toukiMeter.m_value++;
-                    if (toukiMeter.m_value > ToukiWidth)
+                    if (toukiMeter.m_value > ToukiMax)
                     {
-                        toukiMeter.m_value = ToukiWidth;
+                        toukiMeter.m_value = ToukiMax;
                     }
                 }
             }

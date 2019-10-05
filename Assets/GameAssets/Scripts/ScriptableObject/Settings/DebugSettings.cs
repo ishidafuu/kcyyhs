@@ -12,6 +12,7 @@ namespace YYHS
     public sealed class DebugSettings : ScriptableObject
     {
         public int ShaderFrame;
+        public float ShaderValue;
     }
 }
 

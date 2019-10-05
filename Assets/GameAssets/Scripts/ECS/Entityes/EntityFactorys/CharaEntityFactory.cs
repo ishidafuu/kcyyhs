@@ -28,6 +28,12 @@ namespace YYHS
                 m_value = 0,
             });
 
+            entityManager.SetComponentData(entity, new StateMeter
+            {
+                m_life = Settings.Instance.Common.LifeMax,
+                m_balance = Settings.Instance.Common.BalanceMax,
+            });
+
             return entity;
         }
     }

@@ -68,7 +68,7 @@ namespace YYHS
                         continue;
                 }
 
-                meshMat.m_material.SetInt("_Frame", item.m_count);
+                meshMat.GetMaterial().SetInt("_Frame", item.m_count);
             }
         }
 

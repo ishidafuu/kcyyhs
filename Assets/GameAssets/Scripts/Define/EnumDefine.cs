@@ -25,6 +25,7 @@ namespace YYHS
     {
         OverFrame,
         Frame,
+        UnderFrame,
         OverChara,
         Chara,
         OverBackGround,
@@ -84,12 +85,7 @@ namespace YYHS
         frame_bottom,
         frame_line,
         frame_top,
-        meter,
-        meter00,
-        meter01,
-        meter02,
-        meter03,
-        meter04,
+        rei,
         signal00,
         signal01,
         signal02,
@@ -227,5 +223,13 @@ namespace YYHS
         EndBattleSequence,
         SwitchSplitView,
     }
+
+    public enum EnumGauge
+    {
+        Touki,
+        Life,
+        Balance,
+    }
+
 
 }

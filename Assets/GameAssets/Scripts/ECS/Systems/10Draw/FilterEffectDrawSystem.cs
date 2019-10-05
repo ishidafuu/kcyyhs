@@ -14,7 +14,7 @@ namespace YYHS
     public class FilterEffectDrawSystem : ComponentSystem
     {
         EntityQuery m_query;
-        Quaternion m_quaternion;
+        Quaternion m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
 
         protected override void OnCreate()
         {
@@ -22,7 +22,7 @@ namespace YYHS
                 ComponentType.ReadOnly<FilterEffect>()
             // ComponentType.ReadOnly<BgScroll>()
             );
-            m_quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
+
             // m_quaternion = Quaternion.Euler(new Vector3(-90, 180, 0));
         }
 
@@ -31,7 +31,9 @@ namespace YYHS
 
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
             // DrawFilterEffect(filterEffects);
-            DrawShaderGraphTest();
+            // TODO: シェーダーテスト
+            // DrawShaderGraphTest();
+
             DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
         }
@@ -39,9 +41,11 @@ namespace YYHS
 
         private void DrawShaderGraphTest()
         {
-            Mesh mesh = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_mesh;
-            Material mat = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_material;
+            // Mesh mesh = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_mesh;
+            // Material mat = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_material;
 
+            Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[Shared.m_testShaderNo].m_mesh;
+            Material mat = Shared.m_effectMeshMatList.m_gaugeList[Shared.m_testShaderNo].GetMaterial();
             int layer = (int)EnumDrawLayer.OverBackGround;
 
             Matrix4x4 matrixes = Matrix4x4.TRS(
@@ -49,6 +53,7 @@ namespace YYHS
                 m_quaternion, Vector3.one);
 
             mat.SetInt("_Frame", Settings.Instance.Debug.ShaderFrame);
+            mat.SetFloat("_Value", Settings.Instance.Debug.ShaderValue);
 
             Graphics.DrawMesh(mesh, matrixes, mat, 0);
         }
@@ -80,7 +85,7 @@ namespace YYHS
                 }
 
                 Mesh mesh = meshMat.m_mesh;
-                Material mat = meshMat.m_material;
+                Material mat = meshMat.GetMaterial();
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(
                     new Vector3(0, Settings.Instance.DrawPos.BgScrollY, (int)layer),

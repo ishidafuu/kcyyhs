@@ -36,10 +36,21 @@ namespace YYHS
 
             DrawChara(toukiMeters, sideInfos);
             DrawSpritBackGround(toukiMeters);
+
+            DrawFrameLine();
+
             toukiMeters.Dispose();
             sideInfos.Dispose();
         }
 
+        private void DrawFrameLine()
+        {
+            Matrix4x4 frameLineMatrix = Matrix4x4.TRS(new Vector3(0, Settings.Instance.DrawPos.BgScrollY,
+            (int)EnumDrawLayer.Frame), m_Quaternion, Vector3.one);
+            Graphics.DrawMesh(Shared.m_commonMeshMat.m_meshDict[EnumCommonPartsType.frame_line.ToString()],
+                frameLineMatrix,
+                Shared.m_commonMeshMat.m_materialDict[EnumCommonPartsType.frame_line.ToString()], 0);
+        }
 
         private void DrawChara(NativeArray<ToukiMeter> toukiMeters, NativeArray<SideInfo> sideInfos)
         {

@@ -13,5 +13,8 @@ namespace YYHS
         public int CharaCount;
         public int ButtonCount;
         public int FilterEffectCount;
+        public int ToukiMax;
+        public int LifeMax;
+        public int BalanceMax;
     }
 }
