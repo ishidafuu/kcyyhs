@@ -86,6 +86,15 @@ TextureImporter:
   - first:
       213: 7804155055684304000
     second: u_parts01
+  - first:
+      213: 707177605766897003
+    second: u_bullet03
+  - first:
+      213: -4686764639958188145
+    second: u_bullet04
+  - first:
+      213: 3749889250434441887
+    second: u_bullet05
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -208,7 +217,7 @@ TextureImporter:
         width: 133
         height: 78
       alignment: 9
-      pivot: {x: 0.36842105, y: -0.025641026}
+      pivot: {x: 0.36842105, y: 0.51282054}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -224,8 +233,8 @@ TextureImporter:
       name: body03
       rect:
         serializedVersion: 2
-        x: 0
-        y: 328
+        x: 177
+        y: 180
         width: 108
         height: 91
       alignment: 9
@@ -267,7 +276,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 480
-        y: 450
+        y: 421
         width: 29
         height: 32
       alignment: 9
@@ -287,8 +296,8 @@ TextureImporter:
       name: cm_air01
       rect:
         serializedVersion: 2
-        x: 480
-        y: 418
+        x: 60
+        y: 278
         width: 21
         height: 32
       alignment: 9
@@ -329,12 +338,12 @@ TextureImporter:
       name: cm_dodge00
       rect:
         serializedVersion: 2
-        x: 194
-        y: 118
-        width: 80
-        height: 63
+        x: 347
+        y: 434
+        width: 133
+        height: 78
       alignment: 9
-      pivot: {x: 0.5375, y: 0.50793654}
+      pivot: {x: 0.36842105, y: 0.51282054}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -350,12 +359,12 @@ TextureImporter:
       name: cm_down00
       rect:
         serializedVersion: 2
-        x: 111
-        y: 365
-        width: 94
-        height: 54
+        x: 347
+        y: 434
+        width: 133
+        height: 78
       alignment: 9
-      pivot: {x: 0.5, y: 0.5925926}
+      pivot: {x: 0.36842105, y: 0.51282054}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -372,7 +381,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 111
-        y: 269
+        y: 84
         width: 93
         height: 96
       alignment: 9
@@ -393,7 +402,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 462
-        y: 296
+        y: 299
         width: 42
         height: 96
       alignment: 0
@@ -413,8 +422,8 @@ TextureImporter:
       name: cm_jump02
       rect:
         serializedVersion: 2
-        x: 189
-        y: 36
+        x: 0
+        y: 275
         width: 60
         height: 70
       alignment: 9
@@ -455,8 +464,8 @@ TextureImporter:
       name: cm_miss00
       rect:
         serializedVersion: 2
-        x: 61
-        y: 215
+        x: 125
+        y: 245
         width: 52
         height: 54
       alignment: 9
@@ -477,7 +486,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 111
-        y: 106
+        y: 9
         width: 83
         height: 75
       alignment: 9
@@ -497,8 +506,8 @@ TextureImporter:
       name: cm_stand01
       rect:
         serializedVersion: 2
-        x: 111
-        y: 32
+        x: 125
+        y: 345
         width: 78
         height: 74
       alignment: 9
@@ -518,8 +527,8 @@ TextureImporter:
       name: cm_stand02
       rect:
         serializedVersion: 2
-        x: 204
-        y: 204
+        x: 0
+        y: 352
         width: 117
         height: 67
       alignment: 9
@@ -539,8 +548,8 @@ TextureImporter:
       name: cm_stand03
       rect:
         serializedVersion: 2
-        x: 113
-        y: 181
+        x: 204
+        y: 92
         width: 84
         height: 88
       alignment: 9
@@ -561,7 +570,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 476
-        y: 392
+        y: 395
         width: 34
         height: 26
       alignment: 9
@@ -582,7 +591,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 462
-        y: 270
+        y: 273
         width: 34
         height: 26
       alignment: 9
@@ -602,8 +611,8 @@ TextureImporter:
       name: face03
       rect:
         serializedVersion: 2
-        x: 249
-        y: 30
+        x: 60
+        y: 310
         width: 58
         height: 42
       alignment: 9
@@ -686,8 +695,8 @@ TextureImporter:
       name: u_bullet02
       rect:
         serializedVersion: 2
-        x: 0
-        y: 273
+        x: 61
+        y: 216
         width: 64
         height: 55
       alignment: 9
@@ -704,11 +713,74 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: u_bullet03
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 227
+        width: 24
+        height: 46
+      alignment: 9
+      pivot: {x: 0.45833334, y: 0.5217391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 707177605766897003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: u_bullet04
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 231
+        width: 23
+        height: 42
+      alignment: 9
+      pivot: {x: 0.5217391, y: 0.5714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -4686764639958188145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: u_bullet05
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 453
+        width: 30
+        height: 29
+      alignment: 9
+      pivot: {x: 0.5, y: 0.82758623}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 3749889250434441887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: u_parts00
       rect:
         serializedVersion: 2
-        x: 249
-        y: 72
+        x: 125
+        y: 299
         width: 77
         height: 46
       alignment: 9

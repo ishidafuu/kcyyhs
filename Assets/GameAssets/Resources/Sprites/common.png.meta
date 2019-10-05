@@ -350,6 +350,9 @@ TextureImporter:
   - first:
       213: 5954873061768168511
     second: frame_line
+  - first:
+      213: -5340819860545116866
+    second: reiryoku
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -617,8 +620,8 @@ TextureImporter:
       name: cm_u_effect00_00
       rect:
         serializedVersion: 2
-        x: 357
-        y: 953
+        x: 259
+        y: 959
         width: 64
         height: 64
       alignment: 0
@@ -638,8 +641,8 @@ TextureImporter:
       name: cm_u_effect01_00
       rect:
         serializedVersion: 2
-        x: 423
-        y: 925
+        x: 325
+        y: 959
         width: 64
         height: 64
       alignment: 0
@@ -659,7 +662,7 @@ TextureImporter:
       name: cm_u_effect02_00
       rect:
         serializedVersion: 2
-        x: 455
+        x: 391
         y: 991
         width: 32
         height: 32
@@ -680,8 +683,8 @@ TextureImporter:
       name: energy
       rect:
         serializedVersion: 2
-        x: 489
-        y: 931
+        x: 497
+        y: 1015
         width: 8
         height: 8
       alignment: 0
@@ -701,7 +704,7 @@ TextureImporter:
       name: fire00
       rect:
         serializedVersion: 2
-        x: 489
+        x: 425
         y: 1007
         width: 16
         height: 16
@@ -722,8 +725,8 @@ TextureImporter:
       name: fire01
       rect:
         serializedVersion: 2
-        x: 489
-        y: 989
+        x: 443
+        y: 1007
         width: 16
         height: 16
       alignment: 0
@@ -743,8 +746,8 @@ TextureImporter:
       name: fire02
       rect:
         serializedVersion: 2
-        x: 489
-        y: 971
+        x: 461
+        y: 1007
         width: 16
         height: 16
       alignment: 0
@@ -824,95 +827,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meter00
+      name: reiryoku
       rect:
         serializedVersion: 2
-        x: 259
-        y: 1019
-        width: 96
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 
-      internalID: 7994594458130073924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: meter01
-      rect:
-        serializedVersion: 2
-        x: 357
-        y: 1019
-        width: 96
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 
-      internalID: 2066122059763179257
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: meter02
-      rect:
-        serializedVersion: 2
-        x: 259
-        y: 1013
-        width: 96
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 
-      internalID: -1270523699668152980
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: meter03
-      rect:
-        serializedVersion: 2
-        x: 259
-        y: 1007
-        width: 64
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 
-      internalID: -6456701861806394772
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: meter04
-      rect:
-        serializedVersion: 2
-        x: 499
-        y: 929
+        x: 497
+        y: 1003
         width: 2
         height: 10
       alignment: 0
@@ -923,7 +842,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 6676546782916401491
+      internalID: -5340819860545116866
       vertices: []
       indices: 
       edges: []
@@ -932,8 +851,8 @@ TextureImporter:
       name: signal00
       rect:
         serializedVersion: 2
-        x: 489
-        y: 961
+        x: 479
+        y: 1015
         width: 16
         height: 8
       alignment: 0
@@ -953,8 +872,8 @@ TextureImporter:
       name: signal01
       rect:
         serializedVersion: 2
-        x: 489
-        y: 951
+        x: 479
+        y: 1005
         width: 16
         height: 8
       alignment: 0
@@ -974,8 +893,8 @@ TextureImporter:
       name: signal02
       rect:
         serializedVersion: 2
-        x: 489
-        y: 941
+        x: 425
+        y: 997
         width: 16
         height: 8
       alignment: 0
