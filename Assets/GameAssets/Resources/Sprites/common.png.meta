@@ -827,27 +827,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: reiryoku
-      rect:
-        serializedVersion: 2
-        x: 497
-        y: 1003
-        width: 2
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 
-      internalID: -5340819860545116866
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: signal00
       rect:
         serializedVersion: 2

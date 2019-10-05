@@ -295,59 +295,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">meter00.png</key>
-            <key type="filename">meter01.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,1,48,2</rect>
-                <key>scale9Paddings</key>
-                <rect>24,1,48,2</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">meter02.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,1,48,1</rect>
-                <key>scale9Paddings</key>
-                <rect>24,1,48,1</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">meter03.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>16,1,32,2</rect>
-                <key>scale9Paddings</key>
-                <rect>16,1,32,2</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">meter04.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>1,3,1,5</rect>
-                <key>scale9Paddings</key>
-                <rect>1,3,1,5</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">signal00.png</key>
             <key type="filename">signal01.png</key>
             <key type="filename">signal02.png</key>
@@ -386,11 +333,6 @@
             <filename>fire02.png</filename>
             <filename>frame_bottom.png</filename>
             <filename>frame_top.png</filename>
-            <filename>meter00.png</filename>
-            <filename>meter01.png</filename>
-            <filename>meter02.png</filename>
-            <filename>meter03.png</filename>
-            <filename>meter04.png</filename>
             <filename>frame_line.png</filename>
         </array>
         <key>ignoreFileList</key>

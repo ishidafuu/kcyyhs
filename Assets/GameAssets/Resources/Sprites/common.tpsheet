@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:fa0cb6cb669fa98b233998c22b0a64e6:977cf23bd68eba6e792c021aec40f715:0f89ce481a20e4a5527810f3d83d1c61$
+# $TexturePacker:SmartUpdate:1f0cfcbb00e677922f6149649f45018a:f2532a3852a63093c31801b79956c6ba:0f89ce481a20e4a5527810f3d83d1c61$
 #
 :format=40300
 :texture=common.png
@@ -31,7 +31,6 @@ fire02;461;1007;16;16; 0.5;0.5; 0;0;0;0
 frame_bottom;1;909;256;114; 0.5;0.5; 0;0;0;0
 frame_line;507;927;2;96; 0.5;0.5; 0;0;0;0
 frame_top;1;103;256;20; 0.5;0.5; 0;0;0;0
-reiryoku;497;1003;2;10; 0.5;0.5; 0;0;0;0
 signal00;479;1015;16;8; 0.5;0.5; 0;0;0;0
 signal01;479;1005;16;8; 0.5;0.5; 0;0;0;0
 signal02;425;997;16;8; 0.5;0.5; 0;0;0;0
