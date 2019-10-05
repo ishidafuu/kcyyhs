@@ -93,8 +93,6 @@ namespace YYHS
             Mesh baseMesh = Shared.m_bgFrameMeshMat.m_meshDict[bgName];
             Material mat = Shared.m_bgFrameMeshMat.m_materialDict[bgName];
 
-
-
             for (int i = 0; i < toukiMeters.Length; i++)
             {
                 var toukiMeter = toukiMeters[i];

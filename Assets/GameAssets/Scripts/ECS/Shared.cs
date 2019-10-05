@@ -27,10 +27,7 @@ namespace YYHS
         public static readonly int EffectCount = 18;
         public static readonly int ScreenFillterCount = 2;
         public static readonly int BGFillterCount = 1;
-        public static readonly int GaugeCount = 4;
-        // public static int m_testShaderNo = EffectCount - 1;
-        public static int m_testShaderNo = 0;
-
+        public static int m_testShaderNo = EffectCount - 1;
 
         static readonly string DefaultShader = "Sprites/DefaultSprite";
 
@@ -67,18 +64,11 @@ namespace YYHS
 
         private static void AddGauge()
         {
-            Sprite sprite0 = CreateFilterSprite(96, 4);
-            m_effectMeshMatList.AddGauge(sprite0, GetGaugeShaderName(EnumGauge.Touki));
-
-            Sprite sprite1 = CreateFilterSprite(96, 4);
-            m_effectMeshMatList.AddGauge(sprite1, GetGaugeShaderName(EnumGauge.Life));
-
-            Sprite sprite2 = CreateFilterSprite(64, 4);
-            m_effectMeshMatList.AddGauge(sprite2, GetGaugeShaderName(EnumGauge.Balance));
-
-            Sprite sprite3 = CreateFilterSprite(58, 12);
-            m_effectMeshMatList.AddGauge(sprite3, GetGaugeShaderName(EnumGauge.Rei));
-
+            m_effectMeshMatList.AddGauge(CreateFilterSprite(96, 4), GetGaugeShaderName(EnumGauge.Touki));
+            m_effectMeshMatList.AddGauge(CreateFilterSprite(96, 4), GetGaugeShaderName(EnumGauge.Life));
+            m_effectMeshMatList.AddGauge(CreateFilterSprite(64, 4), GetGaugeShaderName(EnumGauge.Balance));
+            m_effectMeshMatList.AddGauge(CreateFilterSprite(58, 12), GetGaugeShaderName(EnumGauge.Rei));
+            m_effectMeshMatList.AddGauge(CreateFilterSprite(16, 8), GetGaugeShaderName(EnumGauge.Signal));
         }
 
         private static string GetBGFillterShaderName(object i)

@@ -22,7 +22,6 @@ namespace YYHS
                 ComponentType.ReadOnly<ToukiMeter>(),
                 ComponentType.ReadOnly<StateMeter>()
             );
-
         }
 
         protected override void OnUpdate()
@@ -30,6 +29,7 @@ namespace YYHS
             DrawFrame();
             DrawToukiMeter();
             DrawStateMeter();
+            DrawSignal();
         }
 
         private void DrawFrame()
@@ -73,6 +73,8 @@ namespace YYHS
 
             toukiMeters.Dispose();
         }
+
+
 
         private void DrawStateMeter()
         {
@@ -147,7 +149,7 @@ namespace YYHS
                 Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Rei].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 int drawReiLen = (stateMeter.m_rei + (stateMeter.m_rei / Settings.Instance.DrawPos.ReiSeparate)) * 2;
-                drawReiLen = (Settings.Instance.Debug.ShaderFrame + (Settings.Instance.Debug.ShaderFrame / Settings.Instance.DrawPos.ReiSeparate)) * 2;
+                // drawReiLen = (Settings.Instance.Debug.ShaderFrame + (Settings.Instance.Debug.ShaderFrame / Settings.Instance.DrawPos.ReiSeparate)) * 2;
                 float rei = (float)drawReiLen / mesh.bounds.size.x;
 
                 float sign = isSideA ? +1 : -1;
@@ -159,6 +161,44 @@ namespace YYHS
                     isSideA ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
                 mat.SetFloat("_Value", rei);
+
+                Graphics.DrawMesh(mesh, matrixes, mat, 0);
+            }
+        }
+
+        private void DrawSignal()
+        {
+            BattleSequencer seq = GetSingleton<BattleSequencer>();
+
+            for (int i = 0; i < Settings.Instance.Common.PlayerCount; i++)
+            {
+                bool isSideA = (i == 0);
+                Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Signal].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Signal].GetMaterial(i);
+
+                var animStep = (isSideA)
+                    ? seq.m_sideA.m_animStep
+                    : seq.m_sideB.m_animStep;
+
+                EnumSignal signal = EnumSignal.Decide;
+                switch (animStep)
+                {
+                    case EnumAnimationStep.Sleep:
+                        signal = EnumSignal.Sleep;
+                        break;
+                    case EnumAnimationStep.Skip:
+                        signal = EnumSignal.Skip;
+                        break;
+                }
+
+                float sign = isSideA ? +1 : -1;
+                int layer = (int)EnumDrawLayer.UnderFrame;
+
+                Matrix4x4 matrixes = Matrix4x4.TRS(
+                    new Vector3(sign * Settings.Instance.DrawPos.SignalX, Settings.Instance.DrawPos.SignalY, layer),
+                    isSideA ? m_QuaternionRev : m_Quaternion,
+                    Vector3.one);
+                mat.SetFloat("_Value", (float)signal);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }

@@ -23,6 +23,8 @@ namespace YYHS
         public int ReiMeterX;
         public int ReiMeterY;
         public int ReiSeparate;
+        public int SignalX;
+        public int SignalY;
         public int FrameTopY;
         public int FrameBottomY;
 

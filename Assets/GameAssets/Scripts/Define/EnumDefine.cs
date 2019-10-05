@@ -111,6 +111,7 @@ namespace YYHS
         WaitPageA,
         WaitPageB,
         Finished,
+        Skip,
     }
 
     public enum EnumDamageLv
@@ -230,6 +231,14 @@ namespace YYHS
         Life,
         Balance,
         Rei,
+        Signal,
+    }
+
+    public enum EnumSignal
+    {
+        Sleep,
+        Decide,
+        Skip,
     }
 
 
