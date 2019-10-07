@@ -45,8 +45,8 @@ namespace YYHS
             // Mesh mesh = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_mesh;
             // Material mat = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_material;
 
-            Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[Shared.m_testShaderNo].m_mesh;
-            Material mat = Shared.m_effectMeshMatList.m_gaugeList[Shared.m_testShaderNo].GetMaterial();
+            Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].m_mesh;
+            Material mat = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].GetMaterial();
             int layer = (int)EnumDrawLayer.OverBackGround;
 
             Matrix4x4 matrixes = Matrix4x4.TRS(

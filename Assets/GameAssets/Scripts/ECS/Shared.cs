@@ -24,7 +24,7 @@ namespace YYHS
         // public static YHFilterEffectList m_yhFilterEffectList;
         public static YHCharaAnimList m_yhCharaAnimList;
 
-        public static readonly int EffectCount = 18;
+        public static readonly int EffectCount = 17;
         public static readonly int ScreenFillterCount = 2;
         public static readonly int BGFillterCount = 1;
         public static int m_testShaderNo = EffectCount - 1;
@@ -64,11 +64,24 @@ namespace YYHS
 
         private static void AddGauge()
         {
-            m_effectMeshMatList.AddGauge(CreateFilterSprite(96, 4), GetGaugeShaderName(EnumGauge.Touki));
-            m_effectMeshMatList.AddGauge(CreateFilterSprite(96, 4), GetGaugeShaderName(EnumGauge.Life));
-            m_effectMeshMatList.AddGauge(CreateFilterSprite(64, 4), GetGaugeShaderName(EnumGauge.Balance));
-            m_effectMeshMatList.AddGauge(CreateFilterSprite(58, 12), GetGaugeShaderName(EnumGauge.Rei));
-            m_effectMeshMatList.AddGauge(CreateFilterSprite(16, 8), GetGaugeShaderName(EnumGauge.Signal));
+            m_effectMeshMatList.AddFrameParts(CreateFilterSprite(96, 4),
+                GetFramePartsShaderName(EnumFrameParts.ToukiGauge),
+                Settings.Instance.Common.PlayerCount);
+            m_effectMeshMatList.AddFrameParts(CreateFilterSprite(96, 4),
+                GetFramePartsShaderName(EnumFrameParts.LifeGauge),
+                Settings.Instance.Common.PlayerCount);
+            m_effectMeshMatList.AddFrameParts(CreateFilterSprite(64, 4),
+                GetFramePartsShaderName(EnumFrameParts.BalanceGauge),
+                Settings.Instance.Common.PlayerCount);
+            m_effectMeshMatList.AddFrameParts(CreateFilterSprite(58, 12),
+                GetFramePartsShaderName(EnumFrameParts.ReiGauge),
+                Settings.Instance.Common.PlayerCount);
+            m_effectMeshMatList.AddFrameParts(CreateFilterSprite(16, 8),
+                GetFramePartsShaderName(EnumFrameParts.Signal),
+                Settings.Instance.Common.PlayerCount);
+            m_effectMeshMatList.AddFrameParts(CreateFilterSprite(16, 16),
+                GetFramePartsShaderName(EnumFrameParts.ReiPiece),
+                Settings.Instance.Common.ReiPieceCount);
         }
 
         private static string GetBGFillterShaderName(object i)
@@ -93,6 +106,6 @@ namespace YYHS
         private static string GetEffectShaderName(int effectNo) => string.Format(PathSettings.EffectShader, effectNo.ToString("d2"));
         private static string GetScreenFillterShaderName(int fillterNo) => string.Format(PathSettings.ScreenFillterShader, fillterNo.ToString("d2"));
         private static string GetBGFillterShaderName(int fillterNo) => string.Format(PathSettings.BGFillterShader, fillterNo.ToString("d2"));
-        private static string GetGaugeShaderName(EnumGauge gaugeNo) => string.Format(PathSettings.GaugeShader, ((int)gaugeNo).ToString("d2"));
+        private static string GetFramePartsShaderName(EnumFrameParts objNo) => string.Format(PathSettings.FramePartsShader, ((int)objNo).ToString("d2"));
     }
 }

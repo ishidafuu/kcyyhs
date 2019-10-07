@@ -16,6 +16,7 @@ MonoBehaviour:
   CharaCount: 2
   ButtonCount: 4
   FilterEffectCount: 4
+  ReiPieceCount: 6
   ToukiMax: 96
   LifeMax: 96
   BalanceMax: 64

@@ -15,8 +15,9 @@ namespace YYHS
             m_materials = new List<Material>();
         }
 
-        public void AddMaterial(Material material)
+        public void AddMaterial(Material material, int number)
         {
+            material.SetInt("_No", number);
             m_materials.Add(material);
         }
 
@@ -32,7 +33,7 @@ namespace YYHS
         public List<MeshMat> m_effectList;
         public List<MeshMat> m_screenFilterList;
         public List<MeshMat> m_bgFilterList;
-        public List<MeshMat> m_gaugeList;
+        public List<MeshMat> m_framePartsList;
 
         public void AddEffect(Sprite sprite, string shaderName)
         {
@@ -61,13 +62,13 @@ namespace YYHS
             Add(m_bgFilterList, sprite, shaderName, 1);
         }
 
-        public void AddGauge(Sprite sprite, string shaderName)
+        public void AddFrameParts(Sprite sprite, string shaderName, int materialCount)
         {
-            if (m_gaugeList == null)
+            if (m_framePartsList == null)
             {
-                m_gaugeList = new List<MeshMat>();
+                m_framePartsList = new List<MeshMat>();
             }
-            Add(m_gaugeList, sprite, shaderName, Settings.Instance.Common.PlayerCount);
+            Add(m_framePartsList, sprite, shaderName, materialCount);
         }
 
         void Add(List<MeshMat> list, Sprite sprite, string shaderName, int materialCount)
@@ -80,7 +81,7 @@ namespace YYHS
 
             for (int i = 0; i < materialCount; i++)
             {
-                newMeshMat.AddMaterial(new Material(shader));
+                newMeshMat.AddMaterial(new Material(shader), i);
             }
 
             if (shader == null)

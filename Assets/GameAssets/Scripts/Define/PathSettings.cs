@@ -22,6 +22,6 @@ namespace YYHS
         public static readonly string EffectShader = "YHShader/effect{0}";
         public static readonly string ScreenFillterShader = "YHShader/screenFillter{0}";
         public static readonly string BGFillterShader = "YHShader/bgFillter{0}";
-        public static readonly string GaugeShader = "YHShader/gauge{0}";
+        public static readonly string FramePartsShader = "YHShader/frameParts{0}";
     }
 }

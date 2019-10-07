@@ -225,13 +225,14 @@ namespace YYHS
         SwitchSplitView,
     }
 
-    public enum EnumGauge
+    public enum EnumFrameParts
     {
-        Touki,
-        Life,
-        Balance,
-        Rei,
+        ToukiGauge,
+        LifeGauge,
+        BalanceGauge,
+        ReiGauge,
         Signal,
+        ReiPiece,
     }
 
     public enum EnumSignal

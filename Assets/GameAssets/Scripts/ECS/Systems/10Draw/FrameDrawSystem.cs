@@ -54,8 +54,8 @@ namespace YYHS
             for (int i = 0; i < toukiMeters.Length; i++)
             {
                 bool isSideA = (i == 0);
-                Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Touki].m_mesh;
-                Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Touki].GetMaterial(i);
+                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ToukiGauge].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ToukiGauge].GetMaterial(i);
                 var toukiMeter = toukiMeters[i];
                 float touki = (float)toukiMeter.m_value / mesh.bounds.size.x;
                 float sign = isSideA ? +1 : -1;
@@ -94,8 +94,8 @@ namespace YYHS
             for (int i = 0; i < stateMeters.Length; i++)
             {
                 bool isSideA = (i == 0);
-                Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Balance].m_mesh;
-                Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Balance].GetMaterial(i);
+                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.BalanceGauge].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.BalanceGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 float balance = (float)stateMeter.m_balance / mesh.bounds.size.x;
 
@@ -117,8 +117,8 @@ namespace YYHS
             for (int i = 0; i < stateMeters.Length; i++)
             {
                 bool isSideA = (i == 0);
-                Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Life].m_mesh;
-                Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Life].GetMaterial(i);
+                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.LifeGauge].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.LifeGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 float life = (float)stateMeter.m_life / mesh.bounds.size.x;
 
@@ -145,8 +145,8 @@ namespace YYHS
             for (int i = 0; i < stateMeters.Length; i++)
             {
                 bool isSideA = (i == 0);
-                Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Rei].m_mesh;
-                Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Rei].GetMaterial(i);
+                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ReiGauge].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ReiGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 int drawReiLen = (stateMeter.m_rei + (stateMeter.m_rei / Settings.Instance.DrawPos.ReiSeparate)) * 2;
                 // drawReiLen = (Settings.Instance.Debug.ShaderFrame + (Settings.Instance.Debug.ShaderFrame / Settings.Instance.DrawPos.ReiSeparate)) * 2;
@@ -173,8 +173,8 @@ namespace YYHS
             for (int i = 0; i < Settings.Instance.Common.PlayerCount; i++)
             {
                 bool isSideA = (i == 0);
-                Mesh mesh = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Signal].m_mesh;
-                Material mat = Shared.m_effectMeshMatList.m_gaugeList[(int)EnumGauge.Signal].GetMaterial(i);
+                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.Signal].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.Signal].GetMaterial(i);
 
                 var animStep = (isSideA)
                     ? seq.m_sideA.m_animStep
