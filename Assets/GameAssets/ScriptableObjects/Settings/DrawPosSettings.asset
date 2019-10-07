@@ -26,5 +26,7 @@ MonoBehaviour:
   ReiMeterX: -67
   ReiMeterY: -84
   ReiSeparate: 5
+  SignalX: -32
+  SignalY: -53
   FrameTopY: 103
   FrameBottomY: -55

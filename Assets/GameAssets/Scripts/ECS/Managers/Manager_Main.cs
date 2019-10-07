@@ -92,7 +92,7 @@ namespace YYHS
             CreateCharaEntity(manager);
             CreateFilterEffectEntity(manager);
             CreateBattleEntity(manager);
-            // manager.SetSharedComponentData(entity, _meshMatList);
+            CreateReiPieceEntity(manager);
         }
 
         void CreateCharaEntity(EntityManager manager)
@@ -112,6 +112,14 @@ namespace YYHS
             for (int i = 0; i < Settings.Instance.Common.FilterEffectCount; i++)
             {
                 var entity = FilterEffectEntityFactory.CreateEntity(i, manager);
+            }
+        }
+
+        void CreateReiPieceEntity(EntityManager manager)
+        {
+            for (int i = 0; i < Settings.Instance.Common.ReiPieceCount; i++)
+            {
+                var entity = ReiPieceEntityFactory.CreateEntity(i, manager);
             }
         }
 

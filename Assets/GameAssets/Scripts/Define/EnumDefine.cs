@@ -241,5 +241,9 @@ namespace YYHS
         Skip,
     }
 
-
+    public enum EnumReiState
+    {
+        Idle,
+        Distribute,
+    }
 }

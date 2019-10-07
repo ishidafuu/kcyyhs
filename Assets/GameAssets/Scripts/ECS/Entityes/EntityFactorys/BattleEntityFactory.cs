@@ -14,6 +14,11 @@ namespace YYHS
             seq.m_sideB.m_isSideA = false;
             entityManager.SetComponentData(entity, seq);
 
+            ReiPool reiPool = new ReiPool();
+            reiPool.m_reiState = EnumReiState.Idle;
+            reiPool.m_amount = 4;
+            entityManager.SetComponentData(entity, reiPool);
+
             return entity;
         }
     }

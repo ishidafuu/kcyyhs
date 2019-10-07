@@ -17,6 +17,11 @@ namespace YYHS
 
         public static ComponentType[] BattleComponentType = {
             typeof(BattleSequencer),
+            typeof(ReiPool),
+        };
+
+        public static ComponentType[] ReiPieceComponentType = {
+            typeof(ReiPiece),
         };
     }
 }
