@@ -39,8 +39,11 @@ namespace YYHS
                 var reiPiece = reiPieces[i];
                 int layer = (int)EnumDrawLayer.OverFrame;
 
+                int posX = reiPiece.m_basePos.x + reiPiece.m_movePos.x;
+                int posY = reiPiece.m_basePos.y + reiPiece.m_movePos.y + Settings.Instance.DrawPos.ReiPoolY;
+
                 Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(i * 16, Settings.Instance.DrawPos.ReiPoolY + i * 16, layer),
+                    new Vector3(posX, posY, layer),
                     m_Quaternion,
                     Vector3.one);
 
