@@ -6,6 +6,12 @@ using UnityEngine;
 
 namespace YYHS
 {
+    public enum EditAnimType
+    {
+        Action,
+        Common,
+    }
+
     [ExecuteInEditMode]
     public class SpriteSetter : MonoBehaviour
     {
@@ -18,6 +24,8 @@ namespace YYHS
         [SerializeField] GameObject m_characterRC;
         [SerializeField] GameObject m_backGroundRC;
         [SerializeField] GameObject m_effectRC;
+        [SerializeField] GameObject m_cursorRC;
+        [SerializeField] EditAnimType m_animType;
         [SerializeField] int m_charaNo;
         [SerializeField] int m_bgNo;
 
@@ -26,6 +34,7 @@ namespace YYHS
         List<GameObject> m_effectList = new List<GameObject>();
 
         public int GetCharaNo() => m_charaNo;
+        public EditAnimType GetAnimType() => m_animType;
 
         private string GetCharaPath()
         {
@@ -51,11 +60,23 @@ namespace YYHS
             CreateNewEffectObject(GetBackGroundPath());
             CreateNewEffectObject(PathSettings.CommonSprite);
 
+            CreateEffectPos("damage_pos", Color.red);
+            CreateEffectPos("shot_pos", Color.white);
+
             InitPosition();
             LoadObject();
             InactiveBGSprite();
             InactiveCharacterSprite();
             InactiveEffectSprite();
+        }
+
+        private void CreateEffectPos(string cursorName, Color col)
+        {
+            var newSprite = Instantiate(m_cursorRC);
+            newSprite.transform.SetParent(m_effect.transform);
+            newSprite.name = cursorName;
+            newSprite.GetComponent<SpriteRenderer>().color = col;
+            m_effectList.Add(newSprite.gameObject);
         }
 
         public void InactiveBGSprite()
@@ -99,7 +120,11 @@ namespace YYHS
         private void FindAnimationController()
         {
             m_animator = GetComponent<Animator>();
-            string path = $"Assets/GameAssets/Animations/Chara{m_charaNo.ToString("d2")}/Controller.controller";
+
+            string path = (m_animType == EditAnimType.Action)
+                ? $"Assets/GameAssets/Animations/Chara{m_charaNo.ToString("d2")}/Controller.controller"
+                : $"Assets/GameAssets/Animations/Common/Controller.controller";
+
             RuntimeAnimatorController controller = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(path) as RuntimeAnimatorController;
             m_animator.runtimeAnimatorController = controller;
         }
@@ -114,6 +139,7 @@ namespace YYHS
             m_characterRC = GameObject.Find("CharacterRC");
             m_backGroundRC = GameObject.Find("BackGroundRC");
             m_effectRC = GameObject.Find("EffectRC");
+            m_cursorRC = GameObject.Find("CursorRC");
         }
 
         private void InitPosition()

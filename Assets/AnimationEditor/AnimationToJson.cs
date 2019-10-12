@@ -13,21 +13,49 @@ namespace YYHS
     public class AnimationToJson : MonoBehaviour
     {
         [SerializeField] SpriteSetter m_spriteSetter;
+
+
         public void Convert()
         {
+            if (m_spriteSetter.GetAnimType() == EditAnimType.Action)
+            {
+                ConvertAction();
+            }
+            else
+            {
+                ConvertCommon();
+            }
+        }
+
+        void ConvertAction()
+        {
             int charaNo = m_spriteSetter.GetCharaNo();
-            List<string> destPaths = new List<string>();
+            string[] animGuids = AssetDatabase.FindAssets("", new[] { $"Assets/GameAssets/Animations/Chara{charaNo.ToString("d2")}" });
+            string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnim{charaNo.ToString("d2")}.asset";
+            Convert(animGuids, createAssetPath);
+        }
+
+        void ConvertCommon()
+        {
+            string[] animGuids = AssetDatabase.FindAssets("", new[] { $"Assets/GameAssets/Animations/Common" });
+            string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnimCommon.asset";
+            Convert(animGuids, createAssetPath);
+        }
+
+        void Convert(string[] animGuids, string createAssetPath)
+        {
             YHAnimationsObject outputObjects = ScriptableObject.CreateInstance<YHAnimationsObject>();
-            CreateByteFiles(destPaths, charaNo);
+            List<string> destPaths = new List<string>();
+            CreateByteFiles(destPaths, animGuids);
             CreateYHAnimation(destPaths, outputObjects);
-            AssetDatabase.CreateAsset(outputObjects, $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnim{charaNo.ToString("d2")}.asset");
+            AssetDatabase.CreateAsset(outputObjects, createAssetPath);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
 
-        private static void CreateByteFiles(List<string> destPaths, int charaNo)
+        private static void CreateByteFiles(List<string> destPaths, string[] animGuids)
         {
-            string[] animGuids = AssetDatabase.FindAssets("", new[] { $"Assets/GameAssets/Animations/Chara{charaNo.ToString("d2")}" });
+
             foreach (var guid in animGuids)
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);

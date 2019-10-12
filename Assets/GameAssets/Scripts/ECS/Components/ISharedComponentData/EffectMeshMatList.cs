@@ -30,36 +30,66 @@ namespace YYHS
     [Serializable]
     public struct EffectMeshMatList : IEquatable<EffectMeshMatList>, ISharedComponentData
     {
-        public List<MeshMat> m_effectList;
-        public List<MeshMat> m_screenFilterList;
-        public List<MeshMat> m_bgFilterList;
+        public List<MeshMat> m_effectScreenList;
+        public List<MeshMat> m_effectLargeList;
+        public List<MeshMat> m_effectMediumList;
+        public List<MeshMat> m_effectSmallList;
+        public List<MeshMat> m_filterScreenList;
+        public List<MeshMat> m_filterBgList;
         public List<MeshMat> m_framePartsList;
 
-        public void AddEffect(Sprite sprite, string shaderName)
+        public void AddEffectScreen(Sprite sprite, string shaderName)
         {
-            if (m_effectList == null)
+            if (m_effectScreenList == null)
             {
-                m_effectList = new List<MeshMat>();
+                m_effectScreenList = new List<MeshMat>();
             }
-            Add(m_effectList, sprite, shaderName, 1);
+            Add(m_effectScreenList, sprite, shaderName, 1);
         }
 
-        public void AddScreenFilter(Sprite sprite, string shaderName)
+        public void AddEffectLarge(Sprite sprite, string shaderName)
         {
-            if (m_screenFilterList == null)
+            if (m_effectLargeList == null)
             {
-                m_screenFilterList = new List<MeshMat>();
+                m_effectLargeList = new List<MeshMat>();
             }
-            Add(m_screenFilterList, sprite, shaderName, 1);
+            Add(m_effectLargeList, sprite, shaderName, 1);
         }
 
-        public void AddBGFilter(Sprite sprite, string shaderName)
+        public void AddEffectMedium(Sprite sprite, string shaderName)
         {
-            if (m_bgFilterList == null)
+            if (m_effectMediumList == null)
             {
-                m_bgFilterList = new List<MeshMat>();
+                m_effectMediumList = new List<MeshMat>();
             }
-            Add(m_bgFilterList, sprite, shaderName, 1);
+            Add(m_effectMediumList, sprite, shaderName, 1);
+        }
+
+        public void AddEffectSmall(Sprite sprite, string shaderName)
+        {
+            if (m_effectSmallList == null)
+            {
+                m_effectSmallList = new List<MeshMat>();
+            }
+            Add(m_effectSmallList, sprite, shaderName, 1);
+        }
+
+        public void AddFilterScreen(Sprite sprite, string shaderName)
+        {
+            if (m_filterScreenList == null)
+            {
+                m_filterScreenList = new List<MeshMat>();
+            }
+            Add(m_filterScreenList, sprite, shaderName, 1);
+        }
+
+        public void AddFilterBG(Sprite sprite, string shaderName)
+        {
+            if (m_filterBgList == null)
+            {
+                m_filterBgList = new List<MeshMat>();
+            }
+            Add(m_filterBgList, sprite, shaderName, 1);
         }
 
         public void AddFrameParts(Sprite sprite, string shaderName, int materialCount)

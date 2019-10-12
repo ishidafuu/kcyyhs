@@ -19,9 +19,12 @@ namespace YYHS
 
         public static readonly string EffectSprite = "Sprites/Effect/effect{0}";
         public static readonly string EffectMaterial = "Materials/Effect/effect{0}";
-        public static readonly string EffectShader = "YHShader/effect{0}";
-        public static readonly string ScreenFillterShader = "YHShader/screenFillter{0}";
-        public static readonly string BGFillterShader = "YHShader/bgFillter{0}";
+        public static readonly string EffectScreenShader = "YHShader/effectScreen{0}";
+        public static readonly string EffectSmallShader = "YHShader/effectSmall{0}";
+        public static readonly string EffectMediumShader = "YHShader/effectMedium{0}";
+        public static readonly string EffectLargeShader = "YHShader/effectLarge{0}";
+        public static readonly string FillterScreenShader = "YHShader/fillterScreen{0}";
+        public static readonly string FillterBGShader = "YHShader/fillterBG{0}";
         public static readonly string FramePartsShader = "YHShader/frameParts{0}";
     }
 }

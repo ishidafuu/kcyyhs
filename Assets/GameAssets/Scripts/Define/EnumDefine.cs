@@ -156,11 +156,21 @@ namespace YYHS
         _Air00,
         _Air01,
         _Air02,
+        _DefenceA00,
+        _DefenceA01,
+        _DefenceA02,
+        _DefenceB00,
+        _DefenceB01,
+        _DefenceB02,
+        _Down,
         _Jump00,
         _Jump01,
+        _Miss,
+        _Shaky,
         _Stand00,
         _Stand01,
         _Stand02,
+
         Action00_00,
         Action00_01,
         Action01_00,
@@ -177,15 +187,7 @@ namespace YYHS
         Action06_01,
         Action07_00,
         Action07_01,
-        DefenceA00,
-        DefenceA01,
-        DefenceA02,
-        DefenceB00,
-        DefenceB01,
-        DefenceB02,
-        Down,
-        Shaky,
-        Miss,
+
 
     }
 
@@ -193,11 +195,16 @@ namespace YYHS
     {
         None,
         EventPlaySE,
-        EventEffect,
-        EventEffectArg,
-        EventScreenFillter,
-        EventScreenFillterArg,
-        EventBGFillter,
+        EventEffectScreen,
+        EventEffectScreenArg,
+        EventEffectLarge,
+        EventEffectMedium,
+        EventEffectSmall,
+        EventEffectDamageBody,
+        EventEffectDamageFace,
+        EventFillterScreen,
+        EventFillterScreenArg,
+        EventFillterBG,
         EventBGFillterArg,
         EventFlash,
         EventBlink,
@@ -214,9 +221,12 @@ namespace YYHS
 
     public enum EnumEffectType
     {
-        Effect,
-        ScreenFillter,
-        BGFillter,
+        EffectScreen,
+        EffectLarge,
+        EffectMedium,
+        EffectSmall,
+        FillterScreen,
+        FillterBG,
     }
 
     public enum EnumFillter
@@ -246,5 +256,10 @@ namespace YYHS
     {
         Idle,
         Distribute,
+    }
+
+    public enum EnumEffectLarge
+    {
+        Hit,
     }
 }

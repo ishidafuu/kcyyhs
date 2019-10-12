@@ -163,8 +163,9 @@ namespace YYHS
                 battleSequencer.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
             }
 
-            battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.NoDamage;
-            battleSequencer.m_sideB.m_enemyDamageLv = EnumDamageLv.NoDamage;
+            // TODO:仮
+            battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.Hit;
+            battleSequencer.m_sideB.m_enemyDamageLv = EnumDamageLv.Hit;
             // Debug.Log(battleSequencer.m_sideA.m_enemyDamageLv);
             // Debug.Log(battleSequencer.m_sideB.m_enemyDamageLv);
         }

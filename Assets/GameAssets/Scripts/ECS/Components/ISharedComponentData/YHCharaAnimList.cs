@@ -8,7 +8,8 @@ namespace YYHS
     [Serializable]
     public struct YHCharaAnimList : IEquatable<YHCharaAnimList>, ISharedComponentData
     {
-        public List<YHAnimationsObject> m_charaAnimList;
+        YHAnimationsObject m_charaAnimCommon;
+        List<YHAnimationsObject> m_charaAnimList;
         public void Init()
         {
             m_charaAnimList = new List<YHAnimationsObject>();
@@ -22,15 +23,32 @@ namespace YYHS
 
             foreach (var item in loadObjects)
             {
-                m_charaAnimList.Add(item);
+                if (item.name.IndexOf("Common") >= 0)
+                {
+                    m_charaAnimCommon = item;
+                }
+                else
+                {
+                    m_charaAnimList.Add(item);
+                }
             }
+
         }
 
         public YHAnimation GetAnim(int sideNo, EnumAnimationName animName)
         {
-            if ((int)animName >= m_charaAnimList[sideNo].animations.Count)
+            int animeNo = (int)animName;
+            if (animeNo < m_charaAnimCommon.animations.Count)
+            {
+                return m_charaAnimCommon.animations[animeNo];
+            }
+
+            animeNo -= m_charaAnimCommon.animations.Count;
+
+            if (animeNo >= m_charaAnimList[sideNo].animations.Count)
                 Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[sideNo].animations.Count} animName:{(int)animName}({animName})");
-            return m_charaAnimList[sideNo].animations[(int)animName];
+
+            return m_charaAnimList[sideNo].animations[animeNo];
         }
 
         public bool Equals(YHCharaAnimList obj)

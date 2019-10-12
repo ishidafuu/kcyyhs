@@ -152,19 +152,35 @@ namespace YYHS
                 if (item.m_frame != seq.m_animation.m_count)
                     continue;
 
+                isEffectUpdate = true;
                 switch (item.m_functionName)
                 {
-                    case EnumEventFunctionName.EventEffect:
-                        SetEffect(filterEffects, EnumEffectType.Effect, item.m_intParameter, true);
-                        isEffectUpdate = true;
+                    case EnumEventFunctionName.EventEffectScreen:
+                        SetEffect(filterEffects, EnumEffectType.EffectScreen, item.m_intParameter, true);
                         break;
-                    case EnumEventFunctionName.EventScreenFillter:
-                        SetEffect(filterEffects, EnumEffectType.ScreenFillter, item.m_intParameter, true);
-                        isEffectUpdate = true;
+                    case EnumEventFunctionName.EventEffectLarge:
+                        SetEffect(filterEffects, EnumEffectType.EffectLarge, item.m_intParameter, true);
                         break;
-                    case EnumEventFunctionName.EventBGFillter:
-                        SetEffect(filterEffects, EnumEffectType.BGFillter, item.m_intParameter, true);
-                        isEffectUpdate = true;
+                    case EnumEventFunctionName.EventEffectMedium:
+                        SetEffect(filterEffects, EnumEffectType.EffectMedium, item.m_intParameter, true);
+                        break;
+                    case EnumEventFunctionName.EventEffectSmall:
+                        SetEffect(filterEffects, EnumEffectType.EffectSmall, item.m_intParameter, true);
+                        break;
+                    case EnumEventFunctionName.EventFillterScreen:
+                        SetEffect(filterEffects, EnumEffectType.FillterScreen, item.m_intParameter, true);
+                        break;
+                    case EnumEventFunctionName.EventFillterBG:
+                        SetEffect(filterEffects, EnumEffectType.FillterBG, item.m_intParameter, true);
+                        break;
+                    case EnumEventFunctionName.EventEffectDamageBody:
+                        SetEffect(filterEffects, EnumEffectType.EffectLarge, (int)EnumEffectLarge.Hit, true);
+                        break;
+                    case EnumEventFunctionName.EventEffectDamageFace:
+                        SetEffect(filterEffects, EnumEffectType.EffectLarge, (int)EnumEffectLarge.Hit, true);
+                        break;
+                    default:
+                        isEffectUpdate = false;
                         break;
                 }
             }
@@ -172,13 +188,13 @@ namespace YYHS
             // バトルシーケンス終了フィルタ
             if (isEndTransitionFilter)
             {
-                SetEffect(filterEffects, EnumEffectType.ScreenFillter, (int)EnumFillter.EndBattleSequence, false);
+                SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.EndBattleSequence, false);
                 isEffectUpdate = true;
             }
             // バトルシーケンスから分割画面への切り替えフィルタ
             else if (seq.m_seqState == EnumBattleSequenceState.Idle)
             {
-                SetEffect(filterEffects, EnumEffectType.ScreenFillter, (int)EnumFillter.SwitchSplitView, false);
+                SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.SwitchSplitView, false);
                 isEffectUpdate = true;
             }
 
@@ -459,7 +475,7 @@ namespace YYHS
         private EnumAnimationName GetDeffenceName(EnumDefenceType deffenceType, EnumDamageLv damageLv)
         {
             int step = 3;
-            int index = (int)EnumAnimationName.DefenceA00 + ((int)deffenceType * step) + (int)damageLv;
+            int index = (int)EnumAnimationName._DefenceA00 + ((int)deffenceType * step) + (int)damageLv;
             return (EnumAnimationName)index;
         }
 
@@ -468,12 +484,12 @@ namespace YYHS
             switch (reactionType)
             {
                 case EnumDamageReaction.Shaky:
-                    return EnumAnimationName.Shaky;
+                    return EnumAnimationName._Shaky;
                 case EnumDamageReaction.Down:
-                    return EnumAnimationName.Down;
+                    return EnumAnimationName._Down;
             }
 
-            return EnumAnimationName.Down;
+            return EnumAnimationName._Down;
         }
 
 

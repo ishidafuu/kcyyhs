@@ -55,14 +55,23 @@ namespace YYHS
                 MeshMat meshMat;
                 switch (item.m_effectType)
                 {
-                    case EnumEffectType.Effect:
-                        meshMat = Shared.m_effectMeshMatList.m_effectList[item.m_effectIndex];
+                    case EnumEffectType.EffectScreen:
+                        meshMat = Shared.m_effectMeshMatList.m_effectScreenList[item.m_effectIndex];
                         break;
-                    case EnumEffectType.ScreenFillter:
-                        meshMat = Shared.m_effectMeshMatList.m_screenFilterList[item.m_effectIndex];
+                    case EnumEffectType.EffectLarge:
+                        meshMat = Shared.m_effectMeshMatList.m_effectLargeList[item.m_effectIndex];
                         break;
-                    case EnumEffectType.BGFillter:
-                        meshMat = Shared.m_effectMeshMatList.m_bgFilterList[item.m_effectIndex];
+                    case EnumEffectType.EffectMedium:
+                        meshMat = Shared.m_effectMeshMatList.m_effectMediumList[item.m_effectIndex];
+                        break;
+                    case EnumEffectType.EffectSmall:
+                        meshMat = Shared.m_effectMeshMatList.m_effectSmallList[item.m_effectIndex];
+                        break;
+                    case EnumEffectType.FillterScreen:
+                        meshMat = Shared.m_effectMeshMatList.m_filterScreenList[item.m_effectIndex];
+                        break;
+                    case EnumEffectType.FillterBG:
+                        meshMat = Shared.m_effectMeshMatList.m_filterBgList[item.m_effectIndex];
                         break;
                     default:
                         continue;

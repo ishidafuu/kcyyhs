@@ -71,15 +71,24 @@ namespace YYHS
 
                 switch (filterEffect.m_effectType)
                 {
-                    case EnumEffectType.Effect:
-                        meshMat = Shared.m_effectMeshMatList.m_effectList[filterEffect.m_effectIndex];
+                    case EnumEffectType.EffectScreen:
+                        meshMat = Shared.m_effectMeshMatList.m_effectScreenList[filterEffect.m_effectIndex];
                         break;
-                    case EnumEffectType.ScreenFillter:
-                        meshMat = Shared.m_effectMeshMatList.m_screenFilterList[filterEffect.m_effectIndex];
+                    case EnumEffectType.EffectLarge:
+                        meshMat = Shared.m_effectMeshMatList.m_effectLargeList[filterEffect.m_effectIndex];
                         break;
-                    case EnumEffectType.BGFillter:
+                    case EnumEffectType.EffectMedium:
+                        meshMat = Shared.m_effectMeshMatList.m_effectMediumList[filterEffect.m_effectIndex];
+                        break;
+                    case EnumEffectType.EffectSmall:
+                        meshMat = Shared.m_effectMeshMatList.m_effectSmallList[filterEffect.m_effectIndex];
+                        break;
+                    case EnumEffectType.FillterScreen:
+                        meshMat = Shared.m_effectMeshMatList.m_filterScreenList[filterEffect.m_effectIndex];
+                        break;
+                    case EnumEffectType.FillterBG:
                         layer = EnumDrawLayer.OverBackGround;
-                        meshMat = Shared.m_effectMeshMatList.m_bgFilterList[filterEffect.m_effectIndex];
+                        meshMat = Shared.m_effectMeshMatList.m_filterBgList[filterEffect.m_effectIndex];
                         break;
                     default:
                         return;
