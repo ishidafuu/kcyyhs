@@ -144,6 +144,7 @@ namespace YYHS
                 isEffectUpdate = true;
             }
 
+            bool isSideA = seq.m_animation.m_isSideA;
             int charaNo = seq.m_animation.m_charaNo;
             EnumAnimationName animName = seq.m_animation.m_animName;
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
@@ -152,37 +153,42 @@ namespace YYHS
                 if (item.m_frame != seq.m_animation.m_count)
                     continue;
 
-                isEffectUpdate = true;
+                Debug.Log($"{item.m_functionName}:{item.m_intParameter}");
                 switch (item.m_functionName)
                 {
                     case EnumEventFunctionName.EventEffectScreen:
-                        SetEffect(filterEffects, EnumEffectType.EffectScreen, item.m_intParameter, true);
+                        SetEffect(filterEffects, EnumEffectType.EffectScreen, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventEffectLarge:
-                        SetEffect(filterEffects, EnumEffectType.EffectLarge, item.m_intParameter, true);
+                        SetEffect(filterEffects, EnumEffectType.EffectLarge, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventEffectMedium:
-                        SetEffect(filterEffects, EnumEffectType.EffectMedium, item.m_intParameter, true);
+                        SetEffect(filterEffects, EnumEffectType.EffectMedium, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventEffectSmall:
-                        SetEffect(filterEffects, EnumEffectType.EffectSmall, item.m_intParameter, true);
+                        SetEffect(filterEffects, EnumEffectType.EffectSmall, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventFillterScreen:
-                        SetEffect(filterEffects, EnumEffectType.FillterScreen, item.m_intParameter, true);
+                        SetEffect(filterEffects, EnumEffectType.FillterScreen, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventFillterBG:
-                        SetEffect(filterEffects, EnumEffectType.FillterBG, item.m_intParameter, true);
+                        SetEffect(filterEffects, EnumEffectType.FillterBG, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventEffectDamageBody:
                         StopOtherDamageEffect(filterEffects);
-                        SetEffect(filterEffects, EnumEffectType.EffectDamageBody, (int)EnumEffectLarge.Damage, true);
+                        SetEffect(filterEffects, EnumEffectType.EffectDamageBody, (int)EnumEffectLarge.Damage, isSideA);
+                        isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventEffectDamageFace:
                         StopOtherDamageEffect(filterEffects);
-                        SetEffect(filterEffects, EnumEffectType.EffectDamageFace, (int)EnumEffectLarge.Damage, true);
-                        break;
-                    default:
-                        isEffectUpdate = false;
+                        SetEffect(filterEffects, EnumEffectType.EffectDamageFace, (int)EnumEffectLarge.Damage, isSideA);
+                        isEffectUpdate = true;
                         break;
                 }
             }
@@ -190,13 +196,13 @@ namespace YYHS
             // バトルシーケンス終了フィルタ
             if (isEndTransitionFilter)
             {
-                SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.EndBattleSequence, false);
+                SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.EndBattleSequence, isSideA);
                 isEffectUpdate = true;
             }
             // バトルシーケンスから分割画面への切り替えフィルタ
             else if (seq.m_seqState == EnumBattleSequenceState.Idle)
             {
-                SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.SwitchSplitView, false);
+                SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.SwitchSplitView, isSideA);
                 isEffectUpdate = true;
             }
 
@@ -226,12 +232,14 @@ namespace YYHS
                     default:
                         continue;
                 }
+
+                Debug.Log($"{item.m_effectType}:{i} isActive:{item.m_isActive}");
                 filterEffects[i] = item;
             }
         }
 
         private static void SetEffect(NativeArray<FilterEffect> filterEffects,
-            EnumEffectType effectType, int effectIndex, bool isMulti)
+            EnumEffectType effectType, int effectIndex, bool isSideA)
         {
             for (int i = 0; i < filterEffects.Length; i++)
             {
@@ -243,14 +251,11 @@ namespace YYHS
                 effect.m_isActive = true;
                 effect.m_effectType = effectType;
                 effect.m_effectIndex = effectIndex;
+                effect.m_isSideA = isSideA;
                 effect.m_count = 0;
                 filterEffects[i] = effect;
-
-                // 複数ある可能性がなければBreak
-                if (!isMulti)
-                {
-                    break;
-                }
+                Debug.Log($"{effect.m_effectType}:{i} isActive:{effect.m_isActive}");
+                break;
             }
         }
 

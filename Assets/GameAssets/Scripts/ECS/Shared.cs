@@ -29,7 +29,7 @@ namespace YYHS
         public static readonly int EffectMediumCount = 0;
         public static readonly int EffectSmallCount = 0;
         public static readonly int ScreenFillterCount = 2;
-        public static readonly int BGFillterCount = 1;
+        public static readonly int BGFillterCount = 3;
         public static int m_testShaderNo = EffectScreenCount - 1;
 
         static readonly string DefaultShader = "Sprites/DefaultSprite";
