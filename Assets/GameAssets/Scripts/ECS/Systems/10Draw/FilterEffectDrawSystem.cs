@@ -45,8 +45,13 @@ namespace YYHS
             // Mesh mesh = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_mesh;
             // Material mat = Shared.m_effectMeshMatList.m_effectList[Shared.m_testShaderNo].m_material;
 
-            Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].m_mesh;
-            Material mat = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].GetMaterial();
+            // Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].m_mesh;
+            // Material mat = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].GetMaterial();
+
+
+            Mesh mesh = Shared.m_effectMeshMatList.m_effectLargeList[0].m_mesh;
+            Material mat = Shared.m_effectMeshMatList.m_effectLargeList[0].GetMaterial();
+
             int layer = (int)EnumDrawLayer.OverBackGround;
 
             Matrix4x4 matrixes = Matrix4x4.TRS(
@@ -68,6 +73,7 @@ namespace YYHS
                     continue;
                 MeshMat meshMat;
                 EnumDrawLayer layer = EnumDrawLayer.OverChara;
+                Vector3 position = new Vector3(0, Settings.Instance.DrawPos.BgScrollY, (int)layer);
 
                 switch (filterEffect.m_effectType)
                 {
@@ -83,11 +89,19 @@ namespace YYHS
                     case EnumEffectType.EffectSmall:
                         meshMat = Shared.m_effectMeshMatList.m_effectSmallList[filterEffect.m_effectIndex];
                         break;
+                    case EnumEffectType.EffectDamageBody:
+                        meshMat = Shared.m_effectMeshMatList.m_effectLargeList[(int)EnumEffectLarge.Damage];
+                        UpdateEffectPos(ref position, filterEffect.m_effectType);
+                        break;
+                    case EnumEffectType.EffectDamageFace:
+                        meshMat = Shared.m_effectMeshMatList.m_effectLargeList[(int)EnumEffectLarge.Damage];
+                        UpdateEffectPos(ref position, filterEffect.m_effectType);
+                        break;
                     case EnumEffectType.FillterScreen:
                         meshMat = Shared.m_effectMeshMatList.m_filterScreenList[filterEffect.m_effectIndex];
                         break;
                     case EnumEffectType.FillterBG:
-                        layer = EnumDrawLayer.OverBackGround;
+                        position.z = (int)EnumDrawLayer.OverBackGround;
                         meshMat = Shared.m_effectMeshMatList.m_filterBgList[filterEffect.m_effectIndex];
                         break;
                     default:
@@ -96,12 +110,54 @@ namespace YYHS
 
                 Mesh mesh = meshMat.m_mesh;
                 Material mat = meshMat.GetMaterial();
-
-                Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(0, Settings.Instance.DrawPos.BgScrollY, (int)layer),
-                    m_quaternion, Vector3.one);
+                Matrix4x4 matrixes = Matrix4x4.TRS(position, m_quaternion, Vector3.one);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
+            }
+        }
+
+        private void UpdateEffectPos(ref Vector3 position, EnumEffectType effectType)
+        {
+
+
+            BattleSequencer seq = GetSingleton<BattleSequencer>();
+
+            if (seq.m_seqState <= EnumBattleSequenceState.Start)
+                return;
+
+            bool isSideA = seq.m_animation.m_isSideA;
+            int charaNo = seq.m_animation.m_charaNo;
+            EnumAnimationName animName = seq.m_animation.m_animName;
+            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
+            int count = seq.m_animation.m_count;
+
+            foreach (YHAnimationParts item in anim.m_parts)
+            {
+                bool isPosition = false;
+                switch (effectType)
+                {
+                    case EnumEffectType.EffectDamageBody:
+                        isPosition = (item.m_effectPosition == EnumEffectPosition.Dodge);
+                        break;
+                    case EnumEffectType.EffectDamageFace:
+                        // isPosition = (item.m_effectPosition == EnumEffectPosition.Face);
+                        break;
+                }
+
+                if (!isPosition)
+                    continue;
+
+                YHFrameData isActive = YHAnimationUtils.GetNowFrameData(count, item.m_isActive);
+
+                if (isActive == null || !isActive.m_value)
+                    continue;
+
+                Vector2 partsPos = YHAnimationUtils.EvaluteLocalPos(item, count, isSideA);
+
+                position.x = partsPos.x;
+                position.y = partsPos.y;
+                Debug.Log("partsPos" + partsPos);
+                break;
             }
         }
 

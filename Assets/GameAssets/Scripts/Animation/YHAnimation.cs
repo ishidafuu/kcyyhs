@@ -19,6 +19,7 @@ namespace YYHS
     {
         public string m_name;
         public float m_orderInLayer;
+        public EnumEffectPosition m_effectPosition;
         public List<YHFrameData> m_isActive = new List<YHFrameData>();
         public List<YHFrameData> m_isFlipX = new List<YHFrameData>();
         public List<YHFrameData> m_isFlipY = new List<YHFrameData>();

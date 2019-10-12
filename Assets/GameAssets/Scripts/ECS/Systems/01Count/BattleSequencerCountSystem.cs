@@ -174,10 +174,12 @@ namespace YYHS
                         SetEffect(filterEffects, EnumEffectType.FillterBG, item.m_intParameter, true);
                         break;
                     case EnumEventFunctionName.EventEffectDamageBody:
-                        SetEffect(filterEffects, EnumEffectType.EffectLarge, (int)EnumEffectLarge.Hit, true);
+                        StopOtherDamageEffect(filterEffects);
+                        SetEffect(filterEffects, EnumEffectType.EffectDamageBody, (int)EnumEffectLarge.Damage, true);
                         break;
                     case EnumEventFunctionName.EventEffectDamageFace:
-                        SetEffect(filterEffects, EnumEffectType.EffectLarge, (int)EnumEffectLarge.Hit, true);
+                        StopOtherDamageEffect(filterEffects);
+                        SetEffect(filterEffects, EnumEffectType.EffectDamageFace, (int)EnumEffectLarge.Damage, true);
                         break;
                     default:
                         isEffectUpdate = false;
@@ -204,6 +206,28 @@ namespace YYHS
                 m_query.CopyFromComponentDataArray(filterEffects);
             }
             filterEffects.Dispose();
+        }
+
+        private static void StopOtherDamageEffect(NativeArray<FilterEffect> filterEffects)
+        {
+            for (int i = 0; i < filterEffects.Length; i++)
+            {
+                var item = filterEffects[i];
+
+                if (!item.m_isActive)
+                    continue;
+
+                switch (item.m_effectType)
+                {
+                    case EnumEffectType.EffectDamageBody:
+                    case EnumEffectType.EffectDamageFace:
+                        item.m_isActive = false;
+                        break;
+                    default:
+                        continue;
+                }
+                filterEffects[i] = item;
+            }
         }
 
         private static void SetEffect(NativeArray<FilterEffect> filterEffects,

@@ -176,7 +176,7 @@ namespace YYHS
 
                 if (functionName == EnumEventFunctionName.None)
                 {
-                    Debug.LogError($"Not Found FunctionName:{item.functionName}");
+                    Debug.LogError($"Not Found FunctionName:{item.functionName} ({rawAnim.AnimationClip.m_Name} )");
                 }
                 // Debug.Log(functionName);
                 YHFrameEvent newEvent = new YHFrameEvent()
@@ -201,6 +201,7 @@ namespace YYHS
                 parts = new YHAnimationParts()
                 {
                     m_name = partsName,
+                    m_effectPosition = GetEffectPosition(partsName),
                     m_orderInLayer = GetLayer(partsName)
                 };
 
@@ -230,6 +231,19 @@ namespace YYHS
 
         private static int TimeToFrame(float time) => (int)Mathf.Round(time * 60f);
 
+        private static EnumEffectPosition GetEffectPosition(string partsName)
+        {
+            if (partsName.IndexOf("dodge") >= 0)
+                return EnumEffectPosition.Dodge;
+
+            if (partsName.IndexOf("face") >= 0)
+                return EnumEffectPosition.Face;
+
+            if (partsName.IndexOf("shot") >= 0)
+                return EnumEffectPosition.Shot;
+
+            return EnumEffectPosition.None;
+        }
 
         private static float GetLayer(string partsName)
         {

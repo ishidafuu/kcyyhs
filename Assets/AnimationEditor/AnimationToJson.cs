@@ -14,25 +14,43 @@ namespace YYHS
     {
         [SerializeField] SpriteSetter m_spriteSetter;
 
-
         public void Convert()
         {
             if (m_spriteSetter.GetAnimType() == EditAnimType.Action)
             {
-                ConvertAction();
+                int charaNo = m_spriteSetter.GetCharaNo();
+                ConvertAction(charaNo);
             }
             else
             {
                 ConvertCommon();
             }
         }
-
-        void ConvertAction()
+        public void ConvertAll()
         {
-            int charaNo = m_spriteSetter.GetCharaNo();
+            for (int i = 0; i < 100; i++)
+            {
+                bool isFound = ConvertAction(i);
+                if (!isFound)
+                    break;
+            }
+
+            ConvertCommon();
+        }
+
+        bool ConvertAction(int charaNo)
+        {
             string[] animGuids = AssetDatabase.FindAssets("", new[] { $"Assets/GameAssets/Animations/Chara{charaNo.ToString("d2")}" });
+
+            if (animGuids.Length == 0)
+            {
+                return false;
+            }
+
             string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnim{charaNo.ToString("d2")}.asset";
             Convert(animGuids, createAssetPath);
+
+            return true;
         }
 
         void ConvertCommon()
@@ -51,6 +69,7 @@ namespace YYHS
             AssetDatabase.CreateAsset(outputObjects, createAssetPath);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            Debug.Log($"Convert Finished : {createAssetPath}");
         }
 
         private static void CreateByteFiles(List<string> destPaths, string[] animGuids)
@@ -109,6 +128,9 @@ namespace YYHS
 
             if (GUILayout.Button("Convert"))
                 (target as AnimationToJson).Convert();
+
+            if (GUILayout.Button("ConvertAll"))
+                (target as AnimationToJson).ConvertAll();
 
         }
 

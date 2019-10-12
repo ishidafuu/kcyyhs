@@ -111,6 +111,24 @@ namespace YYHS
             return new Vector3((sign * posX) + basePosX, posY, (float)layer + item.m_orderInLayer);
         }
 
+
+        public static Vector2 EvaluteLocalPos(YHAnimationParts item, int count, bool isSideA)
+        {
+            int sign = (isSideA)
+                ? +1
+                : -1;
+
+            float posX = (item.m_positionX.length == 0)
+                ? 0
+                : item.m_positionX.Evaluate(count);
+
+            float posY = (item.m_positionY.length == 0)
+                ? 0
+                : item.m_positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
+
+            return new Vector2((sign * posX), posY);
+        }
+
         public static Quaternion EvaluteQuaternion(YHAnimationParts item, int count, bool isSideA)
         {
 

@@ -73,6 +73,10 @@ namespace YYHS
                     case EnumEffectType.FillterBG:
                         meshMat = Shared.m_effectMeshMatList.m_filterBgList[item.m_effectIndex];
                         break;
+                    case EnumEffectType.EffectDamageBody:
+                    case EnumEffectType.EffectDamageFace:
+                        meshMat = Shared.m_effectMeshMatList.m_effectLargeList[(int)EnumEffectLarge.Damage];
+                        break;
                     default:
                         continue;
                 }

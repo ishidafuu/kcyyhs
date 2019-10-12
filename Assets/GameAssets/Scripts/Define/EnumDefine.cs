@@ -225,6 +225,8 @@ namespace YYHS
         EffectLarge,
         EffectMedium,
         EffectSmall,
+        EffectDamageBody,
+        EffectDamageFace,
         FillterScreen,
         FillterBG,
     }
@@ -260,6 +262,14 @@ namespace YYHS
 
     public enum EnumEffectLarge
     {
-        Hit,
+        Damage,
+    }
+
+    public enum EnumEffectPosition
+    {
+        None,
+        Dodge,
+        Face,
+        Shot,
     }
 }

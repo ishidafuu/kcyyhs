@@ -18,6 +18,7 @@ MonoBehaviour:
     m_parts:
     - m_name: cm_stand03
       m_orderInLayer: 0
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 1
@@ -112,6 +113,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - m_name: cm_l_parts00
       m_orderInLayer: 0.3
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 1
@@ -204,6 +206,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - m_name: cm_u_parts00
       m_orderInLayer: -0.3
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 0
@@ -260,6 +263,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - m_name: bg02
       m_orderInLayer: 0
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 1
@@ -340,6 +344,7 @@ MonoBehaviour:
     m_parts:
     - m_name: cm_stand03
       m_orderInLayer: 0
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 1
@@ -460,6 +465,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - m_name: cm_l_parts00
       m_orderInLayer: 0.3
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 1
@@ -576,6 +582,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - m_name: cm_u_parts00
       m_orderInLayer: -0.3
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 0
@@ -746,6 +753,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     - m_name: bg02
       m_orderInLayer: 0
+      m_effectPosition: 0
       m_isActive:
       - m_frame: 0
         m_value: 1
@@ -842,7 +850,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     m_events:
     - m_frame: 5
-      m_functionName: 6
+      m_functionName: 11
       m_stringParameter: 
       m_floatParameter: 0
       m_intParameter: 0
