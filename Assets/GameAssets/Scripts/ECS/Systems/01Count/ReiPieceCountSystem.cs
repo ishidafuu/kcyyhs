@@ -56,8 +56,6 @@ namespace YYHS
                     m_reiPieces[i] = reiPiece;
                 }
             }
-
-
         }
     }
 }

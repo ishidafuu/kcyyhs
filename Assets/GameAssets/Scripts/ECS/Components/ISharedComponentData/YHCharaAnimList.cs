@@ -35,7 +35,7 @@ namespace YYHS
 
         }
 
-        public YHAnimation GetAnim(int sideNo, EnumAnimationName animName)
+        public YHAnimation GetAnim(int charaNo, EnumAnimationName animName)
         {
             int animeNo = (int)animName;
             if (animeNo < m_charaAnimCommon.animations.Count)
@@ -45,10 +45,10 @@ namespace YYHS
 
             animeNo -= m_charaAnimCommon.animations.Count;
 
-            if (animeNo >= m_charaAnimList[sideNo].animations.Count)
-                Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[sideNo].animations.Count} animName:{(int)animName}({animName})");
+            if (animeNo >= m_charaAnimList[charaNo].animations.Count)
+                Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[charaNo].animations.Count} animName:{(int)animName}({animName})");
 
-            return m_charaAnimList[sideNo].animations[animeNo];
+            return m_charaAnimList[charaNo].animations[animeNo];
         }
 
         public bool Equals(YHCharaAnimList obj)

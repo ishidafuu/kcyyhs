@@ -156,6 +156,10 @@ namespace YYHS
                 Debug.Log($"{item.m_functionName}:{item.m_intParameter}");
                 switch (item.m_functionName)
                 {
+                    case EnumEventFunctionName.EventEffectBG:
+                        SetEffect(filterEffects, EnumEffectType.EffectBG, item.m_intParameter, isSideA);
+                        isEffectUpdate = true;
+                        break;
                     case EnumEventFunctionName.EventEffectScreen:
                         SetEffect(filterEffects, EnumEffectType.EffectScreen, item.m_intParameter, isSideA);
                         isEffectUpdate = true;
@@ -174,10 +178,6 @@ namespace YYHS
                         break;
                     case EnumEventFunctionName.EventFillterScreen:
                         SetEffect(filterEffects, EnumEffectType.FillterScreen, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventFillterBG:
-                        SetEffect(filterEffects, EnumEffectType.FillterBG, item.m_intParameter, isSideA);
                         isEffectUpdate = true;
                         break;
                     case EnumEventFunctionName.EventEffectDamageBody:

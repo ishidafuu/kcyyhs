@@ -70,8 +70,8 @@ namespace YYHS
                     case EnumEffectType.FillterScreen:
                         meshMat = Shared.m_effectMeshMatList.m_filterScreenList[item.m_effectIndex];
                         break;
-                    case EnumEffectType.FillterBG:
-                        meshMat = Shared.m_effectMeshMatList.m_filterBgList[item.m_effectIndex];
+                    case EnumEffectType.EffectBG:
+                        meshMat = Shared.m_effectMeshMatList.m_effectBGList[item.m_effectIndex];
                         break;
                     case EnumEffectType.EffectDamageBody:
                     case EnumEffectType.EffectDamageFace:

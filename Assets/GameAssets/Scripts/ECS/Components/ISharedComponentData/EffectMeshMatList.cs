@@ -30,13 +30,23 @@ namespace YYHS
     [Serializable]
     public struct EffectMeshMatList : IEquatable<EffectMeshMatList>, ISharedComponentData
     {
+        public List<MeshMat> m_effectBGList;
         public List<MeshMat> m_effectScreenList;
+        public List<MeshMat> m_effectSideList;
         public List<MeshMat> m_effectLargeList;
         public List<MeshMat> m_effectMediumList;
         public List<MeshMat> m_effectSmallList;
         public List<MeshMat> m_filterScreenList;
-        public List<MeshMat> m_filterBgList;
         public List<MeshMat> m_framePartsList;
+
+        public void AddEffectBG(Sprite sprite, string shaderName)
+        {
+            if (m_effectBGList == null)
+            {
+                m_effectBGList = new List<MeshMat>();
+            }
+            Add(m_effectBGList, sprite, shaderName, 1);
+        }
 
         public void AddEffectScreen(Sprite sprite, string shaderName)
         {
@@ -45,6 +55,15 @@ namespace YYHS
                 m_effectScreenList = new List<MeshMat>();
             }
             Add(m_effectScreenList, sprite, shaderName, 1);
+        }
+
+        public void AddEffectSide(Sprite sprite, string shaderName, int materialCount)
+        {
+            if (m_effectSideList == null)
+            {
+                m_effectSideList = new List<MeshMat>();
+            }
+            Add(m_effectSideList, sprite, shaderName, 1);
         }
 
         public void AddEffectLarge(Sprite sprite, string shaderName)
@@ -81,15 +100,6 @@ namespace YYHS
                 m_filterScreenList = new List<MeshMat>();
             }
             Add(m_filterScreenList, sprite, shaderName, 1);
-        }
-
-        public void AddFilterBG(Sprite sprite, string shaderName)
-        {
-            if (m_filterBgList == null)
-            {
-                m_filterBgList = new List<MeshMat>();
-            }
-            Add(m_filterBgList, sprite, shaderName, 1);
         }
 
         public void AddFrameParts(Sprite sprite, string shaderName, int materialCount)

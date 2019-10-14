@@ -10,6 +10,7 @@ namespace YYHS
         // 効果音再生
         public void EventPlaySE(int seNo) { }
         // エフェクト
+        public void EventEffectBG(int effectNo) { }
         public void EventEffectScreen(int effectNo) { }
         public void EventEffectScreenArg(string arg) { }
         public void EventEffectLarge(int effectNo) { }
@@ -22,8 +23,9 @@ namespace YYHS
         // フィルター
         public void EventFillterScreen(int fillterNo) { }
         public void EventFillterScreenArg(string arg) { }
-        public void EventFillterBG(int fillterNo) { }
         public void EventFillterBGArg(string arg) { }
+        // ジャンプエフェクト
+        public void EventJump(int step) { }
         // 点滅１回
         public void EventFlash() { }
         // 連続点滅

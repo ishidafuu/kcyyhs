@@ -43,8 +43,8 @@ namespace YYHS
         {
             // Mesh mesh = Shared.m_effectMeshMatList.m_effectScreenList[testShaderNo].m_mesh;
             // Material mat = Shared.m_effectMeshMatList.m_effectScreenList[testShaderNo].GetMaterial();
-            Mesh mesh = Shared.m_effectMeshMatList.m_filterBgList[testShaderNo].m_mesh;
-            Material mat = Shared.m_effectMeshMatList.m_filterBgList[testShaderNo].GetMaterial();
+            Mesh mesh = Shared.m_effectMeshMatList.m_effectBGList[testShaderNo].m_mesh;
+            Material mat = Shared.m_effectMeshMatList.m_effectBGList[testShaderNo].GetMaterial();
             // Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].m_mesh;
             // Material mat = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].GetMaterial();
 
@@ -79,6 +79,10 @@ namespace YYHS
                 Debug.Log($"{filterEffect.m_effectType}:{filterEffect.m_effectIndex}");
                 switch (filterEffect.m_effectType)
                 {
+                    case EnumEffectType.EffectBG:
+                        position.z = (int)EnumDrawLayer.OverBackGround;
+                        meshMat = Shared.m_effectMeshMatList.m_effectBGList[filterEffect.m_effectIndex];
+                        break;
                     case EnumEffectType.EffectScreen:
                         meshMat = Shared.m_effectMeshMatList.m_effectScreenList[filterEffect.m_effectIndex];
                         break;
@@ -104,10 +108,6 @@ namespace YYHS
                         break;
                     case EnumEffectType.FillterScreen:
                         meshMat = Shared.m_effectMeshMatList.m_filterScreenList[filterEffect.m_effectIndex];
-                        break;
-                    case EnumEffectType.FillterBG:
-                        position.z = (int)EnumDrawLayer.OverBackGround;
-                        meshMat = Shared.m_effectMeshMatList.m_filterBgList[filterEffect.m_effectIndex];
                         break;
                     default:
                         return;

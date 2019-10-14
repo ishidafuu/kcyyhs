@@ -195,29 +195,25 @@ namespace YYHS
     {
         None,
         EventPlaySE,
+        EventEffectBG,
         EventEffectScreen,
         EventEffectScreenArg,
+        EventEffectSideOff,
         EventEffectLarge,
         EventEffectMedium,
         EventEffectSmall,
         EventEffectDamageBody,
         EventEffectDamageFace,
+        EventEffectReset,
         EventFillterScreen,
         EventFillterScreenArg,
-        EventFillterBG,
+        EventJump,
         EventBGFillterArg,
         EventFlash,
         EventBlink,
         EventColor,
     }
 
-
-    public enum EnumShaderBaseTexture
-    {
-        Screen,
-        BigQuad,
-        SmallQuad,
-    }
 
     public enum EnumEffectType
     {
@@ -228,7 +224,7 @@ namespace YYHS
         EffectDamageBody,
         EffectDamageFace,
         FillterScreen,
-        FillterBG,
+        EffectBG,
     }
 
     public enum EnumFillter
@@ -245,6 +241,8 @@ namespace YYHS
         ReiGauge,
         Signal,
         ReiPiece,
+        Jump,
+        Air,
     }
 
     public enum EnumSignal
@@ -271,5 +269,24 @@ namespace YYHS
         Dodge,
         Face,
         Shot,
+    }
+
+    public enum EnumJumpState
+    {
+        None = 0,
+        Jumping,
+        Air,
+        Falling,
+        Landing,
+    }
+
+    public enum EnumJumpEffectStep
+    {
+        None = 0,
+        InJumping,
+        OutJumping,
+        Air,
+        InFalling,
+        OutFalling,
     }
 }

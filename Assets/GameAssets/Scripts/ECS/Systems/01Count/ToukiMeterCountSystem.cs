@@ -73,14 +73,10 @@ namespace YYHS
 
                     bool isDecided = false;
                     bool isSideA = (i == 0);
-                    if (isSideA)
-                    {
-                        isDecided = (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep);
-                    }
-                    else
-                    {
-                        isDecided = (m_seq.m_sideB.m_animStep != EnumAnimationStep.Sleep);
-                    }
+
+                    isDecided = (isSideA)
+                        ? (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
+                        : (m_seq.m_sideB.m_animStep != EnumAnimationStep.Sleep);
 
                     if (isDecided)
                     {

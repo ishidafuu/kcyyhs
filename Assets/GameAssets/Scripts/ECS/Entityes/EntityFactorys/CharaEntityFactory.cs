@@ -35,6 +35,14 @@ namespace YYHS
                 m_rei = Settings.Instance.Common.ReiMax / 2,
             });
 
+            entityManager.SetComponentData(entity, new JumpState
+            {
+                m_state = EnumJumpState.None,
+                m_effectStep = EnumJumpEffectStep.None,
+                m_count = 0,
+            });
+
+
             return entity;
         }
     }

@@ -5,10 +5,11 @@ namespace YYHS
     public static class ComponentTypes
     {
         public static ComponentType[] CharaComponentType = {
-            typeof(SideInfo), // キャラ番号など
-            typeof(ToukiMeter), // 闘気メーター
-            typeof(StateMeter), // 状態
-            // typeof(PadScan), // 入力（CharaEntityFactoryで必要なキャラのみつける）
+            typeof(SideInfo),
+            typeof(ToukiMeter),
+            typeof(StateMeter),
+            typeof(JumpState), 
+            // typeof(PadScan), // （CharaEntityFactoryで必要なキャラのみつける）
         };
 
         public static ComponentType[] FilterEffectComponentType = {
