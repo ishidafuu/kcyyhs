@@ -298,6 +298,7 @@
             <key type="filename">cm_miss00.png</key>
             <key type="filename">u_bullet00.png</key>
             <key type="filename">u_bullet02.png</key>
+            <key type="filename">u_parts02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -402,6 +403,7 @@
             <filename>u_bullet03.png</filename>
             <filename>u_bullet04.png</filename>
             <filename>u_bullet05.png</filename>
+            <filename>u_parts02.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
