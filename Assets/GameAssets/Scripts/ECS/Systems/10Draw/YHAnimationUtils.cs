@@ -13,10 +13,11 @@ namespace YYHS
         {
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
 
+            if (anim == null)
+                return;
 
             foreach (YHAnimationParts item in anim.m_parts)
             {
-
                 YHFrameData isActive = YHAnimationUtils.GetNowFrameData(count, item.m_isActive);
 
                 if (isActive == null || !isActive.m_value)

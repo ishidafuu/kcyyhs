@@ -45,8 +45,17 @@ namespace YYHS
 
             animeNo -= m_charaAnimCommon.animations.Count;
 
+            if (charaNo >= m_charaAnimList.Count)
+            {
+                Debug.LogError($"Out Of Range  m_charaAnimList.Count:{m_charaAnimList.Count} charaNo:{charaNo}");
+                return null;
+            }
+
             if (animeNo >= m_charaAnimList[charaNo].animations.Count)
+            {
                 Debug.LogError($"Out Of Range  animations count:{m_charaAnimList[charaNo].animations.Count} animName:{(int)animName}({animName})");
+                return null;
+            }
 
             return m_charaAnimList[charaNo].animations[animeNo];
         }

@@ -16,7 +16,7 @@ namespace YYHS
         public CommonSettings Common;
         public AnimationSettings Animation;
         public DrawPosSettings DrawPos;
-        public DebugSettings Debug;
+        public DebugViewerSettings Debug;
         public int PixelSize { get; private set; }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace YYHS
         {
             Common = Resources.FindObjectsOfTypeAll<CommonSettings>().First() as CommonSettings;
             Animation = Resources.FindObjectsOfTypeAll<AnimationSettings>().First() as AnimationSettings;
-            Debug = Resources.FindObjectsOfTypeAll<DebugSettings>().First() as DebugSettings;
+            Debug = Resources.FindObjectsOfTypeAll<DebugViewerSettings>().First() as DebugViewerSettings;
             DrawPos = Resources.FindObjectsOfTypeAll<DrawPosSettings>().First() as DrawPosSettings;
         }
         public void SetPixelSize(int pixelSize)

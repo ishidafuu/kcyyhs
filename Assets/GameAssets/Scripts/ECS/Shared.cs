@@ -20,19 +20,7 @@ namespace YYHS
         public static MeshMatList m_commonMeshMat;
 
         public static EffectMeshMatList m_effectMeshMatList;
-
-        // public static YHFilterEffectList m_yhFilterEffectList;
         public static YHCharaAnimList m_yhCharaAnimList;
-
-        public static readonly int EffectBGCount = 3;
-        public static readonly int EffectScreenCount = 16;
-        // public static readonly int EffectSideCount = 0;
-        public static readonly int EffectLargeCount = 1;
-        public static readonly int EffectMediumCount = 0;
-        public static readonly int EffectSmallCount = 0;
-        public static readonly int FillterScreenCount = 2;
-        public static int m_testShaderNo = EffectScreenCount - 1;
-
         static readonly string DefaultShader = "Sprites/DefaultSprite";
 
         public static void ReadySharedComponentData()
@@ -43,78 +31,48 @@ namespace YYHS
             m_commonMeshMat = new MeshMatList(PathSettings.CommonSprite, DefaultShader);
 
             Sprite screenSprite = CreateSprite();
-            // Sprite sideSprite = CreateSprite(128, 128);
             Sprite largeSprite = CreateSprite(64, 64);
             Sprite mediumSprite = CreateSprite(32, 32);
             Sprite smallSprite = CreateSprite(16, 16);
 
+            m_effectMeshMatList.LoadEffectBG(screenSprite);
+            m_effectMeshMatList.LoadEffectScreen(screenSprite);
+            m_effectMeshMatList.LoadEffectLarge(largeSprite);
+            m_effectMeshMatList.LoadEffectMedium(mediumSprite);
+            m_effectMeshMatList.LoadEffectSmall(smallSprite);
+            m_effectMeshMatList.LoadFilterScreen(screenSprite);
 
-            for (int i = 0; i < EffectBGCount; i++)
-            {
-                m_effectMeshMatList.AddEffectBG(screenSprite, GetEffectBGShaderName(i));
-            }
-
-            for (int i = 0; i < EffectScreenCount; i++)
-            {
-                m_effectMeshMatList.AddEffectScreen(screenSprite, GetEffectScreenShaderName(i));
-            }
-
-            // for (int i = 0; i < EffectSideCount; i++)
-            // {
-            //     m_effectMeshMatList.AddEffectSide(sideSprite, GetEffectLargeShaderName(i));
-            // }
-
-            for (int i = 0; i < EffectLargeCount; i++)
-            {
-                m_effectMeshMatList.AddEffectLarge(largeSprite, GetEffectLargeShaderName(i));
-            }
-
-            for (int i = 0; i < EffectMediumCount; i++)
-            {
-                m_effectMeshMatList.AddEffectMedium(mediumSprite, GetEffectMediumShaderName(i));
-            }
-
-            for (int i = 0; i < EffectSmallCount; i++)
-            {
-                m_effectMeshMatList.AddEffectSmall(smallSprite, GetEffectSmallShaderName(i));
-            }
-
-            for (int i = 0; i < FillterScreenCount; i++)
-            {
-                m_effectMeshMatList.AddFilterScreen(screenSprite, GetFillterScreenShaderName(i));
-            }
-
-            AddFrameParts();
+            LoadFrameParts();
 
             m_yhCharaAnimList = new YHCharaAnimList();
             m_yhCharaAnimList.Init();
         }
 
-        private static void AddFrameParts()
+        private static void LoadFrameParts()
         {
-            m_effectMeshMatList.AddFrameParts(CreateSprite(96, 4),
-                GetFramePartsShaderName(EnumFrameParts.ToukiGauge),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(96, 4),
+                EnumFrameParts.ToukiGauge,
                 Settings.Instance.Common.PlayerCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(96, 4),
-                GetFramePartsShaderName(EnumFrameParts.LifeGauge),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(96, 4),
+                EnumFrameParts.LifeGauge,
                 Settings.Instance.Common.PlayerCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(64, 4),
-                GetFramePartsShaderName(EnumFrameParts.BalanceGauge),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(64, 4),
+                EnumFrameParts.BalanceGauge,
                 Settings.Instance.Common.PlayerCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(58, 12),
-                GetFramePartsShaderName(EnumFrameParts.ReiGauge),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(58, 12),
+                EnumFrameParts.ReiGauge,
                 Settings.Instance.Common.PlayerCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(16, 8),
-                GetFramePartsShaderName(EnumFrameParts.Signal),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(16, 8),
+                EnumFrameParts.Signal,
                 Settings.Instance.Common.PlayerCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(16, 16),
-                GetFramePartsShaderName(EnumFrameParts.ReiPiece),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(16, 16),
+                EnumFrameParts.ReiPiece,
                 Settings.Instance.Common.ReiPieceCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(128, 128),
-                GetFramePartsShaderName(EnumFrameParts.Jump),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(128, 128),
+                EnumFrameParts.Jump,
                 Settings.Instance.Common.PlayerCount);
-            m_effectMeshMatList.AddFrameParts(CreateSprite(128, 128),
-                GetFramePartsShaderName(EnumFrameParts.Air),
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(128, 128),
+                EnumFrameParts.Air,
                 Settings.Instance.Common.PlayerCount);
         }
 
@@ -135,13 +93,5 @@ namespace YYHS
 
         private static string GetBackGroundPath(int bgNo) => string.Format(PathSettings.BackGroundSprite, bgNo.ToString("d2"));
         private static string GetCharaPath(int charaNo) => string.Format(PathSettings.CharaSprite, charaNo.ToString("d2"));
-        private static string GetEffectBGShaderName(int fillterNo) => string.Format(PathSettings.EffectBGShader, fillterNo.ToString("d2"));
-        private static string GetEffectScreenShaderName(int effectNo) => string.Format(PathSettings.EffectScreenShader, effectNo.ToString("d2"));
-        private static string GetEffectLargeShaderName(int effectNo) => string.Format(PathSettings.EffectLargeShader, effectNo.ToString("d2"));
-        private static string GetEffectMediumShaderName(int effectNo) => string.Format(PathSettings.EffectMediumShader, effectNo.ToString("d2"));
-        private static string GetEffectSmallShaderName(int effectNo) => string.Format(PathSettings.EffectSmallShader, effectNo.ToString("d2"));
-        // private static string GetEffectSideShaderName(int effectNo) => string.Format(PathSettings.EffectSideShader, effectNo.ToString("d2"));
-        private static string GetFillterScreenShaderName(int fillterNo) => string.Format(PathSettings.FillterScreenShader, fillterNo.ToString("d2"));
-        private static string GetFramePartsShaderName(EnumFrameParts objNo) => string.Format(PathSettings.FramePartsShader, ((int)objNo).ToString("d2"));
     }
 }

@@ -289,4 +289,15 @@ namespace YYHS
         InFalling,
         OutFalling,
     }
+
+    public enum EnumShaderType
+    {
+        EffectBG,
+        EffectScreen,
+        EffectLarge,
+        EffectMedium,
+        EffectSmall,
+        FilterScreen,
+        FrameParts,
+    }
 }

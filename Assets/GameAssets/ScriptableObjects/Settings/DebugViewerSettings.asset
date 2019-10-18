@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06f11b907cde87a4382add24157daf1d, type: 3}
-  m_Name: DebugSettings
+  m_Name: DebugViewerSettings
   m_EditorClassIdentifier: 
   ShaderFrame: 7
   ShaderValue: 0.65

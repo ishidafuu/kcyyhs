@@ -34,10 +34,12 @@ namespace YYHS
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var sideInfos = m_query.ToComponentDataArray<SideInfo>(Allocator.TempJob);
 
-            DrawChara(toukiMeters, sideInfos);
             DrawSpritBackGround(toukiMeters);
-
-            DrawFrameLine();
+            if (!Settings.Instance.Debug.IsShaderView && !Settings.Instance.Debug.IsCharaView)
+            {
+                DrawChara(toukiMeters, sideInfos);
+                DrawFrameLine();
+            }
 
             toukiMeters.Dispose();
             sideInfos.Dispose();

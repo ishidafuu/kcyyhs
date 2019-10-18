@@ -68,7 +68,7 @@ namespace YYHS
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ReiPieceDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FrameDrawSystem>());
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleDrawDrawSystem>());
-
+            presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<DebugViewerSystem>());
 
             initializationSystemGroup.SortSystemUpdateList();
             simulationSystemGroup.SortSystemUpdateList();
