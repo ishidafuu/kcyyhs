@@ -269,7 +269,6 @@
                 <false/>
             </struct>
             <key type="filename">cm_l_parts00.png</key>
-            <key type="filename">cm_miss00.png</key>
             <key type="filename">cm_u_parts00.png</key>
             <key type="filename">l_parts00.png</key>
             <key type="filename">u_bullet00.png</key>
@@ -284,6 +283,21 @@
                 <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
                 <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">cm_shaky00.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,24,48,48</rect>
+                <key>scale9Paddings</key>
+                <rect>24,24,48,48</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -335,7 +349,6 @@
             <filename>cm_jump00.png</filename>
             <filename>cm_jump01.png</filename>
             <filename>cm_l_parts00.png</filename>
-            <filename>cm_miss00.png</filename>
             <filename>cm_stand00.png</filename>
             <filename>l_parts00.png</filename>
             <filename>u_bullet00.png</filename>
@@ -346,6 +359,7 @@
             <filename>cm_air00.png</filename>
             <filename>cm_air02.png</filename>
             <filename>cm_jump02.png</filename>
+            <filename>cm_shaky00.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

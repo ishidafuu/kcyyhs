@@ -98,6 +98,9 @@ TextureImporter:
   - first:
       213: -4834341711752745321
     second: u_parts02
+  - first:
+      213: -8252407346120307910
+    second: cm_shaky00
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -236,8 +239,8 @@ TextureImporter:
       name: body03
       rect:
         serializedVersion: 2
-        x: 195
-        y: 113
+        x: 305
+        y: 122
         width: 108
         height: 91
       alignment: 9
@@ -342,7 +345,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 111
-        y: 107
+        y: 87
         width: 84
         height: 109
       alignment: 9
@@ -383,8 +386,8 @@ TextureImporter:
       name: cm_jump00
       rect:
         serializedVersion: 2
-        x: 111
-        y: 11
+        x: 413
+        y: 117
         width: 93
         height: 96
       alignment: 9
@@ -464,22 +467,22 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_miss00
+      name: cm_shaky00
       rect:
         serializedVersion: 2
-        x: 141
-        y: 291
-        width: 52
-        height: 54
+        x: 60
+        y: 281
+        width: 65
+        height: 96
       alignment: 9
-      pivot: {x: 0.42307693, y: 0.5925926}
+      pivot: {x: 0.53846157, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -8701319053840479049
+      internalID: -8252407346120307910
       vertices: []
       indices: 
       edges: []
@@ -488,8 +491,8 @@ TextureImporter:
       name: cm_stand00
       rect:
         serializedVersion: 2
-        x: 288
-        y: 38
+        x: 111
+        y: 12
         width: 83
         height: 75
       alignment: 9
@@ -530,7 +533,7 @@ TextureImporter:
       name: cm_stand02
       rect:
         serializedVersion: 2
-        x: 202
+        x: 188
         y: 204
         width: 117
         height: 67
@@ -551,8 +554,8 @@ TextureImporter:
       name: cm_stand03
       rect:
         serializedVersion: 2
-        x: 204
-        y: 25
+        x: 195
+        y: 116
         width: 84
         height: 88
       alignment: 9
@@ -614,8 +617,8 @@ TextureImporter:
       name: face03
       rect:
         serializedVersion: 2
-        x: 60
-        y: 274
+        x: 125
+        y: 196
         width: 58
         height: 42
       alignment: 9
@@ -740,8 +743,8 @@ TextureImporter:
       name: u_bullet04
       rect:
         serializedVersion: 2
-        x: 118
-        y: 274
+        x: 486
+        y: 231
         width: 23
         height: 42
       alignment: 9
@@ -783,7 +786,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 125
-        y: 228
+        y: 299
         width: 77
         height: 46
       alignment: 9
@@ -824,8 +827,8 @@ TextureImporter:
       name: u_parts02
       rect:
         serializedVersion: 2
-        x: 60
-        y: 316
+        x: 125
+        y: 238
         width: 63
         height: 61
       alignment: 9
