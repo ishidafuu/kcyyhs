@@ -326,13 +326,18 @@ namespace YYHS
         {
             base.OnInspectorGUI();
 
+            EditorGUILayout.HelpBox("編集するCharaNoとAnimTypeを設定してInit Objectボタンを押してください", MessageType.Info);
+            GUI.color = Color.yellow;
             if (GUILayout.Button("Init Object"))
                 (target as SpriteSetter).InitObject();
-
+            GUI.color = Color.white;
+            EditorGUILayout.HelpBox("Hierarchyのキャラオブジェクトを非アクティブ化", MessageType.Info);
             if (GUILayout.Button("Inactive Character Sprite"))
                 (target as SpriteSetter).InactiveCharacterSprite();
+            EditorGUILayout.HelpBox("Hierarchyの背景オブジェクトを非アクティブ化", MessageType.Info);
             if (GUILayout.Button("Inactive BG Sprite"))
                 (target as SpriteSetter).InactiveBGSprite();
+            EditorGUILayout.HelpBox("Hierarchyのエフェクトオブジェクトを非アクティブ化", MessageType.Info);
             if (GUILayout.Button("Inactive Effect Sprite"))
                 (target as SpriteSetter).InactiveEffectSprite();
 

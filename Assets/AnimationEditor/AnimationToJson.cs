@@ -126,9 +126,13 @@ namespace YYHS
         {
             base.OnInspectorGUI();
 
+            EditorGUILayout.HelpBox("現在編集中(AnimType,CharaNo)のアニメーションを出力", MessageType.Info);
+            GUI.color = Color.yellow;
             if (GUILayout.Button("Convert"))
                 (target as AnimationToJson).Convert();
-
+            GUI.color = Color.white;
+            EditorGUILayout.HelpBox("すべてのアニメーションを出力", MessageType.Info);
+            GUI.color = Color.magenta;
             if (GUILayout.Button("ConvertAll"))
                 (target as AnimationToJson).ConvertAll();
 
