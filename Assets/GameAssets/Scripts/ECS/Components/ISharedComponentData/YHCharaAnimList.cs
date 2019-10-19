@@ -35,6 +35,11 @@ namespace YYHS
 
         }
 
+        public YHAnimation GetCommonAnim(EnumAnimationName animName)
+        {
+            return GetAnim(0, animName);
+        }
+
         public YHAnimation GetAnim(int charaNo, EnumAnimationName animName)
         {
             int animeNo = (int)animName;

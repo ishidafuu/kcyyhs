@@ -9,7 +9,7 @@ namespace YYHS
     public static class YHAnimationUtils
     {
 
-        public static void DrawYHAnimation(EnumAnimationName animName, int charaNo, int count, int basePosX, bool isSideA)
+        public static void DrawYHAnimation(EnumAnimationName animName, int charaNo, int count, int basePosX, bool isSideA, bool isSprit)
         {
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
 
@@ -34,8 +34,8 @@ namespace YYHS
                 Material mat = null;
                 int layer = 0;
                 int sideNo = (isSideA)
-                ? 0
-                : 1;
+                    ? 0
+                    : 1;
 
                 bool isBG = false;
 
@@ -70,7 +70,7 @@ namespace YYHS
                 Draw(mesh, mat, q, scale, pos);
 
                 // 不足背景追加描画
-                if (isBG && pos.x != 0)
+                if (isBG && !isSprit && pos.x != 0)
                 {
                     int BgWidthHalf = Settings.Instance.DrawPos.BgWidth >> 1;
                     int sizeHalf = (int)(mesh.bounds.size.x * 0.5f);
@@ -107,9 +107,10 @@ namespace YYHS
 
             float posY = (item.m_positionY.length == 0)
                 ? 0
-                : item.m_positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
+                : item.m_positionY.Evaluate(count);
 
-            return new Vector3((sign * posX) + basePosX, posY, (float)layer + item.m_orderInLayer);
+            return new Vector3((sign * posX) + basePosX,
+                posY + Settings.Instance.DrawPos.BgScrollY, (float)layer + item.m_orderInLayer);
         }
 
 

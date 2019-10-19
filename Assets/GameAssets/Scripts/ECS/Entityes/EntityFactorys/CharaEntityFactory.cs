@@ -38,8 +38,8 @@ namespace YYHS
             entityManager.SetComponentData(entity, new JumpState
             {
                 m_state = EnumJumpState.None,
-                m_effectStep = EnumJumpEffectStep.None,
-                m_count = 0,
+                m_effectStep = EnumJumpEffectStep.JumpStart,
+                m_totalCount = 0,
             });
 
 

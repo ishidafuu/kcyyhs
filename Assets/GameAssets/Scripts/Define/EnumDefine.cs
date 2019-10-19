@@ -133,6 +133,7 @@ namespace YYHS
     public enum EnumActionType
     {
         None,
+        Jump,
         Guard,
         Technique,
         ShortAttack,
@@ -243,6 +244,7 @@ namespace YYHS
         ReiPiece,
         Jump,
         Air,
+        Fall,
     }
 
     public enum EnumSignal
@@ -277,15 +279,15 @@ namespace YYHS
         Jumping,
         Air,
         Falling,
-        Landing,
     }
 
     public enum EnumJumpEffectStep
     {
-        None = 0,
+        JumpStart = 0,
         InJumping,
         OutJumping,
         Air,
+        FallStart,
         InFalling,
         OutFalling,
     }

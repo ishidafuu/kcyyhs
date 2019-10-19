@@ -178,7 +178,7 @@ namespace YYHS
                 {
                     Debug.LogError($"Not Found FunctionName:{item.functionName} ({rawAnim.AnimationClip.m_Name} )");
                 }
-                Debug.Log($"{functionName} i:{item.intParameter} f:{item.floatParameter} s:{item.data}");
+                // Debug.Log($"{functionName} i:{item.intParameter} f:{item.floatParameter} s:{item.data}");
                 YHFrameEvent newEvent = new YHFrameEvent()
                 {
                     m_frame = TimeToFrame(item.time),

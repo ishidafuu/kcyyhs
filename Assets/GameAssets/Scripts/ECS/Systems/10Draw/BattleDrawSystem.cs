@@ -28,7 +28,7 @@ namespace YYHS
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
             int count = seq.m_animation.m_count;
 
-            YHAnimationUtils.DrawYHAnimation(animName, charaNo, count, 0, isSideA);
+            YHAnimationUtils.DrawYHAnimation(animName, charaNo, count, 0, isSideA, false);
         }
     }
 }

@@ -59,44 +59,96 @@ namespace YYHS
 
                     if (jumpState.m_state != EnumJumpState.None)
                     {
-                        jumpState.m_count++;
+                        jumpState.m_totalCount++;
                         jumpState.m_stepCount++;
+                        jumpState.m_animationCount++;
+
+                        UpdateAnimation(ref jumpState);
+                        UpdateFilterEffect(ref jumpState);
+                        // if (seq.m_animation.m_count >= anim.m_length)
                     }
 
                     m_jumpStates[i] = jumpState;
                 }
             }
-        }
 
-        private void UpdateFilterEffect(ref JumpState jumpState)
-        {
-            EnumAnimationName animName = EnumAnimationName._Jump00;
-
-            switch (jumpState.m_state)
+            private void UpdateAnimation(ref JumpState jumpState)
             {
-                case EnumJumpState.Jumping:
-                    animName = EnumAnimationName._Jump00;
-                    break;
-                case EnumJumpState.Falling:
-                    animName = EnumAnimationName._Jump01;
-                    break;
+                switch (jumpState.m_state)
+                {
+                    case EnumJumpState.Jumping:
+                        {
+                            YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(EnumAnimationName._Jump00);
+                            if (jumpState.m_animationCount >= anim.m_length)
+                            {
+                                SetNextState(ref jumpState, EnumJumpState.Air);
+                            }
+                        }
+                        break;
+                    case EnumJumpState.Air:
+                        {
+                            if (jumpState.m_animationCount >= jumpState.m_charge)
+                            {
+                                SetNextState(ref jumpState, EnumJumpState.Falling);
+                            }
+                        }
+                        break;
+                    case EnumJumpState.Falling:
+                        {
+                            YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(EnumAnimationName._Jump01);
+                            if (jumpState.m_animationCount >= anim.m_length)
+                            {
+                                SetNextState(ref jumpState, EnumJumpState.None);
+                                jumpState.m_effectStep = EnumJumpEffectStep.JumpStart;
+                            }
+                        }
+                        break;
+                }
             }
 
-            // Jumpは共通アクションなのでcharaNoは実質使われない
-            int commonCharaNo = 0;
-            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(commonCharaNo, animName);
-            foreach (var item in anim.m_events)
+            private void SetNextState(ref JumpState jumpState, EnumJumpState nextState)
             {
-                if (item.m_frame != jumpState.m_count)
-                    continue;
+                jumpState.m_state = nextState;
+                jumpState.m_stepCount = 0;
+                jumpState.m_animationCount = 0;
+            }
 
-                if (item.m_functionName == EnumEventFunctionName.EventJump)
+            private void UpdateFilterEffect(ref JumpState jumpState)
+            {
+                EnumAnimationName animName = EnumAnimationName._Air00;
+
+                bool isUpdate = false;
+                switch (jumpState.m_state)
                 {
-                    jumpState.m_effectStep = (EnumJumpEffectStep)item.m_intParameter;
-                    jumpState.m_stepCount = 0;
-                    break;
+                    case EnumJumpState.Jumping:
+                        animName = EnumAnimationName._Jump00;
+                        isUpdate = true;
+                        break;
+                    case EnumJumpState.Falling:
+                        animName = EnumAnimationName._Jump01;
+                        isUpdate = true;
+                        break;
+                }
+
+                if (!isUpdate)
+                    return;
+
+                YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(animName);
+                foreach (var item in anim.m_events)
+                {
+                    if (item.m_frame != jumpState.m_animationCount)
+                        continue;
+
+                    if (item.m_functionName == EnumEventFunctionName.EventJump)
+                    {
+                        jumpState.m_effectStep = (EnumJumpEffectStep)item.m_intParameter;
+                        jumpState.m_stepCount = 0;
+                        break;
+                    }
                 }
             }
         }
+
+
     }
 }

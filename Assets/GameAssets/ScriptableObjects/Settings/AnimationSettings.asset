@@ -18,3 +18,4 @@ MonoBehaviour:
   HighScrollSpeed: 2
   LowScrollSpeed: 1
   DecideScrollSpeed: 8
+  JumpFadeFrame: 30

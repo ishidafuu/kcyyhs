@@ -74,6 +74,9 @@ namespace YYHS
             m_effectMeshMatList.LoadFrameParts(CreateSprite(128, 128),
                 EnumFrameParts.Air,
                 Settings.Instance.Common.PlayerCount);
+            m_effectMeshMatList.LoadFrameParts(CreateSprite(128, 128),
+                EnumFrameParts.Fall,
+                Settings.Instance.Common.PlayerCount);
         }
 
         private static string GetBGFillterShaderName(object i)

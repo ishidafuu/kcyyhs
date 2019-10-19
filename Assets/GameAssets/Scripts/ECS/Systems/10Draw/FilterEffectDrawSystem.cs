@@ -27,41 +27,9 @@ namespace YYHS
 
         protected override void OnUpdate()
         {
-
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
-            // DrawFilterEffect(filterEffects);
-            // TODO: シェーダーテスト
-            // DrawShaderGraphTest(10);
-            // DrawShaderGraphTest(2);
-
             DrawFilterEffect(filterEffects);
             filterEffects.Dispose();
-        }
-
-
-        private void DrawShaderGraphTest(int testShaderNo)
-        {
-            // Mesh mesh = Shared.m_effectMeshMatList.m_effectScreenList[testShaderNo].m_mesh;
-            // Material mat = Shared.m_effectMeshMatList.m_effectScreenList[testShaderNo].GetMaterial();
-            Mesh mesh = Shared.m_effectMeshMatList.m_effectBGList[testShaderNo].m_mesh;
-            Material mat = Shared.m_effectMeshMatList.m_effectBGList[testShaderNo].GetMaterial();
-            // Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].m_mesh;
-            // Material mat = Shared.m_effectMeshMatList.m_framePartsList[Shared.m_testShaderNo].GetMaterial();
-
-
-            // Mesh mesh = Shared.m_effectMeshMatList.m_effectLargeList[0].m_mesh;
-            // Material mat = Shared.m_effectMeshMatList.m_effectLargeList[0].GetMaterial();
-
-            int layer = (int)EnumDrawLayer.OverBackGround;
-
-            Matrix4x4 matrixes = Matrix4x4.TRS(
-                new Vector3(0, Settings.Instance.DrawPos.BgScrollY, layer),
-                 m_QuaternionRev, Vector3.one);
-
-            mat.SetInt("_Frame", Settings.Instance.Debug.ShaderFrame);
-            mat.SetFloat("_Value", Settings.Instance.Debug.ShaderValue);
-
-            Graphics.DrawMesh(mesh, matrixes, mat, 0);
         }
 
         private void DrawFilterEffect(NativeArray<FilterEffect> filterEffects)

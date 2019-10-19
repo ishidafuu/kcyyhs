@@ -15,6 +15,6 @@ namespace YYHS
         public int HighScrollSpeed;
         public int LowScrollSpeed;
         public int DecideScrollSpeed;
-
+        public int JumpFadeFrame;
     }
 }

@@ -98,7 +98,7 @@ namespace YYHS
                 Settings.Instance.Debug.AnimName,
                 Settings.Instance.Debug.CharaNo,
                 Settings.Instance.Debug.AnimFrame,
-                0, (Settings.Instance.Debug.CharaNo == 0));
+                0, (Settings.Instance.Debug.CharaNo == 0), false);
         }
     }
 }
