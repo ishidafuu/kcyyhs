@@ -66,7 +66,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Character/cm_stand02
+    path: Character/cm_stand_02
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -85,7 +85,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_stand02
+    path: Character/cm_stand_02
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -148,7 +148,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_stand02
+    path: Character/cm_stand_02
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -167,7 +167,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Character/cm_stand02
+    path: Character/cm_stand_02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -222,7 +222,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Character/cm_stand02
+    path: Character/cm_stand_02
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -241,7 +241,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Character/cm_stand02
+    path: Character/cm_stand_02
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

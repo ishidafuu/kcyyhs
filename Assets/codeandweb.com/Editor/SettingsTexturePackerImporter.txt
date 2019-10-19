@@ -1,14 +1,14 @@
 version: 2
 importPivots: 1
 tpsheetFileNames:
-- Assets/GameAssets/Resources/Sprites/BackGround/bg00.tpsheet
-- Assets/GameAssets/Resources/Sprites/Character/chara00.tpsheet
-- Assets/GameAssets/Resources/Sprites/Character/chara01.tpsheet
+- Assets/GameAssets/Resources/Sprites/BackGround/back_ground_00.tpsheet
+- Assets/GameAssets/Resources/Sprites/Character/chara_00.tpsheet
+- Assets/GameAssets/Resources/Sprites/Character/chara_01.tpsheet
 - Assets/GameAssets/Resources/Sprites/common.tpsheet
 textureFileNames:
-- Assets/GameAssets/Resources/Sprites/BackGround/bg00.png
-- Assets/GameAssets/Resources/Sprites/Character/chara00.png
-- Assets/GameAssets/Resources/Sprites/Character/chara01.png
+- Assets/GameAssets/Resources/Sprites/BackGround/back_ground_00.png
+- Assets/GameAssets/Resources/Sprites/Character/chara_00.png
+- Assets/GameAssets/Resources/Sprites/Character/chara_01.png
 - Assets/GameAssets/Resources/Sprites/common.png
 normalmapFileNames:
 - 

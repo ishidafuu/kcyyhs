@@ -16,18 +16,15 @@ namespace YYHS
         public static readonly string YHCharaAnim = "YHCharaAnim";
         public static readonly string YHCharaAnimCommon = "common";
         public static readonly string CommonSprite = "Sprites/common";
-        public static readonly string CharaSprite = "Sprites/Character/chara{0}";
-        public static readonly string BackGroundSprite = "Sprites/BackGround/bg{0}";
-
-        public static readonly string EffectSprite = "Sprites/Effect/effect{0}";
-        public static readonly string EffectMaterial = "Materials/Effect/effect{0}";
-        public static readonly string EffectBGShader = "YHShader/effectBG{0}";
-        public static readonly string EffectScreenShader = "YHShader/effectScreen{0}";
-        public static readonly string EffectSmallShader = "YHShader/effectSmall{0}";
-        public static readonly string EffectMediumShader = "YHShader/effectMedium{0}";
-        public static readonly string EffectLargeShader = "YHShader/effectLarge{0}";
-        public static readonly string EffectSideShader = "YHShader/effectSide{0}";
-        public static readonly string FillterScreenShader = "YHShader/fillterScreen{0}";
-        public static readonly string FramePartsShader = "YHShader/frameParts{0}";
+        public static readonly string CharaSprite = "Sprites/Character/chara_{0}";
+        public static readonly string BackGroundSprite = "Sprites/BackGround/back_ground_{0}";
+        public static readonly string EffectBGShader = "YHShader/EffectBG{0}";
+        public static readonly string EffectScreenShader = "YHShader/EffectScreen{0}";
+        public static readonly string EffectSmallShader = "YHShader/EffectSmall{0}";
+        public static readonly string EffectMediumShader = "YHShader/EffectMedium{0}";
+        public static readonly string EffectLargeShader = "YHShader/EffectLarge{0}";
+        public static readonly string EffectSideShader = "YHShader/EffectSide{0}";
+        public static readonly string FillterScreenShader = "YHShader/FillterScreen{0}";
+        public static readonly string FramePartsShader = "YHShader/FrameParts{0}";
     }
 }

@@ -1,139 +1,34 @@
 fileFormatVersion: 2
-guid: fc6214dfeb511ad48820d71cb28803b4
+guid: 13f1b1f81a09aaa4ab3bf068e0f7f712
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 21300000
-    second: bg00
+      213: 6192780342441500838
+    second: bg_00
   - first:
-      213: 21300002
-    second: bg01
+      213: -7730398009979016775
+    second: bg_01
   - first:
-      213: 21300004
-    second: bg02
+      213: -5667121454029602559
+    second: bg_02
   - first:
-      213: 21300006
-    second: bg03
+      213: 6211154084914666243
+    second: bg_03
   - first:
-      213: 21300008
-    second: bg04
+      213: 8852086037993172051
+    second: bg_04
   - first:
-      213: 21300010
-    second: bg05
+      213: -5017801085933234494
+    second: bg_05
   - first:
-      213: 21300012
-    second: bg06
+      213: 1042861624189045805
+    second: bg_06
   - first:
-      213: 21300014
-    second: bg07
+      213: 1061102728927809257
+    second: bg_07
   - first:
-      213: 21300016
-    second: bg08
-  - first:
-      213: 21300018
-    second: cm_a_effect00
-  - first:
-      213: 21300020
-    second: cm_a_effect01
-  - first:
-      213: 21300022
-    second: cm_a_effect02_00
-  - first:
-      213: 21300024
-    second: cm_a_effect02_01
-  - first:
-      213: 21300026
-    second: cm_a_effect02_02
-  - first:
-      213: 21300028
-    second: cm_a_effect02_03
-  - first:
-      213: 21300030
-    second: cm_a_effect03_00
-  - first:
-      213: 21300032
-    second: cm_b_effect00_00
-  - first:
-      213: 21300034
-    second: cm_b_effect01_00
-  - first:
-      213: 21300036
-    second: cm_b_effect02_00
-  - first:
-      213: 21300038
-    second: cm_b_effect03_00
-  - first:
-      213: 21300040
-    second: cm_b_effect04_00
-  - first:
-      213: 21300042
-    second: cm_b_effect05_00
-  - first:
-      213: 21300044
-    second: cm_b_effect05_01
-  - first:
-      213: 21300046
-    second: cm_b_effect05_02
-  - first:
-      213: 21300048
-    second: cm_b_effect06_00
-  - first:
-      213: 21300050
-    second: cm_b_effect06_01
-  - first:
-      213: 21300052
-    second: cm_b_effect06_02
-  - first:
-      213: 21300054
-    second: cm_b_effect06_03
-  - first:
-      213: 21300056
-    second: cm_b_effect06_04
-  - first:
-      213: 21300058
-    second: cm_b_effect06_05
-  - first:
-      213: 21300060
-    second: cm_b_effect07_00
-  - first:
-      213: 21300062
-    second: cm_b_effect07_01
-  - first:
-      213: 21300064
-    second: cm_b_effect07_02
-  - first:
-      213: 21300066
-    second: cm_b_effect07_03
-  - first:
-      213: 21300068
-    second: cm_b_effect07_04
-  - first:
-      213: 21300070
-    second: frame_bottom
-  - first:
-      213: 21300072
-    second: frame_top
-  - first:
-      213: 21300074
-    second: meter
-  - first:
-      213: 21300076
-    second: meter00
-  - first:
-      213: 21300078
-    second: meter01
-  - first:
-      213: 21300080
-    second: meter02
-  - first:
-      213: 21300082
-    second: meter03
-  - first:
-      213: 21300084
-    second: meter04
-  - first:
-      213: 3631968587678883424
-    second: cm_a_effect03_01
+      213: 8680844884330686518
+    second: bg_08
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -179,7 +74,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -202,35 +97,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg00
+      name: bg_00
       rect:
         serializedVersion: 2
         x: 1
@@ -245,13 +116,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300000
+      internalID: 6192780342441500838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg01
+      name: bg_01
       rect:
         serializedVersion: 2
         x: 515
@@ -266,13 +137,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300002
+      internalID: -7730398009979016775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg02
+      name: bg_02
       rect:
         serializedVersion: 2
         x: 1
@@ -287,13 +158,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300004
+      internalID: -5667121454029602559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg03
+      name: bg_03
       rect:
         serializedVersion: 2
         x: 1
@@ -308,13 +179,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300006
+      internalID: 6211154084914666243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg04
+      name: bg_04
       rect:
         serializedVersion: 2
         x: 515
@@ -329,13 +200,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300008
+      internalID: 8852086037993172051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg05
+      name: bg_05
       rect:
         serializedVersion: 2
         x: 515
@@ -350,13 +221,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300010
+      internalID: -5017801085933234494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg06
+      name: bg_06
       rect:
         serializedVersion: 2
         x: 515
@@ -371,13 +242,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300012
+      internalID: 1042861624189045805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg07
+      name: bg_07
       rect:
         serializedVersion: 2
         x: 773
@@ -392,13 +263,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300014
+      internalID: 1061102728927809257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg08
+      name: bg_08
       rect:
         serializedVersion: 2
         x: 773
@@ -413,7 +284,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 21300016
+      internalID: 8680844884330686518
       vertices: []
       indices: 
       edges: []
@@ -421,7 +292,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7b403e90e9602444ebe46be284caec91
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

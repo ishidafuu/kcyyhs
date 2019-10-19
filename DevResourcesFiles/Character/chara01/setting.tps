@@ -132,7 +132,7 @@
             <key>datafile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../../Assets/GameAssets/Resources/Sprites/Character/chara01.tpsheet</filename>
+                <filename>../../../Assets/GameAssets/Resources/Sprites/Character/chara_01.tpsheet</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -181,9 +181,12 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">body00.png</key>
-            <key type="filename">cm_jump00.png</key>
-            <key type="filename">cm_stand02.png</key>
+            <key type="filename">body_00.png</key>
+            <key type="filename">cm_down_00.png</key>
+            <key type="filename">cm_jump_00.png</key>
+            <key type="filename">cm_stand_00.png</key>
+            <key type="filename">cm_stand_01.png</key>
+            <key type="filename">cm_stand_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -198,8 +201,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">body01.png</key>
-            <key type="filename">l_parts00.png</key>
+            <key type="filename">body_01.png</key>
+            <key type="filename">l_parts_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -214,7 +217,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">body02.png</key>
+            <key type="filename">body_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -223,15 +226,29 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>64,47,128,93</rect>
+                <rect>64,20,128,40</rect>
                 <key>scale9Paddings</key>
-                <rect>64,47,128,93</rect>
+                <rect>64,20,128,40</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">body03.png</key>
-            <key type="filename">body4.png</key>
-            <key type="filename">face03.png</key>
+            <key type="filename">body_03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>28,24,56,48</rect>
+                <key>scale9Paddings</key>
+                <rect>28,24,56,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">body_04.png</key>
+            <key type="filename">face_03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -246,10 +263,10 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">cm_air00.png</key>
-            <key type="filename">cm_air01.png</key>
-            <key type="filename">cm_air02.png</key>
-            <key type="filename">u_bullet01.png</key>
+            <key type="filename">cm_air_00.png</key>
+            <key type="filename">cm_air_01.png</key>
+            <key type="filename">cm_air_02.png</key>
+            <key type="filename">u_bullet_01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -264,8 +281,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">cm_dodge00.png</key>
-            <key type="filename">cm_down00.png</key>
+            <key type="filename">cm_dodge_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -274,14 +290,14 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>24,16,48,32</rect>
+                <rect>32,32,64,64</rect>
                 <key>scale9Paddings</key>
-                <rect>24,16,48,32</rect>
+                <rect>32,32,64,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">cm_jump01.png</key>
-            <key type="filename">cm_jump02.png</key>
+            <key type="filename">cm_jump_01.png</key>
+            <key type="filename">cm_jump_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -296,7 +312,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">cm_l_parts00.png</key>
+            <key type="filename">cm_l_parts_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -311,12 +327,10 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">cm_shaky00.png</key>
-            <key type="filename">cm_stand00.png</key>
-            <key type="filename">cm_stand01.png</key>
-            <key type="filename">cm_stand03.png</key>
-            <key type="filename">cm_u_face00.png</key>
-            <key type="filename">cm_u_face01.png</key>
+            <key type="filename">cm_shaky_00.png</key>
+            <key type="filename">cm_stand_03.png</key>
+            <key type="filename">cm_u_face_00.png</key>
+            <key type="filename">cm_u_face_01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -331,9 +345,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">u_bullet00.png</key>
-            <key type="filename">u_bullet02.png</key>
-            <key type="filename">u_parts02.png</key>
+            <key type="filename">u_bullet_00.png</key>
+            <key type="filename">u_bullet_02.png</key>
+            <key type="filename">u_parts_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -348,9 +362,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">u_bullet03.png</key>
-            <key type="filename">u_bullet04.png</key>
-            <key type="filename">u_bullet05.png</key>
+            <key type="filename">u_bullet_03.png</key>
+            <key type="filename">u_bullet_04.png</key>
+            <key type="filename">u_bullet_05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -365,7 +379,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">u_parts00.png</key>
+            <key type="filename">u_parts_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -380,7 +394,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">u_parts01.png</key>
+            <key type="filename">u_parts_01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -398,38 +412,38 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>cm_stand00.png</filename>
-            <filename>cm_stand01.png</filename>
-            <filename>cm_stand02.png</filename>
-            <filename>cm_stand03.png</filename>
-            <filename>cm_u_face00.png</filename>
-            <filename>cm_u_face01.png</filename>
-            <filename>face03.png</filename>
-            <filename>l_parts00.png</filename>
-            <filename>u_bullet00.png</filename>
-            <filename>u_bullet01.png</filename>
-            <filename>u_bullet02.png</filename>
-            <filename>u_parts00.png</filename>
-            <filename>u_parts01.png</filename>
-            <filename>body00.png</filename>
-            <filename>body01.png</filename>
-            <filename>body02.png</filename>
-            <filename>body03.png</filename>
-            <filename>body4.png</filename>
-            <filename>cm_air00.png</filename>
-            <filename>cm_air01.png</filename>
-            <filename>cm_air02.png</filename>
-            <filename>cm_dodge00.png</filename>
-            <filename>cm_down00.png</filename>
-            <filename>cm_jump00.png</filename>
-            <filename>cm_jump01.png</filename>
-            <filename>cm_jump02.png</filename>
-            <filename>cm_l_parts00.png</filename>
-            <filename>u_bullet03.png</filename>
-            <filename>u_bullet04.png</filename>
-            <filename>u_bullet05.png</filename>
-            <filename>u_parts02.png</filename>
-            <filename>cm_shaky00.png</filename>
+            <filename>cm_stand_00.png</filename>
+            <filename>cm_stand_01.png</filename>
+            <filename>cm_stand_02.png</filename>
+            <filename>cm_stand_03.png</filename>
+            <filename>cm_u_face_00.png</filename>
+            <filename>cm_u_face_01.png</filename>
+            <filename>face_03.png</filename>
+            <filename>l_parts_00.png</filename>
+            <filename>u_bullet_00.png</filename>
+            <filename>u_bullet_01.png</filename>
+            <filename>u_bullet_02.png</filename>
+            <filename>u_bullet_03.png</filename>
+            <filename>u_bullet_04.png</filename>
+            <filename>u_bullet_05.png</filename>
+            <filename>u_parts_00.png</filename>
+            <filename>u_parts_01.png</filename>
+            <filename>u_parts_02.png</filename>
+            <filename>body_00.png</filename>
+            <filename>body_01.png</filename>
+            <filename>body_02.png</filename>
+            <filename>body_03.png</filename>
+            <filename>body_04.png</filename>
+            <filename>cm_air_00.png</filename>
+            <filename>cm_air_01.png</filename>
+            <filename>cm_air_02.png</filename>
+            <filename>cm_dodge_00.png</filename>
+            <filename>cm_down_00.png</filename>
+            <filename>cm_jump_00.png</filename>
+            <filename>cm_jump_01.png</filename>
+            <filename>cm_jump_02.png</filename>
+            <filename>cm_l_parts_00.png</filename>
+            <filename>cm_shaky_00.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -123,7 +123,8 @@ namespace YYHS
 
         private void DrawSpritBackGround(NativeArray<ToukiMeter> toukiMeters, NativeArray<JumpState> jumpStates)
         {
-            string bgName = EnumBGPartsType.bg00.ToString();
+            string bgName = EnumBGPartsType.bg_00.ToString();
+
             Mesh baseMesh = Shared.m_bgFrameMeshMat.m_meshDict[bgName];
             Material mat = Shared.m_bgFrameMeshMat.m_materialDict[bgName];
 

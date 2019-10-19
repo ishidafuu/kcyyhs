@@ -66,7 +66,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Character/cm_jump00
+    path: Character/cm_jump_00
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -109,7 +109,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Character/cm_jump01
+    path: Character/cm_jump_01
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -143,7 +143,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Character/cm_air00
+    path: Character/cm_air_00
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -186,7 +186,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: BackGround/bg07
+    path: BackGround/bg_07
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -220,7 +220,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: BackGround/bg08
+    path: BackGround/bg_08
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -275,7 +275,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_jump00
+    path: Character/cm_jump_00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -321,7 +321,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_jump01
+    path: Character/cm_jump_01
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -376,7 +376,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_air00
+    path: Character/cm_air_00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -404,7 +404,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: BackGround/bg07
+    path: BackGround/bg_07
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -441,7 +441,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -596,7 +596,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_jump00
+    path: Character/cm_jump_00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -651,7 +651,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Character/cm_jump00
+    path: Character/cm_jump_00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -706,7 +706,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Character/cm_jump00
+    path: Character/cm_jump_00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -761,7 +761,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Character/cm_jump00
+    path: Character/cm_jump_00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -807,7 +807,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_jump01
+    path: Character/cm_jump_01
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -853,7 +853,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Character/cm_jump01
+    path: Character/cm_jump_01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -890,7 +890,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Character/cm_jump01
+    path: Character/cm_jump_01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -936,7 +936,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Character/cm_jump01
+    path: Character/cm_jump_01
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -991,7 +991,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_air00
+    path: Character/cm_air_00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -1028,7 +1028,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Character/cm_air00
+    path: Character/cm_air_00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1065,7 +1065,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Character/cm_air00
+    path: Character/cm_air_00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1102,7 +1102,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Character/cm_air00
+    path: Character/cm_air_00
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1130,7 +1130,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: BackGround/bg07
+    path: BackGround/bg_07
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -1158,7 +1158,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: BackGround/bg07
+    path: BackGround/bg_07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1195,7 +1195,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: BackGround/bg07
+    path: BackGround/bg_07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1223,7 +1223,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: BackGround/bg07
+    path: BackGround/bg_07
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1260,7 +1260,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -1288,7 +1288,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1325,7 +1325,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1353,7 +1353,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

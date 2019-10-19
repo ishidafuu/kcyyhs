@@ -1,106 +1,103 @@
 fileFormatVersion: 2
-guid: df47a258e204a3e44b140447384a2c0b
+guid: 384d5acc6972866488aaea7f5d3072ad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5497690394892414557
-    second: body00
+      213: -6751326380867979155
+    second: body_00
   - first:
-      213: 8920406703562555987
-    second: body01
+      213: 8655781093989524552
+    second: body_01
   - first:
-      213: 8972107101058783253
-    second: body02
+      213: 6268857258897558521
+    second: body_02
   - first:
-      213: 8763364447174148466
-    second: body03
+      213: -4892937535425197395
+    second: body_03
   - first:
-      213: -7056648064885840413
-    second: body4
+      213: 65439439666040445
+    second: body_04
   - first:
-      213: -1385333410007056770
-    second: cm_air00
+      213: 7044415266825918670
+    second: cm_air_00
   - first:
-      213: -4346771555783271133
-    second: cm_air01
+      213: 7349918391354030105
+    second: cm_air_01
   - first:
-      213: 4799603982626165116
-    second: cm_air02
+      213: -9142723541066618347
+    second: cm_air_02
   - first:
-      213: -266908308248564454
-    second: cm_dodge00
+      213: 4094930717186315511
+    second: cm_dodge_00
   - first:
-      213: 5179061925316329858
-    second: cm_down00
+      213: 8711671657938451140
+    second: cm_down_00
   - first:
-      213: 7874034599721566779
-    second: cm_jump00
+      213: 7596711328868877011
+    second: cm_jump_00
   - first:
-      213: 5259061808689100661
-    second: cm_jump01
+      213: 815483014439192337
+    second: cm_jump_01
   - first:
-      213: 464681763744432274
-    second: cm_jump02
+      213: -1156367830955359705
+    second: cm_jump_02
   - first:
-      213: -163615043766847134
-    second: cm_l_parts00
+      213: 6337732253934604679
+    second: cm_l_parts_00
   - first:
-      213: -8701319053840479049
-    second: cm_miss00
+      213: 6061317436030166354
+    second: cm_shaky_00
   - first:
-      213: 120582142523474523
-    second: cm_stand00
+      213: 3329950309840273066
+    second: cm_stand_00
   - first:
-      213: -2152883873249866552
-    second: cm_stand01
+      213: 6044306801005870090
+    second: cm_stand_01
   - first:
-      213: -1677126871193271269
-    second: cm_stand02
+      213: 4411317198115190001
+    second: cm_stand_02
   - first:
-      213: 8105988580810327977
-    second: cm_stand03
+      213: 6175088609900484562
+    second: cm_stand_03
   - first:
-      213: -671323978811892154
-    second: cm_u_face00
+      213: 1888501425552440581
+    second: cm_u_face_00
   - first:
-      213: -8430117984951361993
-    second: cm_u_face01
+      213: -1293271447185902783
+    second: cm_u_face_01
   - first:
-      213: 9088725770075381655
-    second: face03
+      213: 1005588695021781918
+    second: face_03
   - first:
-      213: -8984836005772031113
-    second: l_parts00
+      213: 8804002404320870888
+    second: l_parts_00
   - first:
-      213: 618961650841931315
-    second: u_bullet00
+      213: 7056094896744137453
+    second: u_bullet_00
   - first:
-      213: -213706030656227553
-    second: u_bullet01
+      213: 3399889951001824554
+    second: u_bullet_01
   - first:
-      213: 263296588620809158
-    second: u_bullet02
+      213: 8408288545309063268
+    second: u_bullet_02
   - first:
-      213: 7193109104891429643
-    second: u_parts00
+      213: -632758510700976820
+    second: u_bullet_03
   - first:
-      213: 7804155055684304000
-    second: u_parts01
+      213: -8800509950432205220
+    second: u_bullet_04
   - first:
-      213: 707177605766897003
-    second: u_bullet03
+      213: 7376818026274310585
+    second: u_bullet_05
   - first:
-      213: -4686764639958188145
-    second: u_bullet04
+      213: -2631412743849410156
+    second: u_parts_00
   - first:
-      213: 3749889250434441887
-    second: u_bullet05
+      213: -3845591344727906839
+    second: u_parts_01
   - first:
-      213: -4834341711752745321
-    second: u_parts02
-  - first:
-      213: -8252407346120307910
-    second: cm_shaky00
+      213: -4281382364781815140
+    second: u_parts_02
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -173,7 +170,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: body00
+      name: body_00
       rect:
         serializedVersion: 2
         x: 336
@@ -188,13 +185,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 5497690394892414557
+      internalID: -6751326380867979155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: body01
+      name: body_01
       rect:
         serializedVersion: 2
         x: 207
@@ -209,13 +206,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8920406703562555987
+      internalID: 8655781093989524552
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: body02
+      name: body_02
       rect:
         serializedVersion: 2
         x: 347
@@ -230,13 +227,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8972107101058783253
+      internalID: 6268857258897558521
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: body03
+      name: body_03
       rect:
         serializedVersion: 2
         x: 305
@@ -251,13 +248,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8763364447174148466
+      internalID: -4892937535425197395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: body4
+      name: body_04
       rect:
         serializedVersion: 2
         x: 0
@@ -272,13 +269,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -7056648064885840413
+      internalID: 65439439666040445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_air00
+      name: cm_air_00
       rect:
         serializedVersion: 2
         x: 480
@@ -293,13 +290,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -1385333410007056770
+      internalID: 7044415266825918670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_air01
+      name: cm_air_01
       rect:
         serializedVersion: 2
         x: 0
@@ -314,13 +311,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -4346771555783271133
+      internalID: 7349918391354030105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_air02
+      name: cm_air_02
       rect:
         serializedVersion: 2
         x: 462
@@ -335,13 +332,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 4799603982626165116
+      internalID: -9142723541066618347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_dodge00
+      name: cm_dodge_00
       rect:
         serializedVersion: 2
         x: 111
@@ -356,13 +353,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -266908308248564454
+      internalID: 4094930717186315511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_down00
+      name: cm_down_00
       rect:
         serializedVersion: 2
         x: 0
@@ -377,13 +374,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 5179061925316329858
+      internalID: 8711671657938451140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump00
+      name: cm_jump_00
       rect:
         serializedVersion: 2
         x: 413
@@ -398,13 +395,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 7874034599721566779
+      internalID: 7596711328868877011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump01
+      name: cm_jump_01
       rect:
         serializedVersion: 2
         x: 462
@@ -419,13 +416,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 5259061808689100661
+      internalID: 815483014439192337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump02
+      name: cm_jump_02
       rect:
         serializedVersion: 2
         x: 0
@@ -440,13 +437,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 464681763744432274
+      internalID: -1156367830955359705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_l_parts00
+      name: cm_l_parts_00
       rect:
         serializedVersion: 2
         x: 207
@@ -461,13 +458,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -163615043766847134
+      internalID: 6337732253934604679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_shaky00
+      name: cm_shaky_00
       rect:
         serializedVersion: 2
         x: 60
@@ -482,13 +479,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -8252407346120307910
+      internalID: 6061317436030166354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand00
+      name: cm_stand_00
       rect:
         serializedVersion: 2
         x: 111
@@ -503,13 +500,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 120582142523474523
+      internalID: 3329950309840273066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand01
+      name: cm_stand_01
       rect:
         serializedVersion: 2
         x: 125
@@ -524,13 +521,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -2152883873249866552
+      internalID: 6044306801005870090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand02
+      name: cm_stand_02
       rect:
         serializedVersion: 2
         x: 188
@@ -545,13 +542,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -1677126871193271269
+      internalID: 4411317198115190001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand03
+      name: cm_stand_03
       rect:
         serializedVersion: 2
         x: 195
@@ -566,13 +563,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8105988580810327977
+      internalID: 6175088609900484562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_u_face00
+      name: cm_u_face_00
       rect:
         serializedVersion: 2
         x: 476
@@ -587,13 +584,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -671323978811892154
+      internalID: 1888501425552440581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_u_face01
+      name: cm_u_face_01
       rect:
         serializedVersion: 2
         x: 462
@@ -608,13 +605,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -8430117984951361993
+      internalID: -1293271447185902783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: face03
+      name: face_03
       rect:
         serializedVersion: 2
         x: 125
@@ -629,13 +626,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 9088725770075381655
+      internalID: 1005588695021781918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: l_parts00
+      name: l_parts_00
       rect:
         serializedVersion: 2
         x: 0
@@ -650,13 +647,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -8984836005772031113
+      internalID: 8804002404320870888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_bullet00
+      name: u_bullet_00
       rect:
         serializedVersion: 2
         x: 0
@@ -671,13 +668,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 618961650841931315
+      internalID: 7056094896744137453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_bullet01
+      name: u_bullet_01
       rect:
         serializedVersion: 2
         x: 480
@@ -692,13 +689,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -213706030656227553
+      internalID: 3399889951001824554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_bullet02
+      name: u_bullet_02
       rect:
         serializedVersion: 2
         x: 61
@@ -713,13 +710,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 263296588620809158
+      internalID: 8408288545309063268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_bullet03
+      name: u_bullet_03
       rect:
         serializedVersion: 2
         x: 462
@@ -734,13 +731,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 707177605766897003
+      internalID: -632758510700976820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_bullet04
+      name: u_bullet_04
       rect:
         serializedVersion: 2
         x: 486
@@ -755,13 +752,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -4686764639958188145
+      internalID: -8800509950432205220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_bullet05
+      name: u_bullet_05
       rect:
         serializedVersion: 2
         x: 480
@@ -776,13 +773,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 3749889250434441887
+      internalID: 7376818026274310585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_parts00
+      name: u_parts_00
       rect:
         serializedVersion: 2
         x: 125
@@ -797,13 +794,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 7193109104891429643
+      internalID: -2631412743849410156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_parts01
+      name: u_parts_01
       rect:
         serializedVersion: 2
         x: 336
@@ -818,13 +815,13 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 7804155055684304000
+      internalID: -3845591344727906839
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: u_parts02
+      name: u_parts_02
       rect:
         serializedVersion: 2
         x: 125
@@ -839,7 +836,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -4834341711752745321
+      internalID: -4281382364781815140
       vertices: []
       indices: 
       edges: []

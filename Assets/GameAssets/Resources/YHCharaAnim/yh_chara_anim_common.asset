@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_name: _Air00
     m_length: 60
     m_parts:
-    - m_name: cm_air00
+    - m_name: cm_air_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -57,7 +57,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg08
+    - m_name: bg_08
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -102,7 +102,7 @@ MonoBehaviour:
   - m_name: _Air01
     m_length: 60
     m_parts:
-    - m_name: cm_air01
+    - m_name: cm_air_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -143,7 +143,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg08
+    - m_name: bg_08
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -188,7 +188,7 @@ MonoBehaviour:
   - m_name: _Air02
     m_length: 60
     m_parts:
-    - m_name: cm_air02
+    - m_name: cm_air_02
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -229,7 +229,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg08
+    - m_name: bg_08
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -274,7 +274,7 @@ MonoBehaviour:
   - m_name: _DefenseA00
     m_length: 90
     m_parts:
-    - m_name: cm_dodge00
+    - m_name: cm_dodge_00
       m_orderInLayer: 0
       m_effectPosition: 1
       m_isActive:
@@ -349,7 +349,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg01
+    - m_name: bg_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -430,7 +430,7 @@ MonoBehaviour:
   - m_name: _DefenseA01
     m_length: 110
     m_parts:
-    - m_name: cm_dodge00
+    - m_name: cm_dodge_00
       m_orderInLayer: 0
       m_effectPosition: 1
       m_isActive:
@@ -545,7 +545,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_stand03
+    - m_name: cm_stand_03
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -662,7 +662,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_u_face00
+    - m_name: cm_u_face_00
       m_orderInLayer: -0.3
       m_effectPosition: 2
       m_isActive:
@@ -781,7 +781,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg01
+    - m_name: bg_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -862,7 +862,7 @@ MonoBehaviour:
   - m_name: _DefenseA02
     m_length: 150
     m_parts:
-    - m_name: cm_dodge00
+    - m_name: cm_dodge_00
       m_orderInLayer: 0
       m_effectPosition: 1
       m_isActive:
@@ -975,7 +975,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_stand03
+    - m_name: cm_stand_03
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -2024,7 +2024,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_u_face01
+    - m_name: cm_u_face_01
       m_orderInLayer: -0.3
       m_effectPosition: 2
       m_isActive:
@@ -3075,7 +3075,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg01
+    - m_name: bg_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -3188,7 +3188,7 @@ MonoBehaviour:
   - m_name: _Down00
     m_length: 60
     m_parts:
-    - m_name: bg07
+    - m_name: bg_07
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -3265,7 +3265,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_down00
+    - m_name: cm_down_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -3310,7 +3310,7 @@ MonoBehaviour:
   - m_name: _Down01
     m_length: 120
     m_parts:
-    - m_name: bg07
+    - m_name: bg_07
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -3389,7 +3389,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_down00
+    - m_name: cm_down_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -4008,7 +4008,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_stand02
+    - m_name: cm_stand_02
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -4631,7 +4631,7 @@ MonoBehaviour:
   - m_name: _Fly
     m_length: 90
     m_parts:
-    - m_name: bg04
+    - m_name: bg_04
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5008,7 +5008,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_down00
+    - m_name: cm_down_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5179,7 +5179,7 @@ MonoBehaviour:
   - m_name: _Jump00
     m_length: 140
     m_parts:
-    - m_name: cm_jump00
+    - m_name: cm_jump_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5316,7 +5316,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_jump01
+    - m_name: cm_jump_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5433,7 +5433,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_air00
+    - m_name: cm_air_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5534,7 +5534,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg07
+    - m_name: bg_07
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5647,7 +5647,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg08
+    - m_name: bg_08
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5763,7 +5763,7 @@ MonoBehaviour:
   - m_name: _Jump01
     m_length: 125
     m_parts:
-    - m_name: cm_air01
+    - m_name: cm_air_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5840,7 +5840,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: cm_jump02
+    - m_name: cm_jump_02
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -5953,7 +5953,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg07
+    - m_name: bg_07
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -6030,7 +6030,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    - m_name: bg08
+    - m_name: bg_08
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -6132,7 +6132,7 @@ MonoBehaviour:
   - m_name: _Shaky
     m_length: 90
     m_parts:
-    - m_name: cm_shaky00
+    - m_name: cm_shaky_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -6233,7 +6233,7 @@ MonoBehaviour:
   - m_name: _Stand00
     m_length: 120
     m_parts:
-    - m_name: cm_stand00
+    - m_name: cm_stand_00
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -6366,7 +6366,7 @@ MonoBehaviour:
   - m_name: _Stand01
     m_length: 120
     m_parts:
-    - m_name: cm_stand01
+    - m_name: cm_stand_01
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:
@@ -6499,7 +6499,7 @@ MonoBehaviour:
   - m_name: _Stand02
     m_length: 120
     m_parts:
-    - m_name: cm_stand02
+    - m_name: cm_stand_02
       m_orderInLayer: 0
       m_effectPosition: 0
       m_isActive:

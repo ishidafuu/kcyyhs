@@ -42,7 +42,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_air01
+    path: Character/cm_air_01
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -70,7 +70,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -142,7 +142,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Character/cm_air01
+    path: Character/cm_air_01
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -170,7 +170,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: BackGround/bg08
+    path: BackGround/bg_08
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []

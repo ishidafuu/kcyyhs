@@ -60,7 +60,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: cm_l_effect00_00
+    path: cm_l_effect00__00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -106,7 +106,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: cm_l_effect00_01
+    path: cm_l_effect_00__01
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -143,7 +143,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: cm_l_effect00_02
+    path: cm_l_effect_00__02
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -240,7 +240,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: cm_l_effect00_00
+    path: cm_l_effect00__00
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -286,7 +286,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: cm_l_effect00_01
+    path: cm_l_effect_00__01
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -323,7 +323,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: cm_l_effect00_02
+    path: cm_l_effect_00__02
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []

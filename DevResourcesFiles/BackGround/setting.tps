@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.1.0</string>
+        <string>5.2.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -132,7 +132,7 @@
             <key>datafile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../Assets/GameAssets/Resources/Sprites/BackGround/bg00.tpsheet</filename>
+                <filename>../../Assets/GameAssets/Resources/Sprites/BackGround/back_ground_00.tpsheet</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -181,10 +181,12 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">bg00.png</key>
+            <key type="filename">bg_00.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -194,11 +196,13 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg01.png</key>
-            <key type="filename">bg06.png</key>
+            <key type="filename">bg_01.png</key>
+            <key type="filename">bg_06.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -208,10 +212,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg02.png</key>
+            <key type="filename">bg_02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -221,10 +227,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg03.png</key>
+            <key type="filename">bg_03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -234,10 +242,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg04.png</key>
+            <key type="filename">bg_04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -247,10 +257,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg05.png</key>
+            <key type="filename">bg_05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -260,10 +272,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg07.png</key>
+            <key type="filename">bg_07.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -273,10 +287,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bg08.png</key>
+            <key type="filename">bg_08.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -289,15 +305,15 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>bg00.png</filename>
-            <filename>bg01.png</filename>
-            <filename>bg02.png</filename>
-            <filename>bg03.png</filename>
-            <filename>bg04.png</filename>
-            <filename>bg05.png</filename>
-            <filename>bg06.png</filename>
-            <filename>bg07.png</filename>
-            <filename>bg08.png</filename>
+            <filename>bg_08.png</filename>
+            <filename>bg_00.png</filename>
+            <filename>bg_01.png</filename>
+            <filename>bg_02.png</filename>
+            <filename>bg_03.png</filename>
+            <filename>bg_04.png</filename>
+            <filename>bg_05.png</filename>
+            <filename>bg_06.png</filename>
+            <filename>bg_07.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

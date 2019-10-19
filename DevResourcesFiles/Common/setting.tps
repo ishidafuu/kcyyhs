@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.1.0</string>
+        <string>5.2.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -181,85 +181,12 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">cm_l_effect00_00.png</key>
-            <key type="filename">cm_l_effect00_01.png</key>
-            <key type="filename">cm_l_effect00_02.png</key>
-            <key type="filename">cm_l_effect01_00.png</key>
-            <key type="filename">cm_l_effect01_01.png</key>
-            <key type="filename">cm_l_effect02_00.png</key>
-            <key type="filename">cm_l_effect02_01.png</key>
-            <key type="filename">cm_l_effect02_02.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>64,24,128,48</rect>
-                <key>scale9Paddings</key>
-                <rect>64,24,128,48</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">cm_u_effect00_00.png</key>
-            <key type="filename">cm_u_effect01_00.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>16,16,32,32</rect>
-                <key>scale9Paddings</key>
-                <rect>16,16,32,32</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">cm_u_effect02_00.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
-                <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">energy.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>2,2,4,4</rect>
-                <key>scale9Paddings</key>
-                <rect>2,2,4,4</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">fire00.png</key>
-            <key type="filename">fire01.png</key>
-            <key type="filename">fire02.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>4,4,8,8</rect>
-                <key>scale9Paddings</key>
-                <rect>4,4,8,8</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">frame_bottom.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -273,6 +200,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -286,51 +215,20 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>64,5,128,10</rect>
                 <key>scale9Paddings</key>
                 <rect>64,5,128,10</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">signal00.png</key>
-            <key type="filename">signal01.png</key>
-            <key type="filename">signal02.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>4,2,8,4</rect>
-                <key>scale9Paddings</key>
-                <rect>4,2,8,4</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>signal00.png</filename>
-            <filename>signal01.png</filename>
-            <filename>signal02.png</filename>
-            <filename>cm_l_effect00_00.png</filename>
-            <filename>cm_l_effect00_01.png</filename>
-            <filename>cm_l_effect00_02.png</filename>
-            <filename>cm_l_effect01_00.png</filename>
-            <filename>cm_l_effect01_01.png</filename>
-            <filename>cm_l_effect02_00.png</filename>
-            <filename>cm_l_effect02_01.png</filename>
-            <filename>cm_l_effect02_02.png</filename>
-            <filename>cm_u_effect00_00.png</filename>
-            <filename>cm_u_effect01_00.png</filename>
-            <filename>cm_u_effect02_00.png</filename>
-            <filename>energy.png</filename>
-            <filename>fire00.png</filename>
-            <filename>fire01.png</filename>
-            <filename>fire02.png</filename>
             <filename>frame_bottom.png</filename>
             <filename>frame_top.png</filename>
             <filename>frame_line.png</filename>

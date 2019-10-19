@@ -26,7 +26,7 @@ namespace YYHS
             m_query.AddDependency(inputDeps);
 
             NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            Vector2[] uv = Shared.m_bgFrameMeshMat.m_meshDict[EnumBGPartsType.bg00.ToString()].uv;
+            Vector2[] uv = Shared.m_bgFrameMeshMat.m_meshDict[EnumBGPartsType.bg_00.ToString()].uv;
             var job = new CountToukiJob()
             {
                 m_toukiMeters = toukiMeters,
