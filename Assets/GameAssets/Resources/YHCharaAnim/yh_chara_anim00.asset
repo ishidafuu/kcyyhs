@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daca190aefaf47445b2cb5e35a876a82, type: 3}
-  m_Name: YHCharaAnim01
+  m_Name: yh_chara_anim00
   m_EditorClassIdentifier: 
   animations:
   - m_name: Action00_00
@@ -850,7 +850,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     m_events:
     - m_frame: 5
-      m_functionName: 0
+      m_functionName: 2
       m_stringParameter: 
       m_floatParameter: 0
       m_intParameter: 0

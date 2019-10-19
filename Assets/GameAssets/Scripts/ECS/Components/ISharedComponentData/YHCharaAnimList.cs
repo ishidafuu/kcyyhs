@@ -14,7 +14,7 @@ namespace YYHS
         {
             m_charaAnimList = new List<YHAnimationsObject>();
 
-            var loadObjects = Resources.LoadAll<YHAnimationsObject>("YHCharaAnim");
+            var loadObjects = Resources.LoadAll<YHAnimationsObject>(PathSettings.YHCharaAnim);
             if (loadObjects.Length == 0)
             {
                 Debug.LogError("YHAnimationsObject None");
@@ -23,7 +23,7 @@ namespace YYHS
 
             foreach (var item in loadObjects)
             {
-                if (item.name.IndexOf("Common") >= 0)
+                if (item.name.IndexOf(PathSettings.YHCharaAnimCommon) >= 0)
                 {
                     m_charaAnimCommon = item;
                 }

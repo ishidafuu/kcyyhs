@@ -47,7 +47,7 @@ namespace YYHS
                 return false;
             }
 
-            string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnim{charaNo.ToString("d2")}.asset";
+            string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/yh_chara_anim{charaNo.ToString("d2")}.asset";
             Convert(animGuids, createAssetPath);
 
             return true;
@@ -56,7 +56,7 @@ namespace YYHS
         void ConvertCommon()
         {
             string[] animGuids = AssetDatabase.FindAssets("", new[] { $"Assets/GameAssets/Animations/Common" });
-            string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/YHCharaAnimCommon.asset";
+            string createAssetPath = $"Assets/GameAssets/Resources/YHCharaAnim/yh_chara_anim_common.asset";
             Convert(animGuids, createAssetPath);
         }
 
