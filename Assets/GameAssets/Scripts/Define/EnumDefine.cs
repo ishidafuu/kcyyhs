@@ -87,7 +87,7 @@ namespace YYHS
     {
         None,
         Shaky,
-        Down,
+        Fly,
     }
 
 
@@ -264,5 +264,12 @@ namespace YYHS
         EffectSmall,
         FilterScreen,
         FrameParts,
+    }
+
+    public enum EnumShaderParam
+    {
+        _Value,
+        _Frame,
+        _Alpha,
     }
 }

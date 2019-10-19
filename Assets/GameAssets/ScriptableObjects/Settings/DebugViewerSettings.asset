@@ -12,5 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f11b907cde87a4382add24157daf1d, type: 3}
   m_Name: DebugViewerSettings
   m_EditorClassIdentifier: 
+  IsPause: 0
+  GameWait: 5
+  IsShaderView: 0
+  ShaderType: 1
+  ShaderNo: 9
   ShaderFrame: 7
   ShaderValue: 0.65
+  IsCharaView: 0
+  CharaNo: 0
+  AnimName: 0
+  AnimFrame: 0

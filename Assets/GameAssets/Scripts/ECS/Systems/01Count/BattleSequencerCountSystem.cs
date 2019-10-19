@@ -33,6 +33,9 @@ namespace YYHS
 
         protected override void OnUpdate()
         {
+            if (Settings.Instance.Debug.IsSkip())
+                return;
+
             BattleSequencer seq = GetSingleton<BattleSequencer>();
 
             if (seq.m_seqState == EnumBattleSequenceState.Idle)
@@ -112,7 +115,7 @@ namespace YYHS
             switch (step)
             {
                 case NextStepType.DamageReactionStep:
-                    DamageReactionStep(ref seq, ref lastSide, ref waitSide);
+                    DamageReactionStep(ref seq, ref waitSide, ref lastSide);
                     break;
                 case NextStepType.DeffenceStepWaitSide:
                     DeffenceStep(ref seq, ref lastSide, ref waitSide);
@@ -145,51 +148,56 @@ namespace YYHS
             }
 
             bool isSideA = seq.m_animation.m_isSideA;
-            int charaNo = seq.m_animation.m_charaNo;
-            EnumAnimationName animName = seq.m_animation.m_animName;
-            YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
-            foreach (var item in anim.m_events)
-            {
-                if (item.m_frame != seq.m_animation.m_count)
-                    continue;
 
-                Debug.Log($"{item.m_functionName}:{item.m_intParameter}");
-                switch (item.m_functionName)
+            // End(Idle)まできたらエフェクトは発生しない
+            if (seq.m_seqState != EnumBattleSequenceState.Idle)
+            {
+                int charaNo = seq.m_animation.m_charaNo;
+                EnumAnimationName animName = seq.m_animation.m_animName;
+                YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
+                foreach (var item in anim.m_events)
                 {
-                    case EnumEventFunctionName.EventEffectBG:
-                        SetEffect(filterEffects, EnumEffectType.EffectBG, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventEffectScreen:
-                        SetEffect(filterEffects, EnumEffectType.EffectScreen, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventEffectLarge:
-                        SetEffect(filterEffects, EnumEffectType.EffectLarge, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventEffectMedium:
-                        SetEffect(filterEffects, EnumEffectType.EffectMedium, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventEffectSmall:
-                        SetEffect(filterEffects, EnumEffectType.EffectSmall, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventFillterScreen:
-                        SetEffect(filterEffects, EnumEffectType.FillterScreen, item.m_intParameter, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventEffectDamageBody:
-                        StopOtherDamageEffect(filterEffects);
-                        SetEffect(filterEffects, EnumEffectType.EffectDamageBody, (int)EnumEffectLarge.Damage, isSideA);
-                        isEffectUpdate = true;
-                        break;
-                    case EnumEventFunctionName.EventEffectDamageFace:
-                        StopOtherDamageEffect(filterEffects);
-                        SetEffect(filterEffects, EnumEffectType.EffectDamageFace, (int)EnumEffectLarge.Damage, isSideA);
-                        isEffectUpdate = true;
-                        break;
+                    if (item.m_frame != seq.m_animation.m_count)
+                        continue;
+
+                    Debug.Log($"{item.m_functionName}:{item.m_intParameter}");
+                    switch (item.m_functionName)
+                    {
+                        case EnumEventFunctionName.EventEffectBG:
+                            SetEffect(filterEffects, EnumEffectType.EffectBG, item.m_intParameter, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventEffectScreen:
+                            SetEffect(filterEffects, EnumEffectType.EffectScreen, item.m_intParameter, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventEffectLarge:
+                            SetEffect(filterEffects, EnumEffectType.EffectLarge, item.m_intParameter, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventEffectMedium:
+                            SetEffect(filterEffects, EnumEffectType.EffectMedium, item.m_intParameter, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventEffectSmall:
+                            SetEffect(filterEffects, EnumEffectType.EffectSmall, item.m_intParameter, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventFillterScreen:
+                            SetEffect(filterEffects, EnumEffectType.FillterScreen, item.m_intParameter, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventEffectDamageBody:
+                            StopOtherDamageEffect(filterEffects);
+                            SetEffect(filterEffects, EnumEffectType.EffectDamageBody, (int)EnumEffectLarge.Damage, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                        case EnumEventFunctionName.EventEffectDamageFace:
+                            StopOtherDamageEffect(filterEffects);
+                            SetEffect(filterEffects, EnumEffectType.EffectDamageFace, (int)EnumEffectLarge.Damage, isSideA);
+                            isEffectUpdate = true;
+                            break;
+                    }
                 }
             }
 
@@ -261,6 +269,7 @@ namespace YYHS
 
         private static void ResetEffect(ref NativeArray<FilterEffect> filterEffects)
         {
+            Debug.Log("ResetEffect");
             for (int i = 0; i < filterEffects.Length; i++)
             {
                 FilterEffect effect = filterEffects[i];
@@ -283,6 +292,7 @@ namespace YYHS
                 if (seq.m_animType == EnumAnimType.Defence
                     && waitSide.m_enemyDamageReaction != EnumDamageReaction.None)
                 {
+                    Debug.Log("DamageReactionStep ");
                     step = NextStepType.DamageReactionStep;
                 }
                 // リアクションなし
@@ -486,7 +496,7 @@ namespace YYHS
 
         private void DamageReactionStep(ref BattleSequencer seq, ref SideState attackSide, ref SideState deffenceSide)
         {
-            Debug.Log("DamageReactionStep");
+            Debug.Log($"DamageReactionStep{seq.m_animation.m_count}");
             seq.m_animation.m_charaNo = deffenceSide.m_charaNo;
             seq.m_animation.m_isSideA = deffenceSide.m_isSideA;
             seq.m_animation.m_animName = GetDamageReactionName(attackSide.m_enemyDamageReaction);
@@ -514,7 +524,7 @@ namespace YYHS
             {
                 case EnumDamageReaction.Shaky:
                     return EnumAnimationName._Shaky;
-                case EnumDamageReaction.Down:
+                case EnumDamageReaction.Fly:
                     return EnumAnimationName._Fly;
             }
 

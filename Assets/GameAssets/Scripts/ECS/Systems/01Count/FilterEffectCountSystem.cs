@@ -24,6 +24,9 @@ namespace YYHS
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
+            if (Settings.Instance.Debug.IsSkip())
+                return inputDeps;
+
             m_query.AddDependency(inputDeps);
 
             NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
@@ -81,7 +84,7 @@ namespace YYHS
                         continue;
                 }
 
-                meshMat.GetMaterial().SetInt("_Frame", item.m_count);
+                meshMat.GetMaterial().SetInt(EnumShaderParam._Frame.ToString(), item.m_count);
             }
         }
 
@@ -101,7 +104,16 @@ namespace YYHS
                         continue;
 
                     item.m_count++;
+
                     // TODO:終わりのタイミングここで
+                    if (item.m_effectType == EnumEffectType.FillterScreen)
+                    {
+                        if (item.m_count >= Settings.Instance.Animation.FillterScreenEndFrame)
+                        {
+                            item.m_isActive = false;
+                            item.m_count = 0;
+                        }
+                    }
                     // Debug.Log(SpriteUr.imageName);
                     m_filterEffects[i] = item;
                 }

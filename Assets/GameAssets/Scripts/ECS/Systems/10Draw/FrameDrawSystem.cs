@@ -66,7 +66,7 @@ namespace YYHS
                     new Vector3(sign * Settings.Instance.DrawPos.ToukiMeterX, Settings.Instance.DrawPos.ToukiMeterY, layer),
                     isSideA ? m_Quaternion : m_QuaternionRev,
                     Vector3.one);
-                mat.SetFloat("_Value", touki);
+                mat.SetFloat(EnumShaderParam._Value.ToString(), touki);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
@@ -106,7 +106,7 @@ namespace YYHS
                     new Vector3(sign * Settings.Instance.DrawPos.BalanceMeterX, Settings.Instance.DrawPos.BalanceMeterY, layer),
                     isSideA ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
-                mat.SetFloat("_Value", balance);
+                mat.SetFloat(EnumShaderParam._Value.ToString(), balance);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
@@ -134,7 +134,7 @@ namespace YYHS
                     new Vector3(sign * Settings.Instance.DrawPos.LifeMeterX, Settings.Instance.DrawPos.LifeMeterY, layer),
                     isSideA ? m_Quaternion : m_QuaternionRev,
                     Vector3.one);
-                mat.SetFloat("_Value", life);
+                mat.SetFloat(EnumShaderParam._Value.ToString(), life);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
@@ -160,7 +160,7 @@ namespace YYHS
                     new Vector3(sign * Settings.Instance.DrawPos.ReiMeterX, Settings.Instance.DrawPos.ReiMeterY, layer),
                     isSideA ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
-                mat.SetFloat("_Value", rei);
+                mat.SetFloat(EnumShaderParam._Value.ToString(), rei);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
@@ -198,7 +198,7 @@ namespace YYHS
                     new Vector3(sign * Settings.Instance.DrawPos.SignalX, Settings.Instance.DrawPos.SignalY, layer),
                     isSideA ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
-                mat.SetFloat("_Value", (float)signal);
+                mat.SetFloat(EnumShaderParam._Value.ToString(), (float)signal);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }

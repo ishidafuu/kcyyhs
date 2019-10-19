@@ -17,6 +17,7 @@ namespace YYHS
 
         void Start()
         {
+            Settings.Instance.Debug.InitCount();
             Settings.Instance.SetPixelSize(Screen.width / m_pixelPerfectCamera.refResolutionX);
             var scene = SceneManager.GetActiveScene();
             if (scene.name != SCENE_NAME)

@@ -93,6 +93,8 @@ namespace YYHS
 
         protected override void OnUpdate()
         {
+            Settings.Instance.Debug.IncCount();
+
             var PadScans = m_query.ToComponentDataArray<PadScan>(Allocator.TempJob);
             for (int i = 0; i < PadScans.Length; i++)
             {

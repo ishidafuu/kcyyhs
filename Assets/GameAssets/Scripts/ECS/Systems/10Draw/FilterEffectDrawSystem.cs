@@ -44,7 +44,7 @@ namespace YYHS
                 EnumDrawLayer layer = EnumDrawLayer.OverChara;
                 Vector3 position = new Vector3(0, Settings.Instance.DrawPos.BgScrollY, (int)layer);
                 Vector3 scale = Vector3.one;
-                Debug.Log($"{filterEffect.m_effectType}:{filterEffect.m_effectIndex}");
+                // Debug.Log($"{filterEffect.m_effectType}:{filterEffect.m_effectIndex}");
                 switch (filterEffect.m_effectType)
                 {
                     case EnumEffectType.EffectBG:

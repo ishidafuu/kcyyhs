@@ -19,3 +19,4 @@ MonoBehaviour:
   LowScrollSpeed: 1
   DecideScrollSpeed: 8
   JumpFadeFrame: 30
+  FillterScreenEndFrame: 120

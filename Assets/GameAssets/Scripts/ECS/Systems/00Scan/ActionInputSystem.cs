@@ -207,11 +207,11 @@ namespace YYHS
                 int sideBDamage = UnityEngine.Random.Range(0, 3);
                 battleSequencer.m_sideA.m_enemyDamageLv = (EnumDamageLv)sideADamage;
                 battleSequencer.m_sideB.m_enemyDamageLv = (EnumDamageLv)sideBDamage;
-                // TODO:バランス値で変化させる
-                battleSequencer.m_sideA.m_enemyDamageReaction = EnumDamageReaction.None;
-                battleSequencer.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
-            }
 
+            }
+            // TODO:バランス値で変化させる
+            battleSequencer.m_sideA.m_enemyDamageReaction = EnumDamageReaction.Fly;
+            battleSequencer.m_sideB.m_enemyDamageReaction = EnumDamageReaction.Shaky;
             // TODO:仮
             battleSequencer.m_sideA.m_enemyDamageLv = EnumDamageLv.Hit;
             battleSequencer.m_sideB.m_enemyDamageLv = EnumDamageLv.Hit;

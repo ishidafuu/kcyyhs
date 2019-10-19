@@ -4629,7 +4629,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     m_events: []
   - m_name: _Fly
-    m_length: 90
+    m_length: 120
     m_parts:
     - m_name: bg_04
       m_orderInLayer: 0
@@ -4678,20 +4678,20 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: -0.40768126
-          outSlope: -0.40768126
+          inSlope: 0.44696468
+          outSlope: 0.44696468
           tangentMode: 0
           weightedMode: 3
           inWeight: 0.33333334
-          outWeight: 0.4866128
+          outWeight: 0.173108
         - serializedVersion: 3
           time: 35
           value: 16
-          inSlope: -0.41482306
-          outSlope: -0.41482306
+          inSlope: 0.505607
+          outSlope: 0.505607
           tangentMode: 0
           weightedMode: 3
-          inWeight: 0.36604762
+          inWeight: 0.14704968
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 37
@@ -5014,7 +5014,7 @@ MonoBehaviour:
       m_isActive:
       - m_frame: 0
         m_value: 1
-      - m_frame: 90
+      - m_frame: 120
         m_value: 1
       m_isFlipX: []
       m_isFlipY: []
@@ -6229,7 +6229,12 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_events: []
+    m_events:
+    - m_frame: 0
+      m_functionName: 2
+      m_stringParameter: 
+      m_floatParameter: 0
+      m_intParameter: 3
   - m_name: _Stand00
     m_length: 120
     m_parts:

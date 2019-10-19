@@ -22,6 +22,9 @@ namespace YYHS
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
+            if (Settings.Instance.Debug.IsSkip())
+                return inputDeps;
+
             BattleSequencer seq = GetSingleton<BattleSequencer>();
             m_query.AddDependency(inputDeps);
 

@@ -211,7 +211,7 @@ namespace YYHS
                 Mesh mesh = meshMat.m_mesh;
                 Material mat = meshMat.GetMaterial(i);
                 Matrix4x4 matrixes = Matrix4x4.TRS(position, m_Quaternion, scale);
-                mat.SetFloat("_Alpha", alpha);
+                mat.SetFloat(EnumShaderParam._Alpha.ToString(), alpha);
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }

@@ -9,12 +9,11 @@ namespace YYHS
     {
         public int StartTransitionTime;
         public int EndTransitionTime;
-
         public int ToukiAnimationInterval;
-
         public int HighScrollSpeed;
         public int LowScrollSpeed;
         public int DecideScrollSpeed;
         public int JumpFadeFrame;
+        public int FillterScreenEndFrame;
     }
 }

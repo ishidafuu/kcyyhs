@@ -87,8 +87,8 @@ namespace YYHS
                 new Vector3(posX, Settings.Instance.DrawPos.BgScrollY, layer),
                  m_QuaternionRev, Vector3.one);
 
-            mat.SetInt("_Frame", Settings.Instance.Debug.ShaderFrame);
-            mat.SetFloat("_Value", Settings.Instance.Debug.ShaderValue);
+            mat.SetInt(EnumShaderParam._Frame.ToString(), Settings.Instance.Debug.ShaderFrame);
+            mat.SetFloat(EnumShaderParam._Value.ToString(), Settings.Instance.Debug.ShaderValue);
 
             Graphics.DrawMesh(mesh, matrixes, mat, 0);
         }
