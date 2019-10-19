@@ -75,8 +75,8 @@ namespace YYHS
                     : +Settings.Instance.DrawPos.BgScrollX;
 
                 int count = (jumpState.m_state == EnumJumpState.None)
-                ? toukiMeter.m_animationCount
-                : jumpState.m_animationCount;
+                    ? toukiMeter.m_animationCount
+                    : jumpState.m_animationCount;
 
                 EnumAnimationName animName = EnumAnimationName._Stand00;
                 if (toukiMeter.m_cross == EnumCrossType.Right && sideInfo.m_isSideA
