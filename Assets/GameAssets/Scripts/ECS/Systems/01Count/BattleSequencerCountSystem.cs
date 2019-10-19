@@ -515,10 +515,10 @@ namespace YYHS
                 case EnumDamageReaction.Shaky:
                     return EnumAnimationName._Shaky;
                 case EnumDamageReaction.Down:
-                    return EnumAnimationName._Down;
+                    return EnumAnimationName._Fly;
             }
 
-            return EnumAnimationName._Down;
+            return EnumAnimationName._Fly;
         }
 
 
