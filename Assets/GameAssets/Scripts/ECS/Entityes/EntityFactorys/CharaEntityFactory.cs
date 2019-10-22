@@ -46,6 +46,11 @@ namespace YYHS
             {
             });
 
+            entityManager.SetComponentData(entity, new ReiState
+            {
+            });
+
+
 
             return entity;
         }

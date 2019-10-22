@@ -492,6 +492,24 @@ namespace YYHS
             seq.m_animType = EnumAnimType.Action;
             seq.m_isLastSideA = nextSide.m_isSideA;
             nextSide.m_animStep++;
+
+            ConsumeRei(ref seq, ref nextSide);
+        }
+
+        private static void ConsumeRei(ref BattleSequencer seq, ref SideState nextSide)
+        {
+            if (nextSide.m_animStep == EnumAnimationStep.Finished)
+            {
+                Debug.LogError("ConsumeRei");
+                if (seq.m_animation.m_isSideA)
+                {
+                    seq.m_sideA.m_isConsumeRei = true;
+                }
+                else
+                {
+                    seq.m_sideB.m_isConsumeRei = true;
+                }
+            }
         }
 
         private void DeffenceStep(ref BattleSequencer seq, ref SideState attackSide, ref SideState deffenceSide)

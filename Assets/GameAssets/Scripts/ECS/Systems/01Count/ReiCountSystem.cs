@@ -9,14 +9,14 @@ using UnityEngine;
 namespace YYHS
 {
     [UpdateInGroup(typeof(CountGroup))]
-    public class DamageCountSystem : JobComponentSystem
+    public class ReiCountSystem : JobComponentSystem
     {
         EntityQuery m_query;
 
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(
-                ComponentType.ReadWrite<DamageState>(),
+                ComponentType.ReadWrite<ReiState>(),
                 ComponentType.ReadWrite<Status>()
             );
         }
@@ -30,29 +30,26 @@ namespace YYHS
 
 
             m_query.AddDependency(inputDeps);
-            NativeArray<DamageState> damageStates = m_query.ToComponentDataArray<DamageState>(Allocator.TempJob);
+            NativeArray<ReiState> reiStates = m_query.ToComponentDataArray<ReiState>(Allocator.TempJob);
             NativeArray<Status> statuses = m_query.ToComponentDataArray<Status>(Allocator.TempJob);
 
 
             var job = new CountJob()
             {
-                m_damageStates = damageStates,
+                m_reiStates = reiStates,
                 m_statuses = statuses,
                 m_seq = seq,
-                LifeMax = Settings.Instance.Common.LifeMax,
-                BalanceMax = Settings.Instance.Common.BalanceMax,
+                MaxRei = Settings.Instance.Common.ReiMax,
                 IsDebugHeal = Settings.Instance.Debug.IsHeal,
-                DamageSpeed = Settings.Instance.Common.DamageSpeed,
+                AmountSpeed = Settings.Instance.Common.ReiAmountSpeed,
             };
 
             inputDeps = job.Schedule(inputDeps);
             inputDeps.Complete();
-            m_query.CopyFromComponentDataArray(damageStates);
+            m_query.CopyFromComponentDataArray(reiStates);
             m_query.CopyFromComponentDataArray(statuses);
-            damageStates.Dispose();
+            reiStates.Dispose();
             statuses.Dispose();
-
-
 
             return inputDeps;
         }
@@ -60,37 +57,34 @@ namespace YYHS
         // [BurstCompileAttribute]
         struct CountJob : IJob
         {
-            public NativeArray<DamageState> m_damageStates;
+            public NativeArray<ReiState> m_reiStates;
             public NativeArray<Status> m_statuses;
             [ReadOnly] public BattleSequencer m_seq;
-            public int LifeMax;
-            public int BalanceMax;
+            public int MaxRei;
             public bool IsDebugHeal;
-            public int DamageSpeed;
+            public int AmountSpeed;
 
             public void Execute()
             {
-                for (int i = 0; i < m_damageStates.Length; i++)
+                for (int i = 0; i < m_reiStates.Length; i++)
                 {
-                    var damageState = m_damageStates[i];
+                    var reiState = m_reiStates[i];
                     var status = m_statuses[i];
                     if (m_seq.m_seqState == EnumBattleSequenceState.Idle)
                     {
                         if (!IsDebugHeal)
                             continue;
 
-                        status.m_life += DamageSpeed;
-                        if (status.m_life > LifeMax)
+                        if (status.m_rei < MaxRei)
                         {
-                            status.m_life = LifeMax;
+                            status.m_rei += AmountSpeed;
+                            if (status.m_rei > MaxRei)
+                            {
+                                status.m_rei = MaxRei;
+                            }
+                            m_statuses[i] = status;
                         }
 
-                        status.m_balance += DamageSpeed;
-                        if (status.m_balance > BalanceMax)
-                        {
-                            status.m_balance = BalanceMax;
-                        }
-                        m_statuses[i] = status;
                     }
                     else
                     {
@@ -99,38 +93,29 @@ namespace YYHS
 
                         if (isSideA)
                         {
-                            if (!m_seq.m_sideA.m_isStartDamage)
+                            if (!m_seq.m_sideA.m_isConsumeRei)
                                 continue;
                         }
                         else
                         {
-                            if (!m_seq.m_sideB.m_isStartDamage)
+                            if (!m_seq.m_sideB.m_isConsumeRei)
                                 continue;
                         }
 
+                        Debug.Log(reiState.m_reiAmount + " " + i);
 
-                        if (damageState.m_lifeDamage > 0)
+                        if (reiState.m_reiAmount > 0)
                         {
-                            damageState.m_lifeDamage -= DamageSpeed;
-                            status.m_life -= DamageSpeed;
-                            if (status.m_life < 0)
+                            reiState.m_reiAmount -= AmountSpeed;
+                            status.m_rei -= AmountSpeed;
+                            if (status.m_rei < 0)
                             {
-                                status.m_life = 0;
-                            }
-                        }
-
-                        if (damageState.m_balanceDamage > 0)
-                        {
-                            damageState.m_balanceDamage -= DamageSpeed;
-                            status.m_balance -= DamageSpeed;
-                            if (status.m_balance < 0)
-                            {
-                                status.m_balance = 0;
+                                status.m_rei = 0;
                             }
                         }
 
                         m_statuses[i] = status;
-                        m_damageStates[i] = damageState;
+                        m_reiStates[i] = reiState;
                     }
 
                 }

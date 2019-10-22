@@ -19,5 +19,7 @@ namespace YYHS
         public int BalanceMax;
         public int ReiMax;
         public int DamageSpeed;
+        public int ReiAmountSpeed;
+        public int ReiRecoverSpeed;
     }
 }

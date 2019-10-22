@@ -10,6 +10,7 @@ namespace YYHS
             typeof(Status),
             typeof(JumpState),
             typeof(DamageState),
+            typeof(ReiState),
             // typeof(PadScan), // （CharaEntityFactoryで必要なキャラのみつける）
         };
 

@@ -64,6 +64,7 @@ namespace YYHS
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<JumpCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<DamageCountSystem>());
+            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ReiCountSystem>());
 
             PresentationSystemGroup presentationSystemGroup = world.GetOrCreateSystem<PresentationSystemGroup>();
             presentationSystemGroup.AddSystemToUpdateList(world.GetOrCreateSystem<SpritDrawSystem>());
