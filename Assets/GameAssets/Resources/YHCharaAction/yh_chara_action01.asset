@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc1821ea80a7dd4ca1e72e5bcde6caa, type: 3}
+  m_Name: yh_chara_action01
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: actionData
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[YYHS.YHActionData, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 1|YYHS.YHActionData, Assembly-CSharp
+    - Name: actionName
+      Entry: 1
+      Data: "\u970A\u5149\u5F3E"
+    - Name: rangeType
+      Entry: 3
+      Data: 1
+    - Name: effectType
+      Entry: 3
+      Data: 0
+    - Name: cost
+      Entry: 3
+      Data: 6
+    - Name: probability
+      Entry: 3
+      Data: 122
+    - Name: dodge
+      Entry: 3
+      Data: 102
+    - Name: power
+      Entry: 3
+      Data: 92
+    - Name: balance
+      Entry: 3
+      Data: 160
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|YYHS.YHActionData, Assembly-CSharp
+    - Name: actionName
+      Entry: 1
+      Data: "\u970A\u62F3"
+    - Name: rangeType
+      Entry: 3
+      Data: 1
+    - Name: effectType
+      Entry: 3
+      Data: 0
+    - Name: cost
+      Entry: 3
+      Data: 4
+    - Name: probability
+      Entry: 3
+      Data: 116
+    - Name: dodge
+      Entry: 3
+      Data: 98
+    - Name: power
+      Entry: 3
+      Data: 68
+    - Name: balance
+      Entry: 3
+      Data: 116
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|YYHS.YHActionData, Assembly-CSharp
+    - Name: actionName
+      Entry: 1
+      Data: "\u970A\u4E38"
+    - Name: rangeType
+      Entry: 3
+      Data: 3
+    - Name: effectType
+      Entry: 3
+      Data: 0
+    - Name: cost
+      Entry: 3
+      Data: 8
+    - Name: probability
+      Entry: 3
+      Data: 128
+    - Name: dodge
+      Entry: 3
+      Data: 84
+    - Name: power
+      Entry: 3
+      Data: 106
+    - Name: balance
+      Entry: 3
+      Data: 124
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|YYHS.YHActionData, Assembly-CSharp
+    - Name: actionName
+      Entry: 1
+      Data: "\u30B7\u30E7\u30C3\u30C8\u30AC\u30F3"
+    - Name: rangeType
+      Entry: 3
+      Data: 3
+    - Name: effectType
+      Entry: 3
+      Data: 0
+    - Name: cost
+      Entry: 3
+      Data: 5
+    - Name: probability
+      Entry: 3
+      Data: 118
+    - Name: dodge
+      Entry: 3
+      Data: 96
+    - Name: power
+      Entry: 3
+      Data: 76
+    - Name: balance
+      Entry: 3
+      Data: 88
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

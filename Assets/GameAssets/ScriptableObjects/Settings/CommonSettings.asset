@@ -18,6 +18,7 @@ MonoBehaviour:
   FilterEffectCount: 4
   ReiPieceCount: 6
   ToukiMax: 96
-  LifeMax: 96
-  BalanceMax: 64
+  LifeMax: 256
+  BalanceMax: 256
   ReiMax: 25
+  DamageSpeed: 2

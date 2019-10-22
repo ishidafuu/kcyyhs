@@ -104,6 +104,7 @@ namespace YYHS
         WaveAttack,
     }
 
+
     public enum EnumDefenceType
     {
         Stand,
@@ -271,5 +272,23 @@ namespace YYHS
         _Value,
         _Frame,
         _Alpha,
+    }
+
+    public enum EnumAttackRangeType
+    {
+        None,
+        Short,
+        Middle,
+        Long,
+        Ground,
+        Wave,
+    }
+
+    public enum EnumAttackEffectType
+    {
+        None,
+        Heal,
+        LockTech,
+        ToukiSpeedUp,
     }
 }

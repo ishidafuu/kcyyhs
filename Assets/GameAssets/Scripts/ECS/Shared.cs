@@ -21,6 +21,7 @@ namespace YYHS
 
         public static EffectMeshMatList m_effectMeshMatList;
         public static YHCharaAnimList m_yhCharaAnimList;
+        public static YHCharaActionList m_yhCharaAttackList;
         static readonly string DefaultShader = "Sprites/DefaultSprite";
 
         public static void ReadySharedComponentData()
@@ -46,6 +47,9 @@ namespace YYHS
 
             m_yhCharaAnimList = new YHCharaAnimList();
             m_yhCharaAnimList.Init();
+
+            m_yhCharaAttackList = new YHCharaActionList();
+            m_yhCharaAttackList.Init();
         }
 
         private static void LoadFrameParts()

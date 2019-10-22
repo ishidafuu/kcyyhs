@@ -27,6 +27,7 @@ namespace YYHS
         public bool m_isEnemyNeedDefence;
         public EnumAnimationStep m_animStep;
         public bool m_isDefenceFinished;
+        public bool m_isStartDamage;
     }
 
     public struct BattleAnim

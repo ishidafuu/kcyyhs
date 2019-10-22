@@ -8,6 +8,7 @@ namespace YYHS
     [CreateAssetMenu(menuName = "YYHS/Settings/DebugViewerSettings", fileName = "DebugViewerSettings")]
     public sealed class DebugViewerSettings : ScriptableObject
     {
+        public bool IsHeal;
         public bool IsPause;
         [Range(0, 10)]
         public int GameWait;

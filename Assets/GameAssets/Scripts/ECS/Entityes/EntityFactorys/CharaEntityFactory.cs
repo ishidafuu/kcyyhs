@@ -28,9 +28,9 @@ namespace YYHS
                 m_value = 0,
             });
 
-            entityManager.SetComponentData(entity, new StateMeter
+            entityManager.SetComponentData(entity, new Status
             {
-                m_life = Settings.Instance.Common.LifeMax / 3,
+                m_life = Settings.Instance.Common.LifeMax,
                 m_balance = Settings.Instance.Common.BalanceMax / 2,
                 m_rei = Settings.Instance.Common.ReiMax / 2,
             });
@@ -40,6 +40,10 @@ namespace YYHS
                 m_state = EnumJumpState.None,
                 m_effectStep = EnumJumpEffectStep.JumpStart,
                 m_totalCount = 0,
+            });
+
+            entityManager.SetComponentData(entity, new DamageState
+            {
             });
 
 

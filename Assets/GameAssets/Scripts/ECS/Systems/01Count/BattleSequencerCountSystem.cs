@@ -21,12 +21,13 @@ namespace YYHS
         }
 
 
-        EntityQuery m_query;
+        EntityQuery m_queryFillter;
+
 
         protected override void OnCreate()
         {
             RequireSingletonForUpdate<BattleSequencer>();
-            m_query = GetEntityQuery(
+            m_queryFillter = GetEntityQuery(
                 ComponentType.ReadWrite<FilterEffect>()
             );
         }
@@ -70,7 +71,7 @@ namespace YYHS
                             NextStep(ref seq, ref seq.m_sideB);
                         }
                         // seqが更新された直後にエフェクトの発生を行う
-                        UpdateFilterEffect(seq, isEndTransitionFilter);
+                        UpdateFilterEffect(ref seq, isEndTransitionFilter);
                     }
                     break;
                 case EnumBattleSequenceState.Play:
@@ -101,7 +102,7 @@ namespace YYHS
                     }
 
                     // seqが更新された直後にエフェクトの発生を行う
-                    UpdateFilterEffect(seq, isEndTransitionFilter);
+                    UpdateFilterEffect(ref seq, isEndTransitionFilter);
 
                     break;
             }
@@ -135,10 +136,10 @@ namespace YYHS
             }
         }
 
-        private void UpdateFilterEffect(BattleSequencer seq, bool isEndTransitionFilter)
+        private void UpdateFilterEffect(ref BattleSequencer seq, bool isEndTransitionFilter)
         {
             bool isEffectUpdate = false;
-            NativeArray<FilterEffect> filterEffects = m_query.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
+            NativeArray<FilterEffect> filterEffects = m_queryFillter.ToComponentDataArray<FilterEffect>(Allocator.TempJob);
 
             // アニメが切り替わったタイミングでフィルターエフェクトはすべてリセット
             if (seq.m_animation.m_count == 0)
@@ -195,6 +196,16 @@ namespace YYHS
                         case EnumEventFunctionName.EventEffectDamageFace:
                             StopOtherDamageEffect(filterEffects);
                             SetEffect(filterEffects, EnumEffectType.EffectDamageFace, (int)EnumEffectLarge.Damage, isSideA);
+                            // ダメージ変換開始
+                            // TODO:直撃以外
+                            if (isSideA)
+                            {
+                                seq.m_sideA.m_isStartDamage = true;
+                            }
+                            else
+                            {
+                                seq.m_sideB.m_isStartDamage = true;
+                            }
                             isEffectUpdate = true;
                             break;
                     }
@@ -217,7 +228,7 @@ namespace YYHS
 
             if (isEffectUpdate)
             {
-                m_query.CopyFromComponentDataArray(filterEffects);
+                m_queryFillter.CopyFromComponentDataArray(filterEffects);
             }
             filterEffects.Dispose();
         }

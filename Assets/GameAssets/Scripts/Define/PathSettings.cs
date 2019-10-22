@@ -14,6 +14,7 @@ namespace YYHS
     public static class PathSettings
     {
         public static readonly string YHCharaAnim = "YHCharaAnim";
+        public static readonly string YHCharaAction = "YHCharaAction";
         public static readonly string YHCharaAnimCommon = "common";
         public static readonly string CommonSprite = "Sprites/common";
         public static readonly string CharaSprite = "Sprites/Character/chara_{0}";

@@ -20,7 +20,7 @@ namespace YYHS
         {
             m_query = GetEntityQuery(
                 ComponentType.ReadOnly<ToukiMeter>(),
-                ComponentType.ReadOnly<StateMeter>()
+                ComponentType.ReadOnly<Status>()
             );
         }
 
@@ -28,7 +28,7 @@ namespace YYHS
         {
             DrawFrame();
             DrawToukiMeter();
-            DrawStateMeter();
+            DrawStatus();
             DrawSignal();
         }
 
@@ -76,9 +76,9 @@ namespace YYHS
 
 
 
-        private void DrawStateMeter()
+        private void DrawStatus()
         {
-            var stateMeters = m_query.ToComponentDataArray<StateMeter>(Allocator.TempJob);
+            var stateMeters = m_query.ToComponentDataArray<Status>(Allocator.TempJob);
 
             DrawBalanceMeter(stateMeters);
 
@@ -89,7 +89,7 @@ namespace YYHS
             stateMeters.Dispose();
         }
 
-        private void DrawBalanceMeter(NativeArray<StateMeter> stateMeters)
+        private void DrawBalanceMeter(NativeArray<Status> stateMeters)
         {
             for (int i = 0; i < stateMeters.Length; i++)
             {
@@ -97,7 +97,7 @@ namespace YYHS
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.BalanceGauge].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.BalanceGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
-                float balance = (float)stateMeter.m_balance / mesh.bounds.size.x;
+                float balance = (float)stateMeter.m_balance / Settings.Instance.Common.BalanceMax;
 
                 float sign = isSideA ? +1 : -1;
                 int layer = (int)EnumDrawLayer.UnderFrame;
@@ -112,7 +112,7 @@ namespace YYHS
             }
         }
 
-        private void DrawLifeMeter(NativeArray<StateMeter> stateMeters)
+        private void DrawLifeMeter(NativeArray<Status> stateMeters)
         {
             for (int i = 0; i < stateMeters.Length; i++)
             {
@@ -120,7 +120,7 @@ namespace YYHS
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.LifeGauge].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.LifeGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
-                float life = (float)stateMeter.m_life / mesh.bounds.size.x;
+                float life = (float)stateMeter.m_life / Settings.Instance.Common.LifeMax;
 
                 float sign = isSideA ? +1 : -1;
 
@@ -140,7 +140,7 @@ namespace YYHS
             }
         }
 
-        private void DrawReiMeter(NativeArray<StateMeter> stateMeters)
+        private void DrawReiMeter(NativeArray<Status> stateMeters)
         {
             for (int i = 0; i < stateMeters.Length; i++)
             {

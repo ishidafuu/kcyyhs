@@ -32,7 +32,7 @@ namespace YYHS
                 m_query.AddDependency(inputDeps);
                 NativeArray<JumpState> jumpStates = m_query.ToComponentDataArray<JumpState>(Allocator.TempJob);
                 // Vector2[] uv = Shared.m_bgFrameMeshMat.m_meshDict[EnumBGPartsType.bg00.ToString()].uv;
-                var job = new CountToukiJob()
+                var job = new CountJob()
                 {
                     m_jumpStates = jumpStates,
                     m_seq = seq,
@@ -49,7 +49,7 @@ namespace YYHS
         }
 
         // [BurstCompileAttribute]
-        struct CountToukiJob : IJob
+        struct CountJob : IJob
         {
             public NativeArray<JumpState> m_jumpStates;
             [ReadOnly] public BattleSequencer m_seq;
