@@ -102,8 +102,6 @@ namespace YYHS
                                 continue;
                         }
 
-                        Debug.Log(reiState.m_reiAmount + " " + i);
-
                         if (reiState.m_reiAmount > 0)
                         {
                             reiState.m_reiAmount -= AmountSpeed;

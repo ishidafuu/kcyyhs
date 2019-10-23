@@ -20,3 +20,4 @@ MonoBehaviour:
   DecideScrollSpeed: 8
   JumpFadeFrame: 30
   FillterScreenEndFrame: 120
+  ReiDistributeFrame: 60

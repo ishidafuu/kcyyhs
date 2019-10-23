@@ -22,7 +22,7 @@ namespace YYHS
 
             foreach (var item in loadObjects)
             {
-                Debug.Log(item.name);
+                // Debug.Log(item.name);
                 m_charaAttackList.Add(item);
             }
         }

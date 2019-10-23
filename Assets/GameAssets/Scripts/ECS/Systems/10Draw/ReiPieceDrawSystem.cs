@@ -34,9 +34,12 @@ namespace YYHS
 
             for (int i = 0; i < reiPieces.Length; i++)
             {
-                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ReiPiece].m_mesh;
-                Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ReiPiece].GetMaterial(i);
                 var reiPiece = reiPieces[i];
+                int index = (reiPiece.m_reiState == EnumReiState.Idle)
+                    ? (int)EnumFrameParts.ReiPiece
+                    : (int)EnumFrameParts.ReiPieceDistribute;
+                Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[index].m_mesh;
+                Material mat = Shared.m_effectMeshMatList.m_framePartsList[index].GetMaterial(i);
                 int layer = (int)EnumDrawLayer.OverFrame;
 
                 int posX = reiPiece.m_basePos.x + reiPiece.m_movePos.x;

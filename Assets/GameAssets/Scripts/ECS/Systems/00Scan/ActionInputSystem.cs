@@ -306,18 +306,19 @@ namespace YYHS
         {
             battleSequencer.m_seqState = EnumBattleSequenceState.Start;
             battleSequencer.m_isLastSideA = isSideA;
+            battleSequencer.m_isDistributeRei = false;
 
-            battleSequencer.m_sideA.m_actionType = EnumActionType.None;
-            battleSequencer.m_sideA.m_animStep = EnumAnimationStep.Sleep;
-            battleSequencer.m_sideA.m_isDefenceFinished = false;
-            battleSequencer.m_sideA.m_isStartDamage = false;
-            battleSequencer.m_sideA.m_isConsumeRei = false;
+            InitSideState(ref battleSequencer.m_sideA);
+            InitSideState(ref battleSequencer.m_sideB);
+        }
 
-            battleSequencer.m_sideB.m_actionType = EnumActionType.None;
-            battleSequencer.m_sideB.m_animStep = EnumAnimationStep.Sleep;
-            battleSequencer.m_sideB.m_isDefenceFinished = false;
-            battleSequencer.m_sideB.m_isStartDamage = false;
-            battleSequencer.m_sideA.m_isConsumeRei = false;
+        private static void InitSideState(ref SideState sideState)
+        {
+            sideState.m_actionType = EnumActionType.None;
+            sideState.m_animStep = EnumAnimationStep.Sleep;
+            sideState.m_isDefenceFinished = false;
+            sideState.m_isStartDamage = false;
+            sideState.m_isConsumeRei = false;
         }
 
         private static void InitActionSide(SideInfo attackSideInfo, ref SideState attackSideState,

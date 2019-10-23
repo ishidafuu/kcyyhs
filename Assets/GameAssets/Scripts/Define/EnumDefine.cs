@@ -209,6 +209,7 @@ namespace YYHS
         Jump,
         Air,
         Fall,
+        ReiPieceDistribute,
     }
 
     public enum EnumSignal
@@ -221,7 +222,9 @@ namespace YYHS
     public enum EnumReiState
     {
         Idle,
+        Wait,
         Distribute,
+
     }
 
     public enum EnumEffectLarge

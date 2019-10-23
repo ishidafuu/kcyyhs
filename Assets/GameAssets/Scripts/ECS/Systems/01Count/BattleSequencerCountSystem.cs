@@ -481,6 +481,7 @@ namespace YYHS
             seq.m_animation.m_count = 0;
             seq.m_sideA.m_animStep = EnumAnimationStep.Sleep;
             seq.m_sideB.m_animStep = EnumAnimationStep.Sleep;
+            seq.m_isDistributeRei = true;
         }
 
         private void NextStep(ref BattleSequencer seq, ref SideState nextSide)
@@ -500,7 +501,6 @@ namespace YYHS
         {
             if (nextSide.m_animStep == EnumAnimationStep.Finished)
             {
-                Debug.LogError("ConsumeRei");
                 if (seq.m_animation.m_isSideA)
                 {
                     seq.m_sideA.m_isConsumeRei = true;

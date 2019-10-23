@@ -15,5 +15,6 @@ namespace YYHS
         public int DecideScrollSpeed;
         public int JumpFadeFrame;
         public int FillterScreenEndFrame;
+        public int ReiDistributeFrame;
     }
 }
