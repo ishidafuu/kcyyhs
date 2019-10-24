@@ -20,4 +20,6 @@ MonoBehaviour:
   DecideScrollSpeed: 8
   JumpFadeFrame: 30
   FillterScreenEndFrame: 120
-  ReiDistributeFrame: 60
+  ReiDistributeFrame: 30
+  ReiWaitFrame: 30
+  ReiWaitFrame2: 10

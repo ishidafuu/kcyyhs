@@ -14,8 +14,9 @@ namespace YYHS
             entityManager.SetComponentData(entity, new ReiPiece
             {
                 m_id = i,
-
-                m_count = UnityEngine.Random.Range(0, 60),
+                m_reiState = EnumReiState.Born,
+                m_count = 0,
+                m_offset = UnityEngine.Random.Range(0, 60),
                 m_speed = UnityEngine.Random.Range(10f, 20f),
                 m_width = UnityEngine.Random.Range(2f, 4f),
                 m_basePos = new Vector2Int(

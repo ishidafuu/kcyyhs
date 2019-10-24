@@ -294,8 +294,10 @@ namespace YYHS
 
 
             // TODO:バランス値で変化させる
-            seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.Fly;
-            seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.Shaky;
+            seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.None;
+            seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
+            // seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.Fly;
+            // seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.Shaky;
 
 
             // Debug.Log(battleSequencer.m_sideA.m_enemyDamageLv);

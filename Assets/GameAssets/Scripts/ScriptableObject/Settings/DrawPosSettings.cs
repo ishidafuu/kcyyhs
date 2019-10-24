@@ -22,6 +22,7 @@ namespace YYHS
         public int BalanceMeterY;
         public int ReiMeterX;
         public int ReiMeterY;
+        public int ReiDistributeX;
         public int ReiPoolY;
         public int ReiSeparate;
         public int SignalX;

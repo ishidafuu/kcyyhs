@@ -25,6 +25,7 @@ MonoBehaviour:
   BalanceMeterY: -52
   ReiMeterX: -67
   ReiMeterY: -84
+  ReiDistributeX: -36
   ReiPoolY: -70
   ReiSeparate: 5
   SignalX: -32

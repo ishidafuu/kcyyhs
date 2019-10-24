@@ -16,5 +16,7 @@ namespace YYHS
         public int JumpFadeFrame;
         public int FillterScreenEndFrame;
         public int ReiDistributeFrame;
+        public int ReiWaitFrame;
+        public int ReiWaitFrame2;
     }
 }

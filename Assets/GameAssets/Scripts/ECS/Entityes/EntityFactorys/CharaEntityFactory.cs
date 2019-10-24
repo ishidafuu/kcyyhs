@@ -31,8 +31,8 @@ namespace YYHS
             entityManager.SetComponentData(entity, new Status
             {
                 m_life = Settings.Instance.Common.LifeMax,
-                m_balance = Settings.Instance.Common.BalanceMax / 2,
-                m_rei = Settings.Instance.Common.ReiMax / 2,
+                m_balance = Settings.Instance.Common.BalanceMax,
+                m_rei = Settings.Instance.Common.ReiMax,
             });
 
             entityManager.SetComponentData(entity, new JumpState

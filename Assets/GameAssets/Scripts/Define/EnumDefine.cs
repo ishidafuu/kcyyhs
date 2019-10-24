@@ -221,6 +221,7 @@ namespace YYHS
 
     public enum EnumReiState
     {
+        Born,
         Idle,
         Wait,
         Distribute,
