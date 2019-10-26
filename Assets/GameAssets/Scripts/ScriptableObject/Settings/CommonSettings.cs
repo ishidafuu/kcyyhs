@@ -21,5 +21,6 @@ namespace YYHS
         public int DamageSpeed;
         public int ReiAmountSpeed;
         public int ReiRecoverSpeed;
+        public int ShakeyBorder;
     }
 }

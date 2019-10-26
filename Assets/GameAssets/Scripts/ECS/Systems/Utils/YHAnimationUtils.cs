@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace YYHS
 {
-    public static class YHAnimationUtils
+    public static class YHAnimationUtil
     {
 
         public static void DrawYHAnimation(EnumAnimationName animName, int charaNo, int count, int basePosX, bool isSideA, bool isSprit)
@@ -18,12 +18,12 @@ namespace YYHS
 
             foreach (YHAnimationParts item in anim.m_parts)
             {
-                YHFrameData isActive = YHAnimationUtils.GetNowFrameData(count, item.m_isActive);
+                YHFrameData isActive = YHAnimationUtil.GetNowFrameData(count, item.m_isActive);
 
                 if (isActive == null || !isActive.m_value)
                     continue;
 
-                YHFrameData isBrink = YHAnimationUtils.GetNowFrameData(count, item.m_isBrink);
+                YHFrameData isBrink = YHAnimationUtil.GetNowFrameData(count, item.m_isBrink);
                 if (isBrink != null && isBrink.m_value)
                 {
                     if (count % 4 >= 2)
@@ -33,9 +33,7 @@ namespace YYHS
                 Mesh mesh = null;
                 Material mat = null;
                 int layer = 0;
-                int sideNo = (isSideA)
-                    ? 0
-                    : 1;
+                int sideNo = SideUtil.Index(isSideA);
 
                 bool isBG = false;
 
@@ -64,9 +62,9 @@ namespace YYHS
                     continue;
                 }
 
-                Vector3 pos = YHAnimationUtils.EvalutePos(item, count, layer, basePosX, isSideA);
-                Quaternion q = YHAnimationUtils.EvaluteQuaternion(item, count, isSideA);
-                Vector3 scale = YHAnimationUtils.EvaluteScale(item, count);
+                Vector3 pos = YHAnimationUtil.EvalutePos(item, count, layer, basePosX, isSideA);
+                Quaternion q = YHAnimationUtil.EvaluteQuaternion(item, count, isSideA);
+                Vector3 scale = YHAnimationUtil.EvaluteScale(item, count);
                 Draw(mesh, mat, q, scale, pos);
 
                 // 不足背景追加描画
@@ -98,9 +96,6 @@ namespace YYHS
 
         public static Vector3 EvalutePos(YHAnimationParts item, int count, int layer, int basePosX, bool isSideA)
         {
-            int sign = (isSideA)
-                ? +1
-                : -1;
             float posX = (item.m_positionX.length == 0)
                 ? 0
                 : item.m_positionX.Evaluate(count);
@@ -109,17 +104,13 @@ namespace YYHS
                 ? 0
                 : item.m_positionY.Evaluate(count);
 
-            return new Vector3((sign * posX) + basePosX,
+            return new Vector3((SideUtil.Sign(isSideA) * posX) + basePosX,
                 posY + Settings.Instance.DrawPos.BgScrollY, (float)layer + item.m_orderInLayer);
         }
 
 
         public static Vector2 EvaluteLocalPos(YHAnimationParts item, int count, bool isSideA)
         {
-            int sign = (isSideA)
-                ? +1
-                : -1;
-
             float posX = (item.m_positionX.length == 0)
                 ? 0
                 : item.m_positionX.Evaluate(count);
@@ -128,7 +119,7 @@ namespace YYHS
                 ? 0
                 : item.m_positionY.Evaluate(count) + Settings.Instance.DrawPos.BgScrollY;
 
-            return new Vector2((sign * posX), posY);
+            return new Vector2((SideUtil.Sign(isSideA) * posX), posY);
         }
 
         public static Quaternion EvaluteQuaternion(YHAnimationParts item, int count, bool isSideA)

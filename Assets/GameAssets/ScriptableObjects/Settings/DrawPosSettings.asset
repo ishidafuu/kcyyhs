@@ -17,11 +17,11 @@ MonoBehaviour:
   BgScrollRangeFactor: 2
   BgScrollX: 64
   BgScrollY: 48
-  ToukiMeterX: -72
+  ToukiMeterX: 72
   ToukiMeterY: -37
-  LifeMeterX: -72
+  LifeMeterX: 72
   LifeMeterY: 100
-  BalanceMeterX: -88
+  BalanceMeterX: 88
   BalanceMeterY: -52
   ReiMeterX: -67
   ReiMeterY: -84

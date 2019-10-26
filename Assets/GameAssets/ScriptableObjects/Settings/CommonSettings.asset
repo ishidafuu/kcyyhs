@@ -24,3 +24,4 @@ MonoBehaviour:
   DamageSpeed: 3
   ReiAmountSpeed: 1
   ReiRecoverSpeed: 1
+  ShakeyBorder: 128

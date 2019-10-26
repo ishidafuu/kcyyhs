@@ -21,6 +21,7 @@ namespace YYHS
             m_queryChara = GetEntityQuery(
                 ComponentType.ReadOnly<PadScan>(),
                 ComponentType.ReadOnly<SideInfo>(),
+                ComponentType.ReadOnly<Status>(),
                 ComponentType.ReadOnly<ToukiMeter>(),
                 ComponentType.ReadWrite<JumpState>(),
                 ComponentType.ReadWrite<DamageState>(),
@@ -32,6 +33,7 @@ namespace YYHS
         {
             NativeArray<PadScan> padScans = m_queryChara.ToComponentDataArray<PadScan>(Allocator.TempJob);
             NativeArray<SideInfo> sideInfos = m_queryChara.ToComponentDataArray<SideInfo>(Allocator.TempJob);
+            NativeArray<Status> statuses = m_queryChara.ToComponentDataArray<Status>(Allocator.TempJob);
             NativeArray<ToukiMeter> toukiMeters = m_queryChara.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             NativeArray<JumpState> jumpStates = m_queryChara.ToComponentDataArray<JumpState>(Allocator.TempJob);
             NativeArray<DamageState> damageStates = m_queryChara.ToComponentDataArray<DamageState>(Allocator.TempJob);
@@ -50,7 +52,8 @@ namespace YYHS
                 var jumpState = jumpStates[i];
                 var reiState = reiStates[i];
 
-                bool isSideA = i == 0;
+
+                bool isSideA = SideUtil.IsSideA(i);
 
                 if (seq.m_seqState >= EnumBattleSequenceState.Start)
                 {
@@ -134,6 +137,7 @@ namespace YYHS
                             defenceType = EnumDefenceType.Stand;
                             break;
                     }
+
                     // TODO:仮
                     defenceType = EnumDefenceType.Stand;
 
@@ -148,7 +152,10 @@ namespace YYHS
                             defenceType, isNeedDefence);
                     }
 
-                    JudgeDamageLv(ref sideInfo, ref seq, isIdleSeq);
+                    var enemyStatus = statuses[SideUtil.EnemyIndex(i)];
+
+                    JudgeDamageLv(sideInfo, ref seq, isIdleSeq);
+                    UpdateDamage(ref seq, damageStates, statuses, jumpStates);
 
                     UpdateReiAmount(ref reiState, ref sideInfo, actionNo);
                     reiStates[i] = reiState;
@@ -160,9 +167,8 @@ namespace YYHS
 
             if (isReiDamageUpdate)
             {
-                UpdateDamage(damageStates, ref seq);
-
                 m_queryChara.CopyFromComponentDataArray(reiStates);
+                m_queryChara.CopyFromComponentDataArray(damageStates);
             }
 
             if (isJumpUpdate)
@@ -174,6 +180,7 @@ namespace YYHS
             sideInfos.Dispose();
             toukiMeters.Dispose();
             jumpStates.Dispose();
+            statuses.Dispose();
             damageStates.Dispose();
             reiStates.Dispose();
         }
@@ -209,23 +216,27 @@ namespace YYHS
             reiState.m_reiAmount = attackData.cost;
         }
 
-        private void UpdateDamage(NativeArray<DamageState> damageStates, ref BattleSequencer seq)
+        private void UpdateDamage(ref BattleSequencer seq, NativeArray<DamageState> damageStates, NativeArray<Status> statuses,
+        NativeArray<JumpState> jumpStates)
         {
             for (int i = 0; i < damageStates.Length; i++)
             {
                 var damageState = damageStates[i];
+                var jumpState = jumpStates[i];
+                var status = statuses[i];
+
                 bool isAttackSideA = (i != 0);
                 if (isAttackSideA)
                 {
-                    SetDamage(ref seq.m_sideA, ref damageState);
+                    SetDamage(ref seq.m_sideA, ref damageState, status, jumpState);
                 }
                 else
                 {
-                    SetDamage(ref seq.m_sideB, ref damageState);
+                    SetDamage(ref seq.m_sideB, ref damageState, status, jumpState);
                 }
+
                 damageStates[i] = damageState;
             }
-            m_queryChara.CopyFromComponentDataArray(damageStates);
         }
 
         private void StartJump(ref JumpState jumpState, int charge)
@@ -238,7 +249,7 @@ namespace YYHS
             jumpState.m_stepCount = 0;
         }
 
-        private static void SetDamage(ref SideState attackSideState, ref DamageState damageState)
+        private static void SetDamage(ref SideState attackSideState, ref DamageState damageState, in Status status, in JumpState jumpState)
         {
 
             YHActionData attackData = Shared.m_yhCharaAttackList.GetData(attackSideState.m_charaNo, attackSideState.m_actionNo);
@@ -265,12 +276,32 @@ namespace YYHS
 
             damageState.m_lifeDamage = damage;
             damageState.m_balanceDamage = balance;
+
+            int afterBalance = (status.m_balance - balance);
+            int afterLife = (status.m_life - damage);
+            bool isJumpHit = (jumpState.m_state != EnumJumpState.None
+                && attackSideState.m_enemyDamageLv >= EnumDamageLv.Hit);
+
+            bool isFly = (afterLife <= 0 || afterBalance <= 0 || isJumpHit);
+            bool isShakey = (afterBalance <= Settings.Instance.Common.ShakeyBorder);
+
+            if (isFly)
+            {
+                attackSideState.m_enemyDamageReaction = EnumDamageReaction.Fly;
+            }
+            else if (isShakey)
+            {
+                attackSideState.m_enemyDamageReaction = EnumDamageReaction.Shaky;
+            }
+            else
+            {
+                attackSideState.m_enemyDamageReaction = EnumDamageReaction.None;
+            }
+
         }
 
-        private static void JudgeDamageLv(ref SideInfo attackSideInfo, ref BattleSequencer seq, bool isStartAnim)
+        private static void JudgeDamageLv(in SideInfo attackSideInfo, ref BattleSequencer seq, bool isStartAnim)
         {
-
-
             // TODO:確率算出
             int sideADamage = UnityEngine.Random.Range(0, 3);
             int sideBDamage = UnityEngine.Random.Range(0, 3);
@@ -294,8 +325,10 @@ namespace YYHS
 
 
             // TODO:バランス値で変化させる
-            seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.None;
-            seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
+            // seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.None;
+            // seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
+
+
             // seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.Fly;
             // seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.Shaky;
 
@@ -323,7 +356,7 @@ namespace YYHS
             sideState.m_isConsumeRei = false;
         }
 
-        private static void InitActionSide(SideInfo attackSideInfo, ref SideState attackSideState,
+        private static void InitActionSide(in SideInfo attackSideInfo, ref SideState attackSideState,
             int actionNo, EnumActionType actionType, EnumDefenceType defenceType, bool isNeedDefence)
         {
             attackSideState.m_isSideA = attackSideInfo.m_isSideA;

@@ -40,6 +40,8 @@ namespace YYHS
                 if (!filterEffect.m_isActive)
                     continue;
 
+                // Debug.Log($"activeFilter:{filterEffect.m_effectIndex}");
+
                 MeshMat meshMat;
                 EnumDrawLayer layer = EnumDrawLayer.OverChara;
                 Vector3 position = new Vector3(0, Settings.Instance.DrawPos.BgScrollY, (int)layer);
@@ -120,12 +122,12 @@ namespace YYHS
                 if (!isPosition)
                     continue;
 
-                YHFrameData isActive = YHAnimationUtils.GetNowFrameData(count, item.m_isActive);
+                YHFrameData isActive = YHAnimationUtil.GetNowFrameData(count, item.m_isActive);
 
                 if (isActive == null || !isActive.m_value)
                     continue;
 
-                Vector2 partsPos = YHAnimationUtils.EvaluteLocalPos(item, count, isSideA);
+                Vector2 partsPos = YHAnimationUtil.EvaluteLocalPos(item, count, isSideA);
 
                 position.x = partsPos.x;
                 position.y = partsPos.y;

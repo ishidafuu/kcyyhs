@@ -53,18 +53,15 @@ namespace YYHS
 
             for (int i = 0; i < toukiMeters.Length; i++)
             {
-                bool isSideA = (i == 0);
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ToukiGauge].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ToukiGauge].GetMaterial(i);
                 var toukiMeter = toukiMeters[i];
                 float touki = (float)toukiMeter.m_value / mesh.bounds.size.x;
-                float sign = isSideA ? +1 : -1;
-
                 int layer = (int)EnumDrawLayer.UnderFrame;
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(sign * Settings.Instance.DrawPos.ToukiMeterX, Settings.Instance.DrawPos.ToukiMeterY, layer),
-                    isSideA ? m_Quaternion : m_QuaternionRev,
+                    new Vector3(SideUtil.PosSign(i) * Settings.Instance.DrawPos.ToukiMeterX, Settings.Instance.DrawPos.ToukiMeterY, layer),
+                    SideUtil.IsSideA(i) ? m_Quaternion : m_QuaternionRev,
                     Vector3.one);
                 mat.SetFloat(EnumShaderParam._Value.ToString(), touki);
 
@@ -93,18 +90,15 @@ namespace YYHS
         {
             for (int i = 0; i < stateMeters.Length; i++)
             {
-                bool isSideA = (i == 0);
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.BalanceGauge].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.BalanceGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 float balance = (float)stateMeter.m_balance / Settings.Instance.Common.BalanceMax;
-
-                float sign = isSideA ? +1 : -1;
                 int layer = (int)EnumDrawLayer.UnderFrame;
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(sign * Settings.Instance.DrawPos.BalanceMeterX, Settings.Instance.DrawPos.BalanceMeterY, layer),
-                    isSideA ? m_QuaternionRev : m_Quaternion,
+                    new Vector3(SideUtil.PosSign(i) * Settings.Instance.DrawPos.BalanceMeterX, Settings.Instance.DrawPos.BalanceMeterY, layer),
+                    SideUtil.IsSideA(i) ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
                 mat.SetFloat(EnumShaderParam._Value.ToString(), balance);
 
@@ -116,23 +110,15 @@ namespace YYHS
         {
             for (int i = 0; i < stateMeters.Length; i++)
             {
-                bool isSideA = (i == 0);
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.LifeGauge].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.LifeGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 float life = (float)stateMeter.m_life / Settings.Instance.Common.LifeMax;
-
-                float sign = isSideA ? +1 : -1;
-
-                float posX = (i == 0)
-                    ? Settings.Instance.DrawPos.LifeMeterX
-                    : -Settings.Instance.DrawPos.LifeMeterX;
-
                 int layer = (int)EnumDrawLayer.UnderFrame;
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(sign * Settings.Instance.DrawPos.LifeMeterX, Settings.Instance.DrawPos.LifeMeterY, layer),
-                    isSideA ? m_Quaternion : m_QuaternionRev,
+                    new Vector3(SideUtil.PosSign(i) * Settings.Instance.DrawPos.LifeMeterX, Settings.Instance.DrawPos.LifeMeterY, layer),
+                    SideUtil.IsSideA(i) ? m_Quaternion : m_QuaternionRev,
                     Vector3.one);
                 mat.SetFloat(EnumShaderParam._Value.ToString(), life);
 
@@ -144,21 +130,16 @@ namespace YYHS
         {
             for (int i = 0; i < stateMeters.Length; i++)
             {
-                bool isSideA = (i == 0);
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ReiGauge].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.ReiGauge].GetMaterial(i);
                 var stateMeter = stateMeters[i];
                 int drawReiLen = (stateMeter.m_rei + (stateMeter.m_rei / Settings.Instance.DrawPos.ReiSeparate)) * 2;
-                // drawReiLen = (Settings.Instance.Debug.ShaderFrame + (Settings.Instance.Debug.ShaderFrame / Settings.Instance.DrawPos.ReiSeparate)) * 2;
                 float rei = (float)drawReiLen / mesh.bounds.size.x;
-
-                float sign = isSideA ? +1 : -1;
-
                 int layer = (int)EnumDrawLayer.UnderFrame;
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(sign * Settings.Instance.DrawPos.ReiMeterX, Settings.Instance.DrawPos.ReiMeterY, layer),
-                    isSideA ? m_QuaternionRev : m_Quaternion,
+                    new Vector3(SideUtil.PosSign(i) * Settings.Instance.DrawPos.ReiMeterX, Settings.Instance.DrawPos.ReiMeterY, layer),
+                    SideUtil.IsSideA(i) ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
                 mat.SetFloat(EnumShaderParam._Value.ToString(), rei);
 
@@ -172,11 +153,10 @@ namespace YYHS
 
             for (int i = 0; i < Settings.Instance.Common.PlayerCount; i++)
             {
-                bool isSideA = (i == 0);
                 Mesh mesh = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.Signal].m_mesh;
                 Material mat = Shared.m_effectMeshMatList.m_framePartsList[(int)EnumFrameParts.Signal].GetMaterial(i);
 
-                var animStep = (isSideA)
+                var animStep = (SideUtil.IsSideA(i))
                     ? seq.m_sideA.m_animStep
                     : seq.m_sideB.m_animStep;
 
@@ -191,12 +171,11 @@ namespace YYHS
                         break;
                 }
 
-                float sign = isSideA ? +1 : -1;
                 int layer = (int)EnumDrawLayer.UnderFrame;
 
                 Matrix4x4 matrixes = Matrix4x4.TRS(
-                    new Vector3(sign * Settings.Instance.DrawPos.SignalX, Settings.Instance.DrawPos.SignalY, layer),
-                    isSideA ? m_QuaternionRev : m_Quaternion,
+                    new Vector3(SideUtil.PosSign(i) * Settings.Instance.DrawPos.SignalX, Settings.Instance.DrawPos.SignalY, layer),
+                    SideUtil.IsSideA(i) ? m_QuaternionRev : m_Quaternion,
                     Vector3.one);
                 mat.SetFloat(EnumShaderParam._Value.ToString(), (float)signal);
 

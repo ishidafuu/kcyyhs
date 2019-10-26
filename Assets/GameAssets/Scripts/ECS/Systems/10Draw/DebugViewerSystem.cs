@@ -94,7 +94,7 @@ namespace YYHS
         }
         private void DrawChara()
         {
-            YHAnimationUtils.DrawYHAnimation(
+            YHAnimationUtil.DrawYHAnimation(
                 Settings.Instance.Debug.AnimName,
                 Settings.Instance.Debug.CharaNo,
                 Settings.Instance.Debug.AnimFrame,

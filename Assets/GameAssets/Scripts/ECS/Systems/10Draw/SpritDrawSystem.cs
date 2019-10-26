@@ -116,7 +116,7 @@ namespace YYHS
                         break;
                 }
 
-                YHAnimationUtils.DrawYHAnimation(animName, charaNo, count, basePosX, sideInfo.m_isSideA, true);
+                YHAnimationUtil.DrawYHAnimation(animName, charaNo, count, basePosX, sideInfo.m_isSideA, true);
             }
         }
 
@@ -136,9 +136,7 @@ namespace YYHS
                 if (jumpState.m_state != EnumJumpState.None)
                     continue;
 
-                int posX = (i == 0)
-                    ? -Settings.Instance.DrawPos.BgScrollX
-                    : +Settings.Instance.DrawPos.BgScrollX;
+                int posX = SideUtil.PosSign(i) * Settings.Instance.DrawPos.BgScrollX;
 
                 Vector3 pos = new Vector3(posX, Settings.Instance.DrawPos.BgScrollY,
                         (int)EnumDrawLayer.BackGround);
@@ -201,9 +199,7 @@ namespace YYHS
                     ? (float)jumpState.m_stepCount / (float)Settings.Instance.Animation.JumpFadeFrame
                     : (float)(Settings.Instance.Animation.JumpFadeFrame - jumpState.m_stepCount) / (float)Settings.Instance.Animation.JumpFadeFrame;
 
-                int posX = (i == 0)
-                    ? -Settings.Instance.DrawPos.BgScrollX
-                    : +Settings.Instance.DrawPos.BgScrollX;
+                int posX = SideUtil.PosSign(i) * Settings.Instance.DrawPos.BgScrollX;
 
                 EnumDrawLayer layer = EnumDrawLayer.OverBackGround;
                 Vector3 position = new Vector3(posX, Settings.Instance.DrawPos.BgScrollY, (int)layer);

@@ -95,7 +95,7 @@ namespace YYHS
                     else
                     {
 
-                        bool isSideA = (i == 0);
+                        bool isSideA = SideUtil.IsSideA(i);
 
                         if (isSideA)
                         {

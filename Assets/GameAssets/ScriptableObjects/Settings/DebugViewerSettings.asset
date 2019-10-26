@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f11b907cde87a4382add24157daf1d, type: 3}
   m_Name: DebugViewerSettings
   m_EditorClassIdentifier: 
-  IsHeal: 1
+  IsHeal: 0
   IsPause: 0
   GameWait: 0
   IsShaderView: 0

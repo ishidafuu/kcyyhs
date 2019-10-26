@@ -79,6 +79,7 @@ namespace YYHS
                     if (seq.m_animation.m_count >= anim.m_length)
                     {
                         seq.m_animation.m_count = 0;
+
                         if (seq.m_isLastSideA)
                         {
                             NextStepType step = SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
@@ -93,12 +94,11 @@ namespace YYHS
                     // 切り替えフィルタ表示
                     else if (seq.m_animation.m_count == anim.m_length - Settings.Instance.Animation.EndTransitionTime)
                     {
-                        NextStepType step = SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
+                        NextStepType step = (seq.m_isLastSideA)
+                            ? SelectNextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB)
+                            : SelectNextStep(ref seq, ref seq.m_sideB, ref seq.m_sideA);
 
-                        if (step == NextStepType.EndAnimation)
-                        {
-                            isEndTransitionFilter = true;
-                        }
+                        isEndTransitionFilter = (step == NextStepType.EndAnimation);
                     }
 
                     // seqが更新された直後にエフェクトの発生を行う
@@ -224,7 +224,6 @@ namespace YYHS
                 SetEffect(filterEffects, EnumEffectType.FillterScreen, (int)EnumFillter.SwitchSplitView, isSideA);
                 isEffectUpdate = true;
             }
-
 
             if (isEffectUpdate)
             {
