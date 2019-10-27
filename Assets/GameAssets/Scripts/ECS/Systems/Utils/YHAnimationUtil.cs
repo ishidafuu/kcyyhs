@@ -9,12 +9,13 @@ namespace YYHS
     public static class YHAnimationUtil
     {
 
-        public static void DrawYHAnimation(EnumAnimationName animName, int charaNo, int count, int basePosX, bool isSideA, bool isSprit)
+        public static bool DrawYHAnimation(EnumAnimationName animName, int charaNo, int count, int basePosX, bool isSideA, bool isSprit)
         {
             YHAnimation anim = Shared.m_yhCharaAnimList.GetAnim(charaNo, animName);
 
+            bool isDrawBackGround = false;
             if (anim == null)
-                return;
+                return isDrawBackGround;
 
             foreach (YHAnimationParts item in anim.m_parts)
             {
@@ -34,7 +35,6 @@ namespace YYHS
                 Material mat = null;
                 int layer = 0;
                 int sideNo = SideUtil.Index(isSideA);
-
                 bool isBG = false;
 
                 if (Shared.m_charaMeshMat[sideNo].m_materialDict.ContainsKey(item.m_name))
@@ -68,22 +68,34 @@ namespace YYHS
                 Draw(mesh, mat, q, scale, pos);
 
                 // 不足背景追加描画
-                if (isBG && !isSprit && pos.x != 0)
+                DrawScrollBackGround(isSprit, mesh, mat, isBG, pos, q, scale);
+
+                if (isBG)
                 {
-                    int BgWidthHalf = Settings.Instance.DrawPos.BgWidth >> 1;
-                    int sizeHalf = (int)(mesh.bounds.size.x * 0.5f);
-                    if ((pos.x + BgWidthHalf - sizeHalf) > 0)
-                    {
-                        Vector3 posL = pos;
-                        posL.x -= mesh.bounds.size.x;
-                        Draw(mesh, mat, q, scale, posL);
-                    }
-                    else if ((pos.x + sizeHalf) < BgWidthHalf)
-                    {
-                        Vector3 posR = pos;
-                        posR.x += mesh.bounds.size.x;
-                        Draw(mesh, mat, q, scale, posR);
-                    }
+                    isDrawBackGround = true;
+                }
+            }
+
+            return isDrawBackGround;
+        }
+
+        private static void DrawScrollBackGround(bool isSprit, Mesh mesh, Material mat, bool isBG, Vector3 pos, Quaternion q, Vector3 scale)
+        {
+            if (isBG && !isSprit && pos.x != 0)
+            {
+                int BgWidthHalf = Settings.Instance.DrawPos.BgWidth >> 1;
+                int sizeHalf = (int)(mesh.bounds.size.x * 0.5f);
+                if ((pos.x + BgWidthHalf - sizeHalf) > 0)
+                {
+                    Vector3 posL = pos;
+                    posL.x -= mesh.bounds.size.x;
+                    Draw(mesh, mat, q, scale, posL);
+                }
+                else if ((pos.x + sizeHalf) < BgWidthHalf)
+                {
+                    Vector3 posR = pos;
+                    posR.x += mesh.bounds.size.x;
+                    Draw(mesh, mat, q, scale, posR);
                 }
             }
         }

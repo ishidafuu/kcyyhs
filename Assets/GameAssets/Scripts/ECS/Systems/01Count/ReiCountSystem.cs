@@ -88,10 +88,7 @@ namespace YYHS
                     }
                     else
                     {
-
-                        bool isSideA = (i == 0);
-
-                        if (isSideA)
+                        if (SideUtil.IsSideA(i))
                         {
                             if (!m_seq.m_sideA.m_isConsumeRei)
                                 continue;

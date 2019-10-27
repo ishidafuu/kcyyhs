@@ -22,5 +22,7 @@ namespace YYHS
         public int ReiAmountSpeed;
         public int ReiRecoverSpeed;
         public int ShakeyBorder;
+        public float TipMag;
+        public int ReverseFrame;
     }
 }

@@ -80,9 +80,6 @@ namespace YYHS
 
             Mesh mesh = listMeshMat[shaderNo].m_mesh;
             Material mat = listMeshMat[shaderNo].GetMaterial();
-
-
-
             Matrix4x4 matrixes = Matrix4x4.TRS(
                 new Vector3(posX, Settings.Instance.DrawPos.BgScrollY, layer),
                  m_QuaternionRev, Vector3.one);

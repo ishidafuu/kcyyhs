@@ -63,6 +63,7 @@ namespace YYHS
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<BattleSequencerCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<FilterEffectCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<JumpCountSystem>());
+            countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<DownCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<DamageCountSystem>());
             countGroup.AddSystemToUpdateList(world.GetOrCreateSystem<ReiCountSystem>());
 

@@ -14,13 +14,14 @@ namespace YYHS
     {
         EntityQuery m_query;
         Quaternion m_Quaternion = Quaternion.Euler(new Vector3(-90, 0, 0));
-        Vector3 m_Scale = new Vector3(0.5f, 1, 1);
+        Vector3 m_SpriteBGScale = new Vector3(0.5f, 1, 1);
 
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(
                 ComponentType.ReadOnly<ToukiMeter>(),
                 ComponentType.ReadOnly<JumpState>(),
+                ComponentType.ReadOnly<DownState>(),
                 ComponentType.ReadOnly<SideInfo>()
             );
         }
@@ -34,18 +35,19 @@ namespace YYHS
 
             var toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
             var jumpStates = m_query.ToComponentDataArray<JumpState>(Allocator.TempJob);
+            var downStates = m_query.ToComponentDataArray<DownState>(Allocator.TempJob);
             var sideInfos = m_query.ToComponentDataArray<SideInfo>(Allocator.TempJob);
 
-            DrawSpritBackGround(toukiMeters, jumpStates);
             if (!Settings.Instance.Debug.IsShaderView && !Settings.Instance.Debug.IsCharaView)
             {
-                DrawChara(toukiMeters, jumpStates, sideInfos);
+                DrawChara(toukiMeters, jumpStates, downStates, sideInfos);
                 DrawFrameLine();
                 DrawFilterEffect(toukiMeters, jumpStates);
             }
 
             toukiMeters.Dispose();
             jumpStates.Dispose();
+            downStates.Dispose();
             sideInfos.Dispose();
         }
 
@@ -58,107 +60,123 @@ namespace YYHS
                 Shared.m_commonMeshMat.m_materialDict[EnumCommonPartsType.frame_line.ToString()], 0);
         }
 
-        private void DrawChara(NativeArray<ToukiMeter> toukiMeters,
-            NativeArray<JumpState> jumpStates, NativeArray<SideInfo> sideInfos)
+        private void DrawChara(NativeArray<ToukiMeter> toukiMeters, NativeArray<JumpState> jumpStates,
+             NativeArray<DownState> downStates, NativeArray<SideInfo> sideInfos)
         {
             for (int i = 0; i < toukiMeters.Length; i++)
             {
                 var toukiMeter = toukiMeters[i];
-                var jumpState = jumpStates[i];
+                var downState = downStates[i];
                 var sideInfo = sideInfos[i];
-
                 int charaNo = sideInfo.m_charaNo;
-
                 bool isSideA = sideInfo.m_isSideA;
-                int basePosX = isSideA
-                    ? -Settings.Instance.DrawPos.BgScrollX
-                    : +Settings.Instance.DrawPos.BgScrollX;
-
-                int count = (jumpState.m_state == EnumJumpState.None)
-                    ? toukiMeter.m_animationCount
-                    : jumpState.m_animationCount;
+                int basePosX = SideUtil.PosSign(isSideA) * Settings.Instance.DrawPos.BgScrollX;
 
                 EnumAnimationName animName = EnumAnimationName._Stand00;
-                if (toukiMeter.m_cross == EnumCrossType.Right && sideInfo.m_isSideA
-                    || toukiMeter.m_cross == EnumCrossType.Left && !sideInfo.m_isSideA
-                    || toukiMeter.m_cross == EnumCrossType.Up)
-                {
-                    animName = EnumAnimationName._Stand01;
-                }
-                else if (toukiMeter.m_cross == EnumCrossType.Right && !sideInfo.m_isSideA
-                    || toukiMeter.m_cross == EnumCrossType.Left && sideInfo.m_isSideA
-                    || toukiMeter.m_cross == EnumCrossType.Down)
-                {
-                    animName = EnumAnimationName._Stand02;
-                }
+                int count = 0;
 
-                switch (jumpState.m_state)
+                switch (downState.m_state)
                 {
-                    case EnumJumpState.Jumping:
-                        animName = EnumAnimationName._Jump00;
-                        break;
-                    case EnumJumpState.Air:
-                        switch (animName)
+                    case EnumDownState.None:
                         {
-                            case EnumAnimationName._Stand01:
-                                animName = EnumAnimationName._Air01;
-                                break;
-                            case EnumAnimationName._Stand02:
-                                animName = EnumAnimationName._Air02;
-                                break;
-                            default:
-                                animName = EnumAnimationName._Air00;
-                                break;
+                            var jumpState = jumpStates[i];
+                            count = (jumpState.m_state == EnumJumpState.None)
+                                ? toukiMeter.m_animationCount
+                                : jumpState.m_animationCount;
+                            animName = SwitchStandAnim(toukiMeter, sideInfo);
+                            animName = SwitchJumpAnim(animName, jumpState);
                         }
                         break;
-                    case EnumJumpState.Falling:
-                        animName = EnumAnimationName._Jump01;
+                    case EnumDownState.Down:
+                        animName = EnumAnimationName._Down00;
+                        break;
+                    case EnumDownState.Reverse:
+                        animName = EnumAnimationName._Down01;
+                        count = downState.m_count;
                         break;
                 }
 
-                YHAnimationUtil.DrawYHAnimation(animName, charaNo, count, basePosX, sideInfo.m_isSideA, true);
+                bool isDrawBackGround = YHAnimationUtil.DrawYHAnimation(animName, charaNo, count, basePosX, sideInfo.m_isSideA, true);
+
+                if (!isDrawBackGround)
+                {
+                    DrawBackGround(basePosX, ref toukiMeter);
+                }
             }
         }
 
-
-        private void DrawSpritBackGround(NativeArray<ToukiMeter> toukiMeters, NativeArray<JumpState> jumpStates)
+        private void DrawBackGround(int basePosX, ref ToukiMeter toukiMeter)
         {
             string bgName = EnumBGPartsType.bg_00.ToString();
 
             Mesh baseMesh = Shared.m_bgFrameMeshMat.m_meshDict[bgName];
             Material mat = Shared.m_bgFrameMeshMat.m_materialDict[bgName];
+            Vector3 pos = new Vector3(basePosX, Settings.Instance.DrawPos.BgScrollY,
+                    (int)EnumDrawLayer.BackGround);
 
-            for (int i = 0; i < toukiMeters.Length; i++)
+            Matrix4x4 bgScrollMatrixes = Matrix4x4.TRS(pos, m_Quaternion, m_SpriteBGScale);
+
+            Mesh mesh = new Mesh()
             {
-                var toukiMeter = toukiMeters[i];
-                var jumpState = jumpStates[i];
-
-                if (jumpState.m_state != EnumJumpState.None)
-                    continue;
-
-                int posX = SideUtil.PosSign(i) * Settings.Instance.DrawPos.BgScrollX;
-
-                Vector3 pos = new Vector3(posX, Settings.Instance.DrawPos.BgScrollY,
-                        (int)EnumDrawLayer.BackGround);
-
-                Matrix4x4 bgScrollMatrixes = Matrix4x4.TRS(pos, m_Quaternion, m_Scale);
-
-                Mesh mesh = new Mesh()
+                vertices = baseMesh.vertices,
+                uv = new Vector2[]
                 {
-                    vertices = baseMesh.vertices,
-                    uv = new Vector2[]
-                    {
                     new Vector2(toukiMeter.m_bgScrollTextureUL, baseMesh.uv[0].y),
                     new Vector2(toukiMeter.m_bgScrollTextureUR, baseMesh.uv[1].y),
                     new Vector2(toukiMeter.m_bgScrollTextureUL, baseMesh.uv[2].y),
                     new Vector2(toukiMeter.m_bgScrollTextureUR, baseMesh.uv[3].y),
-                    },
-                    triangles = baseMesh.triangles,
-                };
-                Graphics.DrawMesh(mesh, bgScrollMatrixes, mat, 0);
-            }
+                },
+                triangles = baseMesh.triangles,
+            };
+            Graphics.DrawMesh(mesh, bgScrollMatrixes, mat, 0);
         }
 
+        private static EnumAnimationName SwitchStandAnim(ToukiMeter toukiMeter, SideInfo sideInfo)
+        {
+            if ((toukiMeter.m_cross == EnumCrossType.Right && sideInfo.m_isSideA)
+                || (toukiMeter.m_cross == EnumCrossType.Left && !sideInfo.m_isSideA)
+                || toukiMeter.m_cross == EnumCrossType.Up)
+            {
+                return EnumAnimationName._Stand01;
+            }
+            else if ((toukiMeter.m_cross == EnumCrossType.Right && !sideInfo.m_isSideA)
+                || (toukiMeter.m_cross == EnumCrossType.Left && sideInfo.m_isSideA)
+                || toukiMeter.m_cross == EnumCrossType.Down)
+            {
+                return EnumAnimationName._Stand02;
+            }
+
+            return EnumAnimationName._Stand00;
+        }
+
+        private static EnumAnimationName SwitchJumpAnim(EnumAnimationName animName, JumpState jumpState)
+        {
+            switch (jumpState.m_state)
+            {
+                case EnumJumpState.Jumping:
+                    animName = EnumAnimationName._Jump00;
+                    break;
+                case EnumJumpState.Air:
+                    switch (animName)
+                    {
+                        case EnumAnimationName._Stand01:
+                            animName = EnumAnimationName._Air01;
+                            break;
+                        case EnumAnimationName._Stand02:
+                            animName = EnumAnimationName._Air02;
+                            break;
+                        default:
+                            animName = EnumAnimationName._Air00;
+                            break;
+                    }
+                    break;
+                case EnumJumpState.Falling:
+                    animName = EnumAnimationName._Jump01;
+                    break;
+            }
+
+            return animName;
+        }
 
         private void DrawFilterEffect(NativeArray<ToukiMeter> toukiMeters, NativeArray<JumpState> jumpStates)
         {

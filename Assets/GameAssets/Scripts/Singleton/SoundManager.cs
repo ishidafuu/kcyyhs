@@ -58,6 +58,8 @@ namespace YYHS
             m_bgmSource.clip = m_bgmArray[index];
             m_bgmSource.volume = m_bgmVolume;
             m_bgmSource.Play();
+
+            Debug.Log($"PlayBgm:{index}");
         }
 
         public void StopBgm()

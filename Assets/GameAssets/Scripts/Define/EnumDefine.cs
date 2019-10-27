@@ -295,4 +295,11 @@ namespace YYHS
         LockTech,
         ToukiSpeedUp,
     }
+
+    public enum EnumDownState
+    {
+        None,
+        Down,
+        Reverse,
+    }
 }

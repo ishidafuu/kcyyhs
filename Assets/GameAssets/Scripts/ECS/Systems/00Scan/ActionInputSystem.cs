@@ -217,7 +217,7 @@ namespace YYHS
         }
 
         private void UpdateDamage(ref BattleSequencer seq, NativeArray<DamageState> damageStates, NativeArray<Status> statuses,
-        NativeArray<JumpState> jumpStates)
+            NativeArray<JumpState> jumpStates)
         {
             for (int i = 0; i < damageStates.Length; i++)
             {
@@ -225,7 +225,7 @@ namespace YYHS
                 var jumpState = jumpStates[i];
                 var status = statuses[i];
 
-                bool isAttackSideA = (i != 0);
+                bool isAttackSideA = !SideUtil.IsSideA(i);
                 if (isAttackSideA)
                 {
                     SetDamage(ref seq.m_sideA, ref damageState, status, jumpState);
@@ -261,12 +261,10 @@ namespace YYHS
                 case EnumDamageLv.CleanHit:
                     break;
                 case EnumDamageLv.Hit:
-                    damage = (int)(damage * 0.7f);
-                    balance = (int)(balance * 0.7f);
                     break;
                 case EnumDamageLv.Tip:
-                    damage = (int)(damage * 0.2f);
-                    balance = (int)(balance * 0.2f);
+                    damage = (int)(damage * Settings.Instance.Common.TipMag);
+                    balance = (int)(balance * Settings.Instance.Common.TipMag);
                     break;
                 case EnumDamageLv.NoDamage:
                     damage = 0;
@@ -322,19 +320,6 @@ namespace YYHS
                     seq.m_sideA.m_enemyDamageLv = EnumDamageLv.NoDamage;
                 }
             }
-
-
-            // TODO:バランス値で変化させる
-            // seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.None;
-            // seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.None;
-
-
-            // seq.m_sideA.m_enemyDamageReaction = EnumDamageReaction.Fly;
-            // seq.m_sideB.m_enemyDamageReaction = EnumDamageReaction.Shaky;
-
-
-            // Debug.Log(battleSequencer.m_sideA.m_enemyDamageLv);
-            // Debug.Log(battleSequencer.m_sideB.m_enemyDamageLv);
         }
 
         private static void InitSequencer(ref BattleSequencer battleSequencer, bool isSideA)

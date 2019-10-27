@@ -165,8 +165,7 @@ namespace YYHS
 
             private void UpdateDistribute(ref ReiPiece reiPiece, ref Random random)
             {
-                int index = (reiPiece.m_isSideA) ? 0 : 1;
-                int sign = (reiPiece.m_isSideA) ? 1 : -1;
+                int index = SideUtil.Index(reiPiece.m_isSideA);
                 var status = m_statuses[index];
 
                 int waitTime = reiPiece.m_id * WaitFrame2;
@@ -174,7 +173,7 @@ namespace YYHS
                 {
                     float time = (float)(reiPiece.m_count - waitTime) / DistributeFrame;
                     float2 start = new float2(0, 0);
-                    float2 end = new float2((sign * ReiDistributeX) - reiPiece.m_basePos.x, ReiMeterY - reiPiece.m_basePos.y);
+                    float2 end = new float2((SideUtil.Sign(reiPiece.m_isSideA) * ReiDistributeX) - reiPiece.m_basePos.x, ReiMeterY - reiPiece.m_basePos.y);
                     float2 pos = math.lerp(start, end, time);
                     reiPiece.m_movePos.x = (int)pos.x;
                     reiPiece.m_movePos.y = (int)pos.y;
