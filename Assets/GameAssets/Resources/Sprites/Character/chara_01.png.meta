@@ -236,7 +236,7 @@ TextureImporter:
       name: body_03
       rect:
         serializedVersion: 2
-        x: 305
+        x: 326
         y: 122
         width: 108
         height: 91
@@ -278,12 +278,12 @@ TextureImporter:
       name: cm_air_00
       rect:
         serializedVersion: 2
-        x: 480
-        y: 421
-        width: 29
-        height: 32
+        x: 462
+        y: 264
+        width: 42
+        height: 47
       alignment: 9
-      pivot: {x: 0.51724136, y: 0.5}
+      pivot: {x: 0.54761904, y: 0.42553192}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,12 +299,12 @@ TextureImporter:
       name: cm_air_01
       rect:
         serializedVersion: 2
-        x: 0
-        y: 345
-        width: 21
-        height: 32
+        x: 462
+        y: 264
+        width: 42
+        height: 47
       alignment: 9
-      pivot: {x: 0.52380955, y: 0.5}
+      pivot: {x: 0.54761904, y: 0.42553192}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,11 +321,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 462
-        y: 402
-        width: 14
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 264
+        width: 42
+        height: 47
+      alignment: 9
+      pivot: {x: 0.54761904, y: 0.42553192}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -341,8 +341,8 @@ TextureImporter:
       name: cm_dodge_00
       rect:
         serializedVersion: 2
-        x: 111
-        y: 87
+        x: 61
+        y: 214
         width: 84
         height: 109
       alignment: 9
@@ -362,8 +362,8 @@ TextureImporter:
       name: cm_down_00
       rect:
         serializedVersion: 2
-        x: 0
-        y: 377
+        x: 205
+        y: 229
         width: 123
         height: 42
       alignment: 9
@@ -383,8 +383,8 @@ TextureImporter:
       name: cm_jump_00
       rect:
         serializedVersion: 2
-        x: 413
-        y: 117
+        x: 111
+        y: 323
         width: 93
         height: 96
       alignment: 9
@@ -405,7 +405,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 462
-        y: 299
+        y: 311
         width: 42
         height: 96
       alignment: 0
@@ -425,8 +425,8 @@ TextureImporter:
       name: cm_jump_02
       rect:
         serializedVersion: 2
-        x: 0
-        y: 275
+        x: 145
+        y: 253
         width: 60
         height: 70
       alignment: 9
@@ -467,8 +467,8 @@ TextureImporter:
       name: cm_shaky_00
       rect:
         serializedVersion: 2
-        x: 60
-        y: 281
+        x: 0
+        y: 323
         width: 65
         height: 96
       alignment: 9
@@ -488,8 +488,8 @@ TextureImporter:
       name: cm_stand_00
       rect:
         serializedVersion: 2
-        x: 111
-        y: 12
+        x: 195
+        y: 17
         width: 83
         height: 75
       alignment: 9
@@ -509,8 +509,8 @@ TextureImporter:
       name: cm_stand_01
       rect:
         serializedVersion: 2
-        x: 125
-        y: 345
+        x: 434
+        y: 138
         width: 78
         height: 74
       alignment: 9
@@ -530,8 +530,8 @@ TextureImporter:
       name: cm_stand_02
       rect:
         serializedVersion: 2
-        x: 188
-        y: 204
+        x: 145
+        y: 162
         width: 117
         height: 67
       alignment: 9
@@ -551,8 +551,8 @@ TextureImporter:
       name: cm_stand_03
       rect:
         serializedVersion: 2
-        x: 195
-        y: 116
+        x: 111
+        y: 4
         width: 84
         height: 88
       alignment: 9
@@ -572,8 +572,8 @@ TextureImporter:
       name: cm_u_face_00
       rect:
         serializedVersion: 2
-        x: 476
-        y: 395
+        x: 462
+        y: 238
         width: 34
         height: 26
       alignment: 9
@@ -594,7 +594,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 462
-        y: 273
+        y: 212
         width: 34
         height: 26
       alignment: 9
@@ -614,8 +614,8 @@ TextureImporter:
       name: face_03
       rect:
         serializedVersion: 2
-        x: 125
-        y: 196
+        x: 0
+        y: 281
         width: 58
         height: 42
       alignment: 9
@@ -636,7 +636,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
+        y: 23
         width: 111
         height: 189
       alignment: 9
@@ -698,8 +698,8 @@ TextureImporter:
       name: u_bullet_02
       rect:
         serializedVersion: 2
-        x: 61
-        y: 216
+        x: 262
+        y: 174
         width: 64
         height: 55
       alignment: 9
@@ -719,8 +719,8 @@ TextureImporter:
       name: u_bullet_03
       rect:
         serializedVersion: 2
-        x: 462
-        y: 227
+        x: 480
+        y: 407
         width: 24
         height: 46
       alignment: 9
@@ -740,8 +740,8 @@ TextureImporter:
       name: u_bullet_04
       rect:
         serializedVersion: 2
-        x: 486
-        y: 231
+        x: 65
+        y: 377
         width: 23
         height: 42
       alignment: 9
@@ -782,8 +782,8 @@ TextureImporter:
       name: u_parts_00
       rect:
         serializedVersion: 2
-        x: 125
-        y: 299
+        x: 434
+        y: 92
         width: 77
         height: 46
       alignment: 9
@@ -824,8 +824,8 @@ TextureImporter:
       name: u_parts_02
       rect:
         serializedVersion: 2
-        x: 125
-        y: 238
+        x: 262
+        y: 113
         width: 63
         height: 61
       alignment: 9
