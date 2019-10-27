@@ -74,12 +74,7 @@ namespace YYHS
                 }
             }
 
-
-
-
             reiPieces.Dispose();
         }
-
-
     }
 }

@@ -19,25 +19,27 @@ namespace YYHS
         protected override void OnCreate()
         {
             m_queryChara = GetEntityQuery(
-                ComponentType.ReadOnly<PadScan>(),
-                ComponentType.ReadOnly<SideInfo>(),
-                ComponentType.ReadOnly<Status>(),
-                ComponentType.ReadOnly<ToukiMeter>(),
+                ComponentType.ReadWrite<ReiState>(),
                 ComponentType.ReadWrite<JumpState>(),
+                ComponentType.ReadWrite<DownState>(),
                 ComponentType.ReadWrite<DamageState>(),
-                ComponentType.ReadWrite<ReiState>()
+                ComponentType.ReadOnly<ToukiMeter>(),
+                ComponentType.ReadOnly<Status>(),
+                ComponentType.ReadOnly<SideInfo>(),
+                ComponentType.ReadOnly<PadScan>()
             );
         }
 
         protected override void OnUpdate()
         {
-            NativeArray<PadScan> padScans = m_queryChara.ToComponentDataArray<PadScan>(Allocator.TempJob);
-            NativeArray<SideInfo> sideInfos = m_queryChara.ToComponentDataArray<SideInfo>(Allocator.TempJob);
-            NativeArray<Status> statuses = m_queryChara.ToComponentDataArray<Status>(Allocator.TempJob);
             NativeArray<ToukiMeter> toukiMeters = m_queryChara.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
-            NativeArray<JumpState> jumpStates = m_queryChara.ToComponentDataArray<JumpState>(Allocator.TempJob);
-            NativeArray<DamageState> damageStates = m_queryChara.ToComponentDataArray<DamageState>(Allocator.TempJob);
+            NativeArray<Status> statuses = m_queryChara.ToComponentDataArray<Status>(Allocator.TempJob);
+            NativeArray<SideInfo> sideInfos = m_queryChara.ToComponentDataArray<SideInfo>(Allocator.TempJob);
             NativeArray<ReiState> reiStates = m_queryChara.ToComponentDataArray<ReiState>(Allocator.TempJob);
+            NativeArray<PadScan> padScans = m_queryChara.ToComponentDataArray<PadScan>(Allocator.TempJob);
+            NativeArray<JumpState> jumpStates = m_queryChara.ToComponentDataArray<JumpState>(Allocator.TempJob);
+            NativeArray<DownState> downStates = m_queryChara.ToComponentDataArray<DownState>(Allocator.TempJob);
+            NativeArray<DamageState> damageStates = m_queryChara.ToComponentDataArray<DamageState>(Allocator.TempJob);
 
             var seq = GetSingleton<BattleSequencer>();
 
@@ -46,12 +48,12 @@ namespace YYHS
 
             for (int i = 0; i < padScans.Length; i++)
             {
-                var padScan = padScans[i];
                 var toukiMeter = toukiMeters[i];
                 var sideInfo = sideInfos[i];
-                var jumpState = jumpStates[i];
                 var reiState = reiStates[i];
-
+                var padScan = padScans[i];
+                var jumpState = jumpStates[i];
+                // var damageState = damageStates[i];
 
                 bool isSideA = SideUtil.IsSideA(i);
 
@@ -123,7 +125,7 @@ namespace YYHS
 
                     if (isIdleSeq)
                     {
-                        InitSequencer(ref seq, sideInfo.m_isSideA);
+                        InitSequencer(ref seq, downStates, sideInfo.m_isSideA);
                     }
 
                     EnumDefenceType defenceType = EnumDefenceType.Stand;
@@ -176,13 +178,15 @@ namespace YYHS
                 m_queryChara.CopyFromComponentDataArray(jumpStates);
             }
 
-            padScans.Dispose();
-            sideInfos.Dispose();
             toukiMeters.Dispose();
-            jumpStates.Dispose();
             statuses.Dispose();
-            damageStates.Dispose();
+            sideInfos.Dispose();
             reiStates.Dispose();
+            padScans.Dispose();
+            jumpStates.Dispose();
+            downStates.Dispose();
+            damageStates.Dispose();
+
         }
 
         private static EnumActionType GetActionType(YHActionData attackData)
@@ -322,23 +326,32 @@ namespace YYHS
             }
         }
 
-        private static void InitSequencer(ref BattleSequencer battleSequencer, bool isSideA)
+        private static void InitSequencer(ref BattleSequencer battleSequencer, NativeArray<DownState> downStates, bool isSideA)
         {
             battleSequencer.m_seqState = EnumBattleSequenceState.Start;
             battleSequencer.m_isLastSideA = isSideA;
             battleSequencer.m_isDistributeRei = false;
 
-            InitSideState(ref battleSequencer.m_sideA);
-            InitSideState(ref battleSequencer.m_sideB);
+            InitSideState(ref battleSequencer.m_sideA, downStates[0]);
+            InitSideState(ref battleSequencer.m_sideB, downStates[1]);
         }
 
-        private static void InitSideState(ref SideState sideState)
+        private static void InitSideState(ref SideState sideState, in DownState damageState)
         {
-            sideState.m_actionType = EnumActionType.None;
-            sideState.m_animStep = EnumAnimationStep.Sleep;
+            bool isDown = damageState.m_state == EnumDownState.Down;
+
+            sideState.m_actionType = (isDown)
+                ? EnumActionType.Reverse
+                : EnumActionType.None;
+
+            sideState.m_animStep = (isDown)
+                ? EnumAnimationStep.WaitPageA
+                : EnumAnimationStep.Sleep;
+
             sideState.m_isDefenceFinished = false;
             sideState.m_isStartDamage = false;
             sideState.m_isConsumeRei = false;
+            sideState.m_isReverse = false;
         }
 
         private static void InitActionSide(in SideInfo attackSideInfo, ref SideState attackSideState,
@@ -354,6 +367,7 @@ namespace YYHS
             attackSideState.m_isDefenceFinished = false;
             attackSideState.m_isStartDamage = false;
             attackSideState.m_isConsumeRei = false;
+            attackSideState.m_isReverse = false;
         }
 
     }

@@ -25,31 +25,26 @@ namespace YYHS
         {
 
             BattleSequencer seq = GetSingleton<BattleSequencer>();
+            m_query.AddDependency(inputDeps);
+            NativeArray<Status> statuses = m_query.ToComponentDataArray<Status>(Allocator.TempJob);
+            NativeArray<DownState> downStates = m_query.ToComponentDataArray<DownState>(Allocator.TempJob);
 
-            if (seq.m_seqState == EnumBattleSequenceState.Idle)
+            var job = new CountJob()
             {
-                m_query.AddDependency(inputDeps);
-                NativeArray<Status> statuses = m_query.ToComponentDataArray<Status>(Allocator.TempJob);
-                NativeArray<DownState> downStates = m_query.ToComponentDataArray<DownState>(Allocator.TempJob);
-                // Vector2[] uv = Shared.m_bgFrameMeshMat.m_meshDict[EnumBGPartsType.bg00.ToString()].uv;
-                var job = new CountJob()
-                {
-                    m_downStates = downStates,
-                    m_statuses = statuses,
-                    m_seq = seq,
-                    ReverseFrame = Settings.Instance.Common.ReverseFrame,
-                    BalanceMax = Settings.Instance.Common.BalanceMax,
-                };
+                m_downStates = downStates,
+                m_statuses = statuses,
+                m_seq = seq,
+                ReverseFrame = Settings.Instance.Common.ReverseFrame,
+                BalanceMax = Settings.Instance.Common.BalanceMax,
+            };
 
+            inputDeps = job.Schedule(inputDeps);
+            inputDeps.Complete();
 
-                inputDeps = job.Schedule(inputDeps);
-                inputDeps.Complete();
-                m_query.CopyFromComponentDataArray(statuses);
-                m_query.CopyFromComponentDataArray(downStates);
-                statuses.Dispose();
-                downStates.Dispose();
-            }
-
+            m_query.CopyFromComponentDataArray(statuses);
+            m_query.CopyFromComponentDataArray(downStates);
+            statuses.Dispose();
+            downStates.Dispose();
 
             return inputDeps;
         }
@@ -67,41 +62,18 @@ namespace YYHS
             {
                 for (int i = 0; i < m_downStates.Length; i++)
                 {
-
                     var status = m_statuses[i];
                     var downState = m_downStates[i];
 
-
-                    if (downState.m_state == EnumDownState.None
-                        && status.m_balance == 0)
+                    switch (m_seq.m_seqState)
                     {
-                        downState.m_state = EnumDownState.Down;
-                    }
-
-                    if (downState.m_state != EnumDownState.None)
-                    {
-                        downState.m_count++;
-
-                        switch (downState.m_state)
-                        {
-                            case EnumDownState.Down:
-                                if (downState.m_count > ReverseFrame)
-                                {
-                                    downState.m_state = EnumDownState.Reverse;
-                                    downState.m_count = 0;
-                                }
-                                break;
-                            case EnumDownState.Reverse:
-                                {
-                                    YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(EnumAnimationName._Down01);
-                                    if (downState.m_count >= anim.m_length)
-                                    {
-                                        downState.m_state = EnumDownState.None;
-                                        status.m_balance = BalanceMax;
-                                    }
-                                }
-                                break;
-                        }
+                        case EnumBattleSequenceState.Idle:
+                        case EnumBattleSequenceState.Start:
+                            UpdateIdle(ref status, ref downState);
+                            break;
+                        case EnumBattleSequenceState.Play:
+                            UpdatePlay(i, ref status, ref downState);
+                            break;
                     }
 
                     m_statuses[i] = status;
@@ -109,83 +81,62 @@ namespace YYHS
                 }
             }
 
-            private void UpdateAnimation(ref JumpState jumpState)
+            private void UpdateIdle(ref Status status, ref DownState downState)
             {
-                switch (jumpState.m_state)
+                if (downState.m_state == EnumDownState.None
+                    && status.m_balance == 0)
                 {
-                    case EnumJumpState.Jumping:
-                        {
-                            YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(EnumAnimationName._Jump00);
-                            if (jumpState.m_animationCount >= anim.m_length)
-                            {
-                                SetNextState(ref jumpState, EnumJumpState.Air);
-                            }
-                        }
-                        break;
-                    case EnumJumpState.Air:
-                        {
-                            if (jumpState.m_animationCount >= jumpState.m_charge)
-                            {
-                                SetNextState(ref jumpState, EnumJumpState.Falling);
-                            }
-                        }
-                        break;
-                    case EnumJumpState.Falling:
-                        {
-                            YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(EnumAnimationName._Jump01);
-                            if (jumpState.m_animationCount >= anim.m_length)
-                            {
-                                SetNextState(ref jumpState, EnumJumpState.None);
-                                jumpState.m_effectStep = EnumJumpEffectStep.JumpStart;
-                            }
-                        }
-                        break;
-                }
-            }
-
-            private void SetNextState(ref JumpState jumpState, EnumJumpState nextState)
-            {
-                jumpState.m_state = nextState;
-                jumpState.m_stepCount = 0;
-                jumpState.m_animationCount = 0;
-            }
-
-            private void UpdateFilterEffect(ref JumpState jumpState)
-            {
-                EnumAnimationName animName = EnumAnimationName._Air00;
-
-                bool isUpdate = false;
-                switch (jumpState.m_state)
-                {
-                    case EnumJumpState.Jumping:
-                        animName = EnumAnimationName._Jump00;
-                        isUpdate = true;
-                        break;
-                    case EnumJumpState.Falling:
-                        animName = EnumAnimationName._Jump01;
-                        isUpdate = true;
-                        break;
+                    downState.m_state = EnumDownState.Down;
+                    downState.m_count = 0;
                 }
 
-                if (!isUpdate)
-                    return;
-
-                YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(animName);
-                foreach (var item in anim.m_events)
+                if (downState.m_state != EnumDownState.None)
                 {
-                    if (item.m_frame != jumpState.m_animationCount)
-                        continue;
-
-                    if (item.m_functionName == EnumEventFunctionName.EventJump)
+                    downState.m_count++;
+                    switch (downState.m_state)
                     {
-                        jumpState.m_effectStep = (EnumJumpEffectStep)item.m_intParameter;
-                        jumpState.m_stepCount = 0;
-                        break;
+                        case EnumDownState.Down:
+                            if (downState.m_count > ReverseFrame)
+                            {
+                                downState.m_state = EnumDownState.Reverse;
+                                downState.m_count = 0;
+                                status.m_balance = BalanceMax;
+                            }
+                            break;
+                        case EnumDownState.Reverse:
+                            {
+                                YHAnimation anim = Shared.m_yhCharaAnimList.GetCommonAnim(EnumAnimationName._Down01);
+                                if (downState.m_count >= anim.m_length)
+                                {
+                                    downState.m_state = EnumDownState.None;
+                                }
+                            }
+                            break;
                     }
                 }
             }
+
+            private void UpdatePlay(int i, ref Status status, ref DownState downState)
+            {
+                switch (downState.m_state)
+                {
+                    case EnumDownState.Reverse:
+                        downState.m_state = EnumDownState.None;
+                        break;
+                    case EnumDownState.Down:
+                        bool isReverse = (SideUtil.IsSideA(i))
+                            ? m_seq.m_sideA.m_isReverse
+                            : m_seq.m_sideB.m_isReverse;
+
+                        if (isReverse)
+                        {
+                            downState.m_state = EnumDownState.None;
+                            downState.m_count = 0;
+                            status.m_balance = BalanceMax;
+                        }
+                        break;
+                }
+            }
         }
-
-
     }
 }

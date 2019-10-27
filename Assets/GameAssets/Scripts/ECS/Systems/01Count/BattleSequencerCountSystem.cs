@@ -25,7 +25,7 @@ namespace YYHS
 
         static void DebugLog(string message)
         {
-            // DebugLog(message);
+            Debug.Log(message);
         }
 
         protected override void OnCreate()
@@ -375,7 +375,7 @@ namespace YYHS
                     )
                 {
                     DebugLog("DeffenceStepC ");
-                    step = NextStepType.NextStepWaitSide;
+                    step = NextStepType.DeffenceStepWaitSide;
                 }
                 // 未始動であれば始動へ
                 else if (waitSide.m_animStep == EnumAnimationStep.WaitPageA)
@@ -489,29 +489,52 @@ namespace YYHS
 
         private void NextStep(ref BattleSequencer seq, ref SideState nextSide)
         {
+            bool isReverse = nextSide.m_actionType == EnumActionType.Reverse;
             DebugLog($"NextStepactionNo:{nextSide.m_actionNo} isSideA:{nextSide.m_isSideA} animStep:{nextSide.m_animStep} animName:{seq.m_animation.m_animName}");
             seq.m_animation.m_charaNo = nextSide.m_charaNo;
             seq.m_animation.m_isSideA = nextSide.m_isSideA;
-            seq.m_animation.m_animName = GetActionName(nextSide.m_actionNo, nextSide.m_animStep);
+            seq.m_animation.m_animName = (isReverse)
+                ? EnumAnimationName._Reverse
+                : GetActionName(nextSide.m_actionNo, nextSide.m_animStep);
             seq.m_animType = EnumAnimType.Action;
             seq.m_isLastSideA = nextSide.m_isSideA;
-            nextSide.m_animStep++;
+            if (isReverse)
+            {
+                nextSide.m_animStep = EnumAnimationStep.Finished;
+                Reverse(ref seq, ref nextSide);
+            }
+            else
+            {
+                nextSide.m_animStep++;
+            }
 
-            ConsumeRei(ref seq, ref nextSide);
+            if (nextSide.m_animStep == EnumAnimationStep.Finished)
+            {
+                ConsumeRei(ref seq, ref nextSide);
+            }
         }
 
         private static void ConsumeRei(ref BattleSequencer seq, ref SideState nextSide)
         {
-            if (nextSide.m_animStep == EnumAnimationStep.Finished)
+            if (seq.m_animation.m_isSideA)
             {
-                if (seq.m_animation.m_isSideA)
-                {
-                    seq.m_sideA.m_isConsumeRei = true;
-                }
-                else
-                {
-                    seq.m_sideB.m_isConsumeRei = true;
-                }
+                seq.m_sideA.m_isConsumeRei = true;
+            }
+            else
+            {
+                seq.m_sideB.m_isConsumeRei = true;
+            }
+        }
+
+        private static void Reverse(ref BattleSequencer seq, ref SideState nextSide)
+        {
+            if (seq.m_animation.m_isSideA)
+            {
+                seq.m_sideA.m_isReverse = true;
+            }
+            else
+            {
+                seq.m_sideB.m_isReverse = true;
             }
         }
 

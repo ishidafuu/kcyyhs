@@ -29,6 +29,7 @@ namespace YYHS
         public bool m_isDefenceFinished;
         public bool m_isStartDamage;
         public bool m_isConsumeRei;
+        public bool m_isReverse;
     }
 
     public struct BattleAnim
