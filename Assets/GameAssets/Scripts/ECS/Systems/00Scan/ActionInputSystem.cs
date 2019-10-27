@@ -45,6 +45,7 @@ namespace YYHS
 
             bool isJumpUpdate = false;
             bool isReiDamageUpdate = false;
+            bool isToukiMeterUpdate = false;
 
             for (int i = 0; i < padScans.Length; i++)
             {
@@ -53,7 +54,6 @@ namespace YYHS
                 var reiState = reiStates[i];
                 var padScan = padScans[i];
                 var jumpState = jumpStates[i];
-                // var damageState = damageStates[i];
 
                 bool isSideA = SideUtil.IsSideA(i);
 
@@ -99,8 +99,6 @@ namespace YYHS
                     YHActionData attackData = Shared.m_yhCharaAttackList.GetData(sideInfo.m_charaNo, toukiMeter.m_cross, padScan.GetPressButton());
                     actionType = GetActionType(attackData);
                 }
-
-
 
                 bool isIdleSeq = seq.m_seqState == EnumBattleSequenceState.Idle;
 
@@ -158,11 +156,15 @@ namespace YYHS
 
                     JudgeDamageLv(sideInfo, ref seq, isIdleSeq);
                     UpdateDamage(ref seq, damageStates, statuses, jumpStates);
-
                     UpdateReiAmount(ref reiState, ref sideInfo, actionNo);
+
                     reiStates[i] = reiState;
                     isReiDamageUpdate = true;
                 }
+
+                toukiMeter.m_isDecided = true;
+                toukiMeters[i] = toukiMeter;
+                isToukiMeterUpdate = true;
 
                 SetSingleton<BattleSequencer>(seq);
             }
@@ -176,6 +178,11 @@ namespace YYHS
             if (isJumpUpdate)
             {
                 m_queryChara.CopyFromComponentDataArray(jumpStates);
+            }
+
+            if (isToukiMeterUpdate)
+            {
+                m_queryChara.CopyFromComponentDataArray(toukiMeters);
             }
 
             toukiMeters.Dispose();

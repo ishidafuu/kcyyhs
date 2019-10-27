@@ -10,5 +10,6 @@ namespace YYHS
         public float m_bgScrollTextureUL;
         public float m_bgScrollTextureUR;
         public int m_animationCount;
+        public bool m_isDecided;
     }
 }

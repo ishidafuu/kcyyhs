@@ -17,6 +17,7 @@ namespace YYHS
         {
             m_query = GetEntityQuery(
                 ComponentType.ReadOnly<PadScan>(),
+                ComponentType.ReadOnly<JumpState>(),
                 ComponentType.ReadWrite<ToukiMeter>()
             );
         }
@@ -29,10 +30,13 @@ namespace YYHS
 
             NativeArray<PadScan> padScans = m_query.ToComponentDataArray<PadScan>(Allocator.TempJob);
             NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
+            NativeArray<JumpState> jumpStates = m_query.ToComponentDataArray<JumpState>(Allocator.TempJob);
+
             var job = new InputToToukiJob()
             {
-                m_padScans = padScans,
                 m_toukiMeters = toukiMeters,
+                m_jumpStates = jumpStates,
+                m_padScans = padScans,
                 m_seq = seq,
             };
             inputDeps = job.Schedule(inputDeps);
@@ -43,6 +47,7 @@ namespace YYHS
 
             padScans.Dispose();
             toukiMeters.Dispose();
+            jumpStates.Dispose();
 
             return inputDeps;
         }
@@ -51,6 +56,7 @@ namespace YYHS
         struct InputToToukiJob : IJob
         {
             public NativeArray<ToukiMeter> m_toukiMeters;
+            [ReadOnly] public NativeArray<JumpState> m_jumpStates;
             [ReadOnly] public NativeArray<PadScan> m_padScans;
             [ReadOnly] public BattleSequencer m_seq;
 
@@ -62,7 +68,7 @@ namespace YYHS
                     var toukiMeter = m_toukiMeters[i];
                     var padScan = m_padScans[i];
 
-                    if (i == 0)
+                    if (SideUtil.IsSideA(i))
                     {
                         if (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
                             continue;
@@ -71,6 +77,14 @@ namespace YYHS
                     {
                         if (m_seq.m_sideB.m_animStep != EnumAnimationStep.Sleep)
                             continue;
+                    }
+
+                    var JumpState = m_jumpStates[i];
+
+                    if (JumpState.m_state == EnumJumpState.Falling
+                     || JumpState.m_state == EnumJumpState.Jumping)
+                    {
+                        continue;
                     }
 
                     if (toukiMeter.m_cross != padScan.GetPressCross())

@@ -16,7 +16,8 @@ namespace YYHS
         protected override void OnCreate()
         {
             m_query = GetEntityQuery(
-                ComponentType.ReadWrite<ToukiMeter>()
+                ComponentType.ReadWrite<ToukiMeter>(),
+                ComponentType.ReadOnly<JumpState>()
             );
         }
 
@@ -29,10 +30,13 @@ namespace YYHS
             m_query.AddDependency(inputDeps);
 
             NativeArray<ToukiMeter> toukiMeters = m_query.ToComponentDataArray<ToukiMeter>(Allocator.TempJob);
+            NativeArray<JumpState> jumpStates = m_query.ToComponentDataArray<JumpState>(Allocator.TempJob);
+
             Vector2[] uv = Shared.m_bgFrameMeshMat.m_meshDict[EnumBGPartsType.bg_00.ToString()].uv;
             var job = new CountToukiJob()
             {
                 m_toukiMeters = toukiMeters,
+                m_jumpStates = jumpStates,
                 m_seq = seq,
                 BgScrollRange = Settings.Instance.DrawPos.BgWidth << (Settings.Instance.DrawPos.BgScrollRangeFactor - 1),
                 ToukiMax = Settings.Instance.Common.ToukiMax,
@@ -48,6 +52,7 @@ namespace YYHS
             inputDeps.Complete();
             m_query.CopyFromComponentDataArray(toukiMeters);
             toukiMeters.Dispose();
+            jumpStates.Dispose();
             return inputDeps;
         }
 
@@ -55,6 +60,7 @@ namespace YYHS
         struct CountToukiJob : IJob
         {
             public NativeArray<ToukiMeter> m_toukiMeters;
+            [ReadOnly] public NativeArray<JumpState> m_jumpStates;
             [ReadOnly] public BattleSequencer m_seq;
             [ReadOnly] public int BgScrollRange;
             [ReadOnly] public int ToukiMax;
@@ -73,27 +79,41 @@ namespace YYHS
                 for (int i = 0; i < m_toukiMeters.Length; i++)
                 {
                     var toukiMeter = m_toukiMeters[i];
+                    var JumpState = m_jumpStates[i];
 
-                    bool isDecided = false;
-                    bool isSideA = (i == 0);
-
-                    isDecided = (isSideA)
-                        ? (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
-                        : (m_seq.m_sideB.m_animStep != EnumAnimationStep.Sleep);
-
-                    if (isDecided)
+                    if (JumpState.m_state == EnumJumpState.None
+                     || JumpState.m_state == EnumJumpState.Air)
                     {
-                        UpdateDecidedScroll(ref toukiMeter, isSideA);
-                    }
-                    else
-                    {
-                        IncMeterValue(ref toukiMeter);
-                        IncBGScrollValue(ref toukiMeter, isSideA);
-                        IncAnimationCount(ref toukiMeter);
+                        bool isSideA = SideUtil.IsSideA(i);
+                        bool isDecided = (isSideA)
+                            ? (m_seq.m_sideA.m_animStep != EnumAnimationStep.Sleep)
+                            : (m_seq.m_sideB.m_animStep != EnumAnimationStep.Sleep);
+
+                        if (isDecided)
+                        {
+                            UpdateDecidedScroll(ref toukiMeter, isSideA);
+                        }
+                        else
+                        {
+                            if (toukiMeter.m_isDecided)
+                            {
+                                ResetValue(ref toukiMeter);
+                            }
+
+                            IncMeterValue(ref toukiMeter);
+                            IncBGScrollValue(ref toukiMeter, isSideA);
+                            IncAnimationCount(ref toukiMeter);
+                        }
                     }
 
                     m_toukiMeters[i] = toukiMeter;
                 }
+            }
+
+            private static void ResetValue(ref ToukiMeter toukiMeter)
+            {
+                toukiMeter.m_value = 0;
+                toukiMeter.m_isDecided = false;
             }
 
             private int IncBGScrollCount(int bgScroll, int value, bool isSideA)
