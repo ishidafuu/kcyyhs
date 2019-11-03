@@ -80,7 +80,7 @@ namespace YYHS
         NoDamage,
         Tip,
         Hit,
-        CleanHit,
+        Air,
     }
 
     public enum EnumDamageReaction
@@ -110,8 +110,8 @@ namespace YYHS
     {
         Stand,
         Fly,
-        Step,
         Jumping,
+        Step,
     }
 
 
@@ -123,20 +123,28 @@ namespace YYHS
         _DefenceA00,
         _DefenceA01,
         _DefenceA02,
+        _DefenceA03,
         _DefenceB00,
         _DefenceB01,
         _DefenceB02,
+        _DefenceB03,
+        _DefenceC00,
+        _DefenceC01,
+        _DefenceC02,
+        _DefenceC03,
         _Down00,
         _Down01,
         _Fly,
         _Jump00,
         _Jump01,
+        _JumpAction,
         _Miss,
         _Reverse,
         _Shaky,
         _Stand00,
         _Stand01,
         _Stand02,
+        _Wait,
 
         Action00_00,
         Action00_01,

@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:b7e708c871da26c9aa369ba92217da47:e43cabdda326441fa30fbd3a0ae3fe99:1d5bd359e45f7ff3c621c7eec36178ac$
+# $TexturePacker:SmartUpdate:bede68338d77ea57794915f345f50695:189c59485711fe20e8624efcb54f2f8a:1d5bd359e45f7ff3c621c7eec36178ac$
 #
 :format=40300
 :texture=back_ground_00.png
@@ -13,7 +13,7 @@
 :borders=disabled
 :alphahandling=KeepTransparentPixels
 
-bg_00;1;383;256;92; 0.5;0.5; 0;0;0;0
+bg_00;1;285;256;92; 0.5;0.5; 0;0;0;0
 bg_01;515;523;256;96; 0.5;0.5; 0;0;0;0
 bg_02;1;477;512;256; 0.5;0.5; 0;0;0;0
 bg_03;1;735;512;288; 0.5;0.5; 0;0;0;0
@@ -22,3 +22,4 @@ bg_05;515;621;256;160; 0.5;0.5; 0;0;0;0
 bg_06;515;425;256;96; 0.5;0.5; 0;0;0;0
 bg_07;773;831;128;192; 0.5;0.5; 0;0;0;0
 bg_08;773;669;128;160; 0.5;0.5; 0;0;0;0
+bg_09;1;379;256;96; 0.5;0.5; 0;0;0;0

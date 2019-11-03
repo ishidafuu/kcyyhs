@@ -198,6 +198,7 @@
             </struct>
             <key type="filename">bg_01.png</key>
             <key type="filename">bg_06.png</key>
+            <key type="filename">bg_09.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -314,6 +315,7 @@
             <filename>bg_05.png</filename>
             <filename>bg_06.png</filename>
             <filename>bg_07.png</filename>
+            <filename>bg_09.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

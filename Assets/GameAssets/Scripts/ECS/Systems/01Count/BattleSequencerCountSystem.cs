@@ -68,11 +68,11 @@ namespace YYHS
                         seq.m_animation.m_count = 0;
                         if (seq.m_isLastSideA)
                         {
-                            NextStep(ref seq, ref seq.m_sideA);
+                            NextStep(ref seq, ref seq.m_sideA, ref seq.m_sideB);
                         }
                         else
                         {
-                            NextStep(ref seq, ref seq.m_sideB);
+                            NextStep(ref seq, ref seq.m_sideB, ref seq.m_sideA);
                         }
                         // seqが更新された直後にエフェクトの発生を行う
                         UpdateFilterEffect(ref seq, isEndTransitionFilter);
@@ -129,10 +129,10 @@ namespace YYHS
                     DeffenceStep(ref seq, ref waitSide, ref lastSide);
                     break;
                 case NextStepType.NextStepLastSide:
-                    NextStep(ref seq, ref lastSide);
+                    NextStep(ref seq, ref lastSide, ref waitSide);
                     break;
                 case NextStepType.NextStepWaitSide:
-                    NextStep(ref seq, ref waitSide);
+                    NextStep(ref seq, ref waitSide, ref lastSide);
                     break;
                 case NextStepType.EndAnimation:
                     EndAnimation(ref seq);
@@ -165,7 +165,7 @@ namespace YYHS
                     if (item.m_frame != seq.m_animation.m_count)
                         continue;
 
-                    DebugLog($"{item.m_functionName}:{item.m_intParameter}");
+                    // DebugLog($"{item.m_functionName}:{item.m_intParameter}");
                     switch (item.m_functionName)
                     {
                         case EnumEventFunctionName.EventEffectBG:
@@ -276,14 +276,14 @@ namespace YYHS
                 effect.m_isSideA = isSideA;
                 effect.m_count = 0;
                 filterEffects[i] = effect;
-                DebugLog($"{effect.m_effectType}:{i} isActive:{effect.m_isActive}");
+                // DebugLog($"{effect.m_effectType}:{i} isActive:{effect.m_isActive}");
                 break;
             }
         }
 
         private static void ResetEffect(ref NativeArray<FilterEffect> filterEffects)
         {
-            DebugLog("ResetEffect");
+            // DebugLog("ResetEffect");
             for (int i = 0; i < filterEffects.Length; i++)
             {
                 FilterEffect effect = filterEffects[i];
@@ -487,21 +487,51 @@ namespace YYHS
             seq.m_isDistributeRei = true;
         }
 
-        private void NextStep(ref BattleSequencer seq, ref SideState nextSide)
+        private void NextStep(ref BattleSequencer seq, ref SideState nextSide, ref SideState waitSide)
         {
-            bool isReverse = nextSide.m_actionType == EnumActionType.Reverse;
+            bool isReverse = false;
+            bool isWait = false;
             DebugLog($"NextStepactionNo:{nextSide.m_actionNo} isSideA:{nextSide.m_isSideA} animStep:{nextSide.m_animStep} animName:{seq.m_animation.m_animName}");
             seq.m_animation.m_charaNo = nextSide.m_charaNo;
             seq.m_animation.m_isSideA = nextSide.m_isSideA;
-            seq.m_animation.m_animName = (isReverse)
-                ? EnumAnimationName._Reverse
-                : GetActionName(nextSide.m_actionNo, nextSide.m_animStep);
+
+            switch (nextSide.m_actionType)
+            {
+                case EnumActionType.Reverse:
+                    isReverse = true;
+                    seq.m_animation.m_animName = EnumAnimationName._Reverse;
+                    break;
+                case EnumActionType.Jump:
+                case EnumActionType.Guard:
+                    isWait = true;
+                    if (nextSide.m_animStep == EnumAnimationStep.WaitPageA)
+                    {
+                        seq.m_animation.m_animName = EnumAnimationName._Wait;
+                    }
+                    else
+                    {
+                        seq.m_animation.m_animName = EnumAnimationName._JumpAction;
+                    }
+                    break;
+                default:
+                    seq.m_animation.m_animName = GetActionName(nextSide.m_actionNo, nextSide.m_animStep);
+                    break;
+            }
+
             seq.m_animType = EnumAnimType.Action;
             seq.m_isLastSideA = nextSide.m_isSideA;
             if (isReverse)
             {
                 nextSide.m_animStep = EnumAnimationStep.Finished;
                 Reverse(ref seq, ref nextSide);
+            }
+            else if (isWait)
+            {
+                // 相手が攻撃モーションの場合は、ディフェンス（避けジャンプ）モーションがあるので完了にする
+                if (waitSide.m_isEnemyNeedDefence)
+                {
+                    nextSide.m_animStep = EnumAnimationStep.Finished;
+                }
             }
             else
             {
@@ -542,7 +572,8 @@ namespace YYHS
         {
             seq.m_animation.m_charaNo = deffenceSide.m_charaNo;
             seq.m_animation.m_isSideA = deffenceSide.m_isSideA;
-            seq.m_animation.m_animName = GetDeffenceName(attackSide.m_enemyDeffenceType, attackSide.m_enemyDamageLv);
+            bool isJumping = deffenceSide.m_actionType == EnumActionType.Jump;
+            seq.m_animation.m_animName = GetDeffenceName(attackSide.m_enemyDeffenceType, attackSide.m_enemyDamageLv, isJumping);
             DebugLog($"DeffenceStep isSideA:{deffenceSide.m_isSideA} animName:{seq.m_animation.m_animName}");
             seq.m_animType = EnumAnimType.Defence;
             seq.m_isLastSideA = deffenceSide.m_isSideA;
@@ -566,10 +597,12 @@ namespace YYHS
             return (EnumAnimationName)index;
         }
 
-        private EnumAnimationName GetDeffenceName(EnumDefenceType deffenceType, EnumDamageLv damageLv)
+        private EnumAnimationName GetDeffenceName(EnumDefenceType deffenceType, EnumDamageLv damageLv, bool isJumping)
         {
             int step = 3;
-            int index = (int)EnumAnimationName._DefenceA00 + ((int)deffenceType * step) + (int)damageLv;
+            int index = (isJumping)
+                ? (int)EnumAnimationName._DefenceC00 + (int)damageLv
+                : (int)EnumAnimationName._DefenceA00 + ((int)deffenceType * step) + (int)damageLv;
             return (EnumAnimationName)index;
         }
 
