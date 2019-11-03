@@ -56,7 +56,7 @@ namespace YYHS
                             alpha = ((float)reiPiece.m_count / (float)Settings.Instance.Animation.ReiWaitFrame);
                             break;
                     }
-                    mat.SetFloat(EnumShaderParam._Alpha.ToString(), alpha);
+                    mat.SetFloat(EnumShaderParam._Alpha.ToString(), Mathf.Clamp01(alpha));
                     Graphics.DrawMesh(mesh, matrixes, mat, 0);
                 }
 
@@ -69,7 +69,7 @@ namespace YYHS
                     float alpha = (reiPiece.m_reiState == EnumReiState.Wait)
                     ? ((float)reiPiece.m_count / (float)Settings.Instance.Animation.ReiWaitFrame)
                     : 1;
-                    mat.SetFloat(EnumShaderParam._Alpha.ToString(), alpha);
+                    mat.SetFloat(EnumShaderParam._Alpha.ToString(), Mathf.Clamp01(alpha));
                     Graphics.DrawMesh(mesh, matrixes, mat, 0);
                 }
             }

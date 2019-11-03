@@ -216,7 +216,7 @@ namespace YYHS
                 float alpha = isFadeIn
                     ? (float)jumpState.m_stepCount / (float)Settings.Instance.Animation.JumpFadeFrame
                     : (float)(Settings.Instance.Animation.JumpFadeFrame - jumpState.m_stepCount) / (float)Settings.Instance.Animation.JumpFadeFrame;
-
+                alpha = Mathf.Clamp01(alpha);
                 int posX = SideUtil.PosSign(i) * Settings.Instance.DrawPos.BgScrollX;
 
                 EnumDrawLayer layer = EnumDrawLayer.OverBackGround;
@@ -226,6 +226,8 @@ namespace YYHS
                 Material mat = meshMat.GetMaterial(i);
                 Matrix4x4 matrixes = Matrix4x4.TRS(position, m_Quaternion, scale);
                 mat.SetFloat(EnumShaderParam._Alpha.ToString(), alpha);
+
+                Debug.Log($"{jumpState.m_effectStep}:{alpha}");
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }
