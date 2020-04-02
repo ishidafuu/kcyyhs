@@ -1,10 +1,6 @@
-﻿using Unity.Burst;
-using Unity.Collections;
+﻿using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
-// using Unity.Transforms;
-using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
+using UnityEngine; // using Unity.Transforms;
 
 namespace YYHS
 {
@@ -227,7 +223,7 @@ namespace YYHS
                 Matrix4x4 matrixes = Matrix4x4.TRS(position, m_Quaternion, scale);
                 mat.SetFloat(EnumShaderParam._Alpha.ToString(), alpha);
 
-                Debug.Log($"{jumpState.m_effectStep}:{alpha}");
+                // Debug.Log($"{jumpState.m_effectStep}:{alpha}");
 
                 Graphics.DrawMesh(mesh, matrixes, mat, 0);
             }

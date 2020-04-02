@@ -321,7 +321,7 @@ namespace YYHS
                         step = NextStepType.DeffenceStepWaitSide;
                     }
                     // 直撃もしくはKO以外で、直前側が攻撃完了していない場合は、直前側の進行
-                    else if (waitSide.m_enemyDamageLv <= EnumDamageLv.Tip
+                    else if (!waitSide.m_enemyDamageLv.IsHit()
                         && (lastSide.m_animStep == EnumAnimationStep.WaitPageA
                             || lastSide.m_animStep == EnumAnimationStep.WaitPageB))
                     {
@@ -365,13 +365,13 @@ namespace YYHS
                 DebugLog($"SelectNextStep3 {waitSide.m_isSideA} {waitSide.m_animStep}");
                 // 待ち側のアクション始動
 
-                // 直前が近接攻撃の完了の場合
+                // 直前が近接攻撃の完了（完了まで出たら追いつけない）の場合
                 // もしくは、直前が追いつき不可能攻撃の完了の場合は待ち側ディフェンス
                 if (lastSide.m_animStep == EnumAnimationStep.Finished
                     && lastSide.m_isEnemyNeedDefence
                     && !waitSide.m_isDefenceFinished
-                    && (lastSide.m_actionType == EnumActionType.ShortAttack
-                        || CheckChasable(ref lastSide, ref waitSide))
+                    && (lastSide.m_actionType.IsShort()
+                        || lastSide.m_actionType.IsChaseable(waitSide.m_actionType))
                     )
                 {
                     DebugLog("DeffenceStepC ");
@@ -387,7 +387,7 @@ namespace YYHS
                         && lastSide.m_animStep == EnumAnimationStep.WaitPageB)
                 {
                     // 直前のアクションが待ちアクションよりプライオリティが高ければ追い越して、直前を再度進める
-                    if (lastSide.m_actionType > waitSide.m_actionType)
+                    if (lastSide.m_actionType.IsOvertakeable(waitSide.m_actionType))
                     {
                         step = NextStepType.NextStepLastSide;
                     }
@@ -402,10 +402,10 @@ namespace YYHS
                         && lastSide.m_animStep == EnumAnimationStep.Finished)
                 {
                     // 待ち側が追いつき可能な場合は発動する
-                    if (CheckChasable(ref waitSide, ref lastSide))
+                    if (waitSide.m_actionType.IsChaseable(lastSide.m_actionType))
                     {
                         // 直撃でなければ待ち側のアクションを進める
-                        if (lastSide.m_enemyDamageLv < EnumDamageLv.Hit)
+                        if (lastSide.m_enemyDamageLv >= EnumDamageLv.Hit)
                         {
                             step = NextStepType.NextStepWaitSide;
                         }
@@ -427,8 +427,8 @@ namespace YYHS
                 {
                     // 直前側が追いつき可能な場合は連続する
                     // ディフェンスが完了している場合も連続する
-                    if (CheckChasable(ref lastSide, ref waitSide)
-                    || lastSide.m_isDefenceFinished)
+                    if (lastSide.m_actionType.IsChaseable(waitSide.m_actionType)
+                        || lastSide.m_isDefenceFinished)
                     {
                         step = NextStepType.NextStepLastSide;
                     }
@@ -467,15 +467,6 @@ namespace YYHS
             }
 
             return step;
-        }
-
-        private bool CheckChasable(ref SideState chaseSide, ref SideState targetSide)
-        {
-            // ターゲットが攻撃ではない場合、
-            // もしくは、射程が同じ以上なら追いつける
-            // 近接の完了には追いつけないが、別箇所でその対応は行っている
-            return (!targetSide.m_isEnemyNeedDefence
-                || chaseSide.m_actionType >= targetSide.m_actionType);
         }
 
         private void EndAnimation(ref BattleSequencer seq)

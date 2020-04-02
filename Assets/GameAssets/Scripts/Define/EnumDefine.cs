@@ -77,11 +77,26 @@ namespace YYHS
 
     public enum EnumDamageLv
     {
+        Air,
         NoDamage,
         Tip,
         Hit,
-        Air,
     }
+    public static partial class EnumDamageLvExtend
+    {
+        public static bool IsHit(this EnumDamageLv value)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumDamageLv.Hit:
+                    res = true;
+                    break;
+            }
+            return res;
+        }
+    }
+
 
     public enum EnumDamageReaction
     {
@@ -99,10 +114,110 @@ namespace YYHS
         Reverse,
         Technique,
         ShortAttack,
+        AirShortAttack,
         MiddleAttack,
         LongAttack,
-        GroundAttack,
         WaveAttack,
+        GroundAttack,
+    }
+    public static partial class EnumActionTypeExtend
+    {
+        public static bool IsChaseable(this EnumActionType value, EnumActionType targetValue)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumActionType.ShortAttack:
+                    res = value > targetValue;
+                    break;
+                case EnumActionType.AirShortAttack:
+                    res = (targetValue == EnumActionType.ShortAttack)
+                        || (targetValue == EnumActionType.GroundAttack);
+                    break;
+                case EnumActionType.MiddleAttack:
+                    res = value >= targetValue;
+                    break;
+                case EnumActionType.LongAttack:
+                case EnumActionType.WaveAttack:
+                    res = true;
+                    break;
+                case EnumActionType.GroundAttack:
+                    res = (targetValue != EnumActionType.AirShortAttack);
+                    break;
+            }
+
+            return res;
+        }
+
+        public static bool IsOvertakeable(this EnumActionType value, EnumActionType targetValue)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumActionType.ShortAttack:
+                    res = value > targetValue;
+                    break;
+                case EnumActionType.AirShortAttack:
+                    res = (targetValue == EnumActionType.ShortAttack) || (targetValue == EnumActionType.GroundAttack);
+                    break;
+                case EnumActionType.MiddleAttack:
+                    res = (value == EnumActionType.LongAttack)
+                        || (value == EnumActionType.WaveAttack);
+                    break;
+                case EnumActionType.GroundAttack:
+                    res = (targetValue != EnumActionType.AirShortAttack);
+                    break;
+                default:
+                    res = true;
+                    break;
+            }
+
+            return res;
+        }
+
+        public static bool IsAttack(this EnumActionType value)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumActionType.ShortAttack:
+                case EnumActionType.AirShortAttack:
+                case EnumActionType.MiddleAttack:
+                case EnumActionType.LongAttack:
+                case EnumActionType.WaveAttack:
+                case EnumActionType.GroundAttack:
+                    res = true;
+                    break;
+            }
+            return res;
+        }
+
+        public static bool IsAirHit(this EnumActionType value)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumActionType.MiddleAttack:
+                case EnumActionType.LongAttack:
+                case EnumActionType.WaveAttack:
+                    res = true;
+                    break;
+            }
+            return res;
+        }
+
+        public static bool IsShort(this EnumActionType value)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumActionType.ShortAttack:
+                case EnumActionType.AirShortAttack:
+                    res = true;
+                    break;
+            }
+            return res;
+        }
     }
 
 
@@ -259,6 +374,23 @@ namespace YYHS
         Falling,
     }
 
+    public static partial class EnumJumpStateExtend
+    {
+        public static bool IsAir(this EnumJumpState value)
+        {
+            bool res = false;
+            switch (value)
+            {
+                case EnumJumpState.Air:
+                case EnumJumpState.Jumping:
+                    res = true;
+                    break;
+            }
+            return res;
+        }
+    }
+
+
     public enum EnumJumpEffectStep
     {
         JumpStart = 0,
@@ -294,8 +426,8 @@ namespace YYHS
         Short,
         Middle,
         Long,
-        Ground,
         Wave,
+        Ground,
     }
 
     public enum EnumAttackEffectType

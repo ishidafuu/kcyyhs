@@ -1,10 +1,6 @@
-﻿using Unity.Burst;
-using Unity.Collections;
+﻿using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
-// using Unity.Transforms;
-using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
+using UnityEngine; 
 
 namespace YYHS
 {

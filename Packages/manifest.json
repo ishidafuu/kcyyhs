@@ -1,19 +1,18 @@
 {
   "dependencies": {
-    "com.unity.2d.pixel-perfect": "1.0.1-preview",
+    "com.unity.2d.pixel-perfect": "2.0.4",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.burst": "1.1.2",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.entities": "0.1.1-preview",
     "com.unity.ext.nunit": "1.0.0",
-    "com.unity.ide.rider": "1.1.0",
-    "com.unity.ide.vscode": "1.1.2",
-    "com.unity.package-manager-ui": "2.2.0",
-    "com.unity.render-pipelines.lightweight": "6.9.1",
-    "com.unity.shadergraph": "6.9.1",
-    "com.unity.test-framework": "1.0.18",
+    "com.unity.ide.rider": "1.1.4",
+    "com.unity.ide.vscode": "1.1.4",
+    "com.unity.render-pipelines.lightweight": "7.1.8",
+    "com.unity.shadergraph": "7.1.8",
+    "com.unity.test-framework": "1.1.9",
     "com.unity.textmeshpro": "2.0.1",
-    "com.unity.timeline": "1.1.0",
+    "com.unity.timeline": "1.2.10",
     "com.unity.ugui": "1.0.0",
     "unienumextension": "https://github.com/pCYSl5EDgo/UniEnumExtension.git#master",
     "com.unity.modules.ai": "1.0.0",
@@ -50,8 +49,8 @@
   },
   "lock": {
     "unienumextension": {
-      "hash": "690be851ac068dcb5766f7cb93192a4d9cb4884f",
-      "revision": "master"
+      "revision": "master",
+      "hash": "690be851ac068dcb5766f7cb93192a4d9cb4884f"
     }
   }
 }

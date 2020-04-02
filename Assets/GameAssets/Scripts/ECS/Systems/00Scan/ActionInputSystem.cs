@@ -97,7 +97,8 @@ namespace YYHS
                 {
                     actionNo = (((int)toukiMeter.m_cross - 1) * 4) + ((int)padScan.GetPressButton() - 1);
                     YHActionData attackData = Shared.m_yhCharaAttackList.GetData(sideInfo.m_charaNo, toukiMeter.m_cross, padScan.GetPressButton());
-                    actionType = GetActionType(attackData);
+                    bool isAir = jumpState.m_state.IsAir();
+                    actionType = GetActionType(attackData, isAir);
                     // TODO:仮
                     actionType = EnumActionType.ShortAttack;
                     actionNo = 0;
@@ -105,7 +106,7 @@ namespace YYHS
 
 
                 // 霊力アップなどの相手にディフェンスステップが発生しない場合はfalseにする
-                bool isNeedDefence = GetNeedDefence(actionType);
+
 
                 bool isIdleSeq = seq.m_seqState == EnumBattleSequenceState.Idle;
 
@@ -133,17 +134,20 @@ namespace YYHS
 
                     if (sideInfo.m_isSideA)
                     {
-                        InitActionSide(sideInfo, ref seq.m_sideA, actionNo, actionType,
-                            defenceType, isNeedDefence);
+                        InitActionSide(sideInfo, ref seq.m_sideA, actionNo, actionType, defenceType);
                     }
                     else
                     {
-                        InitActionSide(sideInfo, ref seq.m_sideB, actionNo, actionType,
-                            defenceType, isNeedDefence);
+                        InitActionSide(sideInfo, ref seq.m_sideB, actionNo, actionType, defenceType);
                     }
 
-                    var enemyJumpState = jumpStates[SideUtil.EnemyIndex(i)];
-                    UpdateDamageLv(ref seq, ref sideInfo, actionType, enemyJumpState);
+                    int enemyIndex = SideUtil.EnemyIndex(i);
+                    var enemyJumpState = jumpStates[enemyIndex];
+                    var enemyActionType = (SideUtil.IsSideA(i))
+                        ? seq.m_sideB.m_actionType
+                        : seq.m_sideA.m_actionType;
+
+                    UpdateDamageLv(ref seq, ref sideInfo, actionType, enemyActionType, enemyJumpState);
                     UpdateDamage(ref seq, damageStates, statuses, jumpStates);
                     UpdateReiAmount(ref reiState, ref sideInfo, actionNo);
 
@@ -185,31 +189,16 @@ namespace YYHS
 
         }
 
-        private static bool GetNeedDefence(EnumActionType actionType)
+        private static BattleSequencer UpdateDamageLv(ref BattleSequencer seq, ref SideInfo sideInfo,
+         EnumActionType actionType, EnumActionType enemyActionType, JumpState enemyJumpState)
         {
-            bool isNeedDefence = false;
-            switch (actionType)
-            {
-                case EnumActionType.ShortAttack:
-                case EnumActionType.MiddleAttack:
-                case EnumActionType.LongAttack:
-                case EnumActionType.WaveAttack:
-                case EnumActionType.GroundAttack:
-                    isNeedDefence = true;
-                    break;
-            }
-
-            return isNeedDefence;
-        }
-
-        private static BattleSequencer UpdateDamageLv(ref BattleSequencer seq, ref SideInfo sideInfo, EnumActionType actionType, JumpState enemyJumpState)
-        {
-            bool isEnemyAir = (enemyJumpState.m_state == EnumJumpState.Jumping
+            // 近接攻撃は攻撃中に着地するので空中状態が解除される
+            bool isEnemyAir = (enemyActionType != EnumActionType.ShortAttack)
+                    && (enemyJumpState.m_state == EnumJumpState.Jumping
                     || enemyJumpState.m_state == EnumJumpState.Air);
 
             // 空振り
-            if (isEnemyAir
-                && actionType == EnumActionType.ShortAttack)
+            if (isEnemyAir && !actionType.IsAirHit())
             {
                 if (sideInfo.m_isSideA)
                 {
@@ -220,8 +209,7 @@ namespace YYHS
                     seq.m_sideB.m_enemyDamageLv = EnumDamageLv.Air;
                 }
             }
-            else if (actionType == EnumActionType.Jump
-            || actionType == EnumActionType.Guard)
+            else if (!actionType.IsAttack())
             {
                 if (sideInfo.m_isSideA)
                 {
@@ -229,7 +217,6 @@ namespace YYHS
                 }
                 else
                 {
-
                     seq.m_sideB.m_enemyDamageLv = EnumDamageLv.NoDamage;
                 }
             }
@@ -270,13 +257,15 @@ namespace YYHS
             return defenceType;
         }
 
-        private static EnumActionType GetActionType(YHActionData attackData)
+        private static EnumActionType GetActionType(YHActionData attackData, bool isAir)
         {
             EnumActionType actionType = EnumActionType.None;
             switch (attackData.rangeType)
             {
                 case EnumAttackRangeType.Short:
-                    actionType = EnumActionType.ShortAttack;
+                    actionType = (isAir)
+                        ? EnumActionType.AirShortAttack
+                        : EnumActionType.ShortAttack;
                     break;
                 case EnumAttackRangeType.Middle:
                     actionType = EnumActionType.MiddleAttack;
@@ -284,11 +273,11 @@ namespace YYHS
                 case EnumAttackRangeType.Long:
                     actionType = EnumActionType.LongAttack;
                     break;
-                case EnumAttackRangeType.Ground:
-                    actionType = EnumActionType.GroundAttack;
-                    break;
                 case EnumAttackRangeType.Wave:
                     actionType = EnumActionType.WaveAttack;
+                    break;
+                case EnumAttackRangeType.Ground:
+                    actionType = EnumActionType.GroundAttack;
                     break;
             }
 
@@ -313,11 +302,11 @@ namespace YYHS
                 bool isAttackSideA = !SideUtil.IsSideA(i);
                 if (isAttackSideA)
                 {
-                    SetDamage(ref seq.m_sideA, ref damageState, status, jumpState);
+                    SetDamage(ref seq.m_sideA, ref seq.m_sideB, ref damageState, ref status, ref jumpState);
                 }
                 else
                 {
-                    SetDamage(ref seq.m_sideB, ref damageState, status, jumpState);
+                    SetDamage(ref seq.m_sideB, ref seq.m_sideA, ref damageState, ref status, ref jumpState);
                 }
 
                 damageStates[i] = damageState;
@@ -335,7 +324,8 @@ namespace YYHS
             jumpState.m_stepCount = 0;
         }
 
-        private static void SetDamage(ref SideState attackSideState, ref DamageState damageState, in Status status, in JumpState jumpState)
+        private static void SetDamage(ref SideState attackSideState, ref SideState deffenceSideState,
+            ref DamageState damageState, ref Status status, ref JumpState jumpState)
         {
 
             YHActionData attackData = Shared.m_yhCharaAttackList.GetData(attackSideState.m_charaNo, attackSideState.m_actionNo);
@@ -364,8 +354,8 @@ namespace YYHS
 
             int afterBalance = (status.m_balance - balance);
             int afterLife = (status.m_life - damage);
-            bool isJumpHit = (jumpState.m_state != EnumJumpState.None
-                && attackSideState.m_enemyDamageLv >= EnumDamageLv.Hit);
+            bool isJumpHit = (deffenceSideState.m_actionType == EnumActionType.Jump
+                && attackSideState.m_enemyDamageLv == EnumDamageLv.Hit);
 
             bool isFly = (afterLife <= 0 || afterBalance <= 0 || isJumpHit);
             bool isShakey = (afterBalance <= Settings.Instance.Common.ShakeyBorder);
@@ -415,14 +405,14 @@ namespace YYHS
         }
 
         private static void InitActionSide(in SideInfo attackSideInfo, ref SideState attackSideState,
-            int actionNo, EnumActionType actionType, EnumDefenceType defenceType, bool isNeedDefence)
+            int actionNo, EnumActionType actionType, EnumDefenceType defenceType)
         {
             attackSideState.m_isSideA = attackSideInfo.m_isSideA;
             attackSideState.m_charaNo = attackSideInfo.m_charaNo;
             attackSideState.m_actionNo = actionNo;
             attackSideState.m_actionType = actionType;
             attackSideState.m_enemyDeffenceType = defenceType;
-            attackSideState.m_isEnemyNeedDefence = isNeedDefence;
+            attackSideState.m_isEnemyNeedDefence = actionType.IsAttack();
             attackSideState.m_animStep = EnumAnimationStep.WaitPageA;
             attackSideState.m_isDefenceFinished = false;
             attackSideState.m_isStartDamage = false;

@@ -379,6 +379,97 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     m_events: []
+  - m_name: _DefenseA03
+    m_length: 60
+    m_parts:
+    - m_name: cm_air_00
+      m_orderInLayer: 0
+      m_effectPosition: 0
+      m_isActive:
+      - m_frame: 0
+        m_value: 1
+      - m_frame: 60
+        m_value: 1
+      m_isFlipX: []
+      m_isFlipY: []
+      m_isBrink: []
+      m_positionX:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_positionY:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_scaleX:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_scaleY:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_rotation:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    - m_name: bg_09
+      m_orderInLayer: 0
+      m_effectPosition: 0
+      m_isActive:
+      - m_frame: 0
+        m_value: 1
+      - m_frame: 60
+        m_value: 0
+      m_isFlipX: []
+      m_isFlipY: []
+      m_isBrink: []
+      m_positionX:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_positionY:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_scaleX:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_scaleY:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_rotation:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    m_events:
+    - m_frame: 0
+      m_functionName: 2
+      m_stringParameter: 
+      m_floatParameter: 0
+      m_intParameter: 0
   - m_name: _DefenseA00
     m_length: 90
     m_parts:
@@ -3281,92 +3372,6 @@ MonoBehaviour:
       m_stringParameter: 
       m_floatParameter: 0
       m_intParameter: 1
-  - m_name: _DefenseA03
-    m_length: 60
-    m_parts:
-    - m_name: cm_air_00
-      m_orderInLayer: 0
-      m_effectPosition: 0
-      m_isActive:
-      - m_frame: 0
-        m_value: 1
-      - m_frame: 60
-        m_value: 1
-      m_isFlipX: []
-      m_isFlipY: []
-      m_isBrink: []
-      m_positionX:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_positionY:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_scaleX:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_scaleY:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_rotation:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    - m_name: bg_09
-      m_orderInLayer: 0
-      m_effectPosition: 0
-      m_isActive:
-      - m_frame: 0
-        m_value: 1
-      - m_frame: 60
-        m_value: 0
-      m_isFlipX: []
-      m_isFlipY: []
-      m_isBrink: []
-      m_positionX:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_positionY:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_scaleX:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_scaleY:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_rotation:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    m_events: []
   - m_name: _DefenseB00
     m_length: 60
     m_parts: []
