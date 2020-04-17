@@ -6,8 +6,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class FPSManager : SingletonMonoBehaviour<FPSManager>
 	{
-		public int fps_ = 30;
-		public int motionFps_ = 30;
+		public int fps_ = 60;
+		public int motionFps_ = 60;
 		public bool vSync_ = false;
 		public bool fpsDraw_ = true;
 		// 測定用

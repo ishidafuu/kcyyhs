@@ -12,72 +12,6 @@ TextureImporter:
       213: 6268857258897558521
     second: body_02
   - first:
-      213: 7044415266825918670
-    second: cm_air_00
-  - first:
-      213: 7349918391354030105
-    second: cm_air_01
-  - first:
-      213: -9142723541066618347
-    second: cm_air_02
-  - first:
-      213: 4094930717186315511
-    second: cm_dodge_00
-  - first:
-      213: 8711671657938451140
-    second: cm_down_00
-  - first:
-      213: 7596711328868877011
-    second: cm_jump_00
-  - first:
-      213: 815483014439192337
-    second: cm_jump_01
-  - first:
-      213: -1156367830955359705
-    second: cm_jump_02
-  - first:
-      213: 6337732253934604679
-    second: cm_l_parts_00
-  - first:
-      213: 6061317436030166354
-    second: cm_shaky_00
-  - first:
-      213: 3329950309840273066
-    second: cm_stand_00
-  - first:
-      213: 6044306801005870090
-    second: cm_stand_01
-  - first:
-      213: 4411317198115190001
-    second: cm_stand_02
-  - first:
-      213: 6175088609900484562
-    second: cm_stand_03
-  - first:
-      213: 1888501425552440581
-    second: cm_u_face_00
-  - first:
-      213: -1293271447185902783
-    second: cm_u_face_01
-  - first:
-      213: 5071034780540999481
-    second: cm_u_parts_00
-  - first:
-      213: 8804002404320870888
-    second: l_parts_00
-  - first:
-      213: 7056094896744137453
-    second: u_bullet_00
-  - first:
-      213: 3399889951001824554
-    second: u_bullet_01
-  - first:
-      213: -2631412743849410156
-    second: u_parts_00
-  - first:
-      213: -3845591344727906839
-    second: u_parts_01
-  - first:
       213: -3714657535703887073
     second: cm_air__00
   - first:
@@ -128,8 +62,74 @@ TextureImporter:
   - first:
       213: -9086173426160648078
     second: cm_u_parts__00
+  - first:
+      213: 8804002404320870888
+    second: l_parts_00
+  - first:
+      213: 7056094896744137453
+    second: u_bullet_00
+  - first:
+      213: 3399889951001824554
+    second: u_bullet_01
+  - first:
+      213: -2631412743849410156
+    second: u_parts_00
+  - first:
+      213: -3845591344727906839
+    second: u_parts_01
+  - first:
+      213: 7044415266825918670
+    second: cm_air_00
+  - first:
+      213: 7349918391354030105
+    second: cm_air_01
+  - first:
+      213: -9142723541066618347
+    second: cm_air_02
+  - first:
+      213: 4094930717186315511
+    second: cm_dodge_00
+  - first:
+      213: 8711671657938451140
+    second: cm_down_00
+  - first:
+      213: 7596711328868877011
+    second: cm_jump_00
+  - first:
+      213: 815483014439192337
+    second: cm_jump_01
+  - first:
+      213: -1156367830955359705
+    second: cm_jump_02
+  - first:
+      213: 6337732253934604679
+    second: cm_l_parts_00
+  - first:
+      213: 6061317436030166354
+    second: cm_shaky_00
+  - first:
+      213: 3329950309840273066
+    second: cm_stand_00
+  - first:
+      213: 6044306801005870090
+    second: cm_stand_01
+  - first:
+      213: 4411317198115190001
+    second: cm_stand_02
+  - first:
+      213: 6175088609900484562
+    second: cm_stand_03
+  - first:
+      213: 1888501425552440581
+    second: cm_u_face_00
+  - first:
+      213: -1293271447185902783
+    second: cm_u_face_01
+  - first:
+      213: 5071034780540999481
+    second: cm_u_parts_00
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -183,6 +183,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -263,49 +264,49 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_air__00
+      name: cm_air_00
       rect:
         serializedVersion: 2
         x: 94
         y: 352
         width: 29
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.51724136, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f13542207a2e27cc0800000000000000
-      internalID: -3714657535703887073
+      spriteID: ec85f7dbc5ac2c160800000000000000
+      internalID: 7044415266825918670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_air__01
+      name: cm_air_01
       rect:
         serializedVersion: 2
         x: 233
         y: 407
         width: 21
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.52380955, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e6394b14834be630800000000000000
-      internalID: 3957330932247639783
+      spriteID: 91874ccd5d7200660800000000000000
+      internalID: 7349918391354030105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_air__02
+      name: cm_air_02
       rect:
         serializedVersion: 2
         x: 237
@@ -319,77 +320,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42bc5ec7b62b29bb0800000000000000
-      internalID: -4930682467290592476
+      spriteID: 51a6f1f21658e1180800000000000000
+      internalID: -9142723541066618347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_dodge__00
+      name: cm_dodge_00
       rect:
         serializedVersion: 2
         x: 0
         y: 117
         width: 80
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5375, y: 0.50793654}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5217dcac6ae695990800000000000000
-      internalID: -7396759250333241051
+      spriteID: 7f4d9b99acd14d830800000000000000
+      internalID: 4094930717186315511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_down__00
+      name: cm_down_00
       rect:
         serializedVersion: 2
         x: 0
         y: 355
         width: 94
         height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8545455}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1cd7eb21b83bd7a0800000000000000
-      internalID: -6351420515878970337
+      spriteID: 4ca724b673316e870800000000000000
+      internalID: 8711671657938451140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump__00
+      name: cm_jump_00
       rect:
         serializedVersion: 2
         x: 0
         y: 259
         width: 93
         height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.516129, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f05fbbd5f457718f0800000000000000
-      internalID: -569857844103613169
+      spriteID: 3d24a6a54b0fc6960800000000000000
+      internalID: 7596711328868877011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump__01
+      name: cm_jump_01
       rect:
         serializedVersion: 2
         x: 0
@@ -403,218 +404,218 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bef90d447faa66eb0800000000000000
-      internalID: -4726902779890589717
+      spriteID: 11743042b7d215b00800000000000000
+      internalID: 815483014439192337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_jump__02
+      name: cm_jump_02
       rect:
         serializedVersion: 2
         x: 80
         y: 52
         width: 60
         height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6857143}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 63b15fcd3a0b151a0800000000000000
-      internalID: -6822477742656382154
+      spriteID: 722873e9591c3ffe0800000000000000
+      internalID: -1156367830955359705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_l_parts__00
+      name: cm_l_parts_00
       rect:
         serializedVersion: 2
         x: 84
         y: 20
         width: 57
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0.5625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ec452205a3543c20800000000000000
-      internalID: 3185262804628491492
+      spriteID: 781de4df7e524f750800000000000000
+      internalID: 6337732253934604679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_shaky__00
+      name: cm_shaky_00
       rect:
         serializedVersion: 2
         x: 179
         y: 161
         width: 65
         height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acc639d73092b1b50800000000000000
-      internalID: 6564885976791084234
+      spriteID: 255a57508102e1450800000000000000
+      internalID: 6061317436030166354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand__00
+      name: cm_stand_00
       rect:
         serializedVersion: 2
         x: 0
         y: 180
         width: 84
         height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.54761904, y: 0.6075949}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: efd98bba1c2637de0800000000000000
-      internalID: -1336616080449692162
+      spriteID: aae3bb9f92c563e20800000000000000
+      internalID: 3329950309840273066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand__01
+      name: cm_stand_01
       rect:
         serializedVersion: 2
         x: 128
         y: 439
         width: 109
         height: 73
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.44954127, y: 0.65753424}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cfa795d8e155dc690800000000000000
-      internalID: -7580309008085845252
+      spriteID: a0cbe6be201b1e350800000000000000
+      internalID: 6044306801005870090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand__02
+      name: cm_stand_02
       rect:
         serializedVersion: 2
         x: 93
         y: 274
         width: 92
         height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5326087, y: 0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8757b8c52e6cce1e0800000000000000
-      internalID: -2167138645154499208
+      spriteID: 1f43a399e95283d30800000000000000
+      internalID: 4411317198115190001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_stand__03
+      name: cm_stand_03
       rect:
         serializedVersion: 2
         x: 84
         y: 122
         width: 83
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5301205, y: 0.53333336}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66a6c703ecbbe5ef0800000000000000
-      internalID: -117450046013937050
+      spriteID: 2d7dda9af5252b550800000000000000
+      internalID: 6175088609900484562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_u_face__00
+      name: cm_u_face_00
       rect:
         serializedVersion: 2
         x: 0
         y: 3
         width: 39
         height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.025641026, y: 0.055555556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d08887c1b8be28900800000000000000
-      internalID: 685369076024379405
+      spriteID: 50d3fd37a0e453a10800000000000000
+      internalID: 1888501425552440581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_u_face__01
+      name: cm_u_face_01
       rect:
         serializedVersion: 2
         x: 94
         y: 384
         width: 34
         height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.029411765, y: 0.34615386}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a842a06d8dca0fbe0800000000000000
-      internalID: -1445465433082026870
+      spriteID: 143345888706d0ee0800000000000000
+      internalID: -1293271447185902783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cm_u_parts__00
+      name: cm_u_parts_00
       rect:
         serializedVersion: 2
         x: 167
         y: 105
         width: 64
         height: 56
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51785713}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 270c916d86d67e180800000000000000
-      internalID: -9086173426160648078
+      spriteID: 9371cc1f34fef5640800000000000000
+      internalID: 5071034780540999481
       vertices: []
       indices: 
       edges: []
